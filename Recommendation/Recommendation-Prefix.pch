@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'Recommendation' target in the 'Recommendation' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif
