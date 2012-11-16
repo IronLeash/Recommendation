@@ -14,6 +14,7 @@
 		52A978A7165449C8004ABC6D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A978A6165449C8004ABC6D /* AppDelegate.m */; };
 		52A978AA165449C8004ABC6D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52A978A8165449C8004ABC6D /* MainMenu.xib */; };
 		52A978AD165449C8004ABC6D /* Recommendation.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 52A978AB165449C8004ABC6D /* Recommendation.xcdatamodeld */; };
+		52A978B616544E35004ABC6D /* RestaurantsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A978B516544E35004ABC6D /* RestaurantsView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,8 @@
 		52A978A6165449C8004ABC6D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		52A978A9165449C8004ABC6D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		52A978AC165449C8004ABC6D /* Recommendation.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Recommendation.xcdatamodel; sourceTree = "<group>"; };
+		52A978B416544E35004ABC6D /* RestaurantsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantsView.h; sourceTree = "<group>"; };
+		52A978B516544E35004ABC6D /* RestaurantsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantsView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +87,7 @@
 		52A97899165449C8004ABC6D /* Recommendation */ = {
 			isa = PBXGroup;
 			children = (
+				52A978B316544CCC004ABC6D /* Tabs */,
 				52A978A5165449C8004ABC6D /* AppDelegate.h */,
 				52A978A6165449C8004ABC6D /* AppDelegate.m */,
 				52A978A8165449C8004ABC6D /* MainMenu.xib */,
@@ -103,6 +107,15 @@
 				52A978A2165449C8004ABC6D /* Credits.rtf */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		52A978B316544CCC004ABC6D /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				52A978B416544E35004ABC6D /* RestaurantsView.h */,
+				52A978B516544E35004ABC6D /* RestaurantsView.m */,
+			);
+			path = Tabs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -172,6 +185,7 @@
 				52A978A0165449C8004ABC6D /* main.m in Sources */,
 				52A978A7165449C8004ABC6D /* AppDelegate.m in Sources */,
 				52A978AD165449C8004ABC6D /* Recommendation.xcdatamodeld in Sources */,
+				52A978B616544E35004ABC6D /* RestaurantsView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
