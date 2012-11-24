@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "User.h"
 @interface DataGenerator : NSObject
 {
 //    NSManagedObjectContext *moc;
@@ -18,14 +18,18 @@
 
 //Data generators
 -(void)generateCusines;
+
 -(void)generateCategories;
 
 -(void)generateUserStereotypes;
 
 -(void)generateUsers:(int)numberOfUsers;
+
 -(void)generateRestaurants:(int)numberOfRestaurants;
 
--(void)generateRatings;
+//Generates ratings for a user
+-(void)generateRatingForUser:(User*)aUser;;
+
 
 
 
@@ -34,5 +38,11 @@
 -(NSArray*)getRestaurantCuisines;
 -(NSArray*)getRestaurants;
 -(NSArray*)getUsers;
+
+-(NSArray*)getRestaurantRatings;
+-(NSArray*)getRestaurantRatingsForUser:(User*)aUser;
+-(NSArray*)getPositiveRatingsforUser:(User*)aUser;
+
+-(NSArray*)getFavoriteCategoriesForUser:(User*)currentUser;
 
 @end

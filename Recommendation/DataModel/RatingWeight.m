@@ -12,11 +12,11 @@
 
 @implementation RatingWeight
 
+@dynamic accessibility;
 @dynamic coreService;
+@dynamic personal;
 @dynamic service;
 @dynamic tangibles;
-@dynamic personal;
-@dynamic accessibility;
 @dynamic user;
 
 @end

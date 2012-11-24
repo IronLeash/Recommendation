@@ -26,6 +26,16 @@
         <attribute name="vegeterian" optional="YES" attributeType="Boolean" syncable="YES"/>
         <relationship name="categories" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Category" syncable="YES"/>
         <relationship name="cuisine" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Cuisine" syncable="YES"/>
+        <relationship name="ratings" optional="YES" toMany="YES" deletionRule="Deny" destinationEntity="RestaurantRating" inverseName="restaurant" inverseEntity="RestaurantRating" syncable="YES"/>
+    </entity>
+    <entity name="RestaurantRating" representedClassName="RestaurantRating" syncable="YES">
+        <attribute name="accessibilityRating" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="coreServiceRating" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="personalRating" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="serviceRating" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="tangiblesRating" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="restaurant" optional="YES" maxCount="1" deletionRule="Deny" destinationEntity="Restaurant" inverseName="ratings" inverseEntity="Restaurant" syncable="YES"/>
+        <relationship name="user" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="ratings" inverseEntity="User" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES">
         <attribute name="age" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -36,6 +46,7 @@
         <attribute name="userid" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="vegeterian" optional="YES" attributeType="Boolean" syncable="YES"/>
         <relationship name="preference" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="UserPreference" inverseName="user" inverseEntity="UserPreference" syncable="YES"/>
+        <relationship name="ratings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RestaurantRating" inverseName="user" inverseEntity="RestaurantRating" syncable="YES"/>
         <relationship name="ratingWeight" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="RatingWeight" inverseName="user" inverseEntity="RatingWeight" syncable="YES"/>
         <relationship name="userPrerefenceWeight" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="UserPreferenceWeight" inverseName="user" inverseEntity="UserPreferenceWeight" syncable="YES"/>
     </entity>
@@ -66,12 +77,13 @@
         <relationship name="user" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="userPrerefenceWeight" inverseEntity="User" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Category" positionX="-200" positionY="347" width="128" height="58"/>
-        <element name="Cuisine" positionX="-470" positionY="338" width="128" height="58"/>
-        <element name="Restaurant" positionX="-353" positionY="126" width="128" height="208"/>
-        <element name="User" positionX="-830" positionY="153" width="128" height="193"/>
-        <element name="UserPreference" positionX="-675" positionY="116" width="128" height="208"/>
-        <element name="UserPreferenceWeight" positionX="-981" positionY="117" width="128" height="208"/>
-        <element name="RatingWeight" positionX="-938" positionY="416" width="128" height="133"/>
+        <element name="Category" positionX="-189" positionY="117" width="128" height="58"/>
+        <element name="Cuisine" positionX="-495" positionY="117" width="128" height="58"/>
+        <element name="RatingWeight" positionX="-893" positionY="387" width="128" height="133"/>
+        <element name="Restaurant" positionX="-353" positionY="126" width="128" height="223"/>
+        <element name="User" positionX="-875" positionY="126" width="128" height="208"/>
+        <element name="UserPreference" positionX="-711" positionY="8" width="128" height="208"/>
+        <element name="UserPreferenceWeight" positionX="-1019" positionY="90" width="128" height="208"/>
+        <element name="RestaurantRating" positionX="-576" positionY="315" width="128" height="148"/>
     </elements>
 </model>

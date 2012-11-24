@@ -7,12 +7,39 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "User.h"
+#import "Restaurant.h"
 
 @interface RatingsView : NSObject <NSTabViewDelegate,NSTableViewDataSource>
 {
 
     NSMutableArray *usersArray;
+    NSMutableArray *ratingsArray;
+    NSMutableArray *weightedAverageArray;
+
+    IBOutlet NSTableView *ratingsTableView;
     IBOutlet NSTableView *usersTableView;
 
+    __weak NSTextField *_gardenTextField;
+    __weak NSTextField *_liveMusicTextfield;
+    __weak NSTextField *_childFriendlyTextfield;
+    __weak NSTextField *_vegetarianTextfield;
+    
+    __weak NSButton *_onlyPositiveRatingscheckBox;
+    User *currentlySelectedUser;
+    
+    NSMutableDictionary *preferencesDictionary;
 }
+
+
+-(IBAction)generateRatings:(id)sender;
+-(IBAction)aRowIsSelected:(id)sender;
+-(IBAction)checkBoxchangedValue:(id)sender;
+
+
+@property (weak) IBOutlet NSButton *onlyPositiveRatingscheckBox;
+@property (weak) IBOutlet NSTextField *vegetarianTextfield;
+@property (weak) IBOutlet NSTextField *childFriendlyTextfield;
+@property (weak) IBOutlet NSTextField *liveMusicTextfield;
+@property (weak) IBOutlet NSTextField *gardenTextField;
 @end

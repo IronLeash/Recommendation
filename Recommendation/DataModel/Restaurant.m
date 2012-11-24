@@ -9,6 +9,7 @@
 #import "Restaurant.h"
 #import "Category.h"
 #import "Cuisine.h"
+#import "RestaurantRating.h"
 
 
 @implementation Restaurant
@@ -19,10 +20,11 @@
 @dynamic liveMusic;
 @dynamic location;
 @dynamic priceRange;
+@dynamic restaurantId;
 @dynamic smoking;
 @dynamic vegeterian;
-@dynamic restaurantId;
 @dynamic categories;
 @dynamic cuisine;
+@dynamic ratings;
 
 @end

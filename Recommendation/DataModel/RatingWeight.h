@@ -13,11 +13,11 @@
 
 @interface RatingWeight : NSManagedObject
 
+@property (nonatomic, retain) NSNumber * accessibility;
 @property (nonatomic, retain) NSNumber * coreService;
+@property (nonatomic, retain) NSNumber * personal;
 @property (nonatomic, retain) NSNumber * service;
 @property (nonatomic, retain) NSNumber * tangibles;
-@property (nonatomic, retain) NSNumber * personal;
-@property (nonatomic, retain) NSNumber * accessibility;
 @property (nonatomic, retain) User *user;
 
 @end

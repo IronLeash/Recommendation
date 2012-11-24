@@ -8,6 +8,7 @@
 
 #import "User.h"
 #import "RatingWeight.h"
+#import "RestaurantRating.h"
 #import "UserPreference.h"
 #import "UserPreferenceWeight.h"
 
@@ -19,10 +20,11 @@
 @dynamic location;
 @dynamic smoker;
 @dynamic stereotype;
-@dynamic vegeterian;
 @dynamic userid;
+@dynamic vegeterian;
 @dynamic preference;
-@dynamic userPrerefenceWeight;
 @dynamic ratingWeight;
+@dynamic userPrerefenceWeight;
+@dynamic ratings;
 
 @end

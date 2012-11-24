@@ -1,4 +1,5 @@
 //
+
 //  DataGenerator.m
 //  Recommendation
 //
@@ -12,21 +13,25 @@
 #import "Cuisine.h"
 #import "Category.h"
 #import "Restaurant.h"
-
 #import "User.h"
 #import "RatingWeight.h"
+#import "RestaurantRating.h"
+#import "StatisticsLibrary.h"
+
+#import "Constants.h"
 
 @implementation DataGenerator
 
 static DataGenerator* dataGenerator = nil;
 static  NSManagedObjectContext *moc;
 
+
+#pragma mark - Shared Instance
+#pragma mark -
 +(DataGenerator*)sharedInstance;
 {
 	@synchronized([DataGenerator class])
 	{
-        
-        
         AppDelegate *appDelegate = (AppDelegate *)[NSApp delegate];
         moc= [appDelegate managedObjectContext];
 
@@ -63,8 +68,8 @@ static  NSManagedObjectContext *moc;
 	return self;
 }
 
-
 #pragma mark - Generator methods
+#pragma mark -
 
 -(void)generateCusines{
     
@@ -220,8 +225,6 @@ static  NSManagedObjectContext *moc;
                                                         @"Vegaterian",
                                                         @"Tourist",nil];
     
-
-        
         @autoreleasepool
         {            
 
@@ -275,6 +278,7 @@ static  NSManagedObjectContext *moc;
                     currentUser.ratingWeight = ratingWeight;
                     currentUserIndex++;
                     
+
                 }
             }
         }
@@ -352,13 +356,85 @@ static  NSManagedObjectContext *moc;
     }
 }
 
--(void)generateRatings{
+-(void)generateRatingForUser:(User*)aUser
+{
+
+    NSArray *restaurantsArray = [[DataGenerator sharedInstance] getRestaurants];
+    
+    //Iterate all restaruants
+
+    @autoreleasepool {
+        
+    for (Restaurant *currentRestaunt in restaurantsArray)
+    {
+        RestaurantRating* restaurantRating = [NSEntityDescription insertNewObjectForEntityForName:@"RestaurantRating" inManagedObjectContext:moc];
+        
+        restaurantRating.restaurant = currentRestaunt;
+        restaurantRating.user   = aUser;
+        
+        int accessibilityRating = (arc4random() %(10))+1;
+        int coreServiceRating = (arc4random() %(10))+1;
+        int personalRating = (arc4random() %(10))+1;
+        int serviceRating = (arc4random() %(10))+1;
+        int tangiblesRating = (arc4random() %(10))+1;
+        
+        restaurantRating.accessibilityRating = [NSNumber  numberWithInt:accessibilityRating];
+        restaurantRating.coreServiceRating = [NSNumber  numberWithInt:coreServiceRating];
+        restaurantRating.personalRating = [NSNumber  numberWithInt:personalRating];
+        restaurantRating.serviceRating = [NSNumber  numberWithInt:serviceRating];
+        restaurantRating.tangiblesRating = [NSNumber  numberWithInt:tangiblesRating];
+    }
+        
+        NSError *error = nil;
+        [moc save:&error];
+        
+        if (error) {
+            NSLog(@"Error %@",error);
+        }
+    
+    }
 
 }
 
 
-#pragma mark -
+-(void)setUserPreferenceForUser:(User*)aUser
+{
+
+    NSArray *userRatings = [[DataGenerator sharedInstance] getRestaurantRatingsForUser:aUser];
+    NSMutableArray *positiveRatings = [NSMutableArray arrayWithArray:userRatings];
+    
+    //Eleminate the  restaurants which are below threshold
+
+    
+    for (RestaurantRating *currentRatings in userRatings)
+    {
+        float weightedAverage = [StatisticsLibrary weightedSumForRating:currentRatings];
+        
+        if (weightedAverage < POSITIVERATINGTHRESHOLD)
+        {
+            [positiveRatings removeObject:currentRatings];
+        }
+    }
+}
+
+
+
+-(void)generateRatingFoAllUsers
+{
+    NSArray *allUsers = [[DataGenerator sharedInstance] getUsers];
+
+    for (User *currentUser in allUsers){
+        
+        [[DataGenerator sharedInstance] generateRatingForUser:currentUser];
+    }
+    
+#warning Notification
+}
+
+
 #pragma mark - Getters
+#pragma mark -
+
 
 -(NSArray*)getRestaurantCategories{
 
@@ -441,6 +517,93 @@ static  NSManagedObjectContext *moc;
     return array;
 
 }
+
+-(NSArray*)getRestaurantRatings{
+
+    //Check if cusines are alreadyThere
+    //Fetsch results
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"RestaurantRating" inManagedObjectContext:moc];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDescription];
+    
+    NSError *error;
+    NSArray *array = [moc executeFetchRequest:request error:&error];
+    
+    return array;
+}
+
+-(NSArray*)getRestaurantRatingsForUser:(User*)aUser{
+
+    //Check if cusines are alreadyThere
+    //Fetsch results
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"RestaurantRating" inManagedObjectContext:moc];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDescription];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"user == %@",aUser]];
+
+    /*
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"self.restaurant.restaurantId" ascending:YES];
+    */
+    NSSortDescriptor *sortDescriptor =  [NSSortDescriptor sortDescriptorWithKey:@"self.restaurant.restaurantId"
+                                  ascending:YES
+                                 comparator:^(id obj1, id obj2){
+                                     return [(NSString*)obj1 compare:(NSString*)obj2
+                                                             options:NSNumericSearch];
+                                 }];
+    
+    [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+    
+    NSError *error;
+    NSArray *array = [moc executeFetchRequest:request error:&error];
+    
+    return array;
+
+}
+
+
+
+-(NSArray*)getPositiveRatingsforUser:(User*)aUser{
+
+    NSArray *userRatings = [[DataGenerator sharedInstance] getRestaurantRatingsForUser:aUser];
+    NSMutableArray *positiveRatings = [NSMutableArray arrayWithArray:userRatings];
+    
+    //Eleminate the  restaurants which are below threshold
+    
+    
+    for (RestaurantRating *currentRatings in userRatings)
+    {
+        float weightedAverage = [StatisticsLibrary weightedSumForRating:currentRatings];
+        
+        if (weightedAverage < POSITIVERATINGTHRESHOLD)
+        {
+            [positiveRatings removeObject:currentRatings];
+        }
+    }
+    
+    return positiveRatings;
+}
+
+
+-(NSArray*)getFavoriteCategoriesForUser:(User*)currentUser{
+
+    NSArray *allCategories = [[DataGenerator sharedInstance] getRestaurantCategories];
+    NSMutableArray *favoriteCategories = [NSMutableArray arrayWithCapacity:[allCategories count]];
+    
+    for (Category *currentCAtegory in allCategories)
+    {
+        FavoriteCategory *curentFavoriteCategory = [[FavoriteCategory alloc] init];
+        curentFavoriteCategory.name =currentCAtegory.name;
+        [favoriteCategories addObject:curentFavoriteCategory];
+    }
+    
+    
+    //Compare names and increment total numbers
+    //add weighted rating
+
+}
+
 
 
 @end
