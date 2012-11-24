@@ -7,6 +7,9 @@
 //
 
 #import "AppDelegate.h"
+#import "DataGenerator.h"
+#import "RestaurantsView.h"
+
 
 @implementation AppDelegate
 
@@ -14,13 +17,21 @@
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize managedObjectContext = _managedObjectContext;
 
+
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    // Insert code here to initialize your application
+
+    [[DataGenerator sharedInstance] generateCategories];
+    [[DataGenerator sharedInstance] generateCusines];
+    
+    //    RestaurantsView *restaurantsView = [[RestaurantsView alloc] init];
+    //    [restaurantsView populateTableView:nil];
+    
 }
 
 // Returns the directory the application uses to store the Core Data store file. This code uses a directory named "com.ilkerbaltaci.Recommendation" in the user's Application Support directory.
-- (NSURL *)applicationFilesDirectory
+-(NSURL*)applicationFilesDirectory
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSURL *appSupportURL = [[fileManager URLsForDirectory:NSApplicationSupportDirectory inDomains:NSUserDomainMask] lastObject];
@@ -92,7 +103,7 @@
     return _persistentStoreCoordinator;
 }
 
-// Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.) 
+// Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.)
 - (NSManagedObjectContext *)managedObjectContext
 {
     if (_managedObjectContext) {
@@ -110,7 +121,7 @@
     }
     _managedObjectContext = [[NSManagedObjectContext alloc] init];
     [_managedObjectContext setPersistentStoreCoordinator:coordinator];
-
+    
     return _managedObjectContext;
 }
 
@@ -153,13 +164,13 @@
     
     NSError *error = nil;
     if (![[self managedObjectContext] save:&error]) {
-
-        // Customize this code block to include application-specific recovery steps.              
+        
+        // Customize this code block to include application-specific recovery steps.
         BOOL result = [sender presentError:error];
         if (result) {
             return NSTerminateCancel;
         }
-
+        
         NSString *question = NSLocalizedString(@"Could not save changes while quitting. Quit anyway?", @"Quit without saves error question message");
         NSString *info = NSLocalizedString(@"Quitting now will lose any changes you have made since the last successful save", @"Quit without saves error question info");
         NSString *quitButton = NSLocalizedString(@"Quit anyway", @"Quit anyway button title");
@@ -169,14 +180,14 @@
         [alert setInformativeText:info];
         [alert addButtonWithTitle:quitButton];
         [alert addButtonWithTitle:cancelButton];
-
+        
         NSInteger answer = [alert runModal];
         
         if (answer == NSAlertAlternateReturn) {
             return NSTerminateCancel;
         }
     }
-
+    
     return NSTerminateNow;
 }
 
