@@ -8,8 +8,11 @@
 
 #import "Category.h"
 
-@interface FavoriteCategory : Category
+@interface FavoriteCategory : NSObject
 {
+
+    
+    
 
     /*
     //Iterate and find this
@@ -26,8 +29,9 @@
 
 
 @property (nonatomic,assign) int totalOccurances;
-@property (nonatomic,assign) int ratingtotal;
-@property (nonatomic,assign) int weightedValue;
+@property (nonatomic,assign) float ratingtotal;
+@property (nonatomic,assign) float weightedValue;
+@property (nonatomic,strong) NSString *name;
 
 
 @end

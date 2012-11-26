@@ -19,7 +19,9 @@
 #define kLiveMusic      @"LiveMusic"
 #define kChildfriendly  @"ChildFriendly"
 #define kVegetarian     @"Vegetarian"
-
+#define kPrice          @"PriceRange"
+#define kCategory       @"Category"
+#define kCuisine        @"Cuisine"
 
 //coefficient for attribtue value relevance for calculation of favorite nominal attributes
 #define  ALPHA 0.5

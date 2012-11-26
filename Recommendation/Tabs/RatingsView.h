@@ -20,6 +20,10 @@
     IBOutlet NSTableView *ratingsTableView;
     IBOutlet NSTableView *usersTableView;
 
+
+    __weak NSTextField *_priceRange;
+    __weak NSTextField *_categoryTextfield;
+    __weak NSTextField *_cuisineTextField;
     __weak NSTextField *_gardenTextField;
     __weak NSTextField *_liveMusicTextfield;
     __weak NSTextField *_childFriendlyTextfield;
@@ -42,4 +46,9 @@
 @property (weak) IBOutlet NSTextField *childFriendlyTextfield;
 @property (weak) IBOutlet NSTextField *liveMusicTextfield;
 @property (weak) IBOutlet NSTextField *gardenTextField;
+
+
+@property (weak) IBOutlet NSTextField *cuisineTextField;
+@property (weak) IBOutlet NSTextField *categoryTextfield;
+@property (weak) IBOutlet NSTextField *priceRange;
 @end

@@ -20,6 +20,8 @@
 
 #import "Constants.h"
 
+#import "FavoriteCuisine.h"
+
 @implementation DataGenerator
 
 static DataGenerator* dataGenerator = nil;
@@ -598,10 +600,116 @@ static  NSManagedObjectContext *moc;
         [favoriteCategories addObject:curentFavoriteCategory];
     }
     
+    NSArray *positiveRAtingsArray =  [[DataGenerator sharedInstance] getPositiveRatingsforUser:currentUser];
+    float   averagePositveRating =[StatisticsLibrary weightedpositveRatingsMean:positiveRAtingsArray];
     
-    //Compare names and increment total numbers
+    //Iterate all positive ratings
+    for (RestaurantRating *currentRating in positiveRAtingsArray){
+        Category *likedCategory = currentRating.restaurant.categories;
+        
+        for (FavoriteCategory *favCategory in favoriteCategories) {
+            if ([favCategory.name isEqualToString:likedCategory.name]) {
+                favCategory.totalOccurances++;
+                favCategory.ratingtotal += [StatisticsLibrary weightedSumForRating:currentRating];
+                favCategory.weightedValue = [StatisticsLibrary scoreofCategory:favCategory amongRatingNumber:[positiveRAtingsArray count] withAverage:averagePositveRating];
+            }
+        }
+//        Category *likedCuisine = currentRating.restaurant.categories;
+    }
+    
+    
+
     //add weighted rating
 
+    //Sort the favoriteCategoriesArray
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"self.weightedValue" ascending:NO];
+    [favoriteCategories sortUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+    
+    return favoriteCategories;
+}
+
+-(NSArray*)getFavoriteCuisinesForUser:(User*)currentUser{
+    
+    NSArray *allCuisines = [[DataGenerator sharedInstance] getRestaurantCuisines];
+    NSMutableArray *favoriteCuisines = [NSMutableArray arrayWithCapacity:[allCuisines count]];
+    
+    for (Cuisine *currentCuisine in allCuisines)
+    {
+        FavoriteCuisine *currentFavoriteCuisine = [[FavoriteCuisine alloc] init];
+        currentFavoriteCuisine.name =currentCuisine.name;
+        [favoriteCuisines addObject:currentFavoriteCuisine];
+    }
+    
+    NSArray *positiveRAtingsArray =  [[DataGenerator sharedInstance] getPositiveRatingsforUser:currentUser];
+    float   averagePositveRating =[StatisticsLibrary weightedpositveRatingsMean:positiveRAtingsArray];
+    
+    //Iterate all positive ratings
+    for (RestaurantRating *currentRating in positiveRAtingsArray){
+        Cuisine *likedCuisine = currentRating.restaurant.cuisine;
+        
+        for (FavoriteCuisine *favoriteCuisine in favoriteCuisines) {
+            if ([favoriteCuisine.name isEqualToString:likedCuisine.name]) {
+                favoriteCuisine.totalOccurances++;
+                favoriteCuisine.ratingtotal += [StatisticsLibrary weightedSumForRating:currentRating];
+                favoriteCuisine.weightedValue = [StatisticsLibrary scoreofCuisine:favoriteCuisine amongRatingNumber:[positiveRAtingsArray count] withAverage:averagePositveRating];
+            }
+        }
+        //        Category *likedCuisine = currentRating.restaurant.categories;
+    }
+    
+    
+    
+    //add weighted rating
+    
+    //Sort the favoriteCategoriesArray
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"self.weightedValue" ascending:NO];
+    [favoriteCuisines sortUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+    
+    return favoriteCuisines;
+}
+
+
+-(NSDictionary*)getPreferencesDictionaryForUser:(User*)currentUser{
+    
+    NSArray *positiveRatingsArray = [[DataGenerator sharedInstance] getPositiveRatingsforUser:currentUser];
+
+    float vegetarian = 0;
+    float childFriendly = 0;
+    float liveMusic = 0;
+    float garden = 0;
+    float priceRange = 0;
+
+    NSArray *favoriteCategories = [[DataGenerator sharedInstance] getFavoriteCategoriesForUser:((RestaurantRating*)[positiveRatingsArray objectAtIndex:0]).user];
+    NSArray *favoriteCuisines = [[DataGenerator sharedInstance] getFavoriteCuisinesForUser:((RestaurantRating*)[positiveRatingsArray objectAtIndex:0]).user];
+    
+    for (RestaurantRating *currentRating in positiveRatingsArray)
+    {
+#warning you can add a weighting factor according to rating value
+        vegetarian     += [currentRating.restaurant.vegeterian floatValue];
+        childFriendly  += [currentRating.restaurant.childFriendly floatValue];
+        liveMusic      += [currentRating.restaurant.liveMusic floatValue];
+        garden         += [currentRating.restaurant.garden floatValue];
+        priceRange     += [currentRating.restaurant.priceRange floatValue];
+    }
+    
+    vegetarian     = vegetarian/[positiveRatingsArray count];
+    childFriendly  = childFriendly/ [positiveRatingsArray count];
+    liveMusic      = liveMusic / [positiveRatingsArray count];
+    garden         = garden / [positiveRatingsArray count];
+    priceRange     = priceRange / [positiveRatingsArray count];
+    
+    NSDictionary *preferencesDictionary = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:
+                                                                               [NSNumber numberWithFloat:vegetarian],
+                                                                               [NSNumber numberWithFloat:childFriendly],
+                                                                               [NSNumber numberWithFloat:liveMusic],
+                                                                               [NSNumber numberWithFloat:garden],
+                                                                               [NSNumber numberWithFloat:priceRange],
+                                                                               favoriteCategories,
+                                                                               favoriteCuisines,
+                                                                               nil]
+                                                                      forKeys:[NSArray arrayWithObjects:kVegetarian,kChildfriendly,kLiveMusic,kGarden,kPrice,kCategory,kCuisine,nil]];
+    
+    return preferencesDictionary;
 }
 
 

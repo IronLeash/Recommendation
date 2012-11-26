@@ -29,6 +29,9 @@
 		52A978AD165449C8004ABC6D /* Recommendation.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 52A978AB165449C8004ABC6D /* Recommendation.xcdatamodeld */; };
 		52A978B616544E35004ABC6D /* RestaurantsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A978B516544E35004ABC6D /* RestaurantsView.m */; };
 		52BBD9871656F71D006F9BA2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52A97897165449C8004ABC6D /* CoreData.framework */; };
+		52D684001662E019006919E2 /* FavoriteCuisine.m in Sources */ = {isa = PBXBuildFile; fileRef = 52D683FF1662E019006919E2 /* FavoriteCuisine.m */; };
+		52D684041662E7AE006919E2 /* FavoriteLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 52D684031662E7AE006919E2 /* FavoriteLocation.m */; };
+		52D684071662E7FF006919E2 /* FavoriteSmoking.m in Sources */ = {isa = PBXBuildFile; fileRef = 52D684061662E7FF006919E2 /* FavoriteSmoking.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +80,12 @@
 		52A978AC165449C8004ABC6D /* Recommendation.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Recommendation.xcdatamodel; sourceTree = "<group>"; };
 		52A978B416544E35004ABC6D /* RestaurantsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantsView.h; sourceTree = "<group>"; };
 		52A978B516544E35004ABC6D /* RestaurantsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantsView.m; sourceTree = "<group>"; };
+		52D683FE1662E019006919E2 /* FavoriteCuisine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteCuisine.h; sourceTree = "<group>"; };
+		52D683FF1662E019006919E2 /* FavoriteCuisine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteCuisine.m; sourceTree = "<group>"; };
+		52D684021662E7AE006919E2 /* FavoriteLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteLocation.h; sourceTree = "<group>"; };
+		52D684031662E7AE006919E2 /* FavoriteLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteLocation.m; sourceTree = "<group>"; };
+		52D684051662E7FF006919E2 /* FavoriteSmoking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteSmoking.h; sourceTree = "<group>"; };
+		52D684061662E7FF006919E2 /* FavoriteSmoking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteSmoking.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +135,12 @@
 			children = (
 				52A6852B16617B4000B83BAF /* FavoriteCategory.h */,
 				52A6852C16617B4000B83BAF /* FavoriteCategory.m */,
+				52D683FE1662E019006919E2 /* FavoriteCuisine.h */,
+				52D683FF1662E019006919E2 /* FavoriteCuisine.m */,
+				52D684021662E7AE006919E2 /* FavoriteLocation.h */,
+				52D684031662E7AE006919E2 /* FavoriteLocation.m */,
+				52D684051662E7FF006919E2 /* FavoriteSmoking.h */,
+				52D684061662E7FF006919E2 /* FavoriteSmoking.m */,
 			);
 			path = "Helper Classes";
 			sourceTree = "<group>";
@@ -312,6 +327,9 @@
 				52361CF916610393008232A3 /* Restaurant.m in Sources */,
 				52361D0116611DF3008232A3 /* StatisticsLibrary.m in Sources */,
 				52A6852D16617B4000B83BAF /* FavoriteCategory.m in Sources */,
+				52D684001662E019006919E2 /* FavoriteCuisine.m in Sources */,
+				52D684041662E7AE006919E2 /* FavoriteLocation.m in Sources */,
+				52D684071662E7FF006919E2 /* FavoriteSmoking.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

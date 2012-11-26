@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 ilker. All rights reserved.
 //
 
+#import "DataGenerator.h"
 #import "StatisticsLibrary.h"
 #import "RatingWeight.h"
 #import "Restaurant.h"
@@ -31,44 +32,33 @@
 }
 
 
-+ (NSDictionary*)preferencesDictionary:(NSArray*)positiveRatingArray{
-
-    float vegetarian = 0;
-    float childFriendly = 0;
-    float liveMusic = 0;
-    float garden = 0;
 
 
-    for (RestaurantRating *currentRating in positiveRatingArray)
-    {
-#warning you can add a weighting factor according to rating value
-         vegetarian     += [currentRating.restaurant.vegeterian floatValue];
-         childFriendly  += [currentRating.restaurant.childFriendly floatValue];
-         liveMusic      += [currentRating.restaurant.liveMusic floatValue];
-         garden         += [currentRating.restaurant.garden floatValue];
-    }
-    
-    vegetarian     = vegetarian/[positiveRatingArray count];
-    childFriendly  = childFriendly/ [positiveRatingArray count];
-    liveMusic      = liveMusic / [positiveRatingArray count];
-    garden         = garden / [positiveRatingArray count];
++ (float)scoreofCategory:(FavoriteCategory*)aCategory amongRatingNumber:(int)numberfPositeRatings withAverage:(float)positveRatingAverage{
 
-    NSDictionary *preferencesDictionary = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:
-                                                                               [NSNumber numberWithFloat:vegetarian],
-                                                                               [NSNumber numberWithFloat:childFriendly],
-                                                                               [NSNumber numberWithFloat:liveMusic],
-                                                                               [NSNumber numberWithFloat:garden],
-                                                                               nil]
-                                                                      forKeys:[NSArray arrayWithObjects:kVegetarian,kChildfriendly,kLiveMusic,kGarden,nil]];
-    
-    return preferencesDictionary;
-}
-
-+ (float)scoreofCategory:(FavoriteCategory*)aCategory amongRatingNumber:(int)totalRating withAverage:(float)average{
-
-    float score  = ALPHA*(aCategory.totalOccurances/(float)totalRating) + BETA*(average/(aCategory.ratingtotal/aCategory.totalOccurances));
+    float score  = ALPHA*(aCategory.totalOccurances/(float)numberfPositeRatings) + BETA*((aCategory.ratingtotal/aCategory.totalOccurances)/positveRatingAverage);
     return score;
 }
+
++ (float)scoreofCuisine:(FavoriteCuisine*)aCuisine amongRatingNumber:(int)numberfPositeRatings withAverage:(float)positveRatingAverage{
+    
+    float score  = ALPHA*(aCuisine.totalOccurances/(float)numberfPositeRatings) + BETA*((aCuisine.ratingtotal/aCuisine.totalOccurances)/positveRatingAverage);
+    return score;
+}
+
++ (float)weightedpositveRatingsMean:(NSArray*)positiveRatings{
+
+    float average= 0;
+
+    for (RestaurantRating *currentRating in  positiveRatings) {
+        average+=[StatisticsLibrary weightedSumForRating:currentRating];
+    }
+    
+    average = average/[positiveRatings count];
+
+    return average;
+}
+
 
 
 

@@ -37,6 +37,9 @@
     usersArray = [NSMutableArray arrayWithArray:[[DataGenerator sharedInstance] getUsers]];
     ratingsArray = [NSMutableArray arrayWithArray:[[DataGenerator sharedInstance] getRestaurantRatings]];
     
+    
+    [_categoryTextfield setSelectable:NO];
+    [_categoryTextfield setEditable:NO];
     [_gardenTextField setEditable:NO];
     [_liveMusicTextfield setEditable:NO];
     [_childFriendlyTextfield setEditable:NO];
@@ -56,16 +59,23 @@
     currentlySelectedUser = [usersArray objectAtIndex:[usersTableView selectedRow]];
     
     //Change preferences
-    NSArray *positiveRatings = [[DataGenerator sharedInstance] getPositiveRatingsforUser:currentlySelectedUser];
-    preferencesDictionary = [NSMutableDictionary dictionaryWithDictionary: [StatisticsLibrary preferencesDictionary:positiveRatings]];
+    preferencesDictionary = [NSMutableDictionary dictionaryWithDictionary: [[DataGenerator sharedInstance] getPreferencesDictionaryForUser:currentlySelectedUser]];
 
+    FavoriteCategory *favoriteCategory = [[preferencesDictionary objectForKey:kCategory] objectAtIndex:0];
+    FavoriteCategory *favoriteCuisine = [[preferencesDictionary objectForKey:kCuisine] objectAtIndex:0];
     
+    
+    [_categoryTextfield setStringValue:favoriteCategory.name];
+    [_cuisineTextField setStringValue:favoriteCuisine.name];
+    
+    [_priceRange setStringValue:[[preferencesDictionary objectForKey:kPrice] stringValue]];
     [_gardenTextField setStringValue: [[preferencesDictionary objectForKey:kGarden] stringValue]];
     [_liveMusicTextfield setStringValue: [[preferencesDictionary objectForKey:kLiveMusic] stringValue]];
     [_childFriendlyTextfield setStringValue: [[preferencesDictionary objectForKey:kChildfriendly] stringValue]];
     [_vegetarianTextfield setStringValue: [[preferencesDictionary objectForKey:kVegetarian] stringValue]];
     
     NSLog(@"Preferences %@",preferencesDictionary);
+    
     
     [self updateRatingTable];
 }

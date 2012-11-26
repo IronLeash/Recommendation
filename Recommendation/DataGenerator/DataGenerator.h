@@ -42,7 +42,8 @@
 -(NSArray*)getRestaurantRatings;
 -(NSArray*)getRestaurantRatingsForUser:(User*)aUser;
 -(NSArray*)getPositiveRatingsforUser:(User*)aUser;
-
 -(NSArray*)getFavoriteCategoriesForUser:(User*)currentUser;
+-(NSDictionary*)getPreferencesDictionaryForUser:(User*)currentUser;
+
 
 @end
