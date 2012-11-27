@@ -21,6 +21,7 @@
 #import "Constants.h"
 
 #import "FavoriteCuisine.h"
+#import "FavoriteSmoking.h"
 
 @implementation DataGenerator
 
@@ -315,7 +316,7 @@ static  NSManagedObjectContext *moc;
         int curentRandomChildFriendlyNumber = arc4random() %(2);
         int curentRandomVegeterianNumber = arc4random() %(2);
         int curentRandomPriceRangeNumber = arc4random() %(4);
-        int curentRandomLocationNumber = arc4random() %(15);
+        int curentRandomLocationNumber = (arc4random() %(15))+1;
         int curentRandomGardenNumber = arc4random() %(2);
         int curentRandomLiveMusicNumber = arc4random() %(2);
         
@@ -669,6 +670,76 @@ static  NSManagedObjectContext *moc;
 }
 
 
+-(NSArray*)getFavoriteSmokingForUser:(User*)currentUser{
+    
+//    NSArray *smokeingValues = [NSArray arrayWithObjects:[NSNumber numberWithInt:0],[NSNumber numberWithInt:1],[NSNumber numberWithInt:2], nil];
+    NSMutableArray *favoriteSmokingArray = [NSMutableArray arrayWithCapacity:0];
+    
+    for (int i = 0; i < 3 ; i++)
+    {
+        FavoriteSmoking *currentFavoriteSmoking = [[FavoriteSmoking alloc] init];
+        currentFavoriteSmoking.value = [NSNumber numberWithInt:i];
+        [favoriteSmokingArray addObject:currentFavoriteSmoking];
+    }
+    
+    NSArray *positiveRAtingsArray =  [[DataGenerator sharedInstance] getPositiveRatingsforUser:currentUser];
+    float   averagePositveRating =[StatisticsLibrary weightedpositveRatingsMean:positiveRAtingsArray];
+    
+    //Iterate all positive ratings
+    for (RestaurantRating *currentRating in positiveRAtingsArray){
+        
+        for (FavoriteSmoking *favoriteSmoking in favoriteSmokingArray) {
+            if ([favoriteSmoking.value isEqualToNumber:currentRating.restaurant.smoking]) {
+                favoriteSmoking.totalOccurances++;
+                favoriteSmoking.ratingtotal += [StatisticsLibrary weightedSumForRating:currentRating];
+                favoriteSmoking.weightedValue = [StatisticsLibrary scoreoSmoking:favoriteSmoking amongRatingNumber:[positiveRAtingsArray count] withAverage:averagePositveRating];
+            }
+        }
+
+    }
+
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"self.weightedValue" ascending:NO];
+    [favoriteSmokingArray sortUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+    
+    return favoriteSmokingArray;
+}
+
+
+-(NSArray*)getFavoriteLocationForUser:(User*)currentUser{
+    
+    //    NSArray *smokeingValues = [NSArray arrayWithObjects:[NSNumber numberWithInt:0],[NSNumber numberWithInt:1],[NSNumber numberWithInt:2], nil];
+    NSMutableArray *favoriteLocationArray = [NSMutableArray arrayWithCapacity:0];
+    
+    for (int i = 1; i < 16 ; i++)
+    {
+        FavoriteLocation *currentFavoriteLocation = [[FavoriteLocation alloc] init];
+        currentFavoriteLocation.nameNumber = [NSNumber numberWithInt:i];
+        [favoriteLocationArray addObject:currentFavoriteLocation];
+    }
+    
+    NSArray *positiveRAtingsArray =  [[DataGenerator sharedInstance] getPositiveRatingsforUser:currentUser];
+    float   averagePositveRating =[StatisticsLibrary weightedpositveRatingsMean:positiveRAtingsArray];
+    
+    //Iterate all positive ratings
+    for (RestaurantRating *currentRating in positiveRAtingsArray){
+        
+        for (FavoriteLocation *favoriteLocation in favoriteLocationArray) {
+            if ([favoriteLocation.nameNumber isEqualToNumber:currentRating.restaurant.location]) {
+                favoriteLocation.totalOccurances++;
+                favoriteLocation.ratingtotal += [StatisticsLibrary weightedSumForRating:currentRating];
+                favoriteLocation.weightedValue = [StatisticsLibrary scoreoLocation:favoriteLocation amongRatingNumber:[positiveRAtingsArray count] withAverage:averagePositveRating];
+            }
+        }
+        
+    }
+    
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"self.weightedValue" ascending:NO];
+    [favoriteLocationArray sortUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+    
+    return favoriteLocationArray;
+}
+
+
 -(NSDictionary*)getPreferencesDictionaryForUser:(User*)currentUser{
     
     NSArray *positiveRatingsArray = [[DataGenerator sharedInstance] getPositiveRatingsforUser:currentUser];
@@ -681,6 +752,9 @@ static  NSManagedObjectContext *moc;
 
     NSArray *favoriteCategories = [[DataGenerator sharedInstance] getFavoriteCategoriesForUser:((RestaurantRating*)[positiveRatingsArray objectAtIndex:0]).user];
     NSArray *favoriteCuisines = [[DataGenerator sharedInstance] getFavoriteCuisinesForUser:((RestaurantRating*)[positiveRatingsArray objectAtIndex:0]).user];
+    NSArray *favoriteSmoking = [[DataGenerator sharedInstance] getFavoriteSmokingForUser:((RestaurantRating*)[positiveRatingsArray objectAtIndex:0]).user];
+    NSArray *favoriteLocation = [[DataGenerator sharedInstance] getFavoriteLocationForUser:((RestaurantRating*)[positiveRatingsArray objectAtIndex:0]).user];
+
     
     for (RestaurantRating *currentRating in positiveRatingsArray)
     {
@@ -706,8 +780,10 @@ static  NSManagedObjectContext *moc;
                                                                                [NSNumber numberWithFloat:priceRange],
                                                                                favoriteCategories,
                                                                                favoriteCuisines,
+                                                                               favoriteSmoking,
+                                                                               favoriteLocation,
                                                                                nil]
-                                                                      forKeys:[NSArray arrayWithObjects:kVegetarian,kChildfriendly,kLiveMusic,kGarden,kPrice,kCategory,kCuisine,nil]];
+                                                                      forKeys:[NSArray arrayWithObjects:kVegetarian,kChildfriendly,kLiveMusic,kGarden,kPrice,kCategory,kCuisine,kSmoking,kLocation,nil]];
     
     return preferencesDictionary;
 }

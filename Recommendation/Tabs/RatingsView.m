@@ -61,12 +61,28 @@
     //Change preferences
     preferencesDictionary = [NSMutableDictionary dictionaryWithDictionary: [[DataGenerator sharedInstance] getPreferencesDictionaryForUser:currentlySelectedUser]];
 
-    FavoriteCategory *favoriteCategory = [[preferencesDictionary objectForKey:kCategory] objectAtIndex:0];
-    FavoriteCategory *favoriteCuisine = [[preferencesDictionary objectForKey:kCuisine] objectAtIndex:0];
+    FavoriteCategory *favoriteCategory      = [[preferencesDictionary objectForKey:kCategory] objectAtIndex:0];
+    FavoriteCategory *favoriteCuisine       = [[preferencesDictionary objectForKey:kCuisine] objectAtIndex:0];
+    FavoriteSmoking *favoriteSmoking        = [[preferencesDictionary objectForKey:kSmoking] objectAtIndex:0];
+    FavoriteLocation *favoriteLocation      = [[preferencesDictionary objectForKey:kLocation] objectAtIndex:0];
+
     
+    NSString *smokingValue;
+    
+    if ([favoriteSmoking.value isEqualToNumber:[NSNumber numberWithInt:0]]) {
+        smokingValue = @"NO";
+    }else if ([favoriteSmoking.value isEqualToNumber:[NSNumber numberWithInt:1]]) {
+        smokingValue = @"YES";
+    }else{
+        smokingValue = @"YES/NO";
+    }
+    
+    NSString *location = [NSString stringWithFormat:@"Dist. %@",favoriteLocation.nameNumber];
     
     [_categoryTextfield setStringValue:favoriteCategory.name];
     [_cuisineTextField setStringValue:favoriteCuisine.name];
+    [_smoking setStringValue:smokingValue];
+    [_locationTextField setStringValue:location];
     
     [_priceRange setStringValue:[[preferencesDictionary objectForKey:kPrice] stringValue]];
     [_gardenTextField setStringValue: [[preferencesDictionary objectForKey:kGarden] stringValue]];
@@ -113,6 +129,12 @@
     
     [ratingsTableView reloadData];
 
+}
+
+
+-(IBAction)showListPopOver:(id)sender{
+
+    [_listPopover showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMaxYEdge];
 }
 
 

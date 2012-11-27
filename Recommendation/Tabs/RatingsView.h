@@ -21,6 +21,9 @@
     IBOutlet NSTableView *usersTableView;
 
 
+    __weak NSPopover *_listPopover;
+    __weak NSTextField *_locationTextField;
+    __weak NSTextField *_smoking;
     __weak NSTextField *_priceRange;
     __weak NSTextField *_categoryTextfield;
     __weak NSTextField *_cuisineTextField;
@@ -39,6 +42,8 @@
 -(IBAction)generateRatings:(id)sender;
 -(IBAction)aRowIsSelected:(id)sender;
 -(IBAction)checkBoxchangedValue:(id)sender;
+-(IBAction)showListPopOver:(id)sender;
+
 
 
 @property (weak) IBOutlet NSButton *onlyPositiveRatingscheckBox;
@@ -51,4 +56,7 @@
 @property (weak) IBOutlet NSTextField *cuisineTextField;
 @property (weak) IBOutlet NSTextField *categoryTextfield;
 @property (weak) IBOutlet NSTextField *priceRange;
+@property (weak) IBOutlet NSTextField *smoking;
+@property (weak) IBOutlet NSTextField *locationTextField;
+@property (weak) IBOutlet NSPopover *listPopover;
 @end

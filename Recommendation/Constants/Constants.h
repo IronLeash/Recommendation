@@ -22,6 +22,8 @@
 #define kPrice          @"PriceRange"
 #define kCategory       @"Category"
 #define kCuisine        @"Cuisine"
+#define kSmoking        @"Smoking"
+#define kLocation       @"Location"
 
 //coefficient for attribtue value relevance for calculation of favorite nominal attributes
 #define  ALPHA 0.5

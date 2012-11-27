@@ -15,6 +15,8 @@
     
     __weak NSTextField *_numberOfRestaurants;
     
+    
+    
 }
 
 
