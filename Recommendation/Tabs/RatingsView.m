@@ -28,6 +28,7 @@
         ratingsArray = [[NSMutableArray alloc] init];
         weightedAverageArray = [[NSMutableArray alloc]  init];
         preferencesDictionary = [[NSMutableDictionary alloc] init];
+        listPopUpcontroller = [[ListPopUpcontroller alloc] init];
     }
     
     return self;
@@ -134,7 +135,46 @@
 
 -(IBAction)showListPopOver:(id)sender{
 
+
+    NSButton *clickedButton = (NSButton*)sender;
+
+    if (currentlySelectedUser != nil && [preferencesDictionary objectForKey:kCategory])
+    {
+    switch (clickedButton.tag) {
+        case 101:
+        {
+
+            [listPopUpcontroller setDataSource:[preferencesDictionary objectForKey:kCategory]];
+            break;
+        }
+        case 102:
+        {
+            [listPopUpcontroller setDataSource:[preferencesDictionary objectForKey:kCuisine]];
+
+            break;
+        }
+        case 103:
+        {
+                        [listPopUpcontroller setDataSource:[preferencesDictionary objectForKey:kLocation]];
+//            listPopUpcontroller = [[ListPopUpcontroller alloc] initWithDataSource:[preferencesDictionary objectForKey:kLocation]];
+            break;
+        }
+        case 104:
+        {
+            [listPopUpcontroller setDataSource:[preferencesDictionary objectForKey:kSmoking]];
+
+//            listPopUpcontroller = [[ListPopUpcontroller alloc] initWithDataSource:[preferencesDictionary objectForKey:kSmoking]];
+            break;
+        }
+            
+        default:
+            break;
+    }
+    
+
     [_listPopover showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMaxYEdge];
+
+    }
 }
 
 

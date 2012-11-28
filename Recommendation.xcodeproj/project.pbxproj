@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		522E787B1666A7080017A86A /* ListPopUpcontroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 522E787A1666A7080017A86A /* ListPopUpcontroller.m */; };
 		52361CE416610392008232A3 /* RestaurantRating.m in Sources */ = {isa = PBXBuildFile; fileRef = 52361CE316610392008232A3 /* RestaurantRating.m */; };
 		52361CE716610392008232A3 /* UserPreference.m in Sources */ = {isa = PBXBuildFile; fileRef = 52361CE616610392008232A3 /* UserPreference.m */; };
 		52361CEA16610392008232A3 /* Cuisine.m in Sources */ = {isa = PBXBuildFile; fileRef = 52361CE916610392008232A3 /* Cuisine.m */; };
@@ -35,8 +36,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		52361CBD1660F588008232A3 /* RestaurantRating.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantRating.h; sourceTree = "<group>"; };
-		52361CBE1660F588008232A3 /* RestaurantRating.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantRating.m; sourceTree = "<group>"; };
+		522E78791666A7080017A86A /* ListPopUpcontroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListPopUpcontroller.h; sourceTree = "<group>"; };
+		522E787A1666A7080017A86A /* ListPopUpcontroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListPopUpcontroller.m; sourceTree = "<group>"; };
 		52361CE216610392008232A3 /* RestaurantRating.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantRating.h; sourceTree = "<group>"; };
 		52361CE316610392008232A3 /* RestaurantRating.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantRating.m; sourceTree = "<group>"; };
 		52361CE516610392008232A3 /* UserPreference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserPreference.h; sourceTree = "<group>"; };
@@ -116,8 +117,6 @@
 			children = (
 				529FAFE61659311000802D22 /* DataGenerator.h */,
 				529FAFE71659311000802D22 /* DataGenerator.m */,
-				52361CBD1660F588008232A3 /* RestaurantRating.h */,
-				52361CBE1660F588008232A3 /* RestaurantRating.m */,
 			);
 			path = DataGenerator;
 			sourceTree = "<group>";
@@ -219,6 +218,8 @@
 				529B7F12165D92D500C72F10 /* UsersView.m */,
 				523A0C4E16603B0700F9BF3E /* RatingsView.h */,
 				523A0C4F16603B0700F9BF3E /* RatingsView.m */,
+				522E78791666A7080017A86A /* ListPopUpcontroller.h */,
+				522E787A1666A7080017A86A /* ListPopUpcontroller.m */,
 			);
 			path = Tabs;
 			sourceTree = "<group>";
@@ -330,6 +331,7 @@
 				52D684001662E019006919E2 /* FavoriteCuisine.m in Sources */,
 				52D684041662E7AE006919E2 /* FavoriteLocation.m in Sources */,
 				52D684071662E7FF006919E2 /* FavoriteSmoking.m in Sources */,
+				522E787B1666A7080017A86A /* ListPopUpcontroller.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

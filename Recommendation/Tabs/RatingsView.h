@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "User.h"
 #import "Restaurant.h"
+#import "ListPopUpcontroller.h"
 
 @interface RatingsView : NSObject <NSTabViewDelegate,NSTableViewDataSource>
 {
@@ -19,7 +20,7 @@
 
     IBOutlet NSTableView *ratingsTableView;
     IBOutlet NSTableView *usersTableView;
-
+    IBOutlet ListPopUpcontroller *listPopUpcontroller;
 
     __weak NSPopover *_listPopover;
     __weak NSTextField *_locationTextField;

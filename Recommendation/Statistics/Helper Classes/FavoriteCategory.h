@@ -7,8 +7,9 @@
 //
 
 #import "Category.h"
+#import "FavoriteAttribute.h"
 
-@interface FavoriteCategory : NSObject
+@interface FavoriteCategory : FavoriteAttribute
 {
 
     
