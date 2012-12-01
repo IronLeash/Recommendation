@@ -7,7 +7,6 @@
 //
 
 #import "ListPopUpcontroller.h"
-#import "FavoriteAttribute.h"
 #import "FavoriteLocation.h"
 
 @implementation ListPopUpcontroller 

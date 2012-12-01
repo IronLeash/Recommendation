@@ -13,6 +13,7 @@
 #import "Constants.h"
 #import "FavoriteSmoking.h"
 
+
 @implementation StatisticsLibrary
 
 
@@ -72,6 +73,37 @@
     return average;
 }
 
+
++ (double)pearsonCorreleationBetweenArray1:(NSArray*)array1 andArray2:(NSArray*)array2{
+
+    double returnValue;
+
+    double CArray1[[array1 count]];
+    double CArray2[[array2 count]];
+    
+//    double CArray3[]={1,3,5,7,8,9,0,-3,2};
+//    double CArray4[]={12321,14.0,421,53,1,11,-12};
+    
+    
+    int i = 0;
+    for (NSNumber *currentNumber in array1) {
+        CArray1[i] = (double)[currentNumber doubleValue];
+        NSLog(@"Array1 %f",CArray1[i]);
+        i++;
+    }
+    
+    i = 0;
+    for (NSNumber *currentNumber in array2) {
+        CArray2[i] = (double)[currentNumber doubleValue];
+        NSLog(@"Array2 %f",CArray2[i]);
+        i++;
+    }
+    
+    
+    returnValue = gsl_stats_correlation(CArray1, 1, CArray2, 1, [array1 count]);
+    
+    return returnValue;
+}
 
 
 

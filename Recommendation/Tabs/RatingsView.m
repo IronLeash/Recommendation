@@ -270,7 +270,12 @@
 -(IBAction)generateRatings:(id)sender
 {
 #warning show loading indication
-    [self performSelectorInBackground:@selector(generateRatingBackgroundThread) withObject:nil];
+    NSArray *array1 = [NSArray arrayWithObjects:[NSNumber numberWithFloat:32.523532532],[NSNumber numberWithFloat:-32.532532],[NSNumber numberWithFloat:99.0],[NSNumber numberWithFloat:12.532532],[NSNumber numberWithFloat:22], nil];
+    NSArray *array2 = [NSArray arrayWithObjects:[NSNumber numberWithFloat:-2.532532],[NSNumber numberWithFloat:-3.1],[NSNumber numberWithFloat:-9.1],[NSNumber numberWithFloat:22.53253],[NSNumber numberWithFloat:-12.0], nil];
+    
+    
+    NSLog(@"Correlation %f",[StatisticsLibrary pearsonCorreleationBetweenArray1:array1 andArray2:array2]);
+//    [self performSelectorInBackground:@selector(generateRatingBackgroundThread) withObject:nil];
 }
 
 -(void)generateRatingBackgroundThread{

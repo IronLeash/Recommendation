@@ -6,7 +6,12 @@
 //  Copyright (c) 2012 ilker. All rights reserved.
 //
 
+
+
+
 #import <Foundation/Foundation.h>
+#include <gsl/gsl_statistics.h>
+
 #import "User.h"
 #import "RestaurantRating.h"
 
@@ -29,6 +34,8 @@
 
 + (float)weightedpositveRatingsMean:(NSArray*)positiveRatings;
 
+//Pearson Correlation
++ (double)pearsonCorreleationBetweenArray1:(NSArray*)array1 andArray2:(NSArray*)array2;
 
 
 
