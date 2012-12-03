@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5215B443166D4D00000007F6 /* Category+Name.m in Sources */ = {isa = PBXBuildFile; fileRef = 5215B442166D4D00000007F6 /* Category+Name.m */; };
 		522E787B1666A7080017A86A /* ListPopUpcontroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 522E787A1666A7080017A86A /* ListPopUpcontroller.m */; };
 		52361CE416610392008232A3 /* RestaurantRating.m in Sources */ = {isa = PBXBuildFile; fileRef = 52361CE316610392008232A3 /* RestaurantRating.m */; };
 		52361CE716610392008232A3 /* UserPreference.m in Sources */ = {isa = PBXBuildFile; fileRef = 52361CE616610392008232A3 /* UserPreference.m */; };
@@ -36,6 +37,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5215B441166D4D00000007F6 /* Category+Name.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Category+Name.h"; sourceTree = "<group>"; };
+		5215B442166D4D00000007F6 /* Category+Name.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Category+Name.m"; sourceTree = "<group>"; };
 		522E78791666A7080017A86A /* ListPopUpcontroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListPopUpcontroller.h; sourceTree = "<group>"; };
 		522E787A1666A7080017A86A /* ListPopUpcontroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListPopUpcontroller.m; sourceTree = "<group>"; };
 		52361CE216610392008232A3 /* RestaurantRating.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantRating.h; sourceTree = "<group>"; };
@@ -243,6 +246,8 @@
 				52361CE616610392008232A3 /* UserPreference.m */,
 				52361CE216610392008232A3 /* RestaurantRating.h */,
 				52361CE316610392008232A3 /* RestaurantRating.m */,
+				5215B441166D4D00000007F6 /* Category+Name.h */,
+				5215B442166D4D00000007F6 /* Category+Name.m */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -332,6 +337,7 @@
 				52D684041662E7AE006919E2 /* FavoriteLocation.m in Sources */,
 				52D684071662E7FF006919E2 /* FavoriteSmoking.m in Sources */,
 				522E787B1666A7080017A86A /* ListPopUpcontroller.m in Sources */,
+				5215B443166D4D00000007F6 /* Category+Name.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,6 +12,7 @@
 #import "Restaurant.h"
 #import "Constants.h"
 #import "FavoriteSmoking.h"
+#import "Category+Name.h"
 
 
 @implementation StatisticsLibrary
@@ -172,6 +173,195 @@
 
 }
 
+
+
++ (NSDictionary*)entopyOfVariable
+{
+    //find entropies of all features
+    
+    double hCategory = 0;
+    double hCuisine = 0;
+    double hLocation = 0;
+    double hSmoking = 0;
+    double hPriceRange = 0;
+    double hGarden = 0;
+    double hLiveMusic = 0;
+    double hChildFriendly = 0;
+    double hVegaterian= 0;
+    double hCardPark= 0;
+
+    
+    NSArray *allCategories = [[DataGenerator sharedInstance] getRestaurantCategories];
+    NSArray *allCuisines = [[DataGenerator sharedInstance] getRestaurantCuisines];
+    NSArray *allLocations = [[DataGenerator sharedInstance] getDistinctRestaurantLocations];
+
+    
+    NSArray *allRestaurants = [[DataGenerator sharedInstance] getRestaurants];
+    NSMutableArray *temporaryArray = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    @autoreleasepool
+    {
+        for (Category *currentCategory in allCategories) {
+            [temporaryArray addObjectsFromArray:[[DataGenerator sharedInstance] getRestaurantsofCategory:currentCategory]];
+            
+            double log = 0;
+            if ([temporaryArray count]) {
+                log =log2((double)[temporaryArray count]/[allRestaurants count]);
+            }
+            
+            hCategory += -(((double)[temporaryArray count]/[allRestaurants count])+log);
+            
+            [temporaryArray removeAllObjects];
+        }
+        
+        NSLog(@"Entropty category %f",hCategory);
+        
+        for (Cuisine *currentCuisine in allCuisines) {
+            [temporaryArray addObjectsFromArray:[[DataGenerator sharedInstance] getRestaurantsofCuisine:currentCuisine]];
+            
+            double log = 0;
+            if ([temporaryArray count]) {
+                log =log2((double)[temporaryArray count]/[allRestaurants count]);
+            }
+            
+            hCuisine += -(((double)[temporaryArray count]/[allRestaurants count])+log);
+            
+            [temporaryArray removeAllObjects];
+        }
+        NSLog(@"Entropty cuisine %f",hCuisine);
+        
+        for (NSNumber *currentLocation in allLocations) {
+            [temporaryArray addObjectsFromArray:[[DataGenerator sharedInstance] getRestaurantsInLocation:currentLocation]];
+            
+            double log = 0;
+            if ([temporaryArray count]) {
+                log =log2((double)[temporaryArray count]/[allRestaurants count]);
+            }
+        
+            hLocation += -(((double)[temporaryArray count]/[allRestaurants count])+log);
+            
+            [temporaryArray removeAllObjects];
+        }
+        NSLog(@"Entropty Location %f",hLocation);
+        
+        for (int i = 0; i < 4 ; i++ ) {
+            [temporaryArray addObjectsFromArray:[[DataGenerator sharedInstance] getRestaurantsForPriceRange:[NSNumber numberWithInt:i]]];
+            
+            double log = 0;
+            if ([temporaryArray count]) {
+                log =log2((double)[temporaryArray count]/[allRestaurants count]);
+            }
+            
+            hPriceRange += -(((double)[temporaryArray count]/[allRestaurants count])+log);
+            
+            [temporaryArray removeAllObjects];
+        }
+        NSLog(@"Entropty PriceRange %f",hPriceRange);
+
+        for (int i = 0; i < 3 ; i++ ) {
+            [temporaryArray addObjectsFromArray:[[DataGenerator sharedInstance] getRestaurantForSmokingValue:[NSNumber numberWithInt:i]]];
+            
+            double log = 0;
+            if ([temporaryArray count]) {
+                log =log2((double)[temporaryArray count]/[allRestaurants count]);
+            }
+            
+            hSmoking += -(((double)[temporaryArray count]/[allRestaurants count])+log);
+            
+            [temporaryArray removeAllObjects];
+        }
+        NSLog(@"Entropty Smoking %f",hSmoking);
+
+        
+        for (int i = 0; i < 2 ; i++ ) {
+            [temporaryArray addObjectsFromArray:[[DataGenerator sharedInstance] getRestaurantForGardenVale:[NSNumber numberWithInt:i]]];
+            
+            double log = 0;
+            if ([temporaryArray count]) {
+                log =log2((double)[temporaryArray count]/[allRestaurants count]);
+            }
+            
+            hGarden += -(((double)[temporaryArray count]/[allRestaurants count])+log);
+            
+            [temporaryArray removeAllObjects];
+        }
+        NSLog(@"Entropty Garden %f",hGarden);
+
+        
+        for (int i = 0; i < 2 ; i++ ) {
+            [temporaryArray addObjectsFromArray:[[DataGenerator sharedInstance] getRestaurantForLiveMusicValue:[NSNumber numberWithInt:i]]];
+            
+            double log = 0;
+            if ([temporaryArray count]) {
+                log =log2((double)[temporaryArray count]/[allRestaurants count]);
+            }
+            
+            hLiveMusic += -(((double)[temporaryArray count]/[allRestaurants count])+log);
+            
+            [temporaryArray removeAllObjects];
+        }
+        NSLog(@"Entropty LiveMusic %f",hLiveMusic);
+
+        for (int i = 0; i < 2 ; i++ ) {
+            [temporaryArray addObjectsFromArray:[[DataGenerator sharedInstance] getRestaurantsWithVegaterieanValue:[NSNumber numberWithInt:i]]];
+            
+            double log = 0;
+            if ([temporaryArray count]) {
+                log =log2((double)[temporaryArray count]/[allRestaurants count]);
+            }
+            
+            hVegaterian += -(((double)[temporaryArray count]/[allRestaurants count])+log);
+            
+            [temporaryArray removeAllObjects];
+        }
+        NSLog(@"Entropty Vegeterian %f",hVegaterian);
+
+        for (int i = 0; i < 2 ; i++ ) {
+            [temporaryArray addObjectsFromArray:[[DataGenerator sharedInstance] getRestaurantForChildFriendly:[NSNumber numberWithInt:i]]];
+            
+            double log = 0;
+            if ([temporaryArray count]) {
+                log =log2((double)[temporaryArray count]/[allRestaurants count]);
+            }
+            
+            hChildFriendly += -(((double)[temporaryArray count]/[allRestaurants count])+log);
+            
+            [temporaryArray removeAllObjects];
+        }
+        NSLog(@"Entropty ChildFriendly %f",hChildFriendly);
+
+        for (int i = 0; i < 2 ; i++ ) {
+            [temporaryArray addObjectsFromArray:[[DataGenerator sharedInstance] getRestaurantForCarParkValue:[NSNumber numberWithInt:i]]];
+            
+            double log = 0;
+            if ([temporaryArray count]) {
+                log =log2((double)[temporaryArray count]/[allRestaurants count]);
+            }
+            
+            hCardPark += -(((double)[temporaryArray count]/[allRestaurants count])+log);
+            
+            [temporaryArray removeAllObjects];
+        }
+        NSLog(@"Entropty Car Park %f",hCardPark);
+        
+    }
+    
+    
+    
+    NSDictionary * returnDictionary = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSNumber numberWithDouble:hCategory],
+                                                                           [NSNumber numberWithDouble:hCuisine],
+                                                                           [NSNumber numberWithDouble:hLocation],
+                                                                           [NSNumber numberWithDouble:hPriceRange],
+                                                                           [NSNumber numberWithDouble:hSmoking],
+                                                                           [NSNumber numberWithDouble:hGarden],
+                                                                           [NSNumber numberWithDouble:hLiveMusic],
+                                                                           [NSNumber numberWithDouble:hChildFriendly],
+                                                                           [NSNumber numberWithDouble:hVegaterian],
+                                                                           [NSNumber numberWithDouble:hCardPark],nil]
+                                                                  forKeys:[NSArray arrayWithObjects:kCategory,kCuisine,kLocation,kPrice,kSmoking,kGarden,kLiveMusic,kChildfriendly,kVegetarian,kCarPark, nil]];
+
+    return returnDictionary;
+}
 
 
 

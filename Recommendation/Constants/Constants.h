@@ -24,7 +24,7 @@
 #define kCuisine        @"Cuisine"
 #define kSmoking        @"Smoking"
 #define kLocation       @"Location"
-
+#define kCarPark        @"CarPark"
 //coefficient for attribtue value relevance for calculation of favorite nominal attributes
 #define  ALPHA 0.5
 #define  BETA 0.5

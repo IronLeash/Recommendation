@@ -502,6 +502,185 @@ static  NSManagedObjectContext *moc;
     return array;
 }
 
+-(NSArray*)getRestaurantsofCategory:(Category*)aCategory{
+
+
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"Restaurant" inManagedObjectContext:moc];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDescription];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"categories == %@",aCategory]];
+    
+    NSError *error;
+    NSArray *array = [moc executeFetchRequest:request error:&error];
+    
+    return array;
+
+}
+
+-(NSArray*)getRestaurantsofCuisine:(Cuisine*)aCuisine{
+
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"Restaurant" inManagedObjectContext:moc];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDescription];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"cuisine == %@",aCuisine]];
+    
+    NSError *error;
+    NSArray *array = [moc executeFetchRequest:request error:&error];
+    
+    return array;
+}
+
+-(NSArray*)getDistinctRestaurantLocations{
+
+
+    
+    NSEntityDescription *entity = [NSEntityDescription  entityForName:@"Restaurant" inManagedObjectContext:moc];
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entity];
+    [request setResultType:NSDictionaryResultType];
+    [request setReturnsDistinctResults:YES];
+    [request setPropertiesToFetch:[NSArray arrayWithObject:@"location"]];
+
+    // Execute the fetch.
+    NSError *error;
+    NSArray *objects = [moc executeFetchRequest:request error:&error];
+    
+    NSSet *aset = [NSSet setWithArray:objects];
+    NSArray *distinctvalues = [aset allObjects];
+    NSMutableArray *returnArray = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    for (NSDictionary *currentDictionary in distinctvalues)
+    {
+        [returnArray addObject:[currentDictionary objectForKey:@"location"]];
+    }
+    
+    if (objects == nil) {
+        // Handle the error.
+    }
+
+    NSSortDescriptor *highestToLowest = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
+    [returnArray sortUsingDescriptors:[NSArray arrayWithObject:highestToLowest]];
+    
+    return returnArray;
+}
+
+-(NSArray*)getRestaurantsInLocation:(NSNumber*)aLocation{
+
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"Restaurant" inManagedObjectContext:moc];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDescription];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"location == %@",aLocation]];
+    
+    NSError *error;
+    NSArray *array = [moc executeFetchRequest:request error:&error];
+    
+    return array;
+}
+
+
+-(NSArray*)getRestaurantsForPriceRange:(NSNumber*)aPriceRange{
+    
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"Restaurant" inManagedObjectContext:moc];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDescription];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"priceRange == %@",aPriceRange]];
+    
+    NSError *error;
+    NSArray *array = [moc executeFetchRequest:request error:&error];
+    
+    return array;
+}
+
+-(NSArray*)getRestaurantForSmokingValue:(NSNumber*)aSmokingValue{
+    
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"Restaurant" inManagedObjectContext:moc];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDescription];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"smoking == %@",aSmokingValue]];
+    
+    NSError *error;
+    NSArray *array = [moc executeFetchRequest:request error:&error];
+    
+    return array;
+}
+
+-(NSArray*)getRestaurantForGardenVale:(NSNumber*)aGardenValue{
+    
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"Restaurant" inManagedObjectContext:moc];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDescription];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"garden == %@",aGardenValue]];
+    
+    NSError *error;
+    NSArray *array = [moc executeFetchRequest:request error:&error];
+    
+    return array;
+}
+
+-(NSArray*)getRestaurantForLiveMusicValue:(NSNumber*)aLiveMusic{
+    
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"Restaurant" inManagedObjectContext:moc];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDescription];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"liveMusic == %@",aLiveMusic]];
+    
+    NSError *error;
+    NSArray *array = [moc executeFetchRequest:request error:&error];
+    
+    return array;
+}
+
+-(NSArray*)getRestaurantForChildFriendly:(NSNumber*)aChildFriendlyValue{
+    
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"Restaurant" inManagedObjectContext:moc];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDescription];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"childFriendly == %@",aChildFriendlyValue]];
+    
+    NSError *error;
+    NSArray *array = [moc executeFetchRequest:request error:&error];
+    
+    return array;
+}
+
+-(NSArray*)getRestaurantsWithVegaterieanValue:(NSNumber*)aVegeterianValue{
+    
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"Restaurant" inManagedObjectContext:moc];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDescription];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"vegeterian == %@",aVegeterianValue]];
+    
+    NSError *error;
+    NSArray *array = [moc executeFetchRequest:request error:&error];
+    
+    return array;
+}
+
+-(NSArray*)getRestaurantForCarParkValue:(NSNumber*)aCarParkValue{
+    
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"Restaurant" inManagedObjectContext:moc];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDescription];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"carPark == %@",aCarParkValue]];
+    
+    NSError *error;
+    NSArray *array = [moc executeFetchRequest:request error:&error];
+    
+    return array;
+}
+
+
 -(NSArray*)getUsers{
     
     AppDelegate *appDelegate = (AppDelegate *)[NSApp delegate];
@@ -615,7 +794,6 @@ static  NSManagedObjectContext *moc;
                 favCategory.weightedValue = [StatisticsLibrary scoreofCategory:favCategory amongRatingNumber:[positiveRAtingsArray count] withAverage:averagePositveRating];
             }
         }
-//        Category *likedCuisine = currentRating.restaurant.categories;
     }
     
     
