@@ -106,6 +106,73 @@
 }
 
 
++ (double)cramersVforAttribute{
+
+    
+    
+    NSArray *row1 = [NSArray arrayWithObjects:
+                           [NSNumber numberWithFloat:11],
+                      [NSNumber numberWithFloat:4], nil];
+    
+    NSArray *row2 = [NSArray arrayWithObjects:
+                           
+                           [NSNumber numberWithFloat:3],
+                       [NSNumber numberWithFloat:8], nil];
+    
+    NSArray *contigencyTableArray =[NSArray arrayWithObjects:row1,row2, nil];
+    int degree = 1;
+    
+//    double gsl_ran_chisq = gsl_ran_chisq (const gsl_rng * r, degree);
+    
+    
+    double chiSquare = 0;
+    double totalOccurences = 0;
+    
+    int colomnTotal = 0;
+    int rowTotal = 0;
+    NSMutableArray *marginalFrequencyRow = [[NSMutableArray alloc] initWithCapacity:0];
+    NSMutableArray *marginalFrequencyColomn = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    for (int row=0; row < [contigencyTableArray count]; row++) {
+        
+        for (int i = 0; i <[[contigencyTableArray objectAtIndex:row] count]; i++)
+        {
+            colomnTotal += [[[contigencyTableArray objectAtIndex:i] objectAtIndex:row] doubleValue];
+            rowTotal += [[[contigencyTableArray objectAtIndex:row] objectAtIndex:i] doubleValue];
+        }
+        totalOccurences += rowTotal;
+        [marginalFrequencyColomn addObject:[NSNumber numberWithInt:colomnTotal]];
+        [marginalFrequencyRow addObject:[NSNumber numberWithInt:rowTotal]];
+        colomnTotal = 0;
+        rowTotal  = 0;
+
+    }
+    
+    for (int row=0; row < [contigencyTableArray count]; row++) {
+        
+        for (int i = 0; i <[[contigencyTableArray objectAtIndex:row] count]; i++)
+        {
+
+            double expected = (double)([[marginalFrequencyColomn objectAtIndex:i] doubleValue] * [[marginalFrequencyRow objectAtIndex:row] doubleValue]/totalOccurences);
+            NSLog(@"Expected %f",expected);
+            chiSquare += (([[[contigencyTableArray objectAtIndex:row] objectAtIndex:i] doubleValue]-expected)*([[[contigencyTableArray objectAtIndex:row] objectAtIndex:i] doubleValue]-expected))/expected;
+            
+                        NSLog(@"O %@",[[contigencyTableArray objectAtIndex:row] objectAtIndex:i]);
+                        NSLog(@"Chi %f",chiSquare);
+            /*
+            chiSquare += (double)sqrt([[[contigencyTableArray objectAtIndex:row] objectAtIndex:i] doubleValue] - expected)/expected;*/
+        }
+
+        
+    }
+    
+    
+//    double gsl_ran_chisq_pdff = gsl_ran_chisq_pdf(0.95, 1);
+//    double gsl_cdf_chisq_Pf = gsl_cdf_chisq_P(0.05, 1);
+
+}
+
+
 
 
 @end

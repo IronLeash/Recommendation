@@ -275,6 +275,8 @@
     
     
     NSLog(@"Correlation %f",[StatisticsLibrary pearsonCorreleationBetweenArray1:array1 andArray2:array2]);
+    NSLog(@"Cramer %f",[StatisticsLibrary cramersVforAttribute]);
+    
 //    [self performSelectorInBackground:@selector(generateRatingBackgroundThread) withObject:nil];
 }
 

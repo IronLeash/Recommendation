@@ -11,6 +11,7 @@
 
 #import <Foundation/Foundation.h>
 #include <gsl/gsl_statistics.h>
+#include <gsl/gsl_randist.h>
 
 #import "User.h"
 #import "RestaurantRating.h"
@@ -36,6 +37,9 @@
 
 //Pearson Correlation
 + (double)pearsonCorreleationBetweenArray1:(NSArray*)array1 andArray2:(NSArray*)array2;
+
+
++ (double)cramersVforAttribute;
 
 
 
