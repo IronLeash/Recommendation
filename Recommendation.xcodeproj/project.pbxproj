@@ -19,6 +19,7 @@
 		52361CF916610393008232A3 /* Restaurant.m in Sources */ = {isa = PBXBuildFile; fileRef = 52361CF816610393008232A3 /* Restaurant.m */; };
 		52361D0116611DF3008232A3 /* StatisticsLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 52361D0016611DF3008232A3 /* StatisticsLibrary.m */; };
 		523A0C5016603B0700F9BF3E /* RatingsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 523A0C4F16603B0700F9BF3E /* RatingsView.m */; };
+		5255D9C3166FE8E9003D1734 /* DataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 5255D9C2166FE8E9003D1734 /* DataFetcher.m */; };
 		529B7F13165D92D500C72F10 /* UsersView.m in Sources */ = {isa = PBXBuildFile; fileRef = 529B7F12165D92D500C72F10 /* UsersView.m */; };
 		529FAFE81659311000802D22 /* DataGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 529FAFE71659311000802D22 /* DataGenerator.m */; };
 		52A6852D16617B4000B83BAF /* FavoriteCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A6852C16617B4000B83BAF /* FavoriteCategory.m */; };
@@ -61,6 +62,8 @@
 		52361D0016611DF3008232A3 /* StatisticsLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticsLibrary.m; sourceTree = "<group>"; };
 		523A0C4E16603B0700F9BF3E /* RatingsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RatingsView.h; sourceTree = "<group>"; };
 		523A0C4F16603B0700F9BF3E /* RatingsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RatingsView.m; sourceTree = "<group>"; };
+		5255D9C1166FE8E9003D1734 /* DataFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataFetcher.h; sourceTree = "<group>"; };
+		5255D9C2166FE8E9003D1734 /* DataFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataFetcher.m; sourceTree = "<group>"; };
 		529B7F11165D92D500C72F10 /* UsersView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsersView.h; sourceTree = "<group>"; };
 		529B7F12165D92D500C72F10 /* UsersView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsersView.m; sourceTree = "<group>"; };
 		529FAFE61659311000802D22 /* DataGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataGenerator.h; sourceTree = "<group>"; };
@@ -120,6 +123,8 @@
 			children = (
 				529FAFE61659311000802D22 /* DataGenerator.h */,
 				529FAFE71659311000802D22 /* DataGenerator.m */,
+				5255D9C1166FE8E9003D1734 /* DataFetcher.h */,
+				5255D9C2166FE8E9003D1734 /* DataFetcher.m */,
 			);
 			path = DataGenerator;
 			sourceTree = "<group>";
@@ -338,6 +343,7 @@
 				52D684071662E7FF006919E2 /* FavoriteSmoking.m in Sources */,
 				522E787B1666A7080017A86A /* ListPopUpcontroller.m in Sources */,
 				5215B443166D4D00000007F6 /* Category+Name.m in Sources */,
+				5255D9C3166FE8E9003D1734 /* DataFetcher.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

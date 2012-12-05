@@ -7,6 +7,8 @@
 //
 
 #import "DataGenerator.h"
+#import "DataFetcher.h"
+
 #import "StatisticsLibrary.h"
 #import "RatingWeight.h"
 #import "Restaurant.h"
@@ -191,18 +193,18 @@
     double hCardPark= 0;
 
     
-    NSArray *allCategories = [[DataGenerator sharedInstance] getRestaurantCategories];
-    NSArray *allCuisines = [[DataGenerator sharedInstance] getRestaurantCuisines];
-    NSArray *allLocations = [[DataGenerator sharedInstance] getDistinctRestaurantLocations];
+    NSArray *allCategories = [[DataFetcher sharedInstance] getRestaurantCategories];
+    NSArray *allCuisines = [[DataFetcher sharedInstance] getRestaurantCuisines];
+    NSArray *allLocations = [[DataFetcher sharedInstance] getDistinctRestaurantLocations];
 
     
-    NSArray *allRestaurants = [[DataGenerator sharedInstance] getRestaurants];
+    NSArray *allRestaurants = [[DataFetcher sharedInstance] getRestaurants];
     NSMutableArray *temporaryArray = [[NSMutableArray alloc] initWithCapacity:0];
     
     @autoreleasepool
     {
         for (Category *currentCategory in allCategories) {
-            [temporaryArray addObjectsFromArray:[[DataGenerator sharedInstance] getRestaurantsofCategory:currentCategory]];
+            [temporaryArray addObjectsFromArray:[[DataFetcher sharedInstance] getRestaurantsofCategory:currentCategory]];
             
             double log = 0;
             if ([temporaryArray count]) {
@@ -217,7 +219,7 @@
         NSLog(@"Entropty category %f",hCategory);
         
         for (Cuisine *currentCuisine in allCuisines) {
-            [temporaryArray addObjectsFromArray:[[DataGenerator sharedInstance] getRestaurantsofCuisine:currentCuisine]];
+            [temporaryArray addObjectsFromArray:[[DataFetcher sharedInstance] getRestaurantsofCuisine:currentCuisine]];
             
             double log = 0;
             if ([temporaryArray count]) {
@@ -231,7 +233,7 @@
         NSLog(@"Entropty cuisine %f",hCuisine);
         
         for (NSNumber *currentLocation in allLocations) {
-            [temporaryArray addObjectsFromArray:[[DataGenerator sharedInstance] getRestaurantsInLocation:currentLocation]];
+            [temporaryArray addObjectsFromArray:[[DataFetcher sharedInstance] getRestaurantsInLocation:currentLocation]];
             
             double log = 0;
             if ([temporaryArray count]) {
@@ -245,7 +247,7 @@
         NSLog(@"Entropty Location %f",hLocation);
         
         for (int i = 0; i < 4 ; i++ ) {
-            [temporaryArray addObjectsFromArray:[[DataGenerator sharedInstance] getRestaurantsForPriceRange:[NSNumber numberWithInt:i]]];
+            [temporaryArray addObjectsFromArray:[[DataFetcher sharedInstance] getRestaurantsForPriceRange:[NSNumber numberWithInt:i]]];
             
             double log = 0;
             if ([temporaryArray count]) {
@@ -259,7 +261,7 @@
         NSLog(@"Entropty PriceRange %f",hPriceRange);
 
         for (int i = 0; i < 3 ; i++ ) {
-            [temporaryArray addObjectsFromArray:[[DataGenerator sharedInstance] getRestaurantForSmokingValue:[NSNumber numberWithInt:i]]];
+            [temporaryArray addObjectsFromArray:[[DataFetcher sharedInstance] getRestaurantForSmokingValue:[NSNumber numberWithInt:i]]];
             
             double log = 0;
             if ([temporaryArray count]) {
@@ -274,7 +276,7 @@
 
         
         for (int i = 0; i < 2 ; i++ ) {
-            [temporaryArray addObjectsFromArray:[[DataGenerator sharedInstance] getRestaurantForGardenVale:[NSNumber numberWithInt:i]]];
+            [temporaryArray addObjectsFromArray:[[DataFetcher sharedInstance] getRestaurantForGardenVale:[NSNumber numberWithInt:i]]];
             
             double log = 0;
             if ([temporaryArray count]) {
@@ -289,7 +291,7 @@
 
         
         for (int i = 0; i < 2 ; i++ ) {
-            [temporaryArray addObjectsFromArray:[[DataGenerator sharedInstance] getRestaurantForLiveMusicValue:[NSNumber numberWithInt:i]]];
+            [temporaryArray addObjectsFromArray:[[DataFetcher sharedInstance] getRestaurantForLiveMusicValue:[NSNumber numberWithInt:i]]];
             
             double log = 0;
             if ([temporaryArray count]) {
@@ -303,7 +305,7 @@
         NSLog(@"Entropty LiveMusic %f",hLiveMusic);
 
         for (int i = 0; i < 2 ; i++ ) {
-            [temporaryArray addObjectsFromArray:[[DataGenerator sharedInstance] getRestaurantsWithVegaterieanValue:[NSNumber numberWithInt:i]]];
+            [temporaryArray addObjectsFromArray:[[DataFetcher sharedInstance] getRestaurantsWithVegaterieanValue:[NSNumber numberWithInt:i]]];
             
             double log = 0;
             if ([temporaryArray count]) {
@@ -317,7 +319,7 @@
         NSLog(@"Entropty Vegeterian %f",hVegaterian);
 
         for (int i = 0; i < 2 ; i++ ) {
-            [temporaryArray addObjectsFromArray:[[DataGenerator sharedInstance] getRestaurantForChildFriendly:[NSNumber numberWithInt:i]]];
+            [temporaryArray addObjectsFromArray:[[DataFetcher sharedInstance] getRestaurantForChildFriendly:[NSNumber numberWithInt:i]]];
             
             double log = 0;
             if ([temporaryArray count]) {
@@ -331,7 +333,7 @@
         NSLog(@"Entropty ChildFriendly %f",hChildFriendly);
 
         for (int i = 0; i < 2 ; i++ ) {
-            [temporaryArray addObjectsFromArray:[[DataGenerator sharedInstance] getRestaurantForCarParkValue:[NSNumber numberWithInt:i]]];
+            [temporaryArray addObjectsFromArray:[[DataFetcher sharedInstance] getRestaurantForCarParkValue:[NSNumber numberWithInt:i]]];
             
             double log = 0;
             if ([temporaryArray count]) {

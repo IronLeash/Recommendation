@@ -8,6 +8,7 @@
 
 #import "RatingsView.h"
 #import "DataGenerator.h"
+#import "DataFetcher.h"
 
 #import "User.h"
 #import "RatingWeight.h"
@@ -35,8 +36,8 @@
 }
 
 -(void)awakeFromNib{
-    usersArray = [NSMutableArray arrayWithArray:[[DataGenerator sharedInstance] getUsers]];
-    ratingsArray = [NSMutableArray arrayWithArray:[[DataGenerator sharedInstance] getRestaurantRatings]];
+    usersArray = [NSMutableArray arrayWithArray:[[DataFetcher sharedInstance] getUsers]];
+    ratingsArray = [NSMutableArray arrayWithArray:[[DataFetcher sharedInstance] getRestaurantRatings]];
     
     
     [_categoryTextfield setSelectable:NO];
@@ -60,7 +61,7 @@
     currentlySelectedUser = [usersArray objectAtIndex:[usersTableView selectedRow]];
     
     //Change preferences
-    preferencesDictionary = [NSMutableDictionary dictionaryWithDictionary: [[DataGenerator sharedInstance] getPreferencesDictionaryForUser:currentlySelectedUser]];
+    preferencesDictionary = [NSMutableDictionary dictionaryWithDictionary: [[DataFetcher sharedInstance] getPreferencesDictionaryForUser:currentlySelectedUser]];
 
     FavoriteCategory *favoriteCategory      = [[preferencesDictionary objectForKey:kCategory] objectAtIndex:0];
     FavoriteCategory *favoriteCuisine       = [[preferencesDictionary objectForKey:kCuisine] objectAtIndex:0];
@@ -109,13 +110,13 @@
 
     if (_onlyPositiveRatingscheckBox.state==NSOnState) {
         
-        NSArray *userRatings = [[DataGenerator sharedInstance] getPositiveRatingsforUser:currentlySelectedUser];
+        NSArray *userRatings = [[DataFetcher sharedInstance] getPositiveRatingsforUser:currentlySelectedUser];
         [ratingsArray removeAllObjects];
         [ratingsArray addObjectsFromArray:userRatings];
         
     }else if (_onlyPositiveRatingscheckBox.state==NSOffState){
         
-        NSArray *userRatings = [[DataGenerator sharedInstance] getRestaurantRatingsForUser:currentlySelectedUser];
+        NSArray *userRatings = [[DataFetcher sharedInstance] getRestaurantRatingsForUser:currentlySelectedUser];
         [ratingsArray removeAllObjects];
         [ratingsArray addObjectsFromArray:userRatings];
         
@@ -274,21 +275,21 @@
     NSArray *array1 = [NSArray arrayWithObjects:[NSNumber numberWithFloat:32.523532532],[NSNumber numberWithFloat:-32.532532],[NSNumber numberWithFloat:99.0],[NSNumber numberWithFloat:12.532532],[NSNumber numberWithFloat:22], nil];
     NSArray *array2 = [NSArray arrayWithObjects:[NSNumber numberWithFloat:-2.532532],[NSNumber numberWithFloat:-3.1],[NSNumber numberWithFloat:-9.1],[NSNumber numberWithFloat:22.53253],[NSNumber numberWithFloat:-12.0], nil];
     
+     */
+//    NSLog(@"Correlation %f",[StatisticsLibrary pearsonCorreleationBetweenArray1:array1 andArray2:array2]);
+//    NSLog(@"Cramer %f",[StatisticsLibrary cramersVforAttribute]);
     
-    NSLog(@"Correlation %f",[StatisticsLibrary pearsonCorreleationBetweenArray1:array1 andArray2:array2]);
-    NSLog(@"Cramer %f",[StatisticsLibrary cramersVforAttribute]);
+
+    [self performSelectorInBackground:@selector(generateRatingBackgroundThread) withObject:nil];
     
-    */
-//    [self performSelectorInBackground:@selector(generateRatingBackgroundThread) withObject:nil];
-    
-    NSLog(@"Entropy %f",[StatisticsLibrary entopyOfVariable]);
+//    NSLog(@"Entropy %f",[StatisticsLibrary entopyOfVariable]);
 }
 
 -(void)generateRatingBackgroundThread{
 
     @autoreleasepool
     {
-        NSArray *allUsersArray = [[DataGenerator sharedInstance] getUsers];
+        NSArray *allUsersArray = [[DataFetcher sharedInstance] getUsers];
         
         for (User *currentUser in allUsersArray) {
             [[DataGenerator sharedInstance] generateRatingForUser:currentUser];

@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 ilker. All rights reserved.
 //
 
+
+#import "DataFetcher.h"
 #import "RestaurantsView.h"
 #import "AppDelegate.h"
 #import "Cuisine.h"
@@ -31,7 +33,7 @@
 }
 
 -(void)awakeFromNib{
-    restaurantsArray = [NSMutableArray arrayWithArray:[[DataGenerator sharedInstance] getRestaurants]];
+    restaurantsArray = [NSMutableArray arrayWithArray:[[DataFetcher sharedInstance] getRestaurants]];
     [RestaurantTableView reloadData];
 }
 
@@ -40,7 +42,7 @@
 
 
     [[DataGenerator sharedInstance] generateRestaurants:[[_numberOfRestaurants stringValue] intValue]];
-    restaurantsArray = [NSMutableArray arrayWithArray:[[DataGenerator sharedInstance] getRestaurants]];
+    restaurantsArray = [NSMutableArray arrayWithArray:[[DataFetcher sharedInstance] getRestaurants]];
     [RestaurantTableView reloadData];
 
 }

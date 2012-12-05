@@ -73,7 +73,6 @@
 @property (weak) IBOutlet NSTextField *categoryWeight;
 @property (weak) IBOutlet NSTextField *cuisineWeight;
 @property (weak) IBOutlet NSTextField *locationWeight;
-@property (weak) IBOutlet NSTextField *locationWeight;
 @property (weak) IBOutlet NSTextField *smokingWeight;
 @property (weak) IBOutlet NSTextField *priceRangeWeight;
 @property (weak) IBOutlet NSTextField *gardenWeight;

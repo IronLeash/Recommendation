@@ -8,8 +8,9 @@
 
 #import "UsersView.h"
 #import "User.h"
-#import "DataGenerator.h"
 
+#import "DataGenerator.h"
+#import "DataFetcher.h"
 @implementation UsersView
 
 -(id)init
@@ -26,14 +27,14 @@
 
 -(void)awakeFromNib
 {
-    usersArray = [NSMutableArray arrayWithArray:[[DataGenerator sharedInstance] getUsers]];
+    usersArray = [NSMutableArray arrayWithArray:[[DataFetcher sharedInstance] getUsers]];
     [usersTableView reloadData];
 }
 
 -(IBAction)generateUsers:(id)sender
 {
     [[DataGenerator sharedInstance] generateUsers:[[_numberOfUsers stringValue] intValue]];
-    usersArray = [NSMutableArray arrayWithArray:[[DataGenerator sharedInstance] getUsers]];
+    usersArray = [NSMutableArray arrayWithArray:[[DataFetcher sharedInstance] getUsers]];
     [usersTableView reloadData];
 }
 
