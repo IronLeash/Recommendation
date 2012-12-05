@@ -14,6 +14,21 @@
 @interface RatingsView : NSObject <NSTabViewDelegate,NSTableViewDataSource>
 {
 
+    
+    NSDictionary *entrophyDictionary;
+    double carParkEntrophy;
+    double categoryEntrophy;
+    double ChildFriendlyEntrophy;
+    double cuisineEntrophy;
+    double gardenEntrophy;
+    double liveMusicEntrophy;
+    double locationEntrophy;
+    double priceRangeEntrophy;
+    double smokingEntrophy;
+    double vegetarianEntrophy;
+    
+    
+    
     NSMutableArray *usersArray;
     NSMutableArray *ratingsArray;
     NSMutableArray *weightedAverageArray;

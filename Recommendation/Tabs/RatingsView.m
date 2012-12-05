@@ -38,7 +38,7 @@
 -(void)awakeFromNib{
     usersArray = [NSMutableArray arrayWithArray:[[DataFetcher sharedInstance] getUsers]];
     ratingsArray = [NSMutableArray arrayWithArray:[[DataFetcher sharedInstance] getRestaurantRatings]];
-    
+    entrophyDictionary = [[DataFetcher sharedInstance] getResturantEntrophyDictionary];
     
     [_categoryTextfield setSelectable:NO];
     [_categoryTextfield setEditable:NO];
@@ -62,6 +62,7 @@
     
     //Change preferences
     preferencesDictionary = [NSMutableDictionary dictionaryWithDictionary: [[DataFetcher sharedInstance] getPreferencesDictionaryForUser:currentlySelectedUser]];
+
 
     FavoriteCategory *favoriteCategory      = [[preferencesDictionary objectForKey:kCategory] objectAtIndex:0];
     FavoriteCategory *favoriteCuisine       = [[preferencesDictionary objectForKey:kCuisine] objectAtIndex:0];
@@ -94,8 +95,43 @@
     
     NSLog(@"Preferences %@",preferencesDictionary);
     
-    
     [self updateRatingTable];
+    
+    
+    //Calculate correlation of attributes
+    
+    
+    NSArray *ratedRestaurants = [[DataFetcher sharedInstance] getRestaurantRatingsForUser:currentlySelectedUser];
+    NSMutableArray *gardenValuesArray = [[NSMutableArray alloc] initWithCapacity:0];
+    NSMutableArray *liveMusicValuesArray = [[NSMutableArray alloc] initWithCapacity:0];
+    NSMutableArray *carParkValuesArray = [[NSMutableArray alloc] initWithCapacity:0];
+    NSMutableArray *childfriendlyValuesArray = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    
+    for (RestaurantRating *currentRestRating in ratedRestaurants) {
+
+        
+        if ([currentRestRating.restaurant.garden isEqualToNumber:[NSNumber numberWithInteger:0]]) {
+        [gardenValuesArray addObject:[NSNumber numberWithInteger:5]];
+        }else{
+            [gardenValuesArray addObject:[NSNumber numberWithInteger:10]];
+        }
+        
+        [liveMusicValuesArray addObject:currentRestRating.restaurant.liveMusic];
+        [carParkValuesArray addObject:currentRestRating.restaurant.carPark];
+        [childfriendlyValuesArray addObject:currentRestRating.restaurant.childFriendly];
+}
+    
+    double correlationGarden = [StatisticsLibrary pearsonCorreleationBetweenArray1:weightedAverageArray andArray2:gardenValuesArray];
+    double correlationLiveMusic = [StatisticsLibrary pearsonCorreleationBetweenArray1:weightedAverageArray andArray2:liveMusicValuesArray];
+    double correlationChildFriendly = [StatisticsLibrary pearsonCorreleationBetweenArray1:weightedAverageArray andArray2:childfriendlyValuesArray];
+    double correlationCarPark = [StatisticsLibrary pearsonCorreleationBetweenArray1:weightedAverageArray andArray2:carParkValuesArray];
+    
+    NSLog(@"Correlation Garden %f",correlationGarden);
+    NSLog(@"Correlation Live Music %f",correlationLiveMusic);
+    NSLog(@"Correlation Child friendly %f",correlationChildFriendly);
+    NSLog(@"Correlation Car park %f",correlationCarPark);
+    
 }
 
 -(IBAction)checkBoxchangedValue:(id)sender

@@ -573,5 +573,10 @@ static  NSManagedObjectContext *moc;
 }
 
 
+-(NSDictionary*)getResturantEntrophyDictionary
+{
+    NSDictionary *returnDictionary = [[NSUserDefaults standardUserDefaults] objectForKey:kRestaurantAttributesEntropyDistionary];
+    return returnDictionary;
+}
 
 @end

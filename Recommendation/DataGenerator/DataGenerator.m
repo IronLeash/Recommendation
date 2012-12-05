@@ -342,7 +342,7 @@ static  NSManagedObjectContext *moc;
             currentRestaurant.categories = currentCateory;
             currentRestaurant.cuisine = currentCuisine;
             currentRestaurant.restaurantId = [NSString stringWithFormat:@"RestId %d",i];
-            currentRestaurant.liveMusic = [NSNumber numberWithInt:curentRandomGardenNumber];
+            currentRestaurant.liveMusic = [NSNumber numberWithInt:curentRandomLiveMusicNumber];
             currentRestaurant.garden = [NSNumber numberWithInt:curentRandomGardenNumber];
             currentRestaurant.carPark = [NSNumber numberWithInt:curentRandomCarParkNumber];
             currentRestaurant.location = [NSNumber numberWithInt:curentRandomLocationNumber];

@@ -44,6 +44,6 @@
 -(NSArray*)getFavoriteCategoriesForUser:(User*)currentUser;
 -(NSDictionary*)getPreferencesDictionaryForUser:(User*)currentUser;
 
-
+-(NSDictionary*)getResturantEntrophyDictionary;
 
 @end
