@@ -16,9 +16,13 @@
 +(DataFetcher*)sharedInstance;
 
 //Getters
+
+-(NSManagedObjectContext*)getManagedObjectContext;
+
 -(NSArray*)getRestaurantCategories;
 
 -(NSArray*)getRestaurantCuisines;
+-(Cuisine*)getRestaurantCuisineWithName:(NSString*)name;
 
 -(NSArray*)getRestaurants;
 -(NSArray*)getRestaurantsofCategory:(Category*)aCategory;
