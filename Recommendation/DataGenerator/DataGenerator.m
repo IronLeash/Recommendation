@@ -25,6 +25,8 @@
 #import "FavoriteCuisine.h"
 #import "FavoriteSmoking.h"
 
+#import "DataGenerationRulesRestaurant.h"
+
 @implementation DataGenerator
 
 static DataGenerator* dataGenerator = nil;
@@ -103,10 +105,15 @@ static  NSManagedObjectContext *moc;
     //Entity does not exist
     if ([array  count] == 0) {
         //Get Managed Context
-        NSArray *cuisinesArray = [[NSArray alloc] initWithObjects:@"Turkish",
-                                  @"French",
+        NSArray *cuisinesArray = [[NSArray alloc] initWithObjects:
+                                  @"American",
+                                  @"Argentina",
                                   @"Austrian",
+                                  @"Turkish",
+                                  @"French",
+                                  @"English",
                                   @"Italian",
+                                  @"Irish",
                                   @"Spanish",
                                   @"Greek",
                                   @"World",
@@ -115,13 +122,11 @@ static  NSManagedObjectContext *moc;
                                   @"Thailand",
                                   @"Chinese",
                                   @"Mexica",
-                                  @"Argentina",
                                   nil];
         
         
         @autoreleasepool
         {
-            
             for (NSString* currentCuisineName in cuisinesArray) {
                 
                 NSManagedObject *cuisineEntityManagedObject = [NSEntityDescription
@@ -129,7 +134,6 @@ static  NSManagedObjectContext *moc;
                                                                inManagedObjectContext:moc];
                 
                 [cuisineEntityManagedObject setValue:currentCuisineName forKey:@"name"];
-                
             }
             
             NSError *error = nil;
@@ -138,10 +142,8 @@ static  NSManagedObjectContext *moc;
             if (error) {
                 NSLog(@"Error %@",error);
             }
-            
         }
     }
-
 }
 
 -(void)generateCategories{
@@ -222,21 +224,16 @@ static  NSManagedObjectContext *moc;
 }
 -(void)generateUsers:(int)numberOfUsers{
     
-    
     NSArray *stereoTypes  = [NSArray arrayWithObjects:@"Student",
                                                         @"Ambiance lover",
-                                                        @"Gourme",
+                                                        @"Gourmet",
                                                         @"Family",
                                                         @"Vegaterian",
                                                         @"Tourist",nil];
-    
         @autoreleasepool
-        {            
-
+        {
 #warning assignauniq id
-            
             int currentUserIndex = 1;
-
             for (NSString *currentStereotype in stereoTypes) {
             
                 for (int i = 0; i < numberOfUsers/[stereoTypes count]; i++) {
@@ -249,13 +246,13 @@ static  NSManagedObjectContext *moc;
                     int smoker = arc4random() %(2);
                     int vegaterian = arc4random() %(2);
                     
-                    currentUser.userid = [NSString stringWithFormat:@"User %@",[NSNumber numberWithInt:currentUserIndex]];
-                    currentUser.age = [NSNumber numberWithInt:age];
-                    currentUser.gender = [NSNumber numberWithInt:gender];
-                    currentUser.location = [NSNumber numberWithInt:location];
-                    currentUser.smoker = [NSNumber numberWithInt:smoker];
-                    currentUser.vegeterian = [NSNumber numberWithInt:vegaterian];
-                    currentUser.stereotype = currentStereotype;
+                    currentUser.userid      = [NSString stringWithFormat:@"User %@",[NSNumber numberWithInt:currentUserIndex]];
+                    currentUser.age         = [NSNumber numberWithInt:age];
+                    currentUser.gender      = [NSNumber numberWithInt:gender];
+                    currentUser.location    = [NSNumber numberWithInt:location];
+                    currentUser.smoker      = [NSNumber numberWithInt:smoker];
+                    currentUser.vegeterian  = [NSNumber numberWithInt:vegaterian];
+                    currentUser.stereotype  = currentStereotype;
                 
                     
                     RatingWeight *ratingWeight = [NSEntityDescription insertNewObjectForEntityForName:@"RatingWeight" inManagedObjectContext:moc];
@@ -310,7 +307,7 @@ static  NSManagedObjectContext *moc;
     {
     for (int i = 0; i < numberOfRestaurants ; i++) {
         
-        int curentRandomCuisineNumber = arc4random() %([cuisines count]-1);
+//        int curentRandomCuisineNumber = arc4random() %([cuisines count]-1);
         int curentRandomCategoryNumber = arc4random() %([categories count]-1);
         
         int curentRandomSmokingNumber = arc4random() %(3);
@@ -323,9 +320,9 @@ static  NSManagedObjectContext *moc;
         int curentRandomLiveMusicNumber = arc4random() %(2);
         
         
-        Cuisine *currentCuisine = [cuisines objectAtIndex:curentRandomCuisineNumber];
         Category *currentCateory = [categories objectAtIndex:curentRandomCategoryNumber];
-        
+        Cuisine *currentCuisine = [DataGenerationRulesRestaurant cuisineForCategory:currentCateory];
+//        Cuisine *currentCuisine = [cuisines objectAtIndex:curentRandomCuisineNumber];
         
         NSLog(@"Generate New restaurant with cuisine %@" ,currentCuisine.name);
         NSLog(@"Generate New restaurant with category %@",currentCateory.name);
@@ -335,37 +332,39 @@ static  NSManagedObjectContext *moc;
         NSLog(@"Generate New restaurant with childFriendly %d",curentRandomChildFriendlyNumber);
         NSLog(@"Generate New restaurant with vegeterian %d",curentRandomVegeterianNumber);
         NSLog(@"Generate New restaurant with price range %d",curentRandomLiveMusicNumber);
-        NSLog(@"--------------------------------------");
+        NSLog(@"-------------------------------------- %d",i);
 
     
             Restaurant* currentRestaurant = [NSEntityDescription insertNewObjectForEntityForName:@"Restaurant" inManagedObjectContext:moc];
             currentRestaurant.categories = currentCateory;
+
             currentRestaurant.cuisine = currentCuisine;
             currentRestaurant.restaurantId = [NSString stringWithFormat:@"RestId %d",i];
-            currentRestaurant.liveMusic = [NSNumber numberWithInt:curentRandomLiveMusicNumber];
-            currentRestaurant.garden = [NSNumber numberWithInt:curentRandomGardenNumber];
-            currentRestaurant.carPark = [NSNumber numberWithInt:curentRandomCarParkNumber];
+            currentRestaurant.liveMusic = [NSNumber numberWithInt:[DataGenerationRulesRestaurant liveMusicForCategory:currentCateory]];
+            currentRestaurant.garden = [NSNumber numberWithInt:[DataGenerationRulesRestaurant gardenForCategory:currentCateory]];
+            currentRestaurant.carPark = [NSNumber numberWithInt:[DataGenerationRulesRestaurant carParkForCategory:currentCateory]];
             currentRestaurant.location = [NSNumber numberWithInt:curentRandomLocationNumber];
-            currentRestaurant.smoking = [NSNumber numberWithInt:curentRandomSmokingNumber];
-            currentRestaurant.childFriendly = [NSNumber numberWithInt:curentRandomChildFriendlyNumber];
-            currentRestaurant.priceRange = [NSNumber numberWithInt:curentRandomPriceRangeNumber];
-            currentRestaurant.vegeterian = [NSNumber numberWithInt:curentRandomVegeterianNumber];
-            
-            }
-        NSError *error = nil;
-        [moc save:&error];
+            currentRestaurant.smoking = [NSNumber numberWithInt:[DataGenerationRulesRestaurant smokingForCategory:currentCateory]];
+            currentRestaurant.childFriendly = [NSNumber numberWithInt:[DataGenerationRulesRestaurant childFriendlyForCategory:currentCateory]];
+            currentRestaurant.priceRange = [NSNumber numberWithInt:[DataGenerationRulesRestaurant priceForCategory:currentCateory]];
+            currentRestaurant.vegeterian = [NSNumber numberWithInt:[DataGenerationRulesRestaurant vegetarianForCategory:currentCateory]];
         
-        if (error) {
-            NSLog(@"Error %@",error);
-        }
+    }
+    }
     
     
     //Restaurants generated save entropies in NSUserDefauls
-        NSDictionary *restaurantAttributesEntropyDictionary = [StatisticsLibrary entopyOfVariable];
-        [[NSUserDefaults standardUserDefaults] setObject:restaurantAttributesEntropyDictionary forKey:kRestaurantAttributesEntropyDistionary];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        
+    NSDictionary *restaurantAttributesEntropyDictionary = [StatisticsLibrary entopyOfVariable];
+    [[NSUserDefaults standardUserDefaults] setObject:restaurantAttributesEntropyDictionary forKey:kRestaurantAttributesEntropyDistionary];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    NSError *error = nil;
+    [moc save:&error];
+    
+    if (error) {
+        NSLog(@"Error %@",error);
     }
+    
 }
 
 -(void)generateRatingForUser:(User*)aUser

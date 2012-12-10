@@ -45,6 +45,10 @@ static  NSManagedObjectContext *moc;
 #pragma mark -
 
 
+-(NSManagedObjectContext*)getManagedObjectContext{
+    return moc;
+}
+
 -(NSArray*)getRestaurantCategories{
     
     //Check if cusines are alreadyThere
@@ -84,6 +88,32 @@ static  NSManagedObjectContext *moc;
     
     return array;
     
+}
+
+-(Cuisine*)getRestaurantCuisineWithName:(NSString*)name{
+
+    
+    //Check if cusines are alreadyThere
+    //Fetsch results
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"Cuisine" inManagedObjectContext:moc];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDescription];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"name == %@",name]];
+    
+
+    NSError *error;
+    NSArray *array = [moc executeFetchRequest:request error:&error];
+    
+    
+    Cuisine *currentCuisine;
+    if ([array count]) {
+        currentCuisine = [array objectAtIndex:0];
+    }else{
+    
+    }
+    
+    return currentCuisine;
 }
 
 -(NSArray*)getRestaurants{
