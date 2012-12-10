@@ -9,9 +9,6 @@
 #ifndef Recommendation_Constants_h
 #define Recommendation_Constants_h
 
-
-#define POSITIVERATINGTHRESHOLD 7.0
-
 //CategoryNames
 
 #define kBakery             @"Bakery"
@@ -55,12 +52,21 @@
 
 
 //Price Description
-
 #define kLow              @"Low"
 #define kNomral           @"Normal"
 #define kAboveAverate     @"Above average"
 #define kLuxus            @"Luxus"
 
+
+
+//User Stereotypes
+
+#define kStudent          @"Student"
+#define kAmbianceLover    @"Ambiance lover"
+#define kGourmet          @"Gourmet"
+#define kFamily           @"Family"
+#define kVegaterian       @"Vegaterian"
+#define kTourist          @"Tourist"
 
 //Dictionary Keys
 
@@ -77,6 +83,8 @@
 
 
 #define kRestaurantAttributesEntropyDistionary @"RestAttributesEntropy"
+
+#define POSITIVERATINGTHRESHOLD 7.0
 
 //coefficient for attribtue value relevance for calculation of favorite nominal attributes
 #define  ALPHA 0.5

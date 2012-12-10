@@ -32,6 +32,8 @@
 		52A978B616544E35004ABC6D /* RestaurantsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A978B516544E35004ABC6D /* RestaurantsView.m */; };
 		52ABE99B1674F5B100E91274 /* Cuisine+Name.m in Sources */ = {isa = PBXBuildFile; fileRef = 52ABE99A1674F5B100E91274 /* Cuisine+Name.m */; };
 		52ABE99F1675475200E91274 /* DataGenerationRulesRestaurant.m in Sources */ = {isa = PBXBuildFile; fileRef = 52ABE99E1675475200E91274 /* DataGenerationRulesRestaurant.m */; };
+		52ABE9A41675502F00E91274 /* DataGenerationRulesUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 52ABE9A31675502F00E91274 /* DataGenerationRulesUser.m */; };
+		52ABE9A71675504500E91274 /* DataGenerationRulesRating.m in Sources */ = {isa = PBXBuildFile; fileRef = 52ABE9A61675504500E91274 /* DataGenerationRulesRating.m */; };
 		52BBD9871656F71D006F9BA2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52A97897165449C8004ABC6D /* CoreData.framework */; };
 		52D684001662E019006919E2 /* FavoriteCuisine.m in Sources */ = {isa = PBXBuildFile; fileRef = 52D683FF1662E019006919E2 /* FavoriteCuisine.m */; };
 		52D684041662E7AE006919E2 /* FavoriteLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 52D684031662E7AE006919E2 /* FavoriteLocation.m */; };
@@ -92,6 +94,10 @@
 		52ABE99E1675475200E91274 /* DataGenerationRulesRestaurant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataGenerationRulesRestaurant.m; sourceTree = "<group>"; };
 		52ABE9A016754E7000E91274 /* Category+Name.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Category+Name.m"; sourceTree = "<group>"; };
 		52ABE9A116754E7000E91274 /* Category+Name.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Category+Name.h"; sourceTree = "<group>"; };
+		52ABE9A21675502F00E91274 /* DataGenerationRulesUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataGenerationRulesUser.h; sourceTree = "<group>"; };
+		52ABE9A31675502F00E91274 /* DataGenerationRulesUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataGenerationRulesUser.m; sourceTree = "<group>"; };
+		52ABE9A51675504500E91274 /* DataGenerationRulesRating.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataGenerationRulesRating.h; sourceTree = "<group>"; };
+		52ABE9A61675504500E91274 /* DataGenerationRulesRating.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataGenerationRulesRating.m; sourceTree = "<group>"; };
 		52D683FE1662E019006919E2 /* FavoriteCuisine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteCuisine.h; sourceTree = "<group>"; };
 		52D683FF1662E019006919E2 /* FavoriteCuisine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteCuisine.m; sourceTree = "<group>"; };
 		52D684021662E7AE006919E2 /* FavoriteLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteLocation.h; sourceTree = "<group>"; };
@@ -254,6 +260,10 @@
 			children = (
 				52ABE99D1675475200E91274 /* DataGenerationRulesRestaurant.h */,
 				52ABE99E1675475200E91274 /* DataGenerationRulesRestaurant.m */,
+				52ABE9A21675502F00E91274 /* DataGenerationRulesUser.h */,
+				52ABE9A31675502F00E91274 /* DataGenerationRulesUser.m */,
+				52ABE9A51675504500E91274 /* DataGenerationRulesRating.h */,
+				52ABE9A61675504500E91274 /* DataGenerationRulesRating.m */,
 			);
 			path = DataRules;
 			sourceTree = "<group>";
@@ -370,6 +380,8 @@
 				5255D9C3166FE8E9003D1734 /* DataFetcher.m in Sources */,
 				52ABE99B1674F5B100E91274 /* Cuisine+Name.m in Sources */,
 				52ABE99F1675475200E91274 /* DataGenerationRulesRestaurant.m in Sources */,
+				52ABE9A41675502F00E91274 /* DataGenerationRulesUser.m in Sources */,
+				52ABE9A71675504500E91274 /* DataGenerationRulesRating.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

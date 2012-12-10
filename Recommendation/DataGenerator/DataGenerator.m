@@ -224,21 +224,16 @@ static  NSManagedObjectContext *moc;
 }
 -(void)generateUsers:(int)numberOfUsers{
     
-    
     NSArray *stereoTypes  = [NSArray arrayWithObjects:@"Student",
                                                         @"Ambiance lover",
-                                                        @"Gourme",
+                                                        @"Gourmet",
                                                         @"Family",
                                                         @"Vegaterian",
                                                         @"Tourist",nil];
-    
         @autoreleasepool
-        {            
-
+        {
 #warning assignauniq id
-            
             int currentUserIndex = 1;
-
             for (NSString *currentStereotype in stereoTypes) {
             
                 for (int i = 0; i < numberOfUsers/[stereoTypes count]; i++) {
@@ -251,13 +246,13 @@ static  NSManagedObjectContext *moc;
                     int smoker = arc4random() %(2);
                     int vegaterian = arc4random() %(2);
                     
-                    currentUser.userid = [NSString stringWithFormat:@"User %@",[NSNumber numberWithInt:currentUserIndex]];
-                    currentUser.age = [NSNumber numberWithInt:age];
-                    currentUser.gender = [NSNumber numberWithInt:gender];
-                    currentUser.location = [NSNumber numberWithInt:location];
-                    currentUser.smoker = [NSNumber numberWithInt:smoker];
-                    currentUser.vegeterian = [NSNumber numberWithInt:vegaterian];
-                    currentUser.stereotype = currentStereotype;
+                    currentUser.userid      = [NSString stringWithFormat:@"User %@",[NSNumber numberWithInt:currentUserIndex]];
+                    currentUser.age         = [NSNumber numberWithInt:age];
+                    currentUser.gender      = [NSNumber numberWithInt:gender];
+                    currentUser.location    = [NSNumber numberWithInt:location];
+                    currentUser.smoker      = [NSNumber numberWithInt:smoker];
+                    currentUser.vegeterian  = [NSNumber numberWithInt:vegaterian];
+                    currentUser.stereotype  = currentStereotype;
                 
                     
                     RatingWeight *ratingWeight = [NSEntityDescription insertNewObjectForEntityForName:@"RatingWeight" inManagedObjectContext:moc];
