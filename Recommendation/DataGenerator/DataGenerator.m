@@ -25,7 +25,9 @@
 #import "FavoriteCuisine.h"
 #import "FavoriteSmoking.h"
 
+//Rules
 #import "DataGenerationRulesRestaurant.h"
+#import "DataGenerationRulesUser.h"
 
 @implementation DataGenerator
 
@@ -224,15 +226,10 @@ static  NSManagedObjectContext *moc;
 }
 -(void)generateUsers:(int)numberOfUsers{
     
-    NSArray *stereoTypes  = [NSArray arrayWithObjects:@"Student",
-                                                        @"Ambiance lover",
-                                                        @"Gourmet",
-                                                        @"Family",
-                                                        @"Vegaterian",
-                                                        @"Tourist",nil];
+    NSArray *stereoTypes  = [NSArray arrayWithObjects:kStudent,kAmbianceLover,kGourmet,kFamily,kVegaterian,kTourist,nil];
+    
         @autoreleasepool
         {
-#warning assignauniq id
             int currentUserIndex = 1;
             for (NSString *currentStereotype in stereoTypes) {
             
@@ -240,18 +237,18 @@ static  NSManagedObjectContext *moc;
 
                     User* currentUser = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:moc];
                     
-                    int age = (arc4random() %(40))+25;
+//                    int age = (arc4random() %(40))+25;
                     int gender = arc4random() %(2);
                     int location = arc4random() %(15);
-                    int smoker = arc4random() %(2);
-                    int vegaterian = arc4random() %(2);
+//                    int smoker = arc4random() %(2);
+//                    int vegaterian = arc4random() %(2);
                     
                     currentUser.userid      = [NSString stringWithFormat:@"User %@",[NSNumber numberWithInt:currentUserIndex]];
-                    currentUser.age         = [NSNumber numberWithInt:age];
+                    currentUser.age         = [NSNumber numberWithInt:[DataGenerationRulesUser userAgePredictionFor:currentStereotype]];
                     currentUser.gender      = [NSNumber numberWithInt:gender];
                     currentUser.location    = [NSNumber numberWithInt:location];
-                    currentUser.smoker      = [NSNumber numberWithInt:smoker];
-                    currentUser.vegeterian  = [NSNumber numberWithInt:vegaterian];
+                    currentUser.smoker      = [NSNumber numberWithInt:[DataGenerationRulesUser userSmokingPredictionFor:currentStereotype]];
+                    currentUser.vegeterian  = [NSNumber numberWithInt:[DataGenerationRulesUser userVegetarianPredictionFor:currentStereotype]];
                     currentUser.stereotype  = currentStereotype;
                 
                     
@@ -298,7 +295,7 @@ static  NSManagedObjectContext *moc;
 -(void)generateRestaurants:(int)numberOfRestaurants{
 
     //Get all restaurant categories
-    NSArray *cuisines = [NSArray arrayWithArray:[[DataFetcher sharedInstance] getRestaurantCuisines]];
+//    NSArray *cuisines = [NSArray arrayWithArray:[[DataFetcher sharedInstance] getRestaurantCuisines]];
     //Get all cuisine in
     NSArray *categories = [NSArray arrayWithArray:[[DataFetcher sharedInstance] getRestaurantCategories]];
     
@@ -310,20 +307,22 @@ static  NSManagedObjectContext *moc;
 //        int curentRandomCuisineNumber = arc4random() %([cuisines count]-1);
         int curentRandomCategoryNumber = arc4random() %([categories count]-1);
         
-        int curentRandomSmokingNumber = arc4random() %(3);
-        int curentRandomCarParkNumber = arc4random() %(2);
-        int curentRandomChildFriendlyNumber = arc4random() %(2);
-        int curentRandomVegeterianNumber = arc4random() %(2);
-        int curentRandomPriceRangeNumber = arc4random() %(4);
+//        int curentRandomSmokingNumber = arc4random() %(3);
+//        int curentRandomCarParkNumber = arc4random() %(2);
+//        int curentRandomChildFriendlyNumber = arc4random() %(2);
+//        int curentRandomVegeterianNumber = arc4random() %(2);
+//        int curentRandomPriceRangeNumber = arc4random() %(4);
         int curentRandomLocationNumber = (arc4random() %(15))+1;
-        int curentRandomGardenNumber = arc4random() %(2);
-        int curentRandomLiveMusicNumber = arc4random() %(2);
+//        int curentRandomGardenNumber = arc4random() %(2);
+//        int curentRandomLiveMusicNumber = arc4random() %(2);
         
         
         Category *currentCateory = [categories objectAtIndex:curentRandomCategoryNumber];
         Cuisine *currentCuisine = [DataGenerationRulesRestaurant cuisineForCategory:currentCateory];
 //        Cuisine *currentCuisine = [cuisines objectAtIndex:curentRandomCuisineNumber];
         
+        
+        /*
         NSLog(@"Generate New restaurant with cuisine %@" ,currentCuisine.name);
         NSLog(@"Generate New restaurant with category %@",currentCateory.name);
 
@@ -333,7 +332,7 @@ static  NSManagedObjectContext *moc;
         NSLog(@"Generate New restaurant with vegeterian %d",curentRandomVegeterianNumber);
         NSLog(@"Generate New restaurant with price range %d",curentRandomLiveMusicNumber);
         NSLog(@"-------------------------------------- %d",i);
-
+        */
     
             Restaurant* currentRestaurant = [NSEntityDescription insertNewObjectForEntityForName:@"Restaurant" inManagedObjectContext:moc];
             currentRestaurant.categories = currentCateory;

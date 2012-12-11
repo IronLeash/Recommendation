@@ -12,9 +12,11 @@
 
 +(int)userAgePredictionFor:(NSString*)userStereotype;
 
+#warning IRRELEVANT
 +(int)userGenderPredictionFor:(NSString*)userStereotype;
 
-+(int)userLocationPredictionFor:(NSString*)userStereotype;
+#warning IRRELEVANT
+//+(int)userLocationPredictionFor:(NSString*)userStereotype;
 
 +(int)userSmokingPredictionFor:(NSString*)userStereotype;
 
