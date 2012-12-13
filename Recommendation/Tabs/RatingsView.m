@@ -50,10 +50,26 @@
     
     [usersTableView reloadData];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateRatingsTable:)
+                                                 name:ratingsGeneratedNotification
+                                               object:nil];
+    
+}
+
+
+
+#pragma mark = Notifications
+
+-(void)updateRatingsTable:(NSNotification*)aNptification{
+
+    usersArray = [NSMutableArray arrayWithArray:[[DataFetcher sharedInstance] getUsers]];
+    ratingsArray = [NSMutableArray arrayWithArray:[[DataFetcher sharedInstance] getRestaurantRatings]];
+    [usersTableView reloadData];
+    [ratingsTableView reloadData];
 }
 
 #pragma mark - Custom Methods
-
 
 -(IBAction)aRowIsSelected:(id)sender{
 
@@ -333,8 +349,14 @@
             [[DataGenerator sharedInstance] generateRatingForUser:currentUser];
         }
     }
-#warning post notification to remove loading secrren
+    [self performSelectorOnMainThread:@selector(notifyViewsAfterRAtingGeneration) withObject:nil waitUntilDone:NO];
     
+}
+
+-(void)notifyViewsAfterRAtingGeneration{
+    
+    NSNotification *ratingsCreatedNotification = [NSNotification notificationWithName:ratingsGeneratedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:ratingsCreatedNotification];
 }
 
 

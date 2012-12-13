@@ -11,6 +11,8 @@
 #import "Category.h"
 #import "Cuisine.h"
 
+NSString *ratingsGeneratedNotification;
+
 @interface DataGenerator : NSObject
 {
 //    NSManagedObjectContext *moc;

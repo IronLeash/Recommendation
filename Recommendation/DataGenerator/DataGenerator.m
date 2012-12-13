@@ -30,7 +30,11 @@
 #import "DataGenerationRulesUser.h"
 #import "DataGenerationRulesRating.h"
 
+
+
 @implementation DataGenerator
+
+NSString *ratingsGeneratedNotification = @"ratingGeenratedNotification";
 
 static DataGenerator* dataGenerator = nil;
 static  NSManagedObjectContext *moc;
@@ -455,7 +459,9 @@ static  NSManagedObjectContext *moc;
         [[DataGenerator sharedInstance] generateRatingForUser:currentUser];
     }
     
-#warning Notification
+
+#warning post he remaining number etc
+
 }
 
 
