@@ -34,13 +34,11 @@ static NSArray *favoriteVegaterianCategories;
         {
 
             favoriteStudentCategories = [[NSArray alloc] initWithArray:[[DataFetcher sharedInstance] getFavoriteCagetoriesForStereotype:kStudent]];
-
-            favoriteTouriestCategories = [[DataFetcher sharedInstance] getFavoriteCagetoriesForStereotype:kTourist];
-            favoriteGourmetCategories = [[DataFetcher sharedInstance] getFavoriteCagetoriesForStereotype:kGourmet];
-            favoriteFamilyCategories = [[DataFetcher sharedInstance] getFavoriteCagetoriesForStereotype:kFamily];
-            favoriteAmbianceLoverCategories = [[DataFetcher sharedInstance] getFavoriteCagetoriesForStereotype:kAmbianceLover] ;
-            favoriteVegaterianCategories = [[DataFetcher sharedInstance] getFavoriteCagetoriesForStereotype:kVegaterian];
-            
+            favoriteTouriestCategories =[[NSArray alloc] initWithArray:[[DataFetcher sharedInstance] getFavoriteCagetoriesForStereotype:kTourist]];
+            favoriteGourmetCategories =[[NSArray alloc] initWithArray:[[DataFetcher sharedInstance] getFavoriteCagetoriesForStereotype:kGourmet]];
+            favoriteFamilyCategories =[[NSArray alloc] initWithArray:[[DataFetcher sharedInstance] getFavoriteCagetoriesForStereotype:kFamily]];
+            favoriteAmbianceLoverCategories =[[NSArray alloc] initWithArray:[[DataFetcher sharedInstance] getFavoriteCagetoriesForStereotype:kAmbianceLover]];
+            favoriteVegaterianCategories = [[NSArray alloc] initWithArray:[[DataFetcher sharedInstance] getFavoriteCagetoriesForStereotype:kVegaterian]];
             
             dataGenerationRulesRating = [[self alloc] init];
             return dataGenerationRulesRating;
@@ -71,17 +69,16 @@ static NSArray *favoriteVegaterianCategories;
     
     if ([aUser.stereotype isEqualToString:kStudent]) {
         favoriteSet = [[NSSet alloc] initWithArray:favoriteStudentCategories];
-
     }else if ([aUser.stereotype isEqualToString:kGourmet]){
-//        favoriteSet = [[NSSet alloc] initWithSet:favoriteGourmetCategories];
+        favoriteSet = [[NSSet alloc] initWithArray:favoriteGourmetCategories];
     }else if ([aUser.stereotype isEqualToString:kAmbianceLover]){
-//        favoriteSet = [[NSSet alloc] initWithSet:favoriteAmbianceLoverCategories];        
+        favoriteSet = [[NSSet alloc] initWithArray:favoriteAmbianceLoverCategories];
     }else if ([aUser.stereotype isEqualToString:kFamily]){
-//        favoriteSet = [[NSSet alloc] initWithSet:favoriteFamilyCategories]; 
+        favoriteSet = [[NSSet alloc] initWithArray:favoriteFamilyCategories];
     }else if ([aUser.stereotype isEqualToString:kTourist]){
-//        favoriteSet = [[NSSet alloc] initWithSet:favoriteVegaterianCategories];
+        favoriteSet = [[NSSet alloc] initWithArray:favoriteTouriestCategories];
     }else {
-//        favoriteSet = [[NSSet alloc] initWithSet:favoriteVegaterianCategories];
+        favoriteSet = [[NSSet alloc] initWithArray:favoriteVegaterianCategories];
     }
     
     
@@ -99,9 +96,7 @@ static NSArray *favoriteVegaterianCategories;
         
     }
     
-    
-    
-    
+
     NSDictionary *returnDicitonary = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSNumber numberWithInt:accessibilityRating],
                                                                                                     [NSNumber numberWithInt:coreServiceRating],
                                                                                                     [NSNumber numberWithInt:personalRating],
@@ -113,14 +108,14 @@ static NSArray *favoriteVegaterianCategories;
 #warning consider following
 //Stereotype - consider favorite categories, potential cuisines
 
+//Assign has car
+//assign has child
+//consider location
+    
 //Consider price
-    
 //Consider smoking
-
 //Consider vegaterian etc
-
 //consider location or not
-    
 //Limit maximum deviation between highes and lowest rating
     
     

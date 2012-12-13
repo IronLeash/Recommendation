@@ -12,13 +12,7 @@
 
 @interface DataGenerationRulesRating : NSObject
 {
-    /*
-    NSSet *favoriteStudentCategories;
-    NSSet *favoriteTouriestCategories;
-    NSSet *favoriteGourmetCategories;
-    NSSet *favoriteFamilyCategories;
-    NSSet *favoriteAmbianceLoverCategories;
-    */
+
 }
 
 -(NSDictionary*)ratingsForRestaruant:(Restaurant*)aRest ofUser:(User*)aUser;
