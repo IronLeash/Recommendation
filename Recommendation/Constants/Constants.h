@@ -82,6 +82,16 @@
 #define kCarPark        @"CarPark"
 
 
+//Rating dimensions
+
+
+#define kAccessibility  @"accessibility"
+#define kCoreService    @"coreService"
+#define kPersonal       @"personal"
+#define kService        @"service"
+#define kTangibles        @"tangible"
+
+
 #define kRestaurantAttributesEntropyDistionary @"RestAttributesEntropy"
 
 #define POSITIVERATINGTHRESHOLD 7.0

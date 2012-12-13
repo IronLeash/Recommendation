@@ -8,6 +8,7 @@
 
 #import "RatingsView.h"
 #import "DataGenerator.h"
+#import "DataGenerationRulesRating.h"
 #import "DataFetcher.h"
 
 #import "User.h"
@@ -242,7 +243,7 @@
         
         if ([tableColumn.identifier isEqualToString:@"restaurant"])
         {
-            return currentRating.restaurant.restaurantId;
+            return currentRating.restaurant.uniqueName;
         }else if([tableColumn.identifier isEqualToString:@"coreService"]) {
             return currentRating.coreServiceRating;
         }else if([tableColumn.identifier isEqualToString:@"accessibility"]) {
@@ -315,6 +316,7 @@
 //    NSLog(@"Correlation %f",[StatisticsLibrary pearsonCorreleationBetweenArray1:array1 andArray2:array2]);
 //    NSLog(@"Cramer %f",[StatisticsLibrary cramersVforAttribute]);
     
+
 
     [self performSelectorInBackground:@selector(generateRatingBackgroundThread) withObject:nil];
     

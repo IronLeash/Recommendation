@@ -15,7 +15,6 @@
 		52361CF016610392008232A3 /* RatingWeight.m in Sources */ = {isa = PBXBuildFile; fileRef = 52361CEF16610392008232A3 /* RatingWeight.m */; };
 		52361CF316610392008232A3 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 52361CF216610392008232A3 /* User.m */; };
 		52361CF616610392008232A3 /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 52361CF516610392008232A3 /* Category.m */; };
-		52361CF916610393008232A3 /* Restaurant.m in Sources */ = {isa = PBXBuildFile; fileRef = 52361CF816610393008232A3 /* Restaurant.m */; };
 		52361D0116611DF3008232A3 /* StatisticsLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 52361D0016611DF3008232A3 /* StatisticsLibrary.m */; };
 		523A0C5016603B0700F9BF3E /* RatingsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 523A0C4F16603B0700F9BF3E /* RatingsView.m */; };
 		5255D9C3166FE8E9003D1734 /* DataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 5255D9C2166FE8E9003D1734 /* DataFetcher.m */; };
@@ -34,6 +33,7 @@
 		52ABE99F1675475200E91274 /* DataGenerationRulesRestaurant.m in Sources */ = {isa = PBXBuildFile; fileRef = 52ABE99E1675475200E91274 /* DataGenerationRulesRestaurant.m */; };
 		52ABE9A41675502F00E91274 /* DataGenerationRulesUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 52ABE9A31675502F00E91274 /* DataGenerationRulesUser.m */; };
 		52ABE9A71675504500E91274 /* DataGenerationRulesRating.m in Sources */ = {isa = PBXBuildFile; fileRef = 52ABE9A61675504500E91274 /* DataGenerationRulesRating.m */; };
+		52ADE2C6167950ED005B1BFC /* Restaurant.m in Sources */ = {isa = PBXBuildFile; fileRef = 52ADE2C5167950ED005B1BFC /* Restaurant.m */; };
 		52BBD9871656F71D006F9BA2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52A97897165449C8004ABC6D /* CoreData.framework */; };
 		52D684001662E019006919E2 /* FavoriteCuisine.m in Sources */ = {isa = PBXBuildFile; fileRef = 52D683FF1662E019006919E2 /* FavoriteCuisine.m */; };
 		52D684041662E7AE006919E2 /* FavoriteLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 52D684031662E7AE006919E2 /* FavoriteLocation.m */; };
@@ -57,8 +57,6 @@
 		52361CF216610392008232A3 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		52361CF416610392008232A3 /* Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Category.h; sourceTree = "<group>"; };
 		52361CF516610392008232A3 /* Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Category.m; sourceTree = "<group>"; };
-		52361CF716610393008232A3 /* Restaurant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Restaurant.h; sourceTree = "<group>"; };
-		52361CF816610393008232A3 /* Restaurant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Restaurant.m; sourceTree = "<group>"; };
 		52361CFF16611DF3008232A3 /* StatisticsLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticsLibrary.h; sourceTree = "<group>"; };
 		52361D0016611DF3008232A3 /* StatisticsLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticsLibrary.m; sourceTree = "<group>"; };
 		523A0C4E16603B0700F9BF3E /* RatingsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RatingsView.h; sourceTree = "<group>"; };
@@ -98,6 +96,8 @@
 		52ABE9A31675502F00E91274 /* DataGenerationRulesUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataGenerationRulesUser.m; sourceTree = "<group>"; };
 		52ABE9A51675504500E91274 /* DataGenerationRulesRating.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataGenerationRulesRating.h; sourceTree = "<group>"; };
 		52ABE9A61675504500E91274 /* DataGenerationRulesRating.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataGenerationRulesRating.m; sourceTree = "<group>"; };
+		52ADE2C4167950ED005B1BFC /* Restaurant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Restaurant.h; sourceTree = "<group>"; };
+		52ADE2C5167950ED005B1BFC /* Restaurant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Restaurant.m; sourceTree = "<group>"; };
 		52D683FE1662E019006919E2 /* FavoriteCuisine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteCuisine.h; sourceTree = "<group>"; };
 		52D683FF1662E019006919E2 /* FavoriteCuisine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteCuisine.m; sourceTree = "<group>"; };
 		52D684021662E7AE006919E2 /* FavoriteLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteLocation.h; sourceTree = "<group>"; };
@@ -272,8 +272,6 @@
 			isa = PBXGroup;
 			children = (
 				52ABE9971674F59C00E91274 /* Categries */,
-				52361CF716610393008232A3 /* Restaurant.h */,
-				52361CF816610393008232A3 /* Restaurant.m */,
 				52361CF416610392008232A3 /* Category.h */,
 				52361CF516610392008232A3 /* Category.m */,
 				52361CF116610392008232A3 /* User.h */,
@@ -288,6 +286,8 @@
 				52361CE616610392008232A3 /* UserPreference.m */,
 				52361CE216610392008232A3 /* RestaurantRating.h */,
 				52361CE316610392008232A3 /* RestaurantRating.m */,
+				52ADE2C4167950ED005B1BFC /* Restaurant.h */,
+				52ADE2C5167950ED005B1BFC /* Restaurant.m */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -370,7 +370,6 @@
 				52361CF016610392008232A3 /* RatingWeight.m in Sources */,
 				52361CF316610392008232A3 /* User.m in Sources */,
 				52361CF616610392008232A3 /* Category.m in Sources */,
-				52361CF916610393008232A3 /* Restaurant.m in Sources */,
 				52361D0116611DF3008232A3 /* StatisticsLibrary.m in Sources */,
 				52A6852D16617B4000B83BAF /* FavoriteCategory.m in Sources */,
 				52D684001662E019006919E2 /* FavoriteCuisine.m in Sources */,
@@ -382,6 +381,7 @@
 				52ABE99F1675475200E91274 /* DataGenerationRulesRestaurant.m in Sources */,
 				52ABE9A41675502F00E91274 /* DataGenerationRulesUser.m in Sources */,
 				52ABE9A71675504500E91274 /* DataGenerationRulesRating.m in Sources */,
+				52ADE2C6167950ED005B1BFC /* Restaurant.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

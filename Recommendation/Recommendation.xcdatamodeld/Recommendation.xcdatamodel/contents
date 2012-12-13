@@ -21,8 +21,8 @@
         <attribute name="liveMusic" optional="YES" attributeType="Boolean" defaultValueString="0" syncable="YES"/>
         <attribute name="location" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="priceRange" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="restaurantId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="smoking" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="uniqueName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="vegeterian" optional="YES" attributeType="Boolean" syncable="YES"/>
         <relationship name="categories" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Category" syncable="YES"/>
         <relationship name="cuisine" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Cuisine" syncable="YES"/>
@@ -80,7 +80,7 @@
         <element name="Category" positionX="-189" positionY="117" width="128" height="58"/>
         <element name="Cuisine" positionX="-495" positionY="117" width="128" height="58"/>
         <element name="RatingWeight" positionX="-893" positionY="387" width="128" height="133"/>
-        <element name="Restaurant" positionX="-353" positionY="126" width="128" height="223"/>
+        <element name="Restaurant" positionX="-353" positionY="126" width="128" height="225"/>
         <element name="RestaurantRating" positionX="-576" positionY="315" width="128" height="148"/>
         <element name="User" positionX="-875" positionY="126" width="128" height="208"/>
         <element name="UserPreference" positionX="-711" positionY="8" width="128" height="208"/>

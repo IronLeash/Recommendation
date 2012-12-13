@@ -393,10 +393,6 @@ static  NSManagedObjectContext *moc;
     [request setEntity:entityDescription];
     [request setPredicate:[NSPredicate predicateWithFormat:@"user == %@",aUser]];
     
-
-//     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"self.restaurant.restaurantId" ascending:YES];
-
-
     NSSortDescriptor *sortDescriptor =  [NSSortDescriptor sortDescriptorWithKey:@"self.restaurant.uniqueName"
                                                                       ascending:YES
                                                                      comparator:^(id obj1, id obj2){
@@ -404,17 +400,17 @@ static  NSManagedObjectContext *moc;
                                                                                                  options:NSNumericSearch];
                                                                      }];
 
-//    [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+
     
     NSError *error;
-    NSMutableArray *array = [NSMutableArray arrayWithArray:[moc executeFetchRequest:request error:&error]];
     
+    NSMutableArray *array = [NSMutableArray arrayWithArray:[moc executeFetchRequest:request error:&error]];
+    //Sort ratings according to Rest name
     NSArray *sortedArray = [array sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
     
     return sortedArray;
     
 }
-
 
 
 -(NSArray*)getPositiveRatingsforUser:(User*)aUser{

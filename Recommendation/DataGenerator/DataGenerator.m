@@ -28,6 +28,7 @@
 //Rules
 #import "DataGenerationRulesRestaurant.h"
 #import "DataGenerationRulesUser.h"
+#import "DataGenerationRulesRating.h"
 
 @implementation DataGenerator
 
@@ -338,7 +339,7 @@ static  NSManagedObjectContext *moc;
             currentRestaurant.categories = currentCateory;
 
             currentRestaurant.cuisine = currentCuisine;
-            currentRestaurant.restaurantId = [NSString stringWithFormat:@"RestId %d",i];
+            currentRestaurant.uniqueName = [NSString stringWithFormat:@"RestId %d",i];
             currentRestaurant.liveMusic = [NSNumber numberWithInt:[DataGenerationRulesRestaurant liveMusicForCategory:currentCateory]];
             currentRestaurant.garden = [NSNumber numberWithInt:[DataGenerationRulesRestaurant gardenForCategory:currentCateory]];
             currentRestaurant.carPark = [NSNumber numberWithInt:[DataGenerationRulesRestaurant carParkForCategory:currentCateory]];
@@ -382,18 +383,31 @@ static  NSManagedObjectContext *moc;
         restaurantRating.restaurant = currentRestaunt;
         restaurantRating.user   = aUser;
         
+        
+        NSDictionary *ratingDicitonary = [[DataGenerationRulesRating sharedInstance] ratingsForRestaruant:currentRestaunt ofUser:aUser];
+        
+        restaurantRating.accessibilityRating = [ratingDicitonary objectForKey:kAccessibility];
+        restaurantRating.coreServiceRating = [ratingDicitonary objectForKey:kCoreService];
+        restaurantRating.personalRating = [ratingDicitonary objectForKey:kPersonal];
+        restaurantRating.serviceRating = [ratingDicitonary objectForKey:kService];
+        restaurantRating.tangiblesRating = [ratingDicitonary objectForKey:kTangibles];
+
+/*
+
         int accessibilityRating = (arc4random() %(10))+1;
         int coreServiceRating = (arc4random() %(10))+1;
         int personalRating = (arc4random() %(10))+1;
         int serviceRating = (arc4random() %(10))+1;
         int tangiblesRating = (arc4random() %(10))+1;
+
         
+
         restaurantRating.accessibilityRating = [NSNumber  numberWithInt:accessibilityRating];
         restaurantRating.coreServiceRating = [NSNumber  numberWithInt:coreServiceRating];
         restaurantRating.personalRating = [NSNumber  numberWithInt:personalRating];
         restaurantRating.serviceRating = [NSNumber  numberWithInt:serviceRating];
         restaurantRating.tangiblesRating = [NSNumber  numberWithInt:tangiblesRating];
-
+*/
         
     }
         
