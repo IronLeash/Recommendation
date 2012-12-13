@@ -2,7 +2,7 @@
 //  Restaurant.m
 //  Recommendation
 //
-//  Created by ilker on 24.11.12.
+//  Created by ilker on 13.12.12.
 //  Copyright (c) 2012 ilker. All rights reserved.
 //
 
@@ -20,7 +20,7 @@
 @dynamic liveMusic;
 @dynamic location;
 @dynamic priceRange;
-@dynamic restaurantId;
+@dynamic uniqueName;
 @dynamic smoking;
 @dynamic vegeterian;
 @dynamic categories;

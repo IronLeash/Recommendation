@@ -317,6 +317,38 @@ static  NSManagedObjectContext *moc;
 }
 
 
+-(NSArray*)getFavoriteCagetoriesForStereotype:(NSString*)aString{
+    
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"Category" inManagedObjectContext:moc];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDescription];
+    
+    if ([aString isEqualToString:kGourmet])
+    {
+    [request setPredicate:[NSPredicate predicateWithFormat:@"name == %@ OR name == %@ OR name == %@",kFineDining,kSteakHouse,kSeaFoodRestaurant]];
+    } else if (([aString isEqualToString:kStudent])) {
+    [request setPredicate:[NSPredicate predicateWithFormat:@"name == %@ OR name == %@ OR name == %@",kBakery,kBistro,kFastFoodRest,kTakeOut,kSnackBar,kPub,kBrewPub]];
+    }else if (([aString isEqualToString:kTourist])) {
+    [request setPredicate:[NSPredicate predicateWithFormat:@"name == %@ OR name == %@ OR name == %@",kCoffeehouse,kFastFoodRest,kHeuriger,kSnackBar,kTakeOut]];
+    }else if (([aString isEqualToString:kFamily])) {
+    [request setPredicate:[NSPredicate predicateWithFormat:@"name == %@ OR name == %@ OR name == %@",kCounterService,kFoodCourt,kPizzeria]];
+    }else if (([aString isEqualToString:kAmbianceLover])) {
+    [request setPredicate:[NSPredicate predicateWithFormat:@"name == %@ OR name == %@ OR name == %@",kRunningSushi,kOuzeriaTavern,kBrewPub,kFineDining,kOsteria]];
+    }else{
+    [request setPredicate:[NSPredicate predicateWithFormat:@"name == %@ OR name == %@ OR name == %@",kBakery,kFoodCourt,kCounterService]];
+    }
+    
+
+    NSError *error;
+    NSArray *array = [moc executeFetchRequest:request error:&error];
+    
+    return array;
+
+}
+
+
+
 -(NSArray*)getUsers{
     
     AppDelegate *appDelegate = (AppDelegate *)[NSApp delegate];
@@ -361,22 +393,25 @@ static  NSManagedObjectContext *moc;
     [request setEntity:entityDescription];
     [request setPredicate:[NSPredicate predicateWithFormat:@"user == %@",aUser]];
     
-    /*
-     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"self.restaurant.restaurantId" ascending:YES];
-     */
-    NSSortDescriptor *sortDescriptor =  [NSSortDescriptor sortDescriptorWithKey:@"self.restaurant.restaurantId"
+
+//     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"self.restaurant.restaurantId" ascending:YES];
+
+
+    NSSortDescriptor *sortDescriptor =  [NSSortDescriptor sortDescriptorWithKey:@"self.restaurant.uniqueName"
                                                                       ascending:YES
                                                                      comparator:^(id obj1, id obj2){
                                                                          return [(NSString*)obj1 compare:(NSString*)obj2
                                                                                                  options:NSNumericSearch];
                                                                      }];
-    
-    [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+
+//    [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
     
     NSError *error;
-    NSArray *array = [moc executeFetchRequest:request error:&error];
+    NSMutableArray *array = [NSMutableArray arrayWithArray:[moc executeFetchRequest:request error:&error]];
     
-    return array;
+    NSArray *sortedArray = [array sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+    
+    return sortedArray;
     
 }
 

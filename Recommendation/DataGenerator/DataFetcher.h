@@ -38,14 +38,17 @@
 -(NSArray*)getRestaurantsWithVegaterieanValue:(NSNumber*)aVegeterianValue;
 -(NSArray*)getRestaurantForCarParkValue:(NSNumber*)aCarParkValue;
 
-
+//Favorite Categories
+-(NSArray*)getFavoriteCagetoriesForStereotype:(NSString*)aString;
 
 -(NSArray*)getUsers;
 
+//Ratings
 -(NSArray*)getRestaurantRatings;
 -(NSArray*)getRestaurantRatingsForUser:(User*)aUser;
 -(NSArray*)getPositiveRatingsforUser:(User*)aUser;
 -(NSArray*)getFavoriteCategoriesForUser:(User*)currentUser;
+
 -(NSDictionary*)getPreferencesDictionaryForUser:(User*)currentUser;
 
 -(NSDictionary*)getResturantEntrophyDictionary;
