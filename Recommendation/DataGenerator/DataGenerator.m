@@ -376,13 +376,15 @@ static  NSManagedObjectContext *moc;
 
     NSArray *restaurantsArray = [[DataFetcher sharedInstance] getRestaurants];
     
-    //Iterate all restaruants
-
+    
     @autoreleasepool {
+        
+    //Iterate all restaruants
+    RestaurantRating* restaurantRating;
         
     for (Restaurant *currentRestaunt in restaurantsArray)
     {
-        RestaurantRating* restaurantRating = [NSEntityDescription insertNewObjectForEntityForName:@"RestaurantRating" inManagedObjectContext:moc];
+        restaurantRating = [NSEntityDescription insertNewObjectForEntityForName:@"RestaurantRating" inManagedObjectContext:moc];
         
         restaurantRating.restaurant = currentRestaunt;
         restaurantRating.user   = aUser;
@@ -396,33 +398,15 @@ static  NSManagedObjectContext *moc;
         restaurantRating.serviceRating = [ratingDicitonary objectForKey:kService];
         restaurantRating.tangiblesRating = [ratingDicitonary objectForKey:kTangibles];
 
-/*
-
-        int accessibilityRating = (arc4random() %(10))+1;
-        int coreServiceRating = (arc4random() %(10))+1;
-        int personalRating = (arc4random() %(10))+1;
-        int serviceRating = (arc4random() %(10))+1;
-        int tangiblesRating = (arc4random() %(10))+1;
-
-        
-
-        restaurantRating.accessibilityRating = [NSNumber  numberWithInt:accessibilityRating];
-        restaurantRating.coreServiceRating = [NSNumber  numberWithInt:coreServiceRating];
-        restaurantRating.personalRating = [NSNumber  numberWithInt:personalRating];
-        restaurantRating.serviceRating = [NSNumber  numberWithInt:serviceRating];
-        restaurantRating.tangiblesRating = [NSNumber  numberWithInt:tangiblesRating];
-*/
-        
     }
-        
-        NSError *error = nil;
-        [moc save:&error];
-        
-        if (error) {
-            NSLog(@"Error %@",error);
-        }
-        
+
+    }
+    NSError *error = nil;
+    [moc save:&error];
+
     
+    if (error) {
+        NSLog(@"Error %@",error);
     }
 
 }

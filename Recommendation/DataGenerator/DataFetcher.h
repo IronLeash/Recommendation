@@ -12,7 +12,12 @@
 #import "User.h"
 
 @interface DataFetcher : NSObject
+{
 
+
+    
+    
+}
 +(DataFetcher*)sharedInstance;
 
 //Getters

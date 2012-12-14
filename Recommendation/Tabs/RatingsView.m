@@ -334,21 +334,35 @@
     
 
 
-    [self performSelectorInBackground:@selector(generateRatingBackgroundThread) withObject:nil];
+    [self generateRatingBackgroundThread];
+//    [self performSelectorInBackground:@selector(generateRatingBackgroundThread) withObject:nil];
+    
+//    [self generateRatingBackgroundThread];
     
 //    NSLog(@"Entropy %f",[StatisticsLibrary entopyOfVariable]);
 }
 
 -(void)generateRatingBackgroundThread{
 
+
+        NSArray *allUsersArray = [[DataFetcher sharedInstance] getUsers];
+        int i =0;
+    
+    NSTimeInterval start= [[NSDate date] timeIntervalSince1970];
+    
     @autoreleasepool
     {
-        NSArray *allUsersArray = [[DataFetcher sharedInstance] getUsers];
-        
         for (User *currentUser in allUsersArray) {
             [[DataGenerator sharedInstance] generateRatingForUser:currentUser];
+            i++;
+            NSLog(@"Curremt number %d",i);
         }
     }
+    
+    NSTimeInterval end= [[NSDate date] timeIntervalSince1970];
+
+    NSLog(@"Seconds %f",end-start);
+    
     [self performSelectorOnMainThread:@selector(notifyViewsAfterRAtingGeneration) withObject:nil waitUntilDone:NO];
     
 }
