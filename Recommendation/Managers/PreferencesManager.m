@@ -10,4 +10,11 @@
 
 @implementation PreferencesManager
 
+#pragma mark - Setters
+
+-(void)setEntrophyDictionary:(NSDictionary*)entropyDicitonary{
+//Check if there is one avaliable in NSUSerdefaults if not calculate it and save it again
+
+}
+
 @end
