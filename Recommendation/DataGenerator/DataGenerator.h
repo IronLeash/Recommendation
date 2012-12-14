@@ -33,6 +33,9 @@ NSString *ratingsGeneratedNotification;
 -(void)generateRestaurants:(int)numberOfRestaurants;
 
 //Generates ratings for a user
--(void)generateRatingForUser:(User*)aUser;;
+-(void)generateRatingForUser:(User*)aUser;
+
+-(void)generateAllUserRatings;
+
 
 @end

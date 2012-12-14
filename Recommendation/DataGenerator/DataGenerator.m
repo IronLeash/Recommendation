@@ -374,21 +374,28 @@ static  NSManagedObjectContext *moc;
 -(void)generateRatingForUser:(User*)aUser
 {
 
-    NSArray *restaurantsArray = [[DataFetcher sharedInstance] getRestaurants];
-    
-    
     @autoreleasepool {
         
     //Iterate all restaruants
     RestaurantRating* restaurantRating;
-        
+        AppDelegate *appdelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
+        NSManagedObjectContext *importContext = [[NSManagedObjectContext alloc] init];
+        NSPersistentStoreCoordinator *coordinator = appdelegate.persistentStoreCoordinator;
+        [importContext setPersistentStoreCoordinator:coordinator];
+        [importContext setUndoManager:nil];
+        NSArray *restaurantsArray = [[DataFetcher sharedInstance] getRestaurantsinManagedObjectContext:importContext];
+//        User *currentUser = [DataFetcher sharedInstance] getUserInManagedObjectContext:importContext]]
     for (Restaurant *currentRestaunt in restaurantsArray)
     {
-        restaurantRating = [NSEntityDescription insertNewObjectForEntityForName:@"RestaurantRating" inManagedObjectContext:moc];
         
+        restaurantRating = [NSEntityDescription insertNewObjectForEntityForName:@"RestaurantRating" inManagedObjectContext:importContext];        
+
+#warning just assign restaurant and user ids ????
+#warning slowing down
+        
+        [importContext refreshObject:restaurantRating mergeChanges:YES];
         restaurantRating.restaurant = currentRestaunt;
-        restaurantRating.user   = aUser;
-        
+//        restaurantRating.user   = aUser;
         
         NSDictionary *ratingDicitonary = [[DataGenerationRulesRating sharedInstance] ratingsForRestaruant:currentRestaunt ofUser:aUser];
         
@@ -398,18 +405,81 @@ static  NSManagedObjectContext *moc;
         restaurantRating.serviceRating = [ratingDicitonary objectForKey:kService];
         restaurantRating.tangiblesRating = [ratingDicitonary objectForKey:kTangibles];
 
-    }
 
     }
+    
     NSError *error = nil;
-    [moc save:&error];
-
+    [importContext save:&error];
     
     if (error) {
         NSLog(@"Error %@",error);
     }
 
+    }
+
+
 }
+
+-(void)generateAllUserRatings{
+    NSTimeInterval start= [[NSDate date] timeIntervalSince1970];
+
+    @autoreleasepool {
+        
+        //Iterate all restaruants
+
+        AppDelegate *appdelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
+        NSManagedObjectContext *importContext = [[NSManagedObjectContext alloc] init];
+        NSPersistentStoreCoordinator *coordinator = appdelegate.persistentStoreCoordinator;
+        [importContext setPersistentStoreCoordinator:coordinator];
+        [importContext setUndoManager:nil];
+        
+        NSArray *restaurantsArray = [[DataFetcher sharedInstance] getRestaurantsinManagedObjectContext:importContext];
+        NSArray *usersArray = [[DataFetcher sharedInstance] getUsersInManagedObjectContext:importContext];
+        
+    
+        int i = 0;
+        for (User *aUser in usersArray) {
+            NSTimeInterval userStartTime= [[NSDate date] timeIntervalSince1970];
+
+            int z = 0;
+            for (Restaurant *currentRestaunt in restaurantsArray)
+            {
+                
+                RestaurantRating* restaurantRating = [NSEntityDescription insertNewObjectForEntityForName:@"RestaurantRating" inManagedObjectContext:importContext];
+                
+                
+//                [importContext refreshObject:restaurantRating mergeChanges:YES];
+                restaurantRating.restaurant = currentRestaunt;
+                restaurantRating.user   = aUser;
+                
+                NSDictionary *ratingDicitonary = [[DataGenerationRulesRating sharedInstance] ratingsForRestaruant:currentRestaunt ofUser:aUser];
+                
+                restaurantRating.accessibilityRating = [ratingDicitonary objectForKey:kAccessibility];
+                restaurantRating.coreServiceRating = [ratingDicitonary objectForKey:kCoreService];
+                restaurantRating.personalRating = [ratingDicitonary objectForKey:kPersonal];
+                restaurantRating.serviceRating = [ratingDicitonary objectForKey:kService];
+                restaurantRating.tangiblesRating = [ratingDicitonary objectForKey:kTangibles];
+
+                 }
+            
+            NSError *error = nil;
+            [importContext save:&error];
+            
+            if (error) {
+                NSLog(@"Error %@",error);
+            }
+            NSTimeInterval userEndTime= [[NSDate date] timeIntervalSince1970];
+
+            i++;
+            NSLog(@"User %d Created in %f",i, userEndTime-userStartTime);
+        }
+
+    }
+    NSTimeInterval end= [[NSDate date] timeIntervalSince1970];
+    
+    NSLog(@"Seconds %f",end-start);
+}
+
 
 
 -(void)setUserPreferenceForUser:(User*)aUser
@@ -430,22 +500,6 @@ static  NSManagedObjectContext *moc;
             [positiveRatings removeObject:currentRatings];
         }
     }
-}
-
-
-
--(void)generateRatingFoAllUsers
-{
-    NSArray *allUsers = [[DataFetcher sharedInstance] getUsers];
-
-    for (User *currentUser in allUsers){
-        
-        [[DataGenerator sharedInstance] generateRatingForUser:currentUser];
-    }
-    
-
-#warning post he remaining number etc
-
 }
 
 

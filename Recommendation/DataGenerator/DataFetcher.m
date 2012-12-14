@@ -126,6 +126,8 @@ static NSArray *restaurantCuisines;
     return currentCuisine;
 }
 
+
+#warning - implement a method with force to reload
 -(NSArray*)getRestaurants{
     
     //Check if cusines are alreadyThere
@@ -133,7 +135,7 @@ static NSArray *restaurantCuisines;
     
     NSArray *returnArray;
     
-    if (![restaurantsArray count]) {
+    if (![restaurantsArray count] || [restaurantsArray count]==0) {
         NSEntityDescription *entityDescription = [NSEntityDescription
                                                   entityForName:@"Restaurant" inManagedObjectContext:moc];
         NSFetchRequest *request = [[NSFetchRequest alloc] init];
@@ -148,12 +150,32 @@ static NSArray *restaurantCuisines;
         
         NSError *error;
         restaurantsArray = [[NSArray alloc] initWithArray:[moc executeFetchRequest:request error:&error]];
-        
-    }else{
-        returnArray = restaurantsArray;
     }
-
+        returnArray = restaurantsArray;
+    
     return returnArray;
+}
+
+-(NSArray*)getRestaurantsinManagedObjectContext:(NSManagedObjectContext*)aManagedObjectContext{
+    
+    //Check if cusines are alreadyThere
+    //Fetsch results
+        
+        NSEntityDescription *entityDescription = [NSEntityDescription
+                                                  entityForName:@"Restaurant" inManagedObjectContext:aManagedObjectContext];
+        NSFetchRequest *request = [[NSFetchRequest alloc] init];
+        [request setEntity:entityDescription];
+        
+        /*
+         // Set example predicate and sort orderings...
+         NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
+         initWithKey:@"name" ascending:YES];
+         [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+         */
+        
+        NSError *error;
+        return [[NSArray alloc] initWithArray:[aManagedObjectContext executeFetchRequest:request error:&error]];
+
 }
 
 -(NSArray*)getRestaurantsofCategory:(Category*)aCategory{
@@ -364,13 +386,15 @@ static NSArray *restaurantCuisines;
 }
 
 
-
+#pragma mark - Users
 -(NSArray*)getUsers{
     
     AppDelegate *appDelegate = (AppDelegate *)[NSApp delegate];
     moc= [appDelegate managedObjectContext];
     
-    if (![usersArray count]) {
+    
+    NSArray *returnArray;
+    if (![usersArray count] || [usersArray count]==0) {
         
         //Check if cusines are alreadyThere
         //Fetsch results
@@ -381,14 +405,28 @@ static NSArray *restaurantCuisines;
         
         NSError *error;
         usersArray = [[NSArray alloc] initWithArray:[moc executeFetchRequest:request error:&error]];
-        return usersArray;
-    }else{
-    
-        return usersArray;
     }
     
-    
+        returnArray = usersArray;
+        return returnArray;
+
 }
+
+-(NSArray*)getUsersInManagedObjectContext:(NSManagedObjectContext*)aManageObjecContext{
+    
+    //Check if cusines are alreadyThere
+    //Fetsch results
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"User" inManagedObjectContext:aManageObjecContext];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDescription];
+    
+    NSError *error;
+    usersArray = [[NSArray alloc] initWithArray:[aManageObjecContext executeFetchRequest:request error:&error]];
+    return usersArray;
+}
+
+#pragma mark - Ratings
 
 -(NSArray*)getRestaurantRatings{
     

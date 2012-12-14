@@ -30,6 +30,8 @@
 -(Cuisine*)getRestaurantCuisineWithName:(NSString*)name;
 
 -(NSArray*)getRestaurants;
+-(NSArray*)getRestaurantsinManagedObjectContext:(NSManagedObjectContext*)aManagedObjectContext;
+
 -(NSArray*)getRestaurantsofCategory:(Category*)aCategory;
 -(NSArray*)getRestaurantsofCuisine:(Cuisine*)aCuisine;
 
@@ -46,7 +48,10 @@
 //Favorite Categories
 -(NSArray*)getFavoriteCagetoriesForStereotype:(NSString*)aString;
 
+
+//Users
 -(NSArray*)getUsers;
+-(NSArray*)getUsersInManagedObjectContext:(NSManagedObjectContext*)aManageObjecContext;
 
 //Ratings
 -(NSArray*)getRestaurantRatings;

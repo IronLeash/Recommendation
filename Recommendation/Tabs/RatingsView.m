@@ -17,7 +17,7 @@
 #import "RestaurantRating.h"
 #import "StatisticsLibrary.h"
 #import "Constants.h"
-
+#import "AppDelegate.h"
 
 @implementation RatingsView
 
@@ -26,7 +26,7 @@
     
     self  = [super init];
     if (self) {
-        usersArray = [[NSMutableArray alloc] initWithCapacity:0];
+        usersArray = [[NSMutableArray alloc]init];
         ratingsArray = [[NSMutableArray alloc] init];
         weightedAverageArray = [[NSMutableArray alloc]  init];
         preferencesDictionary = [[NSMutableDictionary alloc] init];
@@ -47,9 +47,7 @@
     [_liveMusicTextfield setEditable:NO];
     [_childFriendlyTextfield setEditable:NO];
     [_vegetarianTextfield setEditable:NO];
-    
-    [usersTableView reloadData];
-    
+        
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updateRatingsTable:)
                                                  name:ratingsGeneratedNotification
@@ -62,7 +60,6 @@
 #pragma mark = Notifications
 
 -(void)updateRatingsTable:(NSNotification*)aNptification{
-
     usersArray = [NSMutableArray arrayWithArray:[[DataFetcher sharedInstance] getUsers]];
     ratingsArray = [NSMutableArray arrayWithArray:[[DataFetcher sharedInstance] getRestaurantRatings]];
     [usersTableView reloadData];
@@ -334,8 +331,8 @@
     
 
 
-    [self generateRatingBackgroundThread];
-//    [self performSelectorInBackground:@selector(generateRatingBackgroundThread) withObject:nil];
+//    [self generateRatingBackgroundThread];
+    [self performSelectorInBackground:@selector(generateRatingBackgroundThread) withObject:nil];
     
 //    [self generateRatingBackgroundThread];
     
@@ -352,17 +349,19 @@
     
     @autoreleasepool
     {
+
+        /*
         for (User *currentUser in allUsersArray) {
             [[DataGenerator sharedInstance] generateRatingForUser:currentUser];
             i++;
             NSLog(@"Curremt number %d",i);
         }
+         */
+        
+        [[DataGenerator sharedInstance] generateAllUserRatings];
     }
     
-    NSTimeInterval end= [[NSDate date] timeIntervalSince1970];
 
-    NSLog(@"Seconds %f",end-start);
-    
     [self performSelectorOnMainThread:@selector(notifyViewsAfterRAtingGeneration) withObject:nil waitUntilDone:NO];
     
 }
