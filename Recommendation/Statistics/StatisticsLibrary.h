@@ -13,7 +13,6 @@
 #include <gsl/gsl_statistics.h>
 #include <gsl/gsl_randist.h>
 
-
 #import "User.h"
 #import "RestaurantRating.h"
 

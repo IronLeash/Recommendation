@@ -417,7 +417,6 @@ static  NSManagedObjectContext *moc;
 
     }
 
-
 }
 
 -(void)generateAllUserRatings{
@@ -441,7 +440,6 @@ static  NSManagedObjectContext *moc;
         for (User *aUser in usersArray) {
             NSTimeInterval userStartTime= [[NSDate date] timeIntervalSince1970];
 
-            int z = 0;
             for (Restaurant *currentRestaunt in restaurantsArray)
             {
                 

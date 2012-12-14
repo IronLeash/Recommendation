@@ -112,7 +112,6 @@
 + (double)cramersVforAttribute{
 
     
-    
     NSArray *row1 = [NSArray arrayWithObjects:
                            [NSNumber numberWithFloat:11],
                       [NSNumber numberWithFloat:4], nil];
