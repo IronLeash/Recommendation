@@ -393,6 +393,7 @@ static NSArray *restaurantCuisines;
     moc= [appDelegate managedObjectContext];
     
     
+    /*
     NSArray *returnArray;
     if (![usersArray count] || [usersArray count]==0) {
         
@@ -401,14 +402,27 @@ static NSArray *restaurantCuisines;
         NSEntityDescription *entityDescription = [NSEntityDescription
                                                   entityForName:@"User" inManagedObjectContext:moc];
         NSFetchRequest *request = [[NSFetchRequest alloc] init];
+        [request setReturnsObjectsAsFaults:NO];
         [request setEntity:entityDescription];
         
         NSError *error;
         usersArray = [[NSArray alloc] initWithArray:[moc executeFetchRequest:request error:&error]];
     }
+    */
+   
     
-        returnArray = usersArray;
-        return returnArray;
+    //Check if cusines are alreadyThere
+    //Fetsch results
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"User" inManagedObjectContext:moc];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setReturnsObjectsAsFaults:NO];
+    [request setEntity:entityDescription];
+    
+    NSError *error;
+    usersArray = [[NSArray alloc] initWithArray:[moc executeFetchRequest:request error:&error]];
+//        returnArray = usersArray;
+    return usersArray;
 
 }
 
