@@ -12,8 +12,6 @@
 
 #import "AppDelegate.h"
 
-#import "Cuisine.h"
-#import "Category.h"
 #import "Restaurant.h"
 #import "User.h"
 #import "RatingWeight.h"
@@ -85,6 +83,7 @@ static  NSManagedObjectContext *moc;
 #pragma mark - Generator methods
 #pragma mark -
 
+/*
 -(void)generateCusines{
     
     
@@ -152,7 +151,9 @@ static  NSManagedObjectContext *moc;
         }
     }
 }
+*/
 
+/*
 -(void)generateCategories{
     
     //Check if cusines are alreadyThere
@@ -226,6 +227,9 @@ static  NSManagedObjectContext *moc;
 
 
 }
+ */
+
+
 -(void)generateUserStereotypes{
 
 }
@@ -322,8 +326,8 @@ static  NSManagedObjectContext *moc;
 //        int curentRandomLiveMusicNumber = arc4random() %(2);
         
         
-        Category *currentCateory = [categories objectAtIndex:curentRandomCategoryNumber];
-        Cuisine *currentCuisine = [DataGenerationRulesRestaurant cuisineForCategory:currentCateory];
+        NSString *currentCateory = [categories objectAtIndex:curentRandomCategoryNumber];
+        NSString *currentCuisine = [DataGenerationRulesRestaurant cuisineForCategory:currentCateory];
 //        Cuisine *currentCuisine = [cuisines objectAtIndex:curentRandomCuisineNumber];
         
         
@@ -340,7 +344,7 @@ static  NSManagedObjectContext *moc;
         */
     
             Restaurant* currentRestaurant = [NSEntityDescription insertNewObjectForEntityForName:@"Restaurant" inManagedObjectContext:moc];
-            currentRestaurant.categories = currentCateory;
+            currentRestaurant.category = currentCateory;
 
             currentRestaurant.cuisine = currentCuisine;
             currentRestaurant.uniqueName = [NSString stringWithFormat:@"RestId %d",i];

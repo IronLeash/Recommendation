@@ -14,152 +14,152 @@
 @implementation DataGenerationRulesRestaurant
 
 #pragma mark - assign cusine to cateogry
-+(Cuisine*)cuisineForCategory:(Category*)aRestaurantCategory{
++(NSString*)cuisineForCategory:(NSString*)aRestaurantCategory{
 
     int randomNumber = (arc4random() %(100));
-    Cuisine *currentCuisine;
+    NSString *currentCuisine;
     
-    if ([aRestaurantCategory.name isEqualToString:kBakery]) {
+    if ([aRestaurantCategory isEqualToString:kBakery]) {
         
         if (randomNumber < 34) {
-            currentCuisine = [[DataFetcher sharedInstance] getRestaurantCuisineWithName:@"Turkish"];
+            currentCuisine = @"Turkish";
         } else if (randomNumber < 67) {
-            currentCuisine = [[DataFetcher sharedInstance] getRestaurantCuisineWithName:@"Austrian"];
+            currentCuisine = @"Austrian";
         }else{
-            currentCuisine = [[DataFetcher sharedInstance] getRestaurantCuisineWithName:@"French"];
+            currentCuisine = @"French";
         }
         
-    } else if ([aRestaurantCategory.name isEqualToString:kBistro]){
+    } else if ([aRestaurantCategory isEqualToString:kBistro]){
 
-        currentCuisine = [[DataFetcher sharedInstance] getRestaurantCuisineWithName:@"French"];
+        currentCuisine = @"French";
 
-    }else if ([aRestaurantCategory.name isEqualToString:kBrewPub]){
+    }else if ([aRestaurantCategory isEqualToString:kBrewPub]){
         
         if (randomNumber < 50) {
-            currentCuisine = [[DataFetcher sharedInstance] getRestaurantCuisineWithName:@"Irish"];
+            currentCuisine = @"Irish";
         } else {
-            currentCuisine = [[DataFetcher sharedInstance] getRestaurantCuisineWithName:@"Austrian"];
+            currentCuisine = @"Austrian";
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kCounterService]){
+    }else if ([aRestaurantCategory isEqualToString:kCounterService]){
         
-        currentCuisine = [[DataFetcher sharedInstance] getRestaurantCuisineWithName:@"World"];
+        currentCuisine = @"World";
 
-    }else if ([aRestaurantCategory.name isEqualToString:kCantina]){
+    }else if ([aRestaurantCategory isEqualToString:kCantina]){
         
         if (randomNumber < 26) {
-            currentCuisine = [[DataFetcher sharedInstance] getRestaurantCuisineWithName:@"Italian"];
+            currentCuisine = @"Italian";
         } else if (randomNumber < 51) {
-            currentCuisine = [[DataFetcher sharedInstance] getRestaurantCuisineWithName:@"French"];
+            currentCuisine = @"French";
         }else if (randomNumber < 76 ){
-            currentCuisine = [[DataFetcher sharedInstance] getRestaurantCuisineWithName:@"Austrian"];
+            currentCuisine = @"Austrian";
         }else{
-            currentCuisine = [[DataFetcher sharedInstance] getRestaurantCuisineWithName:@"Spanish"];
+            currentCuisine = @"Spanish";
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kCoffeehouse]){
+    }else if ([aRestaurantCategory isEqualToString:kCoffeehouse]){
         
         if (randomNumber < 30) {
-            currentCuisine = [[DataFetcher sharedInstance] getRestaurantCuisineWithName:@"Turkish"];
+            currentCuisine = @"Turkish";
         } else {
-            currentCuisine = [[DataFetcher sharedInstance] getRestaurantCuisineWithName:@"Austrian"];
+            currentCuisine = @"Austrian";
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kFastFoodRest]){
+    }else if ([aRestaurantCategory isEqualToString:kFastFoodRest]){
 
         if (randomNumber < 50) {
-            currentCuisine = [[DataFetcher sharedInstance] getRestaurantCuisineWithName:@"American"];
+            currentCuisine = @"American";
         } else {
-            currentCuisine = [[DataFetcher sharedInstance] getRestaurantCuisineWithName:@"World"];
+            currentCuisine = @"World";
         }
-    }else if ([aRestaurantCategory.name isEqualToString:kFineDining]){
+    }else if ([aRestaurantCategory isEqualToString:kFineDining]){
 
-        currentCuisine = [[DataFetcher sharedInstance] getRestaurantCuisineWithName:@"French"];
+        currentCuisine = @"French";
         
-    }else if ([aRestaurantCategory.name isEqualToString:kFoodCourt]){
+    }else if ([aRestaurantCategory isEqualToString:kFoodCourt]){
         
-        currentCuisine = [[DataFetcher sharedInstance] getRestaurantCuisineWithName:@"World"];
+        currentCuisine = @"World";
         
-    }else if ([aRestaurantCategory.name isEqualToString:kHeuriger]){
+    }else if ([aRestaurantCategory isEqualToString:kHeuriger]){
         
-        currentCuisine = [[DataFetcher sharedInstance] getRestaurantCuisineWithName:@"Austrian"];
+        currentCuisine = @"Austrian";
         
-    }else if ([aRestaurantCategory.name isEqualToString:kOsteria]){
+    }else if ([aRestaurantCategory isEqualToString:kOsteria]){
         
-        currentCuisine = [[DataFetcher sharedInstance] getRestaurantCuisineWithName:@"Italian"];
+        currentCuisine = @"Italian";
         
-    }else if ([aRestaurantCategory.name isEqualToString:kOuzeriaTavern]){
+    }else if ([aRestaurantCategory isEqualToString:kOuzeriaTavern]){
         
-        currentCuisine = [[DataFetcher sharedInstance] getRestaurantCuisineWithName:@"Greek"];
+        currentCuisine = @"Greek";
         
-    }else if ([aRestaurantCategory.name isEqualToString:kPizzeria]){
+    }else if ([aRestaurantCategory isEqualToString:kPizzeria]){
         
-        currentCuisine = [[DataFetcher sharedInstance] getRestaurantCuisineWithName:@"Italian"];
+        currentCuisine = @"Italian";
         
-    }else if ([aRestaurantCategory.name isEqualToString:kPub]){
+    }else if ([aRestaurantCategory isEqualToString:kPub]){
         
         if (randomNumber < 34) {
-            currentCuisine = [[DataFetcher sharedInstance] getRestaurantCuisineWithName:@"English"];
+            currentCuisine = @"English";
         } else if (randomNumber < 67) {
-            currentCuisine = [[DataFetcher sharedInstance] getRestaurantCuisineWithName:@"Irish"];
+            currentCuisine = @"Irish";
         }else{
-            currentCuisine = [[DataFetcher sharedInstance] getRestaurantCuisineWithName:@"Austrian"];
+            currentCuisine = @"Austrian";
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kRunningSushi]){
+    }else if ([aRestaurantCategory isEqualToString:kRunningSushi]){
         
         if (randomNumber < 30) {
-            currentCuisine = [[DataFetcher sharedInstance] getRestaurantCuisineWithName:@"Korea"];
+            currentCuisine = @"Korea";
         } else if (randomNumber < 70){
-            currentCuisine = [[DataFetcher sharedInstance] getRestaurantCuisineWithName:@"Japan"];
+            currentCuisine = @"Japan";
         }else{
-            currentCuisine = [[DataFetcher sharedInstance] getRestaurantCuisineWithName:@"Chinese"];
+            currentCuisine = @"Chinese";
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kSnackBar]){
+    }else if ([aRestaurantCategory isEqualToString:kSnackBar]){
         
         if (randomNumber < 26) {
-            currentCuisine = [[DataFetcher sharedInstance] getRestaurantCuisineWithName:kThailand];
+            currentCuisine = kThailand;
         } else if (randomNumber < 51) {
-            currentCuisine = [[DataFetcher sharedInstance] getRestaurantCuisineWithName:kChinese];
+            currentCuisine = kChinese;
         }else if (randomNumber < 76 ){
-            currentCuisine = [[DataFetcher sharedInstance] getRestaurantCuisineWithName:kTurkish];
+            currentCuisine = kTurkish;
         }else{
-            currentCuisine = [[DataFetcher sharedInstance] getRestaurantCuisineWithName:kAustrian];
+            currentCuisine = kAustrian;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kSteakHouse]){
+    }else if ([aRestaurantCategory isEqualToString:kSteakHouse]){
         
         if (randomNumber < 50) {
-            currentCuisine = [[DataFetcher sharedInstance] getRestaurantCuisineWithName:@"Mexica"];
+            currentCuisine = @"Mexica";
         } else {
-            currentCuisine = [[DataFetcher sharedInstance] getRestaurantCuisineWithName:@"Argentina"];
+            currentCuisine = @"Argentina";
         }
         
     
-    }else if ([aRestaurantCategory.name isEqualToString:kSeaFoodRestaurant]){
+    }else if ([aRestaurantCategory isEqualToString:kSeaFoodRestaurant]){
         
         if (randomNumber < 26) {
-            currentCuisine = [[DataFetcher sharedInstance] getRestaurantCuisineWithName:@"Italian"];
+            currentCuisine = @"Italian";
         } else if (randomNumber < 51) {
-            currentCuisine = [[DataFetcher sharedInstance] getRestaurantCuisineWithName:@"Spanish"];
+            currentCuisine = @"Spanish";
         }else if (randomNumber < 76 ){
-            currentCuisine = [[DataFetcher sharedInstance] getRestaurantCuisineWithName:@"Turkish"];
+            currentCuisine = @"Turkish";
         }else{
-            currentCuisine = [[DataFetcher sharedInstance] getRestaurantCuisineWithName:@"Greek"];
+            currentCuisine = @"Greek";
         }
         
         
-    }else if ([aRestaurantCategory.name isEqualToString:kTakeOut]){
+    }else if ([aRestaurantCategory isEqualToString:kTakeOut]){
         
         if (randomNumber < 26) {
-            currentCuisine = [[DataFetcher sharedInstance] getRestaurantCuisineWithName:@"Italian"];
+            currentCuisine  = kItalian;
         } else if (randomNumber < 51) {
-            currentCuisine = [[DataFetcher sharedInstance] getRestaurantCuisineWithName:@"Chinese"];
+            currentCuisine  = kChinese;
         }else if (randomNumber < 76 ){
-            currentCuisine = [[DataFetcher sharedInstance] getRestaurantCuisineWithName:@"Turkish"];
+            currentCuisine = @"Turkish";
         }else{
-            currentCuisine = [[DataFetcher sharedInstance] getRestaurantCuisineWithName:@"Austrian"];
+            currentCuisine = @"Austrian";
         }
     }else{
     
@@ -173,13 +173,13 @@
 
 #pragma mark - Price for category
 
-+(int)priceForCategory:(Category*)aRestaurantCategory{
++(int)priceForCategory:(NSString*)aRestaurantCategory{
 
 
     int randomNumber = (arc4random() %(100));
     int returnValue = 0;
     
-    if ([aRestaurantCategory.name isEqualToString:kBakery]) {
+    if ([aRestaurantCategory isEqualToString:kBakery]) {
         
         if (randomNumber < 25) {
             returnValue = 0;
@@ -190,7 +190,7 @@
         }
 
     
-    } else if ([aRestaurantCategory.name isEqualToString:kBistro]){
+    } else if ([aRestaurantCategory isEqualToString:kBistro]){
         
         if (randomNumber < 25) {
             returnValue = 0;
@@ -200,7 +200,7 @@
             returnValue = 2;
         }
 
-    }else if ([aRestaurantCategory.name isEqualToString:kBrewPub]){
+    }else if ([aRestaurantCategory isEqualToString:kBrewPub]){
         
         if (randomNumber < 25) {
             returnValue = 0;
@@ -210,7 +210,7 @@
             returnValue = 2;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kCounterService]){
+    }else if ([aRestaurantCategory isEqualToString:kCounterService]){
         
         if (randomNumber < 25) {
             returnValue = 0;
@@ -220,7 +220,7 @@
             returnValue = 2;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kCantina]){
+    }else if ([aRestaurantCategory isEqualToString:kCantina]){
         
         if (randomNumber < 61) {
             returnValue = 1;
@@ -230,7 +230,7 @@
             returnValue = 3;
         }
 
-    }else if ([aRestaurantCategory.name isEqualToString:kCoffeehouse]){
+    }else if ([aRestaurantCategory isEqualToString:kCoffeehouse]){
         
         if (randomNumber < 61) {
             returnValue = 1;
@@ -240,7 +240,7 @@
             returnValue = 3;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kFastFoodRest]){
+    }else if ([aRestaurantCategory isEqualToString:kFastFoodRest]){
         
         if (randomNumber < 20) {
             returnValue = 0;
@@ -250,7 +250,7 @@
             returnValue = 2;
         }
 
-    }else if ([aRestaurantCategory.name isEqualToString:kFineDining]){
+    }else if ([aRestaurantCategory isEqualToString:kFineDining]){
         
         if (randomNumber < 30) {
             returnValue = 1;
@@ -260,7 +260,7 @@
             returnValue = 3;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kFoodCourt]){
+    }else if ([aRestaurantCategory isEqualToString:kFoodCourt]){
         
         if (randomNumber < 20) {
             returnValue = 0;
@@ -270,7 +270,7 @@
             returnValue = 2;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kHeuriger]){
+    }else if ([aRestaurantCategory isEqualToString:kHeuriger]){
         
         if (randomNumber < 20) {
             returnValue = 0;
@@ -282,7 +282,7 @@
             returnValue = 3;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kOsteria]){
+    }else if ([aRestaurantCategory isEqualToString:kOsteria]){
         
         if (randomNumber < 20) {
             returnValue = 0;
@@ -294,7 +294,7 @@
             returnValue = 3;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kOuzeriaTavern]){
+    }else if ([aRestaurantCategory isEqualToString:kOuzeriaTavern]){
         
         if (randomNumber < 20) {
             returnValue = 0;
@@ -306,7 +306,7 @@
             returnValue = 3;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kPizzeria]){
+    }else if ([aRestaurantCategory isEqualToString:kPizzeria]){
         
         if (randomNumber < 20) {
             returnValue = 0;
@@ -318,7 +318,7 @@
             returnValue = 3;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kPub]){
+    }else if ([aRestaurantCategory isEqualToString:kPub]){
         
         if (randomNumber < 30) {
             returnValue = 0;
@@ -330,7 +330,7 @@
             returnValue = 3;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kRunningSushi]){
+    }else if ([aRestaurantCategory isEqualToString:kRunningSushi]){
         
         if (randomNumber < 20) {
             returnValue = 0;
@@ -342,7 +342,7 @@
             returnValue = 3;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kSnackBar]){
+    }else if ([aRestaurantCategory isEqualToString:kSnackBar]){
         
         if (randomNumber < 40) {
             returnValue = 0;
@@ -350,7 +350,7 @@
             returnValue = 1;
         }
        
-    }else if ([aRestaurantCategory.name isEqualToString:kSteakHouse]){
+    }else if ([aRestaurantCategory isEqualToString:kSteakHouse]){
         
         if (randomNumber < 30) {
             returnValue = 1;
@@ -360,7 +360,7 @@
             returnValue = 3;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kSeaFoodRestaurant]){
+    }else if ([aRestaurantCategory isEqualToString:kSeaFoodRestaurant]){
 
         if (randomNumber < 20) {
             returnValue = 1;
@@ -370,7 +370,7 @@
             returnValue = 3;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kTakeOut]){
+    }else if ([aRestaurantCategory isEqualToString:kTakeOut]){
        
         if (randomNumber < 30) {
             returnValue = 0;
@@ -392,12 +392,12 @@
 
 #pragma mark - Garden for Restaurant
 
-+(int)gardenForCategory:(Category*)aRestaurantCategory{
++(int)gardenForCategory:(NSString*)aRestaurantCategory{
 
     int randomNumber = (arc4random() %(100));
     int returnValue = 0;
     
-    if ([aRestaurantCategory.name isEqualToString:kBakery]) {
+    if ([aRestaurantCategory isEqualToString:kBakery]) {
         
         if (randomNumber < 25) {
             returnValue = 1;
@@ -405,7 +405,7 @@
             returnValue = 0;
         }
         
-    } else if ([aRestaurantCategory.name isEqualToString:kBistro]){
+    } else if ([aRestaurantCategory isEqualToString:kBistro]){
         
         if (randomNumber < 10) {
             returnValue = 1;
@@ -413,7 +413,7 @@
             returnValue = 0;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kBrewPub]){
+    }else if ([aRestaurantCategory isEqualToString:kBrewPub]){
         
         if (randomNumber < 25) {
             returnValue = 1;
@@ -421,7 +421,7 @@
             returnValue = 0;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kCounterService]){
+    }else if ([aRestaurantCategory isEqualToString:kCounterService]){
         
         if (randomNumber < 10) {
             returnValue = 1;
@@ -429,7 +429,7 @@
             returnValue = 0;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kCantina]){
+    }else if ([aRestaurantCategory isEqualToString:kCantina]){
         
         if (randomNumber < 10) {
             returnValue = 1;
@@ -437,7 +437,7 @@
             returnValue = 0;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kCoffeehouse]){
+    }else if ([aRestaurantCategory isEqualToString:kCoffeehouse]){
         
         if (randomNumber < 30) {
             returnValue = 1;
@@ -445,22 +445,14 @@
             returnValue = 0;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kFastFoodRest]){
+    }else if ([aRestaurantCategory isEqualToString:kFastFoodRest]){
         
         if (randomNumber < 30) {
             returnValue = 1;
         }else{
             returnValue = 0;
         }
-    }else if ([aRestaurantCategory.name isEqualToString:kFineDining]){
-        
-        if (randomNumber < 30) {
-            returnValue = 1;
-        }else{
-            returnValue = 0;
-        }
-        
-    }else if ([aRestaurantCategory.name isEqualToString:kFoodCourt]){
+    }else if ([aRestaurantCategory isEqualToString:kFineDining]){
         
         if (randomNumber < 30) {
             returnValue = 1;
@@ -468,7 +460,15 @@
             returnValue = 0;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kHeuriger]){
+    }else if ([aRestaurantCategory isEqualToString:kFoodCourt]){
+        
+        if (randomNumber < 30) {
+            returnValue = 1;
+        }else{
+            returnValue = 0;
+        }
+        
+    }else if ([aRestaurantCategory isEqualToString:kHeuriger]){
         
         if (randomNumber < 80) {
             returnValue = 1;
@@ -476,7 +476,7 @@
             returnValue = 0;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kOsteria]){
+    }else if ([aRestaurantCategory isEqualToString:kOsteria]){
         
         if (randomNumber < 30) {
             returnValue = 1;
@@ -484,7 +484,7 @@
             returnValue = 0;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kOuzeriaTavern]){
+    }else if ([aRestaurantCategory isEqualToString:kOuzeriaTavern]){
         
         if (randomNumber < 30) {
             returnValue = 1;
@@ -492,7 +492,7 @@
             returnValue = 0;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kPizzeria]){
+    }else if ([aRestaurantCategory isEqualToString:kPizzeria]){
         
         if (randomNumber < 30) {
             returnValue = 1;
@@ -500,7 +500,7 @@
             returnValue = 0;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kPub]){
+    }else if ([aRestaurantCategory isEqualToString:kPub]){
         
         if (randomNumber < 30) {
             returnValue = 1;
@@ -508,7 +508,7 @@
             returnValue = 0;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kRunningSushi]){
+    }else if ([aRestaurantCategory isEqualToString:kRunningSushi]){
         
         if (randomNumber < 10) {
             returnValue = 1;
@@ -516,11 +516,11 @@
             returnValue = 0;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kSnackBar]){
+    }else if ([aRestaurantCategory isEqualToString:kSnackBar]){
         
         returnValue = 0;
         
-    }else if ([aRestaurantCategory.name isEqualToString:kSteakHouse]){
+    }else if ([aRestaurantCategory isEqualToString:kSteakHouse]){
         
         if (randomNumber < 20) {
             returnValue = 1;
@@ -528,7 +528,7 @@
             returnValue = 0;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kSeaFoodRestaurant]){
+    }else if ([aRestaurantCategory isEqualToString:kSeaFoodRestaurant]){
         
         if (randomNumber < 40) {
             returnValue = 1;
@@ -536,7 +536,7 @@
             returnValue = 0;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kTakeOut]){
+    }else if ([aRestaurantCategory isEqualToString:kTakeOut]){
         
         returnValue = 0;
         
@@ -552,13 +552,13 @@
 
 
 #pragma mark - Smoking
-+(int)smokingForCategory:(Category*)aRestaurantCategory
++(int)smokingForCategory:(NSString*)aRestaurantCategory
 {
     int randomNumber = (arc4random() %(100));
     int returnValue = 0;
     
     
-    if ([aRestaurantCategory.name isEqualToString:kBakery]) {
+    if ([aRestaurantCategory isEqualToString:kBakery]) {
         
         if (randomNumber < 40) {
             returnValue = 0;
@@ -566,7 +566,7 @@
             returnValue = 1;
         }
         
-    } else if ([aRestaurantCategory.name isEqualToString:kBistro]){
+    } else if ([aRestaurantCategory isEqualToString:kBistro]){
         
         if (randomNumber < 50) {
             returnValue = 0;
@@ -574,7 +574,7 @@
             returnValue = 1;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kBrewPub]){
+    }else if ([aRestaurantCategory isEqualToString:kBrewPub]){
         
         if (randomNumber < 5) {
             returnValue = 0;
@@ -585,7 +585,7 @@
 
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kCounterService]){
+    }else if ([aRestaurantCategory isEqualToString:kCounterService]){
         
         if (randomNumber < 30) {
             returnValue = 0;
@@ -595,7 +595,7 @@
             returnValue = 2;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kCantina]){
+    }else if ([aRestaurantCategory isEqualToString:kCantina]){
         
         if (randomNumber < 40) {
             returnValue = 0;
@@ -605,7 +605,7 @@
             returnValue = 2;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kCoffeehouse]){
+    }else if ([aRestaurantCategory isEqualToString:kCoffeehouse]){
         
         if (randomNumber < 20) {
             returnValue = 0;
@@ -615,7 +615,7 @@
             returnValue = 2;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kFastFoodRest]){
+    }else if ([aRestaurantCategory isEqualToString:kFastFoodRest]){
         
         if (randomNumber < 90) {
             returnValue = 0;
@@ -625,15 +625,15 @@
             returnValue = 2;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kFineDining]){
+    }else if ([aRestaurantCategory isEqualToString:kFineDining]){
         
         returnValue = 0;
         
-    }else if ([aRestaurantCategory.name isEqualToString:kFoodCourt]){
+    }else if ([aRestaurantCategory isEqualToString:kFoodCourt]){
         
         returnValue = 0;
         
-    }else if ([aRestaurantCategory.name isEqualToString:kHeuriger]){
+    }else if ([aRestaurantCategory isEqualToString:kHeuriger]){
         
         if (randomNumber < 50) {
             returnValue = 1;
@@ -641,7 +641,7 @@
             returnValue = 2;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kOsteria]){
+    }else if ([aRestaurantCategory isEqualToString:kOsteria]){
         
         if (randomNumber < 70) {
             returnValue = 1;
@@ -649,7 +649,7 @@
             returnValue = 2;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kOuzeriaTavern]){
+    }else if ([aRestaurantCategory isEqualToString:kOuzeriaTavern]){
         
         if (randomNumber < 50) {
             returnValue = 1;
@@ -657,7 +657,7 @@
             returnValue = 2;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kPizzeria]){
+    }else if ([aRestaurantCategory isEqualToString:kPizzeria]){
         
         if (randomNumber < 50) {
             returnValue = 0;
@@ -667,7 +667,7 @@
             returnValue = 2;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kPub]){
+    }else if ([aRestaurantCategory isEqualToString:kPub]){
         
         if (randomNumber < 80) {
             returnValue = 1;
@@ -675,7 +675,7 @@
             returnValue = 2;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kRunningSushi]){
+    }else if ([aRestaurantCategory isEqualToString:kRunningSushi]){
         
         if (randomNumber < 70) {
             returnValue = 0;
@@ -683,11 +683,11 @@
             returnValue = 2;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kSnackBar]){
+    }else if ([aRestaurantCategory isEqualToString:kSnackBar]){
         
         returnValue = 1;
         
-    }else if ([aRestaurantCategory.name isEqualToString:kSteakHouse]){
+    }else if ([aRestaurantCategory isEqualToString:kSteakHouse]){
         
         if (randomNumber < 50) {
             returnValue = 0;
@@ -695,7 +695,7 @@
             returnValue = 2;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kSeaFoodRestaurant]){
+    }else if ([aRestaurantCategory isEqualToString:kSeaFoodRestaurant]){
         
         if (randomNumber < 20) {
             returnValue = 0;
@@ -705,7 +705,7 @@
             returnValue = 2;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kTakeOut]){
+    }else if ([aRestaurantCategory isEqualToString:kTakeOut]){
         
         if (randomNumber < 50) {
             returnValue = 0;
@@ -723,23 +723,23 @@
 }
 
 
-+(int)childFriendlyForCategory:(Category*)aRestaurantCategory{
++(int)childFriendlyForCategory:(NSString*)aRestaurantCategory{
 
     int randomNumber = (arc4random() %(100));
     int returnValue = 0;
     
     
-    if ([aRestaurantCategory.name isEqualToString:kBakery] ||
-        [aRestaurantCategory.name isEqualToString:kBrewPub] ||
-        [aRestaurantCategory.name isEqualToString:kPub] ||
-        [aRestaurantCategory.name isEqualToString:kSnackBar] ||
-        [aRestaurantCategory.name isEqualToString:kBistro] ||
-        [aRestaurantCategory.name isEqualToString:kOuzeriaTavern] ||
-        [aRestaurantCategory.name isEqualToString:kTakeOut]) {
+    if ([aRestaurantCategory isEqualToString:kBakery] ||
+        [aRestaurantCategory isEqualToString:kBrewPub] ||
+        [aRestaurantCategory isEqualToString:kPub] ||
+        [aRestaurantCategory isEqualToString:kSnackBar] ||
+        [aRestaurantCategory isEqualToString:kBistro] ||
+        [aRestaurantCategory isEqualToString:kOuzeriaTavern] ||
+        [aRestaurantCategory isEqualToString:kTakeOut]) {
         
         returnValue = 0;
         
-    }else if ([aRestaurantCategory.name isEqualToString:kCounterService] || [aRestaurantCategory.name isEqualToString:kFastFoodRest] || [aRestaurantCategory.name isEqualToString:kFoodCourt] || [aRestaurantCategory.name isEqualToString:kPizzeria] || [aRestaurantCategory.name isEqualToString:kRunningSushi]){
+    }else if ([aRestaurantCategory isEqualToString:kCounterService] || [aRestaurantCategory isEqualToString:kFastFoodRest] || [aRestaurantCategory isEqualToString:kFoodCourt] || [aRestaurantCategory isEqualToString:kPizzeria] || [aRestaurantCategory isEqualToString:kRunningSushi]){
         
         if (randomNumber < 50) {
             returnValue = 1;
@@ -747,7 +747,7 @@
             returnValue = 0;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kCantina] || [aRestaurantCategory.name isEqualToString:kCoffeehouse] || [aRestaurantCategory.name isEqualToString:kOsteria] || [aRestaurantCategory.name isEqualToString:kSteakHouse] || [aRestaurantCategory.name isEqualToString:kSeaFoodRestaurant]){
+    }else if ([aRestaurantCategory isEqualToString:kCantina] || [aRestaurantCategory isEqualToString:kCoffeehouse] || [aRestaurantCategory isEqualToString:kOsteria] || [aRestaurantCategory isEqualToString:kSteakHouse] || [aRestaurantCategory isEqualToString:kSeaFoodRestaurant]){
         
         if (randomNumber < 30) {
             returnValue = 1;
@@ -755,7 +755,7 @@
             returnValue = 0;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kHeuriger]){
+    }else if ([aRestaurantCategory isEqualToString:kHeuriger]){
         
         if (randomNumber < 80) {
             returnValue = 1;
@@ -776,13 +776,13 @@
 #pragma mark - Car Park
 
 #warning extend this with location parameter city centeler locales less park place ant outer ones more.
-+(int)carParkForCategory:(Category*)aRestaurantCategory{
++(int)carParkForCategory:(NSString*)aRestaurantCategory{
 
     int randomNumber = (arc4random() %(100));
     int returnValue = 0;
     
     
-    if ([aRestaurantCategory.name isEqualToString:kBakery]) {
+    if ([aRestaurantCategory isEqualToString:kBakery]) {
         
         if (randomNumber < 10) {
             returnValue = 1;
@@ -790,8 +790,8 @@
             returnValue = 0;
         }
         
-    } else if ([aRestaurantCategory.name isEqualToString:kCantina]|| [aRestaurantCategory.name isEqualToString:kBistro] || [aRestaurantCategory.name isEqualToString:kBrewPub] || [aRestaurantCategory.name isEqualToString:kCounterService] || [aRestaurantCategory.name isEqualToString:kFastFoodRest] || [aRestaurantCategory.name isEqualToString:kOsteria] ||
-               [aRestaurantCategory.name isEqualToString:kPizzeria] || [aRestaurantCategory.name isEqualToString:kPub] || [aRestaurantCategory.name isEqualToString:kTakeOut]){
+    } else if ([aRestaurantCategory isEqualToString:kCantina]|| [aRestaurantCategory isEqualToString:kBistro] || [aRestaurantCategory isEqualToString:kBrewPub] || [aRestaurantCategory isEqualToString:kCounterService] || [aRestaurantCategory isEqualToString:kFastFoodRest] || [aRestaurantCategory isEqualToString:kOsteria] ||
+               [aRestaurantCategory isEqualToString:kPizzeria] || [aRestaurantCategory isEqualToString:kPub] || [aRestaurantCategory isEqualToString:kTakeOut]){
         
         if (randomNumber < 10) {
             returnValue = 1;
@@ -799,7 +799,7 @@
             returnValue = 0;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kCoffeehouse] || [aRestaurantCategory.name isEqualToString:kOuzeriaTavern] || [aRestaurantCategory.name isEqualToString:kRunningSushi]){
+    }else if ([aRestaurantCategory isEqualToString:kCoffeehouse] || [aRestaurantCategory isEqualToString:kOuzeriaTavern] || [aRestaurantCategory isEqualToString:kRunningSushi]){
         
         if (randomNumber < 20) {
             returnValue = 1;
@@ -807,7 +807,7 @@
             returnValue = 0;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kFineDining] || [aRestaurantCategory.name isEqualToString:kFoodCourt] || [aRestaurantCategory.name isEqualToString:kSteakHouse]){
+    }else if ([aRestaurantCategory isEqualToString:kFineDining] || [aRestaurantCategory isEqualToString:kFoodCourt] || [aRestaurantCategory isEqualToString:kSteakHouse]){
         
         if (randomNumber < 30) {
             returnValue = 1;
@@ -815,7 +815,7 @@
             returnValue = 0;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kFoodCourt] || [aRestaurantCategory.name isEqualToString:kSeaFoodRestaurant]){
+    }else if ([aRestaurantCategory isEqualToString:kFoodCourt] || [aRestaurantCategory isEqualToString:kSeaFoodRestaurant]){
         
         if (randomNumber < 40) {
             returnValue = 1;
@@ -823,7 +823,7 @@
             returnValue = 0;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kHeuriger]){
+    }else if ([aRestaurantCategory isEqualToString:kHeuriger]){
         
         if (randomNumber < 70) {
             returnValue = 1;
@@ -831,7 +831,7 @@
             returnValue = 0;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kSnackBar]){
+    }else if ([aRestaurantCategory isEqualToString:kSnackBar]){
         
         returnValue = 0;
         
@@ -846,25 +846,25 @@
 
 #pragma mark - Live Music
 
-+(int)liveMusicForCategory:(Category*)aRestaurantCategory{
++(int)liveMusicForCategory:(NSString*)aRestaurantCategory{
 
 
     int randomNumber = (arc4random() %(100));
     int returnValue = 0;
     
     
-    if ([aRestaurantCategory.name isEqualToString:kBakery] ||
-        [aRestaurantCategory.name isEqualToString:kBistro] ||
-        [aRestaurantCategory.name isEqualToString:kCounterService] ||
-        [aRestaurantCategory.name isEqualToString:kFastFoodRest] ||
-        [aRestaurantCategory.name isEqualToString:kFoodCourt] ||
-        [aRestaurantCategory.name isEqualToString:kPizzeria] ||
-        [aRestaurantCategory.name isEqualToString:kSnackBar] ||
-        [aRestaurantCategory.name isEqualToString:kTakeOut]) {
+    if ([aRestaurantCategory isEqualToString:kBakery] ||
+        [aRestaurantCategory isEqualToString:kBistro] ||
+        [aRestaurantCategory isEqualToString:kCounterService] ||
+        [aRestaurantCategory isEqualToString:kFastFoodRest] ||
+        [aRestaurantCategory isEqualToString:kFoodCourt] ||
+        [aRestaurantCategory isEqualToString:kPizzeria] ||
+        [aRestaurantCategory isEqualToString:kSnackBar] ||
+        [aRestaurantCategory isEqualToString:kTakeOut]) {
         
             returnValue = 0;
         
-    }else if ([aRestaurantCategory.name isEqualToString:kBrewPub] || [aRestaurantCategory.name isEqualToString:kPub]){
+    }else if ([aRestaurantCategory isEqualToString:kBrewPub] || [aRestaurantCategory isEqualToString:kPub]){
         
         if (randomNumber < 30) {
             returnValue = 1;
@@ -872,7 +872,7 @@
             returnValue = 0;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kCantina] || [aRestaurantCategory.name isEqualToString:kOsteria] || [aRestaurantCategory.name isEqualToString:kSteakHouse]){
+    }else if ([aRestaurantCategory isEqualToString:kCantina] || [aRestaurantCategory isEqualToString:kOsteria] || [aRestaurantCategory isEqualToString:kSteakHouse]){
         
         if (randomNumber < 15) {
             returnValue = 1;
@@ -880,7 +880,7 @@
             returnValue = 0;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kCoffeehouse] || [aRestaurantCategory.name isEqualToString:kRunningSushi]){
+    }else if ([aRestaurantCategory isEqualToString:kCoffeehouse] || [aRestaurantCategory isEqualToString:kRunningSushi]){
         
         if (randomNumber < 10) {
             returnValue = 1;
@@ -888,7 +888,7 @@
             returnValue = 0;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kFineDining]){
+    }else if ([aRestaurantCategory isEqualToString:kFineDining]){
         
         if (randomNumber < 35) {
             returnValue = 1;
@@ -896,7 +896,7 @@
             returnValue = 0;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kHeuriger] || [aRestaurantCategory.name isEqualToString:kOuzeriaTavern]){
+    }else if ([aRestaurantCategory isEqualToString:kHeuriger] || [aRestaurantCategory isEqualToString:kOuzeriaTavern]){
         
         if (randomNumber < 70) {
             returnValue = 1;
@@ -904,7 +904,7 @@
             returnValue = 0;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kSeaFoodRestaurant]){
+    }else if ([aRestaurantCategory isEqualToString:kSeaFoodRestaurant]){
         
         if (randomNumber < 20) {
             returnValue = 1;
@@ -920,19 +920,16 @@
     return returnValue;
     
 
-
-
 }
 
-
-+(int)vegetarianForCategory:(Category*)aRestaurantCategory{
++(int)vegetarianForCategory:(NSString*)aRestaurantCategory{
 
 
     int randomNumber = (arc4random() %(100));
     int returnValue = 0;
     
     
-    if ([aRestaurantCategory.name isEqualToString:kBakery]) {
+    if ([aRestaurantCategory isEqualToString:kBakery]) {
         
         if (randomNumber < 80) {
             returnValue = 1;
@@ -940,7 +937,7 @@
             returnValue = 0;
         }
         
-    } else if ([aRestaurantCategory.name isEqualToString:kBistro] || [aRestaurantCategory.name isEqualToString:kBrewPub]){
+    } else if ([aRestaurantCategory isEqualToString:kBistro] || [aRestaurantCategory isEqualToString:kBrewPub]){
         
         if (randomNumber < 10) {
             returnValue = 1;
@@ -948,8 +945,8 @@
             returnValue = 0;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kCounterService] ||
-              [aRestaurantCategory.name isEqualToString:kCantina]){
+    }else if ([aRestaurantCategory isEqualToString:kCounterService] ||
+              [aRestaurantCategory isEqualToString:kCantina]){
         
         if (randomNumber < 20) {
             returnValue = 0;
@@ -957,7 +954,7 @@
             returnValue = 1;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kCoffeehouse] || [aRestaurantCategory.name isEqualToString:kOsteria] || [aRestaurantCategory.name isEqualToString:kPub]){
+    }else if ([aRestaurantCategory isEqualToString:kCoffeehouse] || [aRestaurantCategory isEqualToString:kOsteria] || [aRestaurantCategory isEqualToString:kPub]){
         
         if (randomNumber < 20) {
             returnValue = 1;
@@ -965,14 +962,14 @@
             returnValue = 0;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kFastFoodRest] ||
-              [aRestaurantCategory.name isEqualToString:kHeuriger] ||
-              [aRestaurantCategory.name isEqualToString:kOuzeriaTavern] || [aRestaurantCategory.name isEqualToString:kSnackBar]||
-              [aRestaurantCategory.name isEqualToString:kSteakHouse] || [aRestaurantCategory.name isEqualToString:kSeaFoodRestaurant]){
+    }else if ([aRestaurantCategory isEqualToString:kFastFoodRest] ||
+              [aRestaurantCategory isEqualToString:kHeuriger] ||
+              [aRestaurantCategory isEqualToString:kOuzeriaTavern] || [aRestaurantCategory isEqualToString:kSnackBar]||
+              [aRestaurantCategory isEqualToString:kSteakHouse] || [aRestaurantCategory isEqualToString:kSeaFoodRestaurant]){
         
         returnValue = 0;
         
-    }else if ([aRestaurantCategory.name isEqualToString:kFineDining]){
+    }else if ([aRestaurantCategory isEqualToString:kFineDining]){
         
         if (randomNumber < 40) {
             returnValue = 1;
@@ -980,7 +977,7 @@
             returnValue = 0;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kFoodCourt] || [aRestaurantCategory.name isEqualToString:kTakeOut]){
+    }else if ([aRestaurantCategory isEqualToString:kFoodCourt] || [aRestaurantCategory isEqualToString:kTakeOut]){
         
         if (randomNumber < 30) {
             returnValue = 1;
@@ -988,7 +985,7 @@
             returnValue = 0;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kOuzeriaTavern]){
+    }else if ([aRestaurantCategory isEqualToString:kOuzeriaTavern]){
         
         if (randomNumber < 50) {
             returnValue = 0;
@@ -996,11 +993,11 @@
             returnValue = 1;
         }
         
-    }else if ([aRestaurantCategory.name isEqualToString:kPizzeria]){
+    }else if ([aRestaurantCategory isEqualToString:kPizzeria]){
         
         returnValue = 1;
         
-    }else if ([aRestaurantCategory.name isEqualToString:kRunningSushi]){
+    }else if ([aRestaurantCategory isEqualToString:kRunningSushi]){
         
         if (randomNumber < 70) {
             returnValue = 0;
@@ -1018,13 +1015,10 @@
 
 }
 
-+(int)locationForCategory:(Category*)aRestaurantCategory{
++(int)locationForCategory:(NSString*)aRestaurantCategory{
 
     return 0;
 }
-
-
-
 
 
 @end

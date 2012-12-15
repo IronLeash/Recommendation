@@ -14,8 +14,6 @@
 #import "Restaurant.h"
 #import "Constants.h"
 #import "FavoriteSmoking.h"
-#import "Category+Name.h"
-
 
 @implementation StatisticsLibrary
 
@@ -203,7 +201,7 @@
     
     @autoreleasepool
     {
-        for (Category *currentCategory in allCategories) {
+        for (NSString *currentCategory in allCategories) {
             [temporaryArray addObjectsFromArray:[[DataFetcher sharedInstance] getRestaurantsofCategory:currentCategory]];
             
             double log = 0;
@@ -218,7 +216,7 @@
         
         NSLog(@"Entropty category %f",hCategory);
         
-        for (Cuisine *currentCuisine in allCuisines) {
+        for (NSString *currentCuisine in allCuisines) {
             [temporaryArray addObjectsFromArray:[[DataFetcher sharedInstance] getRestaurantsofCuisine:currentCuisine]];
             
             double log = 0;

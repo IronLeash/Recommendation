@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "User.h"
-#import "Category.h"
-#import "Cuisine.h"
 
 NSString *ratingsGeneratedNotification;
 
@@ -22,9 +20,9 @@ NSString *ratingsGeneratedNotification;
 
 
 //Data generators
--(void)generateCusines;
+//-(void)generateCusines;
 
--(void)generateCategories;
+//-(void)generateCategories;
 
 -(void)generateUserStereotypes;
 

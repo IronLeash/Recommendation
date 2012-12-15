@@ -2,7 +2,7 @@
 //  User.h
 //  Recommendation
 //
-//  Created by ilker on 24.11.12.
+//  Created by ilker on 15.12.12.
 //  Copyright (c) 2012 ilker. All rights reserved.
 //
 
@@ -21,9 +21,9 @@
 @property (nonatomic, retain) NSString * userid;
 @property (nonatomic, retain) NSNumber * vegeterian;
 @property (nonatomic, retain) UserPreference *preference;
+@property (nonatomic, retain) NSSet *ratings;
 @property (nonatomic, retain) RatingWeight *ratingWeight;
 @property (nonatomic, retain) UserPreferenceWeight *userPrerefenceWeight;
-@property (nonatomic, retain) NSSet *ratings;
 @end
 
 @interface User (CoreDataGeneratedAccessors)

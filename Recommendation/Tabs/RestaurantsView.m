@@ -10,13 +10,10 @@
 #import "DataFetcher.h"
 #import "RestaurantsView.h"
 #import "AppDelegate.h"
-#import "Cuisine.h"
 
 #import "DataGenerator.h"
 
 #import "Restaurant.h"
-#import "Category.h"
-#import "Cuisine.h"
 
 @implementation RestaurantsView
 
@@ -66,10 +63,10 @@
     
     }else if([tableColumn.identifier isEqualToString:@"category"]) {
 
-        return currentRestaurant.categories.name;
+        return currentRestaurant.category;
     }else if([tableColumn.identifier isEqualToString:@"cuisine"]){
     
-        return currentRestaurant.cuisine.name;
+        return currentRestaurant.cuisine;
     }else if([tableColumn.identifier isEqualToString:@"priceRange"]){
     
         switch ([(NSNumber*)currentRestaurant.priceRange intValue]) {

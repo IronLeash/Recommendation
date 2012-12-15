@@ -2,13 +2,11 @@
 //  Restaurant.m
 //  Recommendation
 //
-//  Created by ilker on 13.12.12.
+//  Created by ilker on 15.12.12.
 //  Copyright (c) 2012 ilker. All rights reserved.
 //
 
 #import "Restaurant.h"
-#import "Category.h"
-#import "Cuisine.h"
 #import "RestaurantRating.h"
 
 
@@ -20,10 +18,10 @@
 @dynamic liveMusic;
 @dynamic location;
 @dynamic priceRange;
-@dynamic uniqueName;
 @dynamic smoking;
+@dynamic uniqueName;
 @dynamic vegeterian;
-@dynamic categories;
+@dynamic category;
 @dynamic cuisine;
 @dynamic ratings;
 

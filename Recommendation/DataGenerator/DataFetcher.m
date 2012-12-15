@@ -56,8 +56,10 @@ static NSArray *restaurantCuisines;
 #pragma mark - Restaurant related
 -(NSArray*)getRestaurantCategories{
     
-    
+
     if (![restaurantCategories count]) {
+        
+        /*
         //Check if cusines are alreadyThere
         //Fetsch results
         NSEntityDescription *entityDescription = [NSEntityDescription
@@ -72,7 +74,32 @@ static NSArray *restaurantCuisines;
         
         NSError *error;
         restaurantCategories = [[NSArray alloc] initWithArray:[moc executeFetchRequest:request error:&error]];
+        
+        */
+        restaurantCategories = [[NSArray alloc] initWithObjects:
+                                  @"Bakery",
+                                  @"Bistro",
+                                  @"Sea Food Restaurant",
+                                  @"Brew Pub",
+                                  @"Counter Service",
+                                  @"Cantina",
+                                  @"Coffeehouse",
+                                  @"Fast Food Rest",
+                                  @"Fine Dining",
+                                  @"Food Court",
+                                  @"Heuriger",
+                                  @"Osteria",
+                                  @"Ouzeria/Tavern",
+                                  @"Pizzeria",
+                                  @"Pub",
+                                  @"Running Sushi",
+                                  @"Snack Bar",
+                                  @"Steak house",
+                                  @"Take-Out",
+                                  nil];
+    
     }
+    
         return restaurantCategories;
 }
 
@@ -82,6 +109,9 @@ static NSArray *restaurantCuisines;
     //Fetsch results
     
     if (![restaurantCuisines count]) {
+        
+        
+        /*
         NSEntityDescription *entityDescription = [NSEntityDescription
                                                   entityForName:@"Cuisine" inManagedObjectContext:moc];
         NSFetchRequest *request = [[NSFetchRequest alloc] init];
@@ -94,36 +124,29 @@ static NSArray *restaurantCuisines;
         
         NSError *error;
         restaurantCuisines = [[NSArray alloc] initWithArray:[moc executeFetchRequest:request error:&error]];
-        
+        */
+
+            restaurantCuisines = [[NSArray alloc] initWithObjects:
+                                  @"American",
+                                  @"Argentina",
+                                  @"Austrian",
+                                  @"Turkish",
+                                  @"French",
+                                  @"English",
+                                  @"Italian",
+                                  @"Irish",
+                                  @"Spanish",
+                                  @"Greek",
+                                  @"World",
+                                  @"Korea",
+                                  @"Japan",
+                                  @"Thailand",
+                                  @"Chinese",
+                                  @"Mexica",
+                                  nil];
     }
     return restaurantCuisines;
     
-}
-
--(Cuisine*)getRestaurantCuisineWithName:(NSString*)name{
-
-    
-    //Check if cusines are alreadyThere
-    //Fetsch results
-    NSEntityDescription *entityDescription = [NSEntityDescription
-                                              entityForName:@"Cuisine" inManagedObjectContext:moc];
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:entityDescription];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"name == %@",name]];
-    
-
-    NSError *error;
-    NSArray *array = [moc executeFetchRequest:request error:&error];
-    
-    
-    Cuisine *currentCuisine;
-    if ([array count]) {
-        currentCuisine = [array objectAtIndex:0];
-    }else{
-    
-    }
-    
-    return currentCuisine;
 }
 
 -(NSArray*)getRestaurants{
@@ -156,14 +179,14 @@ static NSArray *restaurantCuisines;
     return returnArray;
 }
 
--(NSArray*)getRestaurantsofCategory:(Category*)aCategory{
+-(NSArray*)getRestaurantsofCategory:(NSString*)aCategory{
     
     
     NSEntityDescription *entityDescription = [NSEntityDescription
                                               entityForName:@"Restaurant" inManagedObjectContext:moc];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:entityDescription];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"categories == %@",aCategory]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"category == %@",aCategory]];
     
     NSError *error;
     NSArray *array = [moc executeFetchRequest:request error:&error];
@@ -172,7 +195,7 @@ static NSArray *restaurantCuisines;
     
 }
 
--(NSArray*)getRestaurantsofCuisine:(Cuisine*)aCuisine{
+-(NSArray*)getRestaurantsofCuisine:(NSString*)aCuisine{
     
     NSEntityDescription *entityDescription = [NSEntityDescription
                                               entityForName:@"Restaurant" inManagedObjectContext:moc];
@@ -339,27 +362,35 @@ static NSArray *restaurantCuisines;
                                               entityForName:@"Category" inManagedObjectContext:moc];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:entityDescription];
+
     
+    NSArray *favoriteArray;
     if ([aString isEqualToString:kGourmet])
     {
-    [request setPredicate:[NSPredicate predicateWithFormat:@"name == %@ OR name == %@ OR name == %@",kFineDining,kSteakHouse,kSeaFoodRestaurant]];
+//    [request setPredicate:[NSPredicate predicateWithFormat:@"name == %@ OR name == %@ OR name == %@",kFineDining,kSteakHouse,kSeaFoodRestaurant]];
+        favoriteArray = [[NSArray alloc] initWithObjects:kFineDining,kSteakHouse,kSeaFoodRestaurant, nil];
     } else if (([aString isEqualToString:kStudent])) {
-    [request setPredicate:[NSPredicate predicateWithFormat:@"name == %@ OR name == %@ OR name == %@",kBakery,kBistro,kFastFoodRest,kTakeOut,kSnackBar,kPub,kBrewPub]];
+//    [request setPredicate:[NSPredicate predicateWithFormat:@"name == %@ OR name == %@ OR name == %@",kBakery,kBistro,kFastFoodRest,kTakeOut,kSnackBar,kPub,kBrewPub]];
+                favoriteArray = [[NSArray alloc] initWithObjects:kBakery,kBistro,kFastFoodRest,kTakeOut,kSnackBar,kPub,kBrewPub, nil];
     }else if (([aString isEqualToString:kTourist])) {
-    [request setPredicate:[NSPredicate predicateWithFormat:@"name == %@ OR name == %@ OR name == %@",kCoffeehouse,kFastFoodRest,kHeuriger,kSnackBar,kTakeOut]];
+//    [request setPredicate:[NSPredicate predicateWithFormat:@"name == %@ OR name == %@ OR name == %@",kCoffeehouse,kFastFoodRest,kHeuriger,kSnackBar,kTakeOut]];
+                favoriteArray = [[NSArray alloc] initWithObjects:kCoffeehouse,kFastFoodRest,kHeuriger,kSnackBar,kTakeOut, nil];
     }else if (([aString isEqualToString:kFamily])) {
-    [request setPredicate:[NSPredicate predicateWithFormat:@"name == %@ OR name == %@ OR name == %@",kCounterService,kFoodCourt,kPizzeria]];
+//    [request setPredicate:[NSPredicate predicateWithFormat:@"name == %@ OR name == %@ OR name == %@",kCounterService,kFoodCourt,kPizzeria]];
+                favoriteArray = [[NSArray alloc] initWithObjects:kCounterService,kFoodCourt,kPizzeria, nil];
     }else if (([aString isEqualToString:kAmbianceLover])) {
-    [request setPredicate:[NSPredicate predicateWithFormat:@"name == %@ OR name == %@ OR name == %@",kRunningSushi,kOuzeriaTavern,kBrewPub,kFineDining,kOsteria]];
+//    [request setPredicate:[NSPredicate predicateWithFormat:@"name == %@ OR name == %@ OR name == %@",kRunningSushi,kOuzeriaTavern,kBrewPub,kFineDining,kOsteria]];
+                favoriteArray = [[NSArray alloc] initWithObjects:kRunningSushi,kOuzeriaTavern,kBrewPub,kFineDining,kOsteria, nil];
     }else{
-    [request setPredicate:[NSPredicate predicateWithFormat:@"name == %@ OR name == %@ OR name == %@",kBakery,kFoodCourt,kCounterService]];
+//    [request setPredicate:[NSPredicate predicateWithFormat:@"name == %@ OR name == %@ OR name == %@",kBakery,kFoodCourt,kCounterService]];
+                favoriteArray = [[NSArray alloc] initWithObjects:kBakery,kFoodCourt,kCounterService, nil];
     }
     
 
-    NSError *error;
-    NSArray *array = [moc executeFetchRequest:request error:&error];
+//    NSError *error;
+//    NSArray *array = [moc executeFetchRequest:request error:&error];
     
-    return array;
+    return favoriteArray;
 
 }
 
@@ -462,10 +493,10 @@ static NSArray *restaurantCuisines;
     NSArray *allCategories = [[DataFetcher sharedInstance] getRestaurantCategories];
     NSMutableArray *favoriteCategories = [NSMutableArray arrayWithCapacity:[allCategories count]];
     
-    for (Category *currentCAtegory in allCategories)
+    for (NSString *currentCategory in allCategories)
     {
         FavoriteCategory *curentFavoriteCategory = [[FavoriteCategory alloc] init];
-        curentFavoriteCategory.name =currentCAtegory.name;
+        curentFavoriteCategory.name =currentCategory;
         [favoriteCategories addObject:curentFavoriteCategory];
     }
     
@@ -474,10 +505,11 @@ static NSArray *restaurantCuisines;
     
     //Iterate all positive ratings
     for (RestaurantRating *currentRating in positiveRAtingsArray){
-        Category *likedCategory = currentRating.restaurant.categories;
+
+        NSString *likedCategory = currentRating.restaurant.category;
         
         for (FavoriteCategory *favCategory in favoriteCategories) {
-            if ([favCategory.name isEqualToString:likedCategory.name]) {
+            if ([favCategory.name isEqualToString:likedCategory]) {
                 favCategory.totalOccurances++;
                 favCategory.ratingtotal += [StatisticsLibrary weightedSumForRating:currentRating];
                 favCategory.weightedValue = [StatisticsLibrary scoreofCategory:favCategory amongRatingNumber:[positiveRAtingsArray count] withAverage:averagePositveRating];
@@ -501,10 +533,10 @@ static NSArray *restaurantCuisines;
     NSArray *allCuisines = [[DataFetcher sharedInstance] getRestaurantCuisines];
     NSMutableArray *favoriteCuisines = [NSMutableArray arrayWithCapacity:[allCuisines count]];
     
-    for (Cuisine *currentCuisine in allCuisines)
+    for (NSString *currentCuisine in allCuisines)
     {
         FavoriteCuisine *currentFavoriteCuisine = [[FavoriteCuisine alloc] init];
-        currentFavoriteCuisine.name =currentCuisine.name;
+        currentFavoriteCuisine.name =currentCuisine;
         [favoriteCuisines addObject:currentFavoriteCuisine];
     }
     
@@ -513,10 +545,10 @@ static NSArray *restaurantCuisines;
     
     //Iterate all positive ratings
     for (RestaurantRating *currentRating in positiveRAtingsArray){
-        Cuisine *likedCuisine = currentRating.restaurant.cuisine;
+        NSString *likedCuisine = currentRating.restaurant.cuisine;
         
         for (FavoriteCuisine *favoriteCuisine in favoriteCuisines) {
-            if ([favoriteCuisine.name isEqualToString:likedCuisine.name]) {
+            if ([favoriteCuisine.name isEqualToString:likedCuisine]) {
                 favoriteCuisine.totalOccurances++;
                 favoriteCuisine.ratingtotal += [StatisticsLibrary weightedSumForRating:currentRating];
                 favoriteCuisine.weightedValue = [StatisticsLibrary scoreofCuisine:favoriteCuisine amongRatingNumber:[positiveRAtingsArray count] withAverage:averagePositveRating];

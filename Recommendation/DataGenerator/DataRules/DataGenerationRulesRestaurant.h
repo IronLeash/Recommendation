@@ -8,8 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "Category.h"
-#import "Cuisine.h"
+
 @interface DataGenerationRulesRestaurant : NSObject
 
 
@@ -17,24 +16,24 @@
 //Rules based on category
 
 //Assings a Cuisine for a given gategory
-+(Cuisine*)cuisineForCategory:(Category*)aRestaurantCategory;
++(NSString*)cuisineForCategory:(NSString*)aRestaurantCategory;
 
 //Price
-+(int)priceForCategory:(Category*)aRestaurantCategory;
++(int)priceForCategory:(NSString*)aRestaurantCategory;
 //Child Friendly
-+(int)childFriendlyForCategory:(Category*)aRestaurantCategory;
++(int)childFriendlyForCategory:(NSString*)aRestaurantCategory;
 //Car Park
-+(int)carParkForCategory:(Category*)aRestaurantCategory;
++(int)carParkForCategory:(NSString*)aRestaurantCategory;
 //Garden
-+(int)gardenForCategory:(Category*)aRestaurantCategory;
++(int)gardenForCategory:(NSString*)aRestaurantCategory;
 //Live Music
-+(int)liveMusicForCategory:(Category*)aRestaurantCategory;
++(int)liveMusicForCategory:(NSString*)aRestaurantCategory;
 
-+(int)locationForCategory:(Category*)aRestaurantCategory;
++(int)locationForCategory:(NSString*)aRestaurantCategory;
 //Smoking
-+(int)smokingForCategory:(Category*)aRestaurantCategory;
++(int)smokingForCategory:(NSString*)aRestaurantCategory;
 //Vegaterian
-+(int)vegetarianForCategory:(Category*)aRestaurantCategory;
++(int)vegetarianForCategory:(NSString*)aRestaurantCategory;
 
 
 //Rules based on cuisine

@@ -7,8 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Cuisine.h"
-#import "Category.h"
 #import "User.h"
 
 @interface DataFetcher : NSObject
@@ -27,11 +25,10 @@
 -(NSArray*)getRestaurantCategories;
 
 -(NSArray*)getRestaurantCuisines;
--(Cuisine*)getRestaurantCuisineWithName:(NSString*)name;
 
 -(NSArray*)getRestaurants;
--(NSArray*)getRestaurantsofCategory:(Category*)aCategory;
--(NSArray*)getRestaurantsofCuisine:(Cuisine*)aCuisine;
+-(NSArray*)getRestaurantsofCategory:(NSString*)aCategory;
+-(NSArray*)getRestaurantsofCuisine:(NSString*)aCuisine;
 
 -(NSArray*)getDistinctRestaurantLocations;
 -(NSArray*)getRestaurantsInLocation:(NSNumber*)aLocation;

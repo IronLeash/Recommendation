@@ -22,8 +22,8 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
 
-    [[DataGenerator sharedInstance] generateCategories];
-    [[DataGenerator sharedInstance] generateCusines];
+//    [[DataGenerator sharedInstance] generateCategories];
+//    [[DataGenerator sharedInstance] generateCusines];
     
     //    RestaurantsView *restaurantsView = [[RestaurantsView alloc] init];
     //    [restaurantsView populateTableView:nil];

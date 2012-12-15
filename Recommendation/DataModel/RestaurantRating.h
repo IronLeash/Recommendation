@@ -2,7 +2,7 @@
 //  RestaurantRating.h
 //  Recommendation
 //
-//  Created by ilker on 24.11.12.
+//  Created by ilker on 15.12.12.
 //  Copyright (c) 2012 ilker. All rights reserved.
 //
 
@@ -18,7 +18,7 @@
 @property (nonatomic, retain) NSNumber * personalRating;
 @property (nonatomic, retain) NSNumber * serviceRating;
 @property (nonatomic, retain) NSNumber * tangiblesRating;
-@property (nonatomic, retain) User *user;
 @property (nonatomic, retain) Restaurant *restaurant;
+@property (nonatomic, retain) User *user;
 
 @end

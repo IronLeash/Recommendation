@@ -334,8 +334,8 @@
     
 
 
-    [self generateRatingBackgroundThread];
-//    [self performSelectorInBackground:@selector(generateRatingBackgroundThread) withObject:nil];
+//    [self generateRatingBackgroundThread];
+    [self performSelectorInBackground:@selector(generateRatingBackgroundThread) withObject:nil];
     
 //    [self generateRatingBackgroundThread];
     

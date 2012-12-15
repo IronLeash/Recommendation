@@ -6,14 +6,8 @@
 //  Copyright (c) 2012 ilker. All rights reserved.
 //
 
-#import "Category.h"
-
-
 @interface FavoriteCategory : NSObject
 {
-
-    
-    
 
     /*
     //Iterate and find this

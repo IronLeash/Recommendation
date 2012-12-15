@@ -81,7 +81,7 @@ static NSArray *favoriteVegaterianCategories;
     
     BOOL favoriteRest = NO;
     NSSet *favoriteSet;
-    NSSet *categorySet = [NSSet setWithObject:aRest.categories];
+    NSSet *categorySet = [NSSet setWithObject:aRest.category];
     
 
     if ([aUser.stereotype isEqualToString:kStudent]) {
