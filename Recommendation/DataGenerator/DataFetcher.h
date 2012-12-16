@@ -49,14 +49,6 @@
 -(NSArray*)getUsers;
 -(NSArray*)getUsersInManagedObjectContext:(NSManagedObjectContext*)aManageObjecContext;
 
-//Ratings
--(NSArray*)getRestaurantRatings;
--(NSArray*)getRestaurantRatingsForUser:(User*)aUser;
--(NSArray*)getPositiveRatingsforUser:(User*)aUser;
--(NSArray*)getFavoriteCategoriesForUser:(User*)currentUser;
 
--(NSDictionary*)getPreferencesDictionaryForUser:(User*)currentUser;
-
--(NSDictionary*)getResturantEntrophyDictionary;
 
 @end

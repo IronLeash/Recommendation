@@ -21,17 +21,22 @@
 }
 
 
+
++(PreferencesManager*)sharedInstance;
+
 //Setters
--(void)setEntrophyDictionary:(NSDictionary*)entropyDicitonary;
+-(void)setEntrophyDictionary;
 
 -(void)setUserPreferenceWeightDicitonary:(User*)currentUser;
 
 
 //Getters
 
--(NSDictionary*)getEntrophyDictionary:(User*)currentUser;
+-(NSDictionary*)getEntrophyDictionary;
 
 -(NSDictionary*)getUserPreferenceWeightDicitonary:(User*)currentUser;
+
+-(NSDictionary*)getPreferencesDictionaryForUser:(User*)currentUser;
 
 
 @end

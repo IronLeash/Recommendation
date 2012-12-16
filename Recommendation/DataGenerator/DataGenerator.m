@@ -27,6 +27,7 @@
 #import "DataGenerationRulesRestaurant.h"
 #import "DataGenerationRulesUser.h"
 #import "DataGenerationRulesRating.h"
+#import "RatingsManager.h"
 
 
 
@@ -487,7 +488,7 @@ static  NSManagedObjectContext *moc;
 -(void)setUserPreferenceForUser:(User*)aUser
 {
 
-    NSArray *userRatings = [[DataFetcher sharedInstance] getRestaurantRatingsForUser:aUser];
+    NSArray *userRatings = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser];
     NSMutableArray *positiveRatings = [NSMutableArray arrayWithArray:userRatings];
     
     //Eleminate the  restaurants which are below threshold

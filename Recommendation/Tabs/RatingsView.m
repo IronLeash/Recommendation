@@ -9,6 +9,7 @@
 #import "RatingsView.h"
 #import "DataGenerator.h"
 #import "DataGenerationRulesRating.h"
+#import "PreferencesManager.h"
 #import "DataFetcher.h"
 
 #import "User.h"
@@ -18,6 +19,8 @@
 #import "StatisticsLibrary.h"
 #import "Constants.h"
 #import "AppDelegate.h"
+
+#import "RatingsManager.h"
 
 @implementation RatingsView
 
@@ -38,8 +41,8 @@
 
 -(void)awakeFromNib{
     usersArray = [NSMutableArray arrayWithArray:[[DataFetcher sharedInstance] getUsers]];
-    ratingsArray = [NSMutableArray arrayWithArray:[[DataFetcher sharedInstance] getRestaurantRatings]];
-    entrophyDictionary = [[DataFetcher sharedInstance] getResturantEntrophyDictionary];
+    ratingsArray = [NSMutableArray arrayWithArray:[[RatingsManager sharedInstance] getRestaurantRatings]];
+    entrophyDictionary = [[PreferencesManager sharedInstance] getEntrophyDictionary];
     
     [_categoryTextfield setSelectable:NO];
     [_categoryTextfield setEditable:NO];
@@ -61,7 +64,7 @@
 
 -(void)updateRatingsTable:(NSNotification*)aNptification{
     usersArray = [NSMutableArray arrayWithArray:[[DataFetcher sharedInstance] getUsers]];
-    ratingsArray = [NSMutableArray arrayWithArray:[[DataFetcher sharedInstance] getRestaurantRatings]];
+    ratingsArray = [NSMutableArray arrayWithArray:[[RatingsManager sharedInstance] getRestaurantRatings]];
     [usersTableView reloadData];
     [ratingsTableView reloadData];
 }
@@ -75,7 +78,7 @@
     currentlySelectedUser = [usersArray objectAtIndex:[usersTableView selectedRow]];
     
     //Change preferences
-    preferencesDictionary = [NSMutableDictionary dictionaryWithDictionary: [[DataFetcher sharedInstance] getPreferencesDictionaryForUser:currentlySelectedUser]];
+    preferencesDictionary = [NSMutableDictionary dictionaryWithDictionary: [[PreferencesManager sharedInstance] getPreferencesDictionaryForUser:currentlySelectedUser]];
 
 
     FavoriteCategory *favoriteCategory      = [[preferencesDictionary objectForKey:kCategory] objectAtIndex:0];
@@ -114,8 +117,8 @@
     
     //Calculate correlation of attributes
     
-    
-    NSArray *ratedRestaurants = [[DataFetcher sharedInstance] getRestaurantRatingsForUser:currentlySelectedUser];
+    /*
+    NSArray *ratedRestaurants = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:currentlySelectedUser];
     NSMutableArray *gardenValuesArray = [[NSMutableArray alloc] initWithCapacity:0];
     NSMutableArray *liveMusicValuesArray = [[NSMutableArray alloc] initWithCapacity:0];
     NSMutableArray *carParkValuesArray = [[NSMutableArray alloc] initWithCapacity:0];
@@ -145,7 +148,7 @@
     NSLog(@"Correlation Live Music %f",correlationLiveMusic);
     NSLog(@"Correlation Child friendly %f",correlationChildFriendly);
     NSLog(@"Correlation Car park %f",correlationCarPark);
-    
+    */
 }
 
 -(IBAction)checkBoxchangedValue:(id)sender
@@ -160,15 +163,15 @@
 
     if (_onlyPositiveRatingscheckBox.state==NSOnState) {
         
-        NSArray *userRatings = [[DataFetcher sharedInstance] getPositiveRatingsforUser:currentlySelectedUser];
+        NSArray *anArray = [[RatingsManager sharedInstance] getPositiveRatingsforUser:currentlySelectedUser];
         [ratingsArray removeAllObjects];
-        [ratingsArray addObjectsFromArray:userRatings];
+        [ratingsArray addObjectsFromArray:anArray];
         
     }else if (_onlyPositiveRatingscheckBox.state==NSOffState){
         
-        NSArray *userRatings = [[DataFetcher sharedInstance] getRestaurantRatingsForUser:currentlySelectedUser];
+        NSArray *anArray = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:currentlySelectedUser];
         [ratingsArray removeAllObjects];
-        [ratingsArray addObjectsFromArray:userRatings];
+        [ratingsArray addObjectsFromArray:anArray];
         
     }
     
