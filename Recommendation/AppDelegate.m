@@ -13,10 +13,11 @@
 
 @implementation AppDelegate
 
+
+#warning make this accessable from outside class
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize managedObjectContext = _managedObjectContext;
-
 
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
@@ -120,6 +121,7 @@
         return nil;
     }
     _managedObjectContext = [[NSManagedObjectContext alloc] init];
+    [_managedObjectContext setUndoManager:nil];
     [_managedObjectContext setPersistentStoreCoordinator:coordinator];
     
     return _managedObjectContext;

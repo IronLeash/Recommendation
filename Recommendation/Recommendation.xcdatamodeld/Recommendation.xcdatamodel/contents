@@ -76,6 +76,6 @@
         <element name="RestaurantRating" positionX="-576" positionY="315" width="128" height="148"/>
         <element name="User" positionX="-875" positionY="126" width="128" height="208"/>
         <element name="UserPreference" positionX="-711" positionY="8" width="128" height="208"/>
-        <element name="UserPreferenceWeight" positionX="-1089" positionY="125" width="128" height="208"/>
+        <element name="UserPreferenceWeight" positionX="-1143" positionY="125" width="128" height="208"/>
     </elements>
 </model>

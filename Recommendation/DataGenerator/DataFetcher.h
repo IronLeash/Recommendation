@@ -12,10 +12,8 @@
 @interface DataFetcher : NSObject
 {
 
-
-    
-    
 }
+
 +(DataFetcher*)sharedInstance;
 
 //Getters
@@ -27,8 +25,11 @@
 -(NSArray*)getRestaurantCuisines;
 
 -(NSArray*)getRestaurants;
+
 -(NSArray*)getRestaurantsofCategory:(NSString*)aCategory;
 -(NSArray*)getRestaurantsofCuisine:(NSString*)aCuisine;
+
+-(NSArray*)getRestaurantsinManagedObjectContext:(NSManagedObjectContext*)aManagedObjectContext;
 
 -(NSArray*)getDistinctRestaurantLocations;
 -(NSArray*)getRestaurantsInLocation:(NSNumber*)aLocation;
@@ -43,7 +44,10 @@
 //Favorite Categories
 -(NSArray*)getFavoriteCagetoriesForStereotype:(NSString*)aString;
 
+
+//Users
 -(NSArray*)getUsers;
+-(NSArray*)getUsersInManagedObjectContext:(NSManagedObjectContext*)aManageObjecContext;
 
 //Ratings
 -(NSArray*)getRestaurantRatings;
