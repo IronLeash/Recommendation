@@ -15,6 +15,7 @@
 		522E787B1666A7080017A86A /* ListPopUpcontroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 522E787A1666A7080017A86A /* ListPopUpcontroller.m */; };
 		52361D0116611DF3008232A3 /* StatisticsLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 52361D0016611DF3008232A3 /* StatisticsLibrary.m */; };
 		523A0C5016603B0700F9BF3E /* RatingsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 523A0C4F16603B0700F9BF3E /* RatingsView.m */; };
+		52530D3B167E717100C68AD7 /* ActionGeneric.m in Sources */ = {isa = PBXBuildFile; fileRef = 52530D3A167E717100C68AD7 /* ActionGeneric.m */; };
 		5255D9C3166FE8E9003D1734 /* DataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 5255D9C2166FE8E9003D1734 /* DataFetcher.m */; };
 		52679F0D167CFFD5002860A5 /* Restaurant.m in Sources */ = {isa = PBXBuildFile; fileRef = 52679F0C167CFFD5002860A5 /* Restaurant.m */; };
 		52679F11167CFFD6002860A5 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 52679F10167CFFD6002860A5 /* User.m */; };
@@ -59,6 +60,8 @@
 		52361D0016611DF3008232A3 /* StatisticsLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticsLibrary.m; sourceTree = "<group>"; };
 		523A0C4E16603B0700F9BF3E /* RatingsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RatingsView.h; sourceTree = "<group>"; };
 		523A0C4F16603B0700F9BF3E /* RatingsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RatingsView.m; sourceTree = "<group>"; };
+		52530D39167E717100C68AD7 /* ActionGeneric.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionGeneric.h; sourceTree = "<group>"; };
+		52530D3A167E717100C68AD7 /* ActionGeneric.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionGeneric.m; sourceTree = "<group>"; };
 		5255D9C1166FE8E9003D1734 /* DataFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataFetcher.h; sourceTree = "<group>"; };
 		5255D9C2166FE8E9003D1734 /* DataFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataFetcher.m; sourceTree = "<group>"; };
 		52679F0B167CFFD5002860A5 /* Restaurant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Restaurant.h; sourceTree = "<group>"; };
@@ -188,6 +191,8 @@
 				52D684031662E7AE006919E2 /* FavoriteLocation.m */,
 				52D684051662E7FF006919E2 /* FavoriteSmoking.h */,
 				52D684061662E7FF006919E2 /* FavoriteSmoking.m */,
+				52530D39167E717100C68AD7 /* ActionGeneric.h */,
+				52530D3A167E717100C68AD7 /* ActionGeneric.m */,
 			);
 			path = "Helper Classes";
 			sourceTree = "<group>";
@@ -406,6 +411,7 @@
 				17707E63167B705B0000CD27 /* RestaurantDataFetcher.m in Sources */,
 				17707E6B167B72F80000CD27 /* PreferencesManager.m in Sources */,
 				522B1BB3167E173300720E8D /* RatingsManager.m in Sources */,
+				52530D3B167E717100C68AD7 /* ActionGeneric.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

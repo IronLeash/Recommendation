@@ -138,21 +138,60 @@ static PreferencesManager* preferencesManager = nil;
     return preferencesDictionary;
 }
 
-
+//Creates empty  contigency table according to to cardinality of attribute
 -(NSMutableArray*)contingencyMatrixForAttribute:(NSString*)anAttribute{
 
-    NSMutableArray *contingancyMatrix;
+    NSMutableArray *contingancyMatrix = [[NSMutableArray alloc] initWithCapacity:10];
     
-    if ([anAttribute isEqualToString:@"Price range"])
+    if ([anAttribute isEqualToString:kCategory])
     {
-        contingancyMatrix = [[NSMutableArray alloc] initWithCapacity:10];
-    
         for (int i = 0; i < 10 ; i++) {
-            NSMutableArray *colomn = [[NSMutableArray alloc] initWithObjects:[NSNumber numberWithInt:0],[NSNumber numberWithInt:0],[NSNumber numberWithInt:0],[NSNumber numberWithInt:0], nil];
+            //19
+            NSMutableArray *colomn = [[NSMutableArray alloc] initWithCapacity:0];
+            for (int categories = 0; categories < 19; i++){
+                [colomn addObject:[NSNumber numberWithInt:0]];
+            }
+            
             [contingancyMatrix addObject:colomn];
         }
         
+    }else if ([anAttribute isEqualToString:kCuisine]){
         
+        //16
+        for (int i = 0; i < 10 ; i++) {
+            //16
+            NSMutableArray *colomn = [[NSMutableArray alloc] initWithCapacity:0];
+            for (int categories = 0; categories < 16; i++){
+                [colomn addObject:[NSNumber numberWithInt:0]];
+            }
+            
+            [contingancyMatrix addObject:colomn];
+        }
+    
+    }else if ([anAttribute isEqualToString:kSmoking]){
+    
+        for (int i = 0; i < 10 ; i++) {
+            //3
+            NSMutableArray *colomn = [[NSMutableArray alloc] initWithCapacity:0];
+            for (int categories = 0; categories < 3; i++){
+                [colomn addObject:[NSNumber numberWithInt:0]];
+            }
+            
+            [contingancyMatrix addObject:colomn];
+        }
+        
+    }else{
+    
+        for (int i = 0; i < 10 ; i++) {
+            //16
+            NSMutableArray *colomn = [[NSMutableArray alloc] initWithCapacity:0];
+            for (int categories = 0; categories < 16; i++){
+                [colomn addObject:[NSNumber numberWithInt:0]];
+            }
+            
+            [contingancyMatrix addObject:colomn];
+        }
+    
     }
     
     return contingancyMatrix;
@@ -162,7 +201,8 @@ static PreferencesManager* preferencesManager = nil;
 
 -(NSMutableArray*)fillContingencyMatrix :(NSMutableArray*)anArray ForAttribute:(NSString*)anAttribute OfUser:(User*)aUser{
     
-    
+#warning need to sort hte nominal variables alphabetically for cuisine and category location and smoking could be taken as numeric value
+
     NSArray *ratingsArray = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser];
     
     NSMutableArray *weightedAverageArray = [[NSMutableArray alloc] initWithCapacity:[ratingsArray count]];
@@ -180,7 +220,18 @@ static PreferencesManager* preferencesManager = nil;
     for (int i = 0; i <[ratingsArray count]; i++)
     {
         int colommNumber = [[weightedAverageArray objectAtIndex:i] intValue];
-        int rowNumber = [[[[ratingsArray objectAtIndex:i] restaurant ]smoking] intValue];
+        int rowNumber;
+        
+        if([anAttribute isEqualToString:kSmoking] || [anAttribute isEqualToString:kLocation]){
+        rowNumber = [[[[ratingsArray objectAtIndex:i] restaurant ]smoking] intValue];
+        }else if ([anAttribute isEqualToString:kCuisine]){
+        
+//TODO: Implement a function to return spesific place of cusinis for the array (e.g alphabetical order)
+        }else if ([anAttribute isEqualToString:kCategory]){
+        
+//TODO: Implement a function to return spesific place of cusinis for the array (e.g alphabetical order)
+
+        }
         
         int currentValue = [[[contingancyMatrix objectAtIndex:colommNumber] objectAtIndex:rowNumber] intValue];
         currentValue++;
