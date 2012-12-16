@@ -39,4 +39,9 @@
 -(NSDictionary*)getPreferencesDictionaryForUser:(User*)currentUser;
 
 
+
+//Helper
+
+-(NSArray*)contingencyMatrixForAttribute:(NSString*)anAttribute;
+
 @end

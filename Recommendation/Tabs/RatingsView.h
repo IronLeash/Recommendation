@@ -65,6 +65,7 @@
 }
 
 
+-(IBAction)generateRecommendation:(id)sender;
 -(IBAction)generateRatings:(id)sender;
 -(IBAction)aRowIsSelected:(id)sender;
 -(IBAction)checkBoxchangedValue:(id)sender;

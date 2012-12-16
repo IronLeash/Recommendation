@@ -68,6 +68,26 @@ static PreferencesManager* preferencesManager = nil;
 
 }
 
+-(NSDictionary*)getUserPreferenceWeightDicitonary:(User*)currentUser{
+
+    NSArray *userRatings = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:currentUser];
+    
+//    double 
+    
+    //Entropies
+    double priceRangeCorrelation;
+    double gardenCorrelation;
+    double liveMusicCorelation;
+    double childFiendlyCorrelation;
+    double vegateriancorrelation;
+    
+    double categoryyCramer;
+    double cuisineCramer;
+    double locationCramer;
+    double smokingCramer;
+    
+    return nil;
+}
 
 
 -(NSDictionary*)getPreferencesDictionaryForUser:(User*)aUser{
@@ -118,5 +138,58 @@ static PreferencesManager* preferencesManager = nil;
     return preferencesDictionary;
 }
 
+
+-(NSMutableArray*)contingencyMatrixForAttribute:(NSString*)anAttribute{
+
+    NSMutableArray *contingancyMatrix;
+    
+    if ([anAttribute isEqualToString:@"Price range"])
+    {
+        contingancyMatrix = [[NSMutableArray alloc] initWithCapacity:10];
+    
+        for (int i = 0; i < 10 ; i++) {
+            NSMutableArray *colomn = [[NSMutableArray alloc] initWithObjects:[NSNumber numberWithInt:0],[NSNumber numberWithInt:0],[NSNumber numberWithInt:0],[NSNumber numberWithInt:0], nil];
+            [contingancyMatrix addObject:colomn];
+        }
+        
+        
+    }
+    
+    return contingancyMatrix;
+
+}
+
+
+-(NSMutableArray*)fillContingencyMatrix :(NSMutableArray*)anArray ForAttribute:(NSString*)anAttribute OfUser:(User*)aUser{
+    
+    
+    NSArray *ratingsArray = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser];
+    
+    NSMutableArray *weightedAverageArray = [[NSMutableArray alloc] initWithCapacity:[ratingsArray count]];
+
+    NSMutableArray *contingancyMatrix = [NSMutableArray arrayWithArray:anArray];
+    
+#warning move this to a helper class
+    for (RestaurantRating *currentRating in ratingsArray)
+    {
+        [weightedAverageArray addObject:[NSNumber numberWithInt:([StatisticsLibrary weightedSumForRating:currentRating]+0.5)]];
+    
+    }
+    
+    
+    for (int i = 0; i <[ratingsArray count]; i++)
+    {
+        int colommNumber = [[weightedAverageArray objectAtIndex:i] intValue];
+        int rowNumber = [[[[ratingsArray objectAtIndex:i] restaurant ]smoking] intValue];
+        
+        int currentValue = [[[contingancyMatrix objectAtIndex:colommNumber] objectAtIndex:rowNumber] intValue];
+        currentValue++;
+        
+        [[contingancyMatrix objectAtIndex:colommNumber] replaceObjectAtIndex:rowNumber withObject:[NSNumber numberWithInt:currentValue]];
+    }
+    
+    return contingancyMatrix;
+    
+}
 
 @end

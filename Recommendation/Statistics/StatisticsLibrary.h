@@ -38,7 +38,7 @@
 //Pearson Correlation
 + (double)pearsonCorreleationBetweenArray1:(NSArray*)array1 andArray2:(NSArray*)array2;
 
-+ (double)cramersVforAttribute;
++ (double)cramersVforAttribute:(NSArray*)anArray;
 
 //Entrophy of Attributes calculated based on Restaurant items
 + (NSDictionary*)entopyOfVariable;
