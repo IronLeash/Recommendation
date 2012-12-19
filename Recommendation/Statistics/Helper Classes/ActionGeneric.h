@@ -16,4 +16,6 @@
 
 +(NSMutableArray*)weightedAveraRatingsArrayForRatings:(NSArray*)ratingsArray;
 
++(NSDictionary*)restaurantAttributevaluesForRatings:(NSArray*)ratingsArray;
+
 @end

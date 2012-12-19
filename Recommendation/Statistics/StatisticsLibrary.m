@@ -350,7 +350,7 @@
                                                                            [NSNumber numberWithDouble:hChildFriendly],
                                                                            [NSNumber numberWithDouble:hVegaterian],
                                                                            [NSNumber numberWithDouble:hCardPark],nil]
-                                                                  forKeys:[NSArray arrayWithObjects:kCategory,kCuisine,kLocation,kPrice,kSmoking,kGarden,kLiveMusic,kChildfriendly,kVegetarian,kCarPark, nil]];
+                                                                  forKeys:[NSArray arrayWithObjects:kCategory,kCuisine,kLocation,kPrice,kSmoking,kGarden,kLiveMusic,kChildfriendly,kVegaterian,kCarPark, nil]];
 
     return returnDictionary;
 }

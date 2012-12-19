@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1811" systemVersion="12C60" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1810" systemVersion="12C54" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="RatingWeight" representedClassName="RatingWeight" syncable="YES">
         <attribute name="accessibility" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="coreService" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
@@ -19,7 +19,7 @@
         <attribute name="priceRange" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="smoking" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="uniqueName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="vegeterian" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="vegaterian" optional="YES" attributeType="Boolean" syncable="YES"/>
         <relationship name="ratings" optional="YES" toMany="YES" deletionRule="Deny" destinationEntity="RestaurantRating" inverseName="restaurant" inverseEntity="RestaurantRating" syncable="YES"/>
     </entity>
     <entity name="RestaurantRating" representedClassName="RestaurantRating" syncable="YES">
@@ -72,7 +72,7 @@
     </entity>
     <elements>
         <element name="RatingWeight" positionX="-893" positionY="387" width="128" height="133"/>
-        <element name="Restaurant" positionX="-353" positionY="144" width="128" height="223"/>
+        <element name="Restaurant" positionX="-353" positionY="144" width="128" height="225"/>
         <element name="RestaurantRating" positionX="-576" positionY="315" width="128" height="148"/>
         <element name="User" positionX="-875" positionY="126" width="128" height="208"/>
         <element name="UserPreference" positionX="-711" positionY="8" width="128" height="208"/>

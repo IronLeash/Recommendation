@@ -72,13 +72,10 @@ static PreferencesManager* preferencesManager = nil;
 -(NSDictionary*)getUserPreferenceWeightDicitonary:(User*)aUser{
 
     NSArray *userRatings = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser];
-//
-//    double
     
     //Entropies
     NSDictionary *entrophyDicitonary = [[PreferencesManager sharedInstance] getEntrophyDictionary];
   
-    
     double priceEntropy  = [[entrophyDicitonary objectForKey:kPrice] doubleValue];
     double gardenEntropy = [[entrophyDicitonary objectForKey:kGarden] doubleValue];
     double liveMusicEntrophy= [[entrophyDicitonary objectForKey:kLiveMusic] doubleValue];
@@ -102,24 +99,30 @@ static PreferencesManager* preferencesManager = nil;
     locationEntrophy    /= total;
     smokingEntrophy     /= total;
     
-    //Min Max Normalization
-    
-    
+    //Correlations
     NSMutableArray *weightedAverageArray = [ActionGeneric weightedAveraRatingsArrayForRatings:userRatings];
+    
+    NSDictionary *restaurantVauesDicitonary = [ActionGeneric restaurantAttributevaluesForRatings:userRatings];
 
-#warning prepare the two arrays restaurant ratings price
-    double priceRangeCorrelation    =   [StatisticsLibrary pearsonCorreleationBetweenArray1:nil andArray2:weightedAverageArray];
-    double gardenCorrelation        =   [StatisticsLibrary pearsonCorreleationBetweenArray1:nil andArray2:weightedAverageArray];
-    double liveMusicCorelation      =   [StatisticsLibrary pearsonCorreleationBetweenArray1:nil andArray2:weightedAverageArray];
-    double childFiendlyCorrelation  =   [StatisticsLibrary pearsonCorreleationBetweenArray1:nil andArray2:weightedAverageArray];
-    double vegateriancorrelation    =   [StatisticsLibrary pearsonCorreleationBetweenArray1:nil andArray2:weightedAverageArray];
+    double priceRangeCorrelation    =   [StatisticsLibrary pearsonCorreleationBetweenArray1:
+                                         [restaurantVauesDicitonary objectForKey:kPrice] andArray2:weightedAverageArray];
+    double gardenCorrelation        =   [StatisticsLibrary pearsonCorreleationBetweenArray1:
+                                         [restaurantVauesDicitonary objectForKey:kGarden] andArray2:weightedAverageArray];
+    double liveMusicCorelation      =   [StatisticsLibrary pearsonCorreleationBetweenArray1:
+                                         [restaurantVauesDicitonary objectForKey:kLiveMusic] andArray2:weightedAverageArray];
+    double childFiendlyCorrelation  =   [StatisticsLibrary pearsonCorreleationBetweenArray1:
+                                         [restaurantVauesDicitonary objectForKey:kChildfriendly] andArray2:weightedAverageArray];
+    double vegateriancorrelation    =   [StatisticsLibrary pearsonCorreleationBetweenArray1:
+                                         [restaurantVauesDicitonary objectForKey:kVegaterian] andArray2:weightedAverageArray];
 
-    /*
-    double categoryyCramer;
-    double cuisineCramer;
-    double locationCramer;
-    double smokingCramer;
-    */
+    //Cramers V for nominal attributes
+    
+    double categoryyCramer = [StatisticsLibrary cramersVforAttribute:[[PreferencesManager sharedInstance] contingencyMatrixForAttribute:@"Category" OfUser:aUser]];
+    double cuisineCramer = [StatisticsLibrary cramersVforAttribute:[[PreferencesManager sharedInstance] contingencyMatrixForAttribute:@"Cuisine" OfUser:aUser]];
+    double locationCramer = [StatisticsLibrary cramersVforAttribute:[[PreferencesManager sharedInstance] contingencyMatrixForAttribute:@"Location" OfUser:aUser]];
+    double smokingCramer = [StatisticsLibrary cramersVforAttribute:[[PreferencesManager sharedInstance] contingencyMatrixForAttribute:@"Smoking" OfUser:aUser]];
+
+#warning return the proper dictionary
     return nil;
 }
 
@@ -143,7 +146,7 @@ static PreferencesManager* preferencesManager = nil;
     for (RestaurantRating *currentRating in positiveRatingsArray)
     {
 #warning you can add a weighting factor according to rating value
-        vegetarian     += [currentRating.restaurant.vegeterian floatValue];
+        vegetarian     += [currentRating.restaurant.vegaterian floatValue];
         childFriendly  += [currentRating.restaurant.childFriendly floatValue];
         liveMusic      += [currentRating.restaurant.liveMusic floatValue];
         garden         += [currentRating.restaurant.garden floatValue];
@@ -167,7 +170,7 @@ static PreferencesManager* preferencesManager = nil;
                                                                                favoriteSmoking,
                                                                                favoriteLocation,
                                                                                nil]
-                                                                      forKeys:[NSArray arrayWithObjects:kVegetarian,kChildfriendly,kLiveMusic,kGarden,kPrice,kCategory,kCuisine,kSmoking,kLocation,nil]];
+                                                                      forKeys:[NSArray arrayWithObjects:kVegaterian,kChildfriendly,kLiveMusic,kGarden,kPrice,kCategory,kCuisine,kSmoking,kLocation,nil]];
     
     return preferencesDictionary;
 }

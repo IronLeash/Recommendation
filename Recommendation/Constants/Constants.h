@@ -73,7 +73,6 @@
 #define kGarden         @"Garden"
 #define kLiveMusic      @"LiveMusic"
 #define kChildfriendly  @"ChildFriendly"
-#define kVegetarian     @"Vegetarian"
 #define kPrice          @"PriceRange"
 #define kCategory       @"Category"
 #define kCuisine        @"Cuisine"

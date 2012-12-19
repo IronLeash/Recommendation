@@ -356,7 +356,7 @@ static  NSManagedObjectContext *moc;
             currentRestaurant.smoking = [NSNumber numberWithInt:[DataGenerationRulesRestaurant smokingForCategory:currentCateory]];
             currentRestaurant.childFriendly = [NSNumber numberWithInt:[DataGenerationRulesRestaurant childFriendlyForCategory:currentCateory]];
             currentRestaurant.priceRange = [NSNumber numberWithInt:[DataGenerationRulesRestaurant priceForCategory:currentCateory]];
-            currentRestaurant.vegeterian = [NSNumber numberWithInt:[DataGenerationRulesRestaurant vegetarianForCategory:currentCateory]];
+            currentRestaurant.vegaterian = [NSNumber numberWithInt:[DataGenerationRulesRestaurant vegetarianForCategory:currentCateory]];
         
     }
     }

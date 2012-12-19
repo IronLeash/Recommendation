@@ -108,7 +108,7 @@
     [_gardenTextField setStringValue: [[preferencesDictionary objectForKey:kGarden] stringValue]];
     [_liveMusicTextfield setStringValue: [[preferencesDictionary objectForKey:kLiveMusic] stringValue]];
     [_childFriendlyTextfield setStringValue: [[preferencesDictionary objectForKey:kChildfriendly] stringValue]];
-    [_vegetarianTextfield setStringValue: [[preferencesDictionary objectForKey:kVegetarian] stringValue]];
+    [_vegetarianTextfield setStringValue: [[preferencesDictionary objectForKey:kVegaterian] stringValue]];
     
     NSLog(@"Preferences %@",preferencesDictionary);
     
