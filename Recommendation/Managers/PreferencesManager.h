@@ -29,7 +29,6 @@
 
 -(void)setUserPreferenceWeightDicitonary:(User*)currentUser;
 
-
 //Getters
 
 -(NSDictionary*)getEntrophyDictionary;
@@ -38,10 +37,10 @@
 
 -(NSDictionary*)getPreferencesDictionaryForUser:(User*)currentUser;
 
-
-
 //Helper
-
 -(NSArray*)contingencyMatrixForAttribute:(NSString*)anAttribute;
+
+-(NSMutableArray*)contingencyMatrixForAttribute:(NSString*)anAttribute OfUser:(User*)aUser;
+
 
 @end

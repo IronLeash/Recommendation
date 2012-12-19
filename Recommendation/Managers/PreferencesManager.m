@@ -16,6 +16,7 @@
 #import "DataFetcher.h"
 #import "Constants.h"
 #import "User.h"
+#import "ActionGeneric.h"
 
 @implementation PreferencesManager
 
@@ -70,11 +71,12 @@ static PreferencesManager* preferencesManager = nil;
 
 -(NSDictionary*)getUserPreferenceWeightDicitonary:(User*)currentUser{
 
-    NSArray *userRatings = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:currentUser];
-    
-//    double 
+//    NSArray *userRatings = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:currentUser];
+//
+//    double
     
     //Entropies
+    /*
     double priceRangeCorrelation;
     double gardenCorrelation;
     double liveMusicCorelation;
@@ -85,7 +87,7 @@ static PreferencesManager* preferencesManager = nil;
     double cuisineCramer;
     double locationCramer;
     double smokingCramer;
-    
+    */
     return nil;
 }
 
@@ -198,38 +200,55 @@ static PreferencesManager* preferencesManager = nil;
 
 }
 
-
--(NSMutableArray*)fillContingencyMatrix :(NSMutableArray*)anArray ForAttribute:(NSString*)anAttribute OfUser:(User*)aUser{
+-(NSMutableArray*)contingencyMatrixForAttribute:(NSString*)anAttribute OfUser:(User*)aUser{
     
-#warning need to sort hte nominal variables alphabetically for cuisine and category location and smoking could be taken as numeric value
-
     NSArray *ratingsArray = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser];
-    
-    NSMutableArray *weightedAverageArray = [[NSMutableArray alloc] initWithCapacity:[ratingsArray count]];
 
-    NSMutableArray *contingancyMatrix = [NSMutableArray arrayWithArray:anArray];
+    NSMutableArray *weightedAverageArray = [ActionGeneric weightedAveraRatingsArrayForRatings:ratingsArray];
+
+    //Empty Arrax of Arrays as Matrix
+    NSMutableArray *contingancyMatrix;
     
-#warning move this to a helper class
-    for (RestaurantRating *currentRating in ratingsArray)
-    {
-        [weightedAverageArray addObject:[NSNumber numberWithInt:([StatisticsLibrary weightedSumForRating:currentRating]+0.5)]];
-    
+
+    //Create empty Matrix For Attribute
+    if([anAttribute isEqualToString:kSmoking]){
+        contingancyMatrix = [NSMutableArray arrayWithArray:[[PreferencesManager sharedInstance] contingencyMatrixForAttribute:kSmoking]];
+    }else if ([anAttribute isEqualToString:kLocation]){
+        contingancyMatrix = [NSMutableArray arrayWithArray:[[PreferencesManager sharedInstance] contingencyMatrixForAttribute:kLocation]];
+    }else if ([anAttribute isEqualToString:kCuisine]){
+        contingancyMatrix = [NSMutableArray arrayWithArray:[[PreferencesManager sharedInstance] contingencyMatrixForAttribute:kCuisine]];
+    }else if ([anAttribute isEqualToString:kCategory]){
+        contingancyMatrix = [NSMutableArray arrayWithArray:[[PreferencesManager sharedInstance] contingencyMatrixForAttribute:kCategory]];
     }
-    
-    
+
     for (int i = 0; i <[ratingsArray count]; i++)
     {
+        
+        //Colomn corresponds to Ratings round to integer from 1-10
         int colommNumber = [[weightedAverageArray objectAtIndex:i] intValue];
-        int rowNumber;
+        //Row is the position of a particular
+        int rowNumber = 0;
         
-        if([anAttribute isEqualToString:kSmoking] || [anAttribute isEqualToString:kLocation]){
-        rowNumber = [[[[ratingsArray objectAtIndex:i] restaurant ]smoking] intValue];
+        if([anAttribute isEqualToString:kSmoking]){
+        
+            rowNumber = [[[[ratingsArray objectAtIndex:i] restaurant ]smoking] intValue];
+            
+        }else if ([anAttribute isEqualToString:kLocation]){
+            rowNumber = [[[[ratingsArray objectAtIndex:i] restaurant ]location] intValue];
+
         }else if ([anAttribute isEqualToString:kCuisine]){
-        
-//TODO: Implement a function to return spesific place of cusinis for the array (e.g alphabetical order)
+
+            //Get current Cuisine String
+            NSString *currentCuisine = [[[ratingsArray objectAtIndex:i] restaurant ]cuisine];
+            //Find its location in the cuisine array, It corresponds to position in contigency array
+            rowNumber = [ActionGeneric cuisinePosiitonInContigencyMatrix:currentCuisine];
+            
         }else if ([anAttribute isEqualToString:kCategory]){
         
-//TODO: Implement a function to return spesific place of cusinis for the array (e.g alphabetical order)
+            //Get current Category String
+            NSString *currentCategory = [[[ratingsArray objectAtIndex:i] restaurant ]category];
+            //Find its location in the cuisine array, It corresponds to position in contigency array
+            rowNumber = [ActionGeneric cuisinePosiitonInContigencyMatrix:currentCategory];
 
         }
         

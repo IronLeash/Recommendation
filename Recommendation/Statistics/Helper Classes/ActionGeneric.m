@@ -10,6 +10,8 @@
 
 #import "DataFetcher.h"
 
+#import "StatisticsLibrary.h"
+
 @implementation ActionGeneric
 
 +(int)cuisinePosiitonInContigencyMatrix:(NSString*)attributeValue{
@@ -38,6 +40,18 @@
     
     return position;
 
+}
+
++(NSMutableArray*)weightedAveraRatingsArrayForRatings:(NSArray*)ratingsArray{
+
+    NSMutableArray *weightedAverageArray = [[NSMutableArray alloc] initWithCapacity:[ratingsArray count]];
+    
+    for (RestaurantRating *currentRating in ratingsArray)
+    {
+        [weightedAverageArray addObject:[NSNumber numberWithInt:([StatisticsLibrary weightedSumForRating:currentRating]+0.5)]];
+    }
+    
+    return weightedAverageArray;
 }
 
 @end

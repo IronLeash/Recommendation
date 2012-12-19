@@ -14,4 +14,6 @@
 
 +(int)categoryPosiitonInContigencyMatrix:(NSString*)attributeValue;
 
++(NSMutableArray*)weightedAveraRatingsArrayForRatings:(NSArray*)ratingsArray;
+
 @end
