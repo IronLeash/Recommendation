@@ -69,20 +69,52 @@ static PreferencesManager* preferencesManager = nil;
 
 }
 
--(NSDictionary*)getUserPreferenceWeightDicitonary:(User*)currentUser{
+-(NSDictionary*)getUserPreferenceWeightDicitonary:(User*)aUser{
 
-//    NSArray *userRatings = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:currentUser];
+    NSArray *userRatings = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser];
 //
 //    double
     
     //Entropies
-    /*
-    double priceRangeCorrelation;
-    double gardenCorrelation;
-    double liveMusicCorelation;
-    double childFiendlyCorrelation;
-    double vegateriancorrelation;
+    NSDictionary *entrophyDicitonary = [[PreferencesManager sharedInstance] getEntrophyDictionary];
+  
     
+    double priceEntropy  = [[entrophyDicitonary objectForKey:kPrice] doubleValue];
+    double gardenEntropy = [[entrophyDicitonary objectForKey:kGarden] doubleValue];
+    double liveMusicEntrophy= [[entrophyDicitonary objectForKey:kLiveMusic] doubleValue];
+    double childEntropy= [[entrophyDicitonary objectForKey:kChildfriendly] doubleValue];
+    double vegEntrophy= [[entrophyDicitonary objectForKey:kVegaterian] doubleValue];
+    double categoryEntrophy= [[entrophyDicitonary objectForKey:kCategory] doubleValue];
+    double cuisineEntrophy= [[entrophyDicitonary objectForKey:kCuisine] doubleValue];
+    double locationEntrophy= [[entrophyDicitonary objectForKey:kLocation] doubleValue];
+    double smokingEntrophy= [[entrophyDicitonary objectForKey:kSmoking] doubleValue];
+    
+    double total = priceEntropy +gardenEntropy+liveMusicEntrophy+childEntropy+vegEntrophy+categoryEntrophy+cuisineEntrophy+locationEntrophy+smokingEntrophy;
+
+    //Normalize
+    priceEntropy        /= total;
+    gardenEntropy       /= total;
+    liveMusicEntrophy   /= total;
+    childEntropy        /= total;
+    vegEntrophy         /= total;
+    categoryEntrophy    /= total;
+    cuisineEntrophy     /= total;
+    locationEntrophy    /= total;
+    smokingEntrophy     /= total;
+    
+    //Min Max Normalization
+    
+    
+    NSMutableArray *weightedAverageArray = [ActionGeneric weightedAveraRatingsArrayForRatings:userRatings];
+
+#warning prepare the two arrays restaurant ratings price
+    double priceRangeCorrelation    =   [StatisticsLibrary pearsonCorreleationBetweenArray1:nil andArray2:weightedAverageArray];
+    double gardenCorrelation        =   [StatisticsLibrary pearsonCorreleationBetweenArray1:nil andArray2:weightedAverageArray];
+    double liveMusicCorelation      =   [StatisticsLibrary pearsonCorreleationBetweenArray1:nil andArray2:weightedAverageArray];
+    double childFiendlyCorrelation  =   [StatisticsLibrary pearsonCorreleationBetweenArray1:nil andArray2:weightedAverageArray];
+    double vegateriancorrelation    =   [StatisticsLibrary pearsonCorreleationBetweenArray1:nil andArray2:weightedAverageArray];
+
+    /*
     double categoryyCramer;
     double cuisineCramer;
     double locationCramer;

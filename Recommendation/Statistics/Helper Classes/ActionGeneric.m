@@ -54,4 +54,20 @@
     return weightedAverageArray;
 }
 
+
++(NSDictionary*)restaurantAttributevaluesForRatings:(NSArray*)ratingsArray{
+    
+    NSMutableArray *categoryArray;
+    NSMutableArray *cuisinesArray;
+    NSMutableArray *locationArray;
+    
+
+    for (RestaurantRating *currentRating in ratingsArray)
+    {
+//        [weightedAverageArray addObject:[NSNumber numberWithInt:([StatisticsLibrary weightedSumForRating:currentRating]+0.5)]];
+    }
+    
+    return weightedAverageArray;
+}
+
 @end

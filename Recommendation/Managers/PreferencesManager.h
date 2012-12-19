@@ -17,7 +17,7 @@
 
     NSDictionary *entrophyDictionary;
     NSDictionary *currentUserPreferenceWeight;
-
+    NSArray      *currentUserRatingsArray;
 }
 
 
