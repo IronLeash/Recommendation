@@ -122,7 +122,7 @@ static PreferencesManager* preferencesManager = nil;
     double locationCramer = [StatisticsLibrary cramersVforAttribute:[[PreferencesManager sharedInstance] contingencyMatrixForAttribute:@"Location" OfUser:aUser]];
     double smokingCramer = [StatisticsLibrary cramersVforAttribute:[[PreferencesManager sharedInstance] contingencyMatrixForAttribute:@"Smoking" OfUser:aUser]];
 
-#warning return the proper dictionary
+
     return nil;
 }
 

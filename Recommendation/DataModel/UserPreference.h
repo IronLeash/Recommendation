@@ -2,7 +2,7 @@
 //  UserPreference.h
 //  Recommendation
 //
-//  Created by ilker on 15.12.12.
+//  Created by Ilker Baltaci on 12/20/12.
 //  Copyright (c) 2012 ilker. All rights reserved.
 //
 
@@ -22,7 +22,7 @@
 @property (nonatomic, retain) NSNumber * location;
 @property (nonatomic, retain) NSNumber * priceRange;
 @property (nonatomic, retain) NSNumber * smoking;
-@property (nonatomic, retain) NSNumber * vegeterian;
+@property (nonatomic, retain) NSNumber * vegaterian;
 @property (nonatomic, retain) User *user;
 
 @end

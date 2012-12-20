@@ -379,13 +379,13 @@ static NSArray *restaurantCuisines;
     return array;
 }
 
--(NSArray*)getRestaurantsWithVegaterieanValue:(NSNumber*)aVegeterianValue{
+-(NSArray*)getRestaurantsWithVegaterieanValue:(NSNumber*)aVegaterianValue{
     
     NSEntityDescription *entityDescription = [NSEntityDescription
                                               entityForName:@"Restaurant" inManagedObjectContext:moc];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:entityDescription];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"vegeterian == %@",aVegeterianValue]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"vegaterian == %@",aVegaterianValue]];
     
     NSError *error;
     NSArray *array = [moc executeFetchRequest:request error:&error];

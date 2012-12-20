@@ -2,7 +2,7 @@
 //  User.h
 //  Recommendation
 //
-//  Created by ilker on 15.12.12.
+//  Created by Ilker Baltaci on 12/20/12.
 //  Copyright (c) 2012 ilker. All rights reserved.
 //
 
@@ -19,7 +19,7 @@
 @property (nonatomic, retain) NSNumber * smoker;
 @property (nonatomic, retain) NSString * stereotype;
 @property (nonatomic, retain) NSString * userid;
-@property (nonatomic, retain) NSNumber * vegeterian;
+@property (nonatomic, retain) NSNumber * vegaterian;
 @property (nonatomic, retain) UserPreference *preference;
 @property (nonatomic, retain) NSSet *ratings;
 @property (nonatomic, retain) RatingWeight *ratingWeight;

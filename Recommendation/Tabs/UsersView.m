@@ -83,7 +83,7 @@
         
     }else if([tableColumn.identifier isEqualToString:@"vegaterian"]){
         
-        switch ([(NSNumber*)currentUser.vegeterian intValue]) {
+        switch ([(NSNumber*)currentUser.vegaterian intValue]) {
             case 0:
             {
                 return @"No";

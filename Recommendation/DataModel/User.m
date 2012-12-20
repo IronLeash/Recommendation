@@ -2,7 +2,7 @@
 //  User.m
 //  Recommendation
 //
-//  Created by ilker on 15.12.12.
+//  Created by Ilker Baltaci on 12/20/12.
 //  Copyright (c) 2012 ilker. All rights reserved.
 //
 
@@ -21,7 +21,7 @@
 @dynamic smoker;
 @dynamic stereotype;
 @dynamic userid;
-@dynamic vegeterian;
+@dynamic vegaterian;
 @dynamic preference;
 @dynamic ratings;
 @dynamic ratingWeight;

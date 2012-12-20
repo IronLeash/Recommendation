@@ -38,7 +38,7 @@
 -(NSArray*)getRestaurantForGardenVale:(NSNumber*)aGardenValue;
 -(NSArray*)getRestaurantForLiveMusicValue:(NSNumber*)aLiveMusic;
 -(NSArray*)getRestaurantForChildFriendly:(NSNumber*)aChildFriendlyValue;
--(NSArray*)getRestaurantsWithVegaterieanValue:(NSNumber*)aVegeterianValue;
+-(NSArray*)getRestaurantsWithVegaterieanValue:(NSNumber*)aVegaterianValue;
 -(NSArray*)getRestaurantForCarParkValue:(NSNumber*)aCarParkValue;
 
 //Favorite Categories

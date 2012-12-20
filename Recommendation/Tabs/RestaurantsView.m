@@ -171,7 +171,7 @@
         }
         
 
-    }else if([tableColumn.identifier isEqualToString:@"vegeterian"]){
+    }else if([tableColumn.identifier isEqualToString:@"vegaterian"]){
         
         switch ([(NSNumber*)currentRestaurant.vegaterian intValue]) {
             case 0:

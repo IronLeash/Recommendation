@@ -12,16 +12,16 @@
 		17707E60167B70440000CD27 /* RatingDataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 17707E5F167B70440000CD27 /* RatingDataFetcher.m */; };
 		17707E63167B705B0000CD27 /* RestaurantDataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 17707E62167B705B0000CD27 /* RestaurantDataFetcher.m */; };
 		17707E6B167B72F80000CD27 /* PreferencesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 17707E6A167B72F80000CD27 /* PreferencesManager.m */; };
+		177F5BFF1683AA5100330CE0 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 177F5BFE1683AA5000330CE0 /* User.m */; };
+		177F5C031683AAA200330CE0 /* UserPreference.m in Sources */ = {isa = PBXBuildFile; fileRef = 177F5C021683AAA200330CE0 /* UserPreference.m */; };
+		177F5C061683AAA300330CE0 /* UserPreferenceWeight.m in Sources */ = {isa = PBXBuildFile; fileRef = 177F5C051683AAA300330CE0 /* UserPreferenceWeight.m */; };
 		522B1BB3167E173300720E8D /* RatingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 522B1BB2167E173300720E8D /* RatingsManager.m */; };
 		522E787B1666A7080017A86A /* ListPopUpcontroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 522E787A1666A7080017A86A /* ListPopUpcontroller.m */; };
 		52361D0116611DF3008232A3 /* StatisticsLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 52361D0016611DF3008232A3 /* StatisticsLibrary.m */; };
 		523A0C5016603B0700F9BF3E /* RatingsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 523A0C4F16603B0700F9BF3E /* RatingsView.m */; };
 		52530D3B167E717100C68AD7 /* ActionGeneric.m in Sources */ = {isa = PBXBuildFile; fileRef = 52530D3A167E717100C68AD7 /* ActionGeneric.m */; };
 		5255D9C3166FE8E9003D1734 /* DataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 5255D9C2166FE8E9003D1734 /* DataFetcher.m */; };
-		52679F11167CFFD6002860A5 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 52679F10167CFFD6002860A5 /* User.m */; };
-		52679F14167CFFD6002860A5 /* UserPreference.m in Sources */ = {isa = PBXBuildFile; fileRef = 52679F13167CFFD6002860A5 /* UserPreference.m */; };
 		52679F17167CFFD6002860A5 /* RatingWeight.m in Sources */ = {isa = PBXBuildFile; fileRef = 52679F16167CFFD6002860A5 /* RatingWeight.m */; };
-		52679F1A167CFFD7002860A5 /* UserPreferenceWeight.m in Sources */ = {isa = PBXBuildFile; fileRef = 52679F19167CFFD7002860A5 /* UserPreferenceWeight.m */; };
 		52679F1D167CFFD7002860A5 /* RestaurantRating.m in Sources */ = {isa = PBXBuildFile; fileRef = 52679F1C167CFFD7002860A5 /* RestaurantRating.m */; };
 		529B7F13165D92D500C72F10 /* UsersView.m in Sources */ = {isa = PBXBuildFile; fileRef = 529B7F12165D92D500C72F10 /* UsersView.m */; };
 		529FAFE81659311000802D22 /* DataGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 529FAFE71659311000802D22 /* DataGenerator.m */; };
@@ -54,6 +54,12 @@
 		17707E62167B705B0000CD27 /* RestaurantDataFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantDataFetcher.m; sourceTree = "<group>"; };
 		17707E69167B72F80000CD27 /* PreferencesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesManager.h; sourceTree = "<group>"; };
 		17707E6A167B72F80000CD27 /* PreferencesManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesManager.m; sourceTree = "<group>"; };
+		177F5BFD1683AA5000330CE0 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		177F5BFE1683AA5000330CE0 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		177F5C011683AAA200330CE0 /* UserPreference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserPreference.h; sourceTree = "<group>"; };
+		177F5C021683AAA200330CE0 /* UserPreference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPreference.m; sourceTree = "<group>"; };
+		177F5C041683AAA300330CE0 /* UserPreferenceWeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserPreferenceWeight.h; sourceTree = "<group>"; };
+		177F5C051683AAA300330CE0 /* UserPreferenceWeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPreferenceWeight.m; sourceTree = "<group>"; };
 		522B1BB1167E173300720E8D /* RatingsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RatingsManager.h; sourceTree = "<group>"; };
 		522B1BB2167E173300720E8D /* RatingsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RatingsManager.m; sourceTree = "<group>"; };
 		522E78791666A7080017A86A /* ListPopUpcontroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListPopUpcontroller.h; sourceTree = "<group>"; };
@@ -66,14 +72,8 @@
 		52530D3A167E717100C68AD7 /* ActionGeneric.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionGeneric.m; sourceTree = "<group>"; };
 		5255D9C1166FE8E9003D1734 /* DataFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataFetcher.h; sourceTree = "<group>"; };
 		5255D9C2166FE8E9003D1734 /* DataFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataFetcher.m; sourceTree = "<group>"; };
-		52679F0F167CFFD6002860A5 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
-		52679F10167CFFD6002860A5 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
-		52679F12167CFFD6002860A5 /* UserPreference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserPreference.h; sourceTree = "<group>"; };
-		52679F13167CFFD6002860A5 /* UserPreference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPreference.m; sourceTree = "<group>"; };
 		52679F15167CFFD6002860A5 /* RatingWeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RatingWeight.h; sourceTree = "<group>"; };
 		52679F16167CFFD6002860A5 /* RatingWeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RatingWeight.m; sourceTree = "<group>"; };
-		52679F18167CFFD7002860A5 /* UserPreferenceWeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserPreferenceWeight.h; sourceTree = "<group>"; };
-		52679F19167CFFD7002860A5 /* UserPreferenceWeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPreferenceWeight.m; sourceTree = "<group>"; };
 		52679F1B167CFFD7002860A5 /* RestaurantRating.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantRating.h; sourceTree = "<group>"; };
 		52679F1C167CFFD7002860A5 /* RestaurantRating.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantRating.m; sourceTree = "<group>"; };
 		529B7F11165D92D500C72F10 /* UsersView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsersView.h; sourceTree = "<group>"; };
@@ -303,18 +303,18 @@
 			isa = PBXGroup;
 			children = (
 				52ABE9971674F59C00E91274 /* Categries */,
-				52679F0F167CFFD6002860A5 /* User.h */,
-				52679F10167CFFD6002860A5 /* User.m */,
-				52679F12167CFFD6002860A5 /* UserPreference.h */,
-				52679F13167CFFD6002860A5 /* UserPreference.m */,
 				52679F15167CFFD6002860A5 /* RatingWeight.h */,
 				52679F16167CFFD6002860A5 /* RatingWeight.m */,
-				52679F18167CFFD7002860A5 /* UserPreferenceWeight.h */,
-				52679F19167CFFD7002860A5 /* UserPreferenceWeight.m */,
 				52679F1B167CFFD7002860A5 /* RestaurantRating.h */,
 				52679F1C167CFFD7002860A5 /* RestaurantRating.m */,
 				174899CA1682791200D61DC2 /* Restaurant.h */,
 				174899CB1682791200D61DC2 /* Restaurant.m */,
+				177F5BFD1683AA5000330CE0 /* User.h */,
+				177F5BFE1683AA5000330CE0 /* User.m */,
+				177F5C011683AAA200330CE0 /* UserPreference.h */,
+				177F5C021683AAA200330CE0 /* UserPreference.m */,
+				177F5C041683AAA300330CE0 /* UserPreferenceWeight.h */,
+				177F5C051683AAA300330CE0 /* UserPreferenceWeight.m */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -400,10 +400,7 @@
 				52ABE99F1675475200E91274 /* DataGenerationRulesRestaurant.m in Sources */,
 				52ABE9A41675502F00E91274 /* DataGenerationRulesUser.m in Sources */,
 				52ABE9A71675504500E91274 /* DataGenerationRulesRating.m in Sources */,
-				52679F11167CFFD6002860A5 /* User.m in Sources */,
-				52679F14167CFFD6002860A5 /* UserPreference.m in Sources */,
 				52679F17167CFFD6002860A5 /* RatingWeight.m in Sources */,
-				52679F1A167CFFD7002860A5 /* UserPreferenceWeight.m in Sources */,
 				52679F1D167CFFD7002860A5 /* RestaurantRating.m in Sources */,
 				17707E5D167B70130000CD27 /* UserDataFetcher.m in Sources */,
 				17707E60167B70440000CD27 /* RatingDataFetcher.m in Sources */,
@@ -412,6 +409,9 @@
 				522B1BB3167E173300720E8D /* RatingsManager.m in Sources */,
 				52530D3B167E717100C68AD7 /* ActionGeneric.m in Sources */,
 				174899CC1682791200D61DC2 /* Restaurant.m in Sources */,
+				177F5BFF1683AA5100330CE0 /* User.m in Sources */,
+				177F5C031683AAA200330CE0 /* UserPreference.m in Sources */,
+				177F5C061683AAA300330CE0 /* UserPreferenceWeight.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -323,25 +323,7 @@
 
 -(IBAction)generateRecommendation:(id)sender{
 
-
-    NSLog(@"Help");
-    
-    
-    
-     NSArray *row1 = [NSArray arrayWithObjects:
-     [NSNumber numberWithFloat:11],
-     [NSNumber numberWithFloat:4], nil];
-     
-     NSArray *row2 = [NSArray arrayWithObjects:
-     
-     [NSNumber numberWithFloat:3],
-     [NSNumber numberWithFloat:8], nil];
-     
-     NSArray *contigencyTableArray =[NSArray arrayWithObjects:row1,row2, nil];
-     
-    [StatisticsLibrary cramersVforAttribute:contigencyTableArray];
-    
-
+    [[PreferencesManager sharedInstance] getUserPreferenceWeightDicitonary:currentlySelectedUser];
 }
 
 

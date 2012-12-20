@@ -258,7 +258,7 @@ static  NSManagedObjectContext *moc;
                     currentUser.gender      = [NSNumber numberWithInt:gender];
                     currentUser.location    = [NSNumber numberWithInt:location];
                     currentUser.smoker      = [NSNumber numberWithInt:[DataGenerationRulesUser userSmokingPredictionFor:currentStereotype]];
-                    currentUser.vegeterian  = [NSNumber numberWithInt:[DataGenerationRulesUser userVegetarianPredictionFor:currentStereotype]];
+                    currentUser.vegaterian  = [NSNumber numberWithInt:[DataGenerationRulesUser userVegetarianPredictionFor:currentStereotype]];
                     currentUser.stereotype  = currentStereotype;
                 
                     
@@ -320,7 +320,6 @@ static  NSManagedObjectContext *moc;
 //        int curentRandomSmokingNumber = arc4random() %(3);
 //        int curentRandomCarParkNumber = arc4random() %(2);
 //        int curentRandomChildFriendlyNumber = arc4random() %(2);
-//        int curentRandomVegeterianNumber = arc4random() %(2);
 //        int curentRandomPriceRangeNumber = arc4random() %(4);
         int curentRandomLocationNumber = (arc4random() %(15))+1;
 //        int curentRandomGardenNumber = arc4random() %(2);
@@ -339,7 +338,6 @@ static  NSManagedObjectContext *moc;
         NSLog(@"Generate New restaurant with smoking %d",curentRandomSmokingNumber);
         NSLog(@"Generate New restaurant with park %d",curentRandomCarParkNumber);
         NSLog(@"Generate New restaurant with childFriendly %d",curentRandomChildFriendlyNumber);
-        NSLog(@"Generate New restaurant with vegeterian %d",curentRandomVegeterianNumber);
         NSLog(@"Generate New restaurant with price range %d",curentRandomLiveMusicNumber);
         NSLog(@"-------------------------------------- %d",i);
         */

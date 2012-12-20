@@ -306,7 +306,7 @@
             
             [temporaryArray removeAllObjects];
         }
-        NSLog(@"Entropty Vegeterian %f",hVegaterian);
+        NSLog(@"Entropty Vegaterian %f",hVegaterian);
 
         for (int i = 0; i < 2 ; i++ ) {
             [temporaryArray addObjectsFromArray:[[DataFetcher sharedInstance] getRestaurantForChildFriendly:[NSNumber numberWithInt:i]]];
