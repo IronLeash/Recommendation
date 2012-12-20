@@ -136,12 +136,7 @@ static PreferencesManager* preferencesManager = nil;
     float liveMusic = 0;
     float garden = 0;
     float priceRange = 0;
-    
-    NSArray *favoriteCategories = [[RatingsManager sharedInstance] getFavoriteCategoriesForUser:aUser];
-    
-    NSArray *favoriteCuisines = [[RatingsManager sharedInstance] getFavoriteCuisinesForUser:aUser];
-    NSArray *favoriteSmoking = [[RatingsManager sharedInstance] getFavoriteSmokingForUser:aUser];
-    NSArray *favoriteLocation = [[RatingsManager sharedInstance] getFavoriteLocationForUser:aUser];
+
     
     for (RestaurantRating *currentRating in positiveRatingsArray)
     {
@@ -159,6 +154,12 @@ static PreferencesManager* preferencesManager = nil;
     garden         = garden / [positiveRatingsArray count];
     priceRange     = priceRange / [positiveRatingsArray count];
     
+    NSArray *favoriteCategories = [[RatingsManager sharedInstance] getFavoriteCategoriesForUser:aUser];
+    NSArray *favoriteCuisines = [[RatingsManager sharedInstance] getFavoriteCuisinesForUser:aUser];
+    NSArray *favoriteSmoking = [[RatingsManager sharedInstance] getFavoriteSmokingForUser:aUser];
+    NSArray *favoriteLocation = [[RatingsManager sharedInstance] getFavoriteLocationForUser:aUser];
+    
+
     NSDictionary *preferencesDictionary = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:
                                                                                [NSNumber numberWithFloat:vegetarian],
                                                                                [NSNumber numberWithFloat:childFriendly],

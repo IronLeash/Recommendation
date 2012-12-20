@@ -16,7 +16,8 @@
 
 static RatingsManager *ratingsManager = nil;
 static NSManagedObjectContext *ratingsMoC;
-
+static User *currentUser;
+static NSArray *posiviteUserRatings;
 
 @implementation RatingsManager
 
@@ -90,7 +91,7 @@ static NSManagedObjectContext *ratingsMoC;
     NSMutableArray *array = [NSMutableArray arrayWithArray:[ratingsMoC executeFetchRequest:request error:&error]];
     //Sort ratings according to Rest name
     NSArray *sortedArray = [array sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
-    
+    currentUser = aUser;
     return sortedArray;
     
 }
@@ -98,23 +99,23 @@ static NSManagedObjectContext *ratingsMoC;
 
 -(NSArray*)getPositiveRatingsforUser:(User*)aUser{
     
-    NSArray *userRatings = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser];
-    NSMutableArray *positiveRatings = [NSMutableArray arrayWithArray:userRatings];
-    
-    //Eleminate the  restaurants which are below threshold
-    
-    
-    for (RestaurantRating *currentRatings in userRatings)
-    {
-        float weightedAverage = [StatisticsLibrary weightedSumForRating:currentRatings];
+        NSArray *userRatings = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser];
+        NSMutableArray *positiveRatings = [NSMutableArray arrayWithArray:userRatings];
         
-        if (weightedAverage < POSITIVERATINGTHRESHOLD)
+        //Eleminate the  restaurants which are below threshold
+        
+        
+        for (RestaurantRating *currentRatings in userRatings)
         {
-            [positiveRatings removeObject:currentRatings];
+            float weightedAverage = [StatisticsLibrary weightedSumForRating:currentRatings];
+            
+            if (weightedAverage < POSITIVERATINGTHRESHOLD)
+            {
+                [positiveRatings removeObject:currentRatings];
+            }
         }
-    }
-    
-    return positiveRatings;
+        posiviteUserRatings = [[NSArray alloc] initWithArray:positiveRatings];
+        return positiveRatings;
 }
 
 
