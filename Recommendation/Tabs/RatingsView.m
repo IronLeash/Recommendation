@@ -350,23 +350,14 @@
 
 -(void)generateRatingBackgroundThread{
 
-
+/*
         NSArray *allUsersArray = [[DataFetcher sharedInstance] getUsers];
         int i =0;
     
     NSTimeInterval start= [[NSDate date] timeIntervalSince1970];
-    
+ */
     @autoreleasepool
     {
-
-        /*
-        for (User *currentUser in allUsersArray) {
-            [[DataGenerator sharedInstance] generateRatingForUser:currentUser];
-            i++;
-            NSLog(@"Curremt number %d",i);
-        }
-         */
-        
         [[DataGenerator sharedInstance] generateAllUserRatings];
     }
     

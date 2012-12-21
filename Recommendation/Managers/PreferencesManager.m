@@ -186,7 +186,7 @@ static PreferencesManager* preferencesManager = nil;
         for (int i = 0; i < 10 ; i++) {
             //19
             NSMutableArray *colomn = [[NSMutableArray alloc] initWithCapacity:0];
-            for (int categories = 0; categories < 19; i++){
+            for (int categories = 0; categories < 19; categories++){
                 [colomn addObject:[NSNumber numberWithInt:0]];
             }
             
@@ -199,7 +199,7 @@ static PreferencesManager* preferencesManager = nil;
         for (int i = 0; i < 10 ; i++) {
             //16
             NSMutableArray *colomn = [[NSMutableArray alloc] initWithCapacity:0];
-            for (int categories = 0; categories < 16; i++){
+            for (int cuisines = 0; cuisines < 16; cuisines++){
                 [colomn addObject:[NSNumber numberWithInt:0]];
             }
             
@@ -211,7 +211,7 @@ static PreferencesManager* preferencesManager = nil;
         for (int i = 0; i < 10 ; i++) {
             //3
             NSMutableArray *colomn = [[NSMutableArray alloc] initWithCapacity:0];
-            for (int categories = 0; categories < 3; i++){
+            for (int smoking = 0; smoking < 3; smoking++){
                 [colomn addObject:[NSNumber numberWithInt:0]];
             }
             
@@ -223,7 +223,7 @@ static PreferencesManager* preferencesManager = nil;
         for (int i = 0; i < 10 ; i++) {
             //16
             NSMutableArray *colomn = [[NSMutableArray alloc] initWithCapacity:0];
-            for (int categories = 0; categories < 16; i++){
+            for (int location = 0; location < 16; location++){
                 [colomn addObject:[NSNumber numberWithInt:0]];
             }
             
