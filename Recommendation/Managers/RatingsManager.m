@@ -15,42 +15,54 @@
 #import "Constants.h"
 
 static RatingsManager *ratingsManager = nil;
-static NSManagedObjectContext *ratingsMoC;
-static User *currentUser;
-static NSArray *posiviteUserRatings;
 
 @implementation RatingsManager
 
 +(RatingsManager*)sharedInstance{
 
 
-   	@synchronized([RatingsManager class])
+   	@synchronized(self)
 	{
-
-        
-		if (!ratingsManager)
+		if (ratingsManager==nil)
         {
-
-            AppDelegate *appdelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
-            ratingsMoC = [[NSManagedObjectContext alloc] init];
-            
-            NSPersistentStoreCoordinator *coordinator = appdelegate.persistentStoreCoordinator;
-            [ratingsMoC setPersistentStoreCoordinator:coordinator];
-            [ratingsMoC setUndoManager:nil];
-            
-            return [[self alloc] init];
-        }else{
-            return ratingsManager;
+            ratingsManager = [[self alloc] init];
         }
+            return ratingsManager;
     }
-    
 	return nil;
+}
 
+-(id)init{
+    
+	self = [super init];
+	if (self != nil) {
+        
+        AppDelegate *appdelegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
+        ratingsMoC = [[NSManagedObjectContext alloc] init];
+        
+        NSPersistentStoreCoordinator *coordinator = appdelegate.persistentStoreCoordinator;
+        [ratingsMoC setPersistentStoreCoordinator:coordinator];
+        [ratingsMoC setUndoManager:nil];
+        
+        posiviteUserRatings = [[NSMutableArray alloc] init];
+        currentUserRatings =  [[NSMutableArray alloc] init];
+	}
+    
+	return self;
+}
 
+#pragma mark - Custom Methods
+
+-(void)cleanUp{
+    
+    currentUser = nil;
+    [posiviteUserRatings removeAllObjects];
+    [currentUserRatings removeAllObjects];
 }
 
 #pragma mark - Ratings
 
+//Gets all restaurant ratings
 -(NSArray*)getRestaurantRatings{
     
     //Check if cusines are alreadyThere
@@ -58,6 +70,7 @@ static NSArray *posiviteUserRatings;
     NSEntityDescription *entityDescription = [NSEntityDescription
                                               entityForName:@"RestaurantRating" inManagedObjectContext:ratingsMoC];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setReturnsObjectsAsFaults:NO];
     [request setEntity:entityDescription];
     
     NSError *error;
@@ -68,36 +81,49 @@ static NSArray *posiviteUserRatings;
 
 -(NSArray*)getRestaurantRatingsForUser:(User*)aUser{
     
-    //Check if cusines are alreadyThere
-    //Fetsch results
-    NSEntityDescription *entityDescription = [NSEntityDescription
-                                              entityForName:@"RestaurantRating" inManagedObjectContext:ratingsMoC];
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setReturnsObjectsAsFaults:NO];
-    [request setEntity:entityDescription];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"user == %@",aUser]];
-    
-    NSSortDescriptor *sortDescriptor =  [NSSortDescriptor sortDescriptorWithKey:@"self.restaurant.uniqueName"
-                                                                      ascending:YES
-                                                                     comparator:^(id obj1, id obj2){
-                                                                         return [(NSString*)obj1 compare:(NSString*)obj2
-                                                                                                 options:NSNumericSearch];
-                                                                     }];
-    
-    
-    
-    NSError *error;
-    
-    NSMutableArray *array = [NSMutableArray arrayWithArray:[ratingsMoC executeFetchRequest:request error:&error]];
-    //Sort ratings according to Rest name
-    NSArray *sortedArray = [array sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
-    currentUser = aUser;
-    return sortedArray;
-    
+    if ([aUser isEqualTo:currentUser] && currentUserRatings) {
+        return currentUserRatings;
+    }else{
+        //Check if cusines are alreadyThere
+        //Fetsch results
+        [self cleanUp];
+        
+        NSEntityDescription *entityDescription = [NSEntityDescription
+                                                  entityForName:@"RestaurantRating" inManagedObjectContext:ratingsMoC];
+        NSFetchRequest *request = [[NSFetchRequest alloc] init];
+        [request setReturnsObjectsAsFaults:NO];
+        [request setEntity:entityDescription];
+        [request setPredicate:[NSPredicate predicateWithFormat:@"user == %@",aUser]];
+        
+        NSSortDescriptor *sortDescriptor =  [NSSortDescriptor sortDescriptorWithKey:@"self.restaurant.uniqueName"
+                                                                          ascending:YES
+                                                                         comparator:^(id obj1, id obj2){
+                                                                             return [(NSString*)obj1 compare:(NSString*)obj2
+                                                                                                     options:NSNumericSearch];
+                                                                         }];
+        NSError *error;
+        
+        NSMutableArray *array = [NSMutableArray arrayWithArray:[ratingsMoC executeFetchRequest:request error:&error]];
+        //Sort ratings according to Rest name
+        NSArray *sortedArray = [array sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+
+        @synchronized(currentUserRatings){
+        currentUser = aUser;
+        [currentUserRatings addObjectsFromArray:sortedArray];
+        }
+        currentUser = aUser;
+        return sortedArray;
+    }
 }
 
 
 -(NSArray*)getPositiveRatingsforUser:(User*)aUser{
+    
+    
+    if ([aUser isEqualTo:currentUser] && posiviteUserRatings) {
+
+        return posiviteUserRatings;
+    }else{
     
         NSArray *userRatings = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser];
         NSMutableArray *positiveRatings = [NSMutableArray arrayWithArray:userRatings];
@@ -114,12 +140,15 @@ static NSArray *posiviteUserRatings;
                 [positiveRatings removeObject:currentRatings];
             }
         }
-        posiviteUserRatings = [[NSArray alloc] initWithArray:positiveRatings];
+        
+        [posiviteUserRatings addObjectsFromArray:positiveRatings];
+        
         return positiveRatings;
+    }
 }
 
 
--(NSArray*)getFavoriteCategoriesForUser:(User*)currentUser{
+-(NSArray*)getFavoriteCategoriesForUser:(User*)aUser{
     
     NSArray *allCategories = [[DataFetcher sharedInstance] getRestaurantCategories];
     NSMutableArray *favoriteCategories = [NSMutableArray arrayWithCapacity:[allCategories count]];
@@ -131,7 +160,7 @@ static NSArray *posiviteUserRatings;
         [favoriteCategories addObject:curentFavoriteCategory];
     }
     
-    NSArray *positiveRAtingsArray =  [[RatingsManager sharedInstance] getPositiveRatingsforUser:currentUser];
+    NSArray *positiveRAtingsArray =  [[RatingsManager sharedInstance] getPositiveRatingsforUser:aUser];
     float   averagePositveRating =[StatisticsLibrary weightedpositveRatingsMean:positiveRAtingsArray];
     
     //Iterate all positive ratings
@@ -159,7 +188,7 @@ static NSArray *posiviteUserRatings;
     return favoriteCategories;
 }
 
--(NSArray*)getFavoriteCuisinesForUser:(User*)currentUser{
+-(NSArray*)getFavoriteCuisinesForUser:(User*)aUser{
     
     NSArray *allCuisines = [[DataFetcher sharedInstance] getRestaurantCuisines];
     NSMutableArray *favoriteCuisines = [NSMutableArray arrayWithCapacity:[allCuisines count]];
@@ -171,7 +200,7 @@ static NSArray *posiviteUserRatings;
         [favoriteCuisines addObject:currentFavoriteCuisine];
     }
     
-    NSArray *positiveRAtingsArray =  [[RatingsManager sharedInstance] getPositiveRatingsforUser:currentUser];
+    NSArray *positiveRAtingsArray =  [[RatingsManager sharedInstance] getPositiveRatingsforUser:aUser];
     float   averagePositveRating =[StatisticsLibrary weightedpositveRatingsMean:positiveRAtingsArray];
     
     //Iterate all positive ratings
@@ -200,7 +229,7 @@ static NSArray *posiviteUserRatings;
 }
 
 
--(NSArray*)getFavoriteSmokingForUser:(User*)currentUser{
+-(NSArray*)getFavoriteSmokingForUser:(User*)aUser{
     
     //    NSArray *smokeingValues = [NSArray arrayWithObjects:[NSNumber numberWithInt:0],[NSNumber numberWithInt:1],[NSNumber numberWithInt:2], nil];
     NSMutableArray *favoriteSmokingArray = [NSMutableArray arrayWithCapacity:0];
@@ -212,7 +241,7 @@ static NSArray *posiviteUserRatings;
         [favoriteSmokingArray addObject:currentFavoriteSmoking];
     }
     
-    NSArray *positiveRAtingsArray =  [[RatingsManager sharedInstance] getPositiveRatingsforUser:currentUser];
+    NSArray *positiveRAtingsArray =  [[RatingsManager sharedInstance] getPositiveRatingsforUser:aUser];
     float   averagePositveRating =[StatisticsLibrary weightedpositveRatingsMean:positiveRAtingsArray];
     
     //Iterate all positive ratings
@@ -235,7 +264,7 @@ static NSArray *posiviteUserRatings;
 }
 
 
--(NSArray*)getFavoriteLocationForUser:(User*)currentUser{
+-(NSArray*)getFavoriteLocationForUser:(User*)aUser{
     
     //    NSArray *smokeingValues = [NSArray arrayWithObjects:[NSNumber numberWithInt:0],[NSNumber numberWithInt:1],[NSNumber numberWithInt:2], nil];
     NSMutableArray *favoriteLocationArray = [NSMutableArray arrayWithCapacity:0];
@@ -247,7 +276,7 @@ static NSArray *posiviteUserRatings;
         [favoriteLocationArray addObject:currentFavoriteLocation];
     }
     
-    NSArray *positiveRAtingsArray =  [[RatingsManager sharedInstance] getPositiveRatingsforUser:currentUser];
+    NSArray *positiveRAtingsArray =  [[RatingsManager sharedInstance] getPositiveRatingsforUser:aUser];
     float   averagePositveRating =[StatisticsLibrary weightedpositveRatingsMean:positiveRAtingsArray];
     
     //Iterate all positive ratings
