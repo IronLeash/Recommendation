@@ -25,7 +25,7 @@
     
     int position = (int)[cuisinesArray indexOfObject:attributeValue] ;
     
-    if (position != NSNotFound) {
+    if (position == NSNotFound) {
         position = -1;
     }
 
@@ -35,11 +35,11 @@
 
 +(int)categoryPosiitonInContigencyMatrix:(NSString*)attributeValue{
 
-    NSArray *cuisinesArray = [[DataFetcher sharedInstance] getRestaurantCategories];
+    NSArray *categoriesArray = [[DataFetcher sharedInstance] getRestaurantCategories];
 
-    int position = (int)[cuisinesArray indexOfObject:attributeValue];
+    int position = (int)[categoriesArray indexOfObject:attributeValue];
     
-    if (position != NSNotFound) {
+    if (position == NSNotFound) {
         position = -1;
     }
     
@@ -90,6 +90,24 @@
 }
 
 
++(void)printContigencyMatrix:(NSArray*)anArray
+{
+    NSUInteger rowNumber = [(NSArray*)[anArray objectAtIndex:0] count];
+    NSUInteger colomnNumbr = [anArray count];
+
+    NSLog(@"---------------Contigency Matrix---------------");
+
+    for (int i =0;i < rowNumber; i++)
+    {
+        NSMutableString *currentRowString = [[NSMutableString alloc] initWithString:[NSString stringWithFormat:@"A %d:",i]];
+        
+        for (int j = 0; j < colomnNumbr; j++) {
+            [currentRowString appendString:[NSString stringWithFormat:@" %@",[(NSArray*)[anArray objectAtIndex:j] objectAtIndex:i]]];
+        }
+        NSLog(@"%@",currentRowString);
+    }
+
+}
 
 
 

@@ -14,6 +14,7 @@
 #import "Restaurant.h"
 #import "Constants.h"
 #import "FavoriteSmoking.h"
+#import "ActionGeneric.h"
 
 @implementation StatisticsLibrary
 
@@ -109,6 +110,8 @@
 
 + (double)cramersVforAttribute:(NSArray*)anArray{
 
+    
+    [ActionGeneric printContigencyMatrix:anArray];
     /*
     NSArray *row1 = [NSArray arrayWithObjects:
                            [NSNumber numberWithFloat:11],
@@ -125,38 +128,63 @@
 //    double gsl_ran_chisq = gsl_ran_chisq (const gsl_rng * r, degree);
     
     long degree = MIN([anArray count]-1, [[anArray objectAtIndex:0] count]-1);
-    double chiSquare = 0;
+    float chiSquare = 0;
     double totalOccurences = 0;
     
     int colomnTotal = 0;
     int rowTotal = 0;
     NSMutableArray *marginalFrequencyRow = [[NSMutableArray alloc] initWithCapacity:0];
     NSMutableArray *marginalFrequencyColomn = [[NSMutableArray alloc] initWithCapacity:0];
-    
-    for (int row=0; row < [anArray count]; row++) {
-        
-        for (int i = 0; i <[[anArray objectAtIndex:row] count]; i++)
-        {
-            colomnTotal += [[[anArray objectAtIndex:i] objectAtIndex:row] doubleValue];
-            rowTotal += [[[anArray objectAtIndex:row] objectAtIndex:i] doubleValue];
-        }
-        totalOccurences += rowTotal;
-        [marginalFrequencyColomn addObject:[NSNumber numberWithInt:colomnTotal]];
-        [marginalFrequencyRow addObject:[NSNumber numberWithInt:rowTotal]];
-        colomnTotal = 0;
-        rowTotal  = 0;
 
+    
+    NSUInteger numberOfColomns = [anArray count];
+    NSUInteger numberOfRows = [[anArray objectAtIndex:0] count];
+    
+        //Iterate over the colomns
+    for (int colomn=0; colomn < numberOfColomns; colomn++) {
+
+        for (int row = 0; row <numberOfRows; row++)
+        {
+            colomnTotal +=[[[anArray objectAtIndex:colomn] objectAtIndex:row] intValue];
+        }
+        totalOccurences += colomnTotal;
+        [marginalFrequencyColomn addObject:[NSNumber numberWithInt:colomnTotal]];
+        colomnTotal = 0;
     }
     
-    for (int row=0; row < [anArray count]; row++) {
+    
+    //Iterate over the rows
+    for (int row=0; row < numberOfRows; row++) {
         
-        for (int i = 0; i <[[anArray objectAtIndex:row] count]; i++)
+        for (int colomn = 0; colomn <numberOfColomns; colomn++)
         {
-            double expected = (double)([[marginalFrequencyColomn objectAtIndex:i] doubleValue] * [[marginalFrequencyRow objectAtIndex:row] doubleValue]/totalOccurences);
+            rowTotal += [[[anArray objectAtIndex:colomn] objectAtIndex:row] intValue];
+        }
+        [marginalFrequencyRow addObject:[NSNumber numberWithInt:rowTotal]];
+        rowTotal  = 0;
+    }
+    
+    for (int colomn=0; colomn < numberOfColomns; colomn++) {
+        
+        for (int row = 0; row < numberOfRows; row++)
+        {
+            double expected = (double)(([[marginalFrequencyColomn objectAtIndex:colomn] doubleValue] * [[marginalFrequencyRow objectAtIndex:row] doubleValue])/totalOccurences);
             NSLog(@"Expected %f",expected);
-            chiSquare += (([[[anArray objectAtIndex:row] objectAtIndex:i] doubleValue]-expected)*([[[anArray objectAtIndex:row] objectAtIndex:i] doubleValue]-expected))/expected;
-//                        NSLog(@"O %@",[[anArray objectAtIndex:row] objectAtIndex:i]);
-//                        NSLog(@"Chi %f",chiSquare);
+            /*
+            chiSquare += (([[[anArray objectAtIndex:colomn] objectAtIndex:row] doubleValue]-expected)*([[[anArray objectAtIndex:colomn] objectAtIndex:row] doubleValue]-expected))/expected;
+            */
+            
+            if (expected>0) {
+                chiSquare += pow([[[anArray objectAtIndex:colomn] objectAtIndex:row] floatValue]-expected, 2.0)/expected;
+                
+                
+                
+                NSLog(@"O %@",[[anArray objectAtIndex:colomn] objectAtIndex:row]);
+                NSLog(@"O %f",[[[anArray objectAtIndex:colomn] objectAtIndex:row] doubleValue]-expected);
+                
+                NSLog(@"Chi %f",chiSquare);
+            }
+            
         }
     }
     

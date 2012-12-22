@@ -284,7 +284,7 @@ static PreferencesManager* preferencesManager = nil;
             //Get current Category String
             NSString *currentCategory = [[[ratingsArray objectAtIndex:i] restaurant ]category];
             //Find its location in the cuisine array, It corresponds to position in contigency array
-            rowNumber = [ActionGeneric cuisinePosiitonInContigencyMatrix:currentCategory];
+            rowNumber = [ActionGeneric categoryPosiitonInContigencyMatrix:currentCategory];
 
         }
         

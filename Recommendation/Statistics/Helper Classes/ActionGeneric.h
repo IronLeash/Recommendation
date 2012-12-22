@@ -18,4 +18,8 @@
 
 +(NSDictionary*)restaurantAttributevaluesForRatings:(NSArray*)ratingsArray;
 
+//Logs human readable contigency matrix
++(void)printContigencyMatrix:(NSArray*)anArray;
+
+
 @end
