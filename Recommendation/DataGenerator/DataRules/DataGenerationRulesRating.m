@@ -112,9 +112,17 @@ static NSArray *favoriteVegaterianCategories;
         personalRating = (arc4random() %(7))+4;
         serviceRating = (arc4random() %(7))+4;
         tangiblesRating = (arc4random() %(7))+4;
-        
+
     }
+
+    double priceFactor = [[DataGenerationRulesRating sharedInstance] priceFactor:aRest ofUser:aUser];
     
+    accessibilityRating *=priceFactor;
+    coreServiceRating   *=priceFactor;
+    personalRating      *=priceFactor;
+    serviceRating       *=priceFactor;
+    tangiblesRating     *=priceFactor;
+
 
     NSDictionary *returnDicitonary = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSNumber numberWithInt:accessibilityRating],
                                                                                                     [NSNumber numberWithInt:coreServiceRating],
@@ -140,6 +148,78 @@ static NSArray *favoriteVegaterianCategories;
     
     return returnDicitonary;
 
+}
+
+
+-(double)priceFactor:(Restaurant*)aRest ofUser:(User*)aUser{
+
+    double priceFactor = 1;
+
+    //Price
+    if ([aUser.stereotype isEqualToString:kStudent]) {
+        
+        if ([aRest.priceRange isEqualToNumber:[NSNumber numberWithInt:0]]) {
+            priceFactor = 1.3;
+        } else if ([aRest.priceRange isEqualToNumber:[NSNumber numberWithInt:1]]) {
+            priceFactor = 1.1;
+        }else if ([aRest.priceRange isEqualToNumber:[NSNumber numberWithInt:2]]) {
+            priceFactor = 0.8;
+        }else {
+            priceFactor = 0.7;
+        }
+        
+    }else if ([aUser.stereotype isEqualToString:kGourmet]){
+        
+        if ([aRest.priceRange isEqualToNumber:[NSNumber numberWithInt:0]]) {
+            priceFactor = 0.6;
+        } else if ([aRest.priceRange isEqualToNumber:[NSNumber numberWithInt:1]]) {
+            priceFactor = 0.8;
+        }else if ([aRest.priceRange isEqualToNumber:[NSNumber numberWithInt:2]]) {
+            priceFactor = 1;
+        }else {
+            priceFactor = 1.2;
+        }
+        
+    }else if ([aUser.stereotype isEqualToString:kAmbianceLover]){
+        
+        if ([aRest.priceRange isEqualToNumber:[NSNumber numberWithInt:0]]) {
+            priceFactor = 0.7;
+        } else if ([aRest.priceRange isEqualToNumber:[NSNumber numberWithInt:1]]) {
+            priceFactor = 0.9;
+        }else if ([aRest.priceRange isEqualToNumber:[NSNumber numberWithInt:2]]) {
+            priceFactor = 1;
+        }else {
+            priceFactor = 1.2;
+        }
+        
+    }else if ([aUser.stereotype isEqualToString:kFamily]){
+        
+        if ([aRest.priceRange isEqualToNumber:[NSNumber numberWithInt:0]]) {
+            priceFactor = 1.2;
+        } else if ([aRest.priceRange isEqualToNumber:[NSNumber numberWithInt:1]]) {
+            priceFactor = 1;
+        }else if ([aRest.priceRange isEqualToNumber:[NSNumber numberWithInt:2]]) {
+            priceFactor = 0.9;
+        }else {
+            priceFactor = 0.8;
+        }
+    }else if ([aUser.stereotype isEqualToString:kTourist]){
+        
+        if ([aRest.priceRange isEqualToNumber:[NSNumber numberWithInt:0]]) {
+            priceFactor = 1;
+        } else if ([aRest.priceRange isEqualToNumber:[NSNumber numberWithInt:1]]) {
+            priceFactor = 1;
+        }else if ([aRest.priceRange isEqualToNumber:[NSNumber numberWithInt:2]]) {
+            priceFactor = 0.9;
+        }else {
+            priceFactor = 0.8;
+        }
+        
+    }else {
+        priceFactor = 1;
+    }
+
+    return priceFactor;
 }
 
 

@@ -62,6 +62,8 @@
     User *currentlySelectedUser;
     
     NSMutableDictionary *preferencesDictionary;
+    NSMutableDictionary *preferencesWeightDictionary;
+
 }
 
 

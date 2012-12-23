@@ -89,6 +89,23 @@
     return restaurantsAttributesDicitonary;
 }
 
++(NSArray*)normalizePriceRangeForRatings:(NSArray*)anArray{
+
+    NSMutableArray *normalizedArray = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    
+    for (NSNumber *currentNumber in anArray) {
+        
+        
+        if ([currentNumber intValue] ==0) {
+            [normalizedArray addObject:[NSNumber numberWithDouble:2.5]];
+        } else {
+            [normalizedArray addObject:[NSNumber numberWithDouble:(2.5*[currentNumber intValue])]];
+        }
+    }
+
+    return normalizedArray;
+}
 
 +(void)printContigencyMatrix:(NSArray*)anArray
 {

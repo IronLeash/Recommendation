@@ -314,34 +314,12 @@ static  NSManagedObjectContext *moc;
     {
     for (int i = 0; i < numberOfRestaurants ; i++) {
         
-//        int curentRandomCuisineNumber = arc4random() %([cuisines count]-1);
         int curentRandomCategoryNumber = arc4random() %([categories count]-1);
-        
-//        int curentRandomSmokingNumber = arc4random() %(3);
-//        int curentRandomCarParkNumber = arc4random() %(2);
-//        int curentRandomChildFriendlyNumber = arc4random() %(2);
-//        int curentRandomPriceRangeNumber = arc4random() %(4);
-        int curentRandomLocationNumber = (arc4random() %(15))+1;
-//        int curentRandomGardenNumber = arc4random() %(2);
-//        int curentRandomLiveMusicNumber = arc4random() %(2);
-        
+        int curentRandomLocationNumber = (arc4random() %(15))+1;        
         
         NSString *currentCateory = [categories objectAtIndex:curentRandomCategoryNumber];
         NSString *currentCuisine = [DataGenerationRulesRestaurant cuisineForCategory:currentCateory];
-//        Cuisine *currentCuisine = [cuisines objectAtIndex:curentRandomCuisineNumber];
-        
-        
-        /*
-        NSLog(@"Generate New restaurant with cuisine %@" ,currentCuisine.name);
-        NSLog(@"Generate New restaurant with category %@",currentCateory.name);
 
-        NSLog(@"Generate New restaurant with smoking %d",curentRandomSmokingNumber);
-        NSLog(@"Generate New restaurant with park %d",curentRandomCarParkNumber);
-        NSLog(@"Generate New restaurant with childFriendly %d",curentRandomChildFriendlyNumber);
-        NSLog(@"Generate New restaurant with price range %d",curentRandomLiveMusicNumber);
-        NSLog(@"-------------------------------------- %d",i);
-        */
-    
             Restaurant* currentRestaurant = [NSEntityDescription insertNewObjectForEntityForName:@"Restaurant" inManagedObjectContext:moc];
             currentRestaurant.category = currentCateory;
 
@@ -448,8 +426,6 @@ static  NSManagedObjectContext *moc;
                 
                 RestaurantRating* restaurantRating = [NSEntityDescription insertNewObjectForEntityForName:@"RestaurantRating" inManagedObjectContext:importContext];
                 
-                
-//                [importContext refreshObject:restaurantRating mergeChanges:YES];
                 restaurantRating.restaurant = currentRestaunt;
                 restaurantRating.user   = aUser;
                 

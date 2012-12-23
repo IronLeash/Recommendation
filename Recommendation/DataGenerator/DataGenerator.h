@@ -20,9 +20,6 @@ NSString *ratingsGeneratedNotification;
 
 
 //Data generators
-//-(void)generateCusines;
-
-//-(void)generateCategories;
 
 -(void)generateUserStereotypes;
 

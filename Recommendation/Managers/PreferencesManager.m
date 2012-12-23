@@ -105,7 +105,7 @@ static PreferencesManager* preferencesManager = nil;
     NSDictionary *restaurantVauesDicitonary = [ActionGeneric restaurantAttributevaluesForRatings:userRatings];
 
     double priceRangeCorrelation    =   [StatisticsLibrary pearsonCorreleationBetweenArray1:
-                                         [restaurantVauesDicitonary objectForKey:kPrice] andArray2:weightedAverageArray];
+                                         [ActionGeneric normalizePriceRangeForRatings:[restaurantVauesDicitonary objectForKey:kPrice]] andArray2:weightedAverageArray];
     double gardenCorrelation        =   [StatisticsLibrary pearsonCorreleationBetweenArray1:
                                          [restaurantVauesDicitonary objectForKey:kGarden] andArray2:weightedAverageArray];
     double liveMusicCorelation      =   [StatisticsLibrary pearsonCorreleationBetweenArray1:
@@ -123,7 +123,29 @@ static PreferencesManager* preferencesManager = nil;
     double smokingCramer = [StatisticsLibrary cramersVforAttribute:[[PreferencesManager sharedInstance] contingencyMatrixForAttribute:@"Smoking" OfUser:aUser]];
 
 
-    return nil;
+    NSDictionary *weightDictionary = [NSDictionary dictionaryWithObjects:
+                                      [NSArray arrayWithObjects:
+                                       [NSNumber numberWithDouble:priceRangeCorrelation],
+                                       [NSNumber numberWithDouble:gardenCorrelation],
+                                       [NSNumber numberWithDouble:liveMusicCorelation],
+                                       [NSNumber numberWithDouble:childFiendlyCorrelation],
+                                       [NSNumber numberWithDouble:vegateriancorrelation],
+                                       [NSNumber numberWithDouble:categoryyCramer],
+                                       [NSNumber numberWithDouble:cuisineCramer],
+                                       [NSNumber numberWithDouble:locationCramer],
+                                       [NSNumber numberWithDouble:smokingCramer],nil]
+                                      
+                                                                 forKeys:[NSArray arrayWithObjects:
+                                                                          kPrice,
+                                                                          kGarden,
+                                                                          kLiveMusic,
+                                                                          kChildfriendly,
+                                                                          kVegaterian,
+                                                                          kCategory,
+                                                                          kCuisine,
+                                                                          kLocation,
+                                                                          kSmoking,nil]];
+    return weightDictionary;
 }
 
 
@@ -261,7 +283,15 @@ static PreferencesManager* preferencesManager = nil;
     {
         
         //Colomn corresponds to Ratings round to integer from 1-10
-        int colommNumber = [[weightedAverageArray objectAtIndex:i] intValue];
+        int colommNumber = [[weightedAverageArray objectAtIndex:i] intValue]-1;
+        
+        if (colommNumber == -1) {
+            colommNumber =0;
+        }
+        if (colommNumber >9) {
+
+            NSLog(@"Fuck!");
+        }
         //Row is the position of a particular
         int rowNumber = 0;
         

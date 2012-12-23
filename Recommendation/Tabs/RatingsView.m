@@ -79,7 +79,10 @@
     
     //Change preferences
     preferencesDictionary = [NSMutableDictionary dictionaryWithDictionary: [[PreferencesManager sharedInstance] getPreferencesDictionaryForUser:currentlySelectedUser]];
-
+    
+    //Change weights
+    preferencesWeightDictionary = [NSMutableDictionary dictionaryWithDictionary:
+                                   [[PreferencesManager sharedInstance] getUserPreferenceWeightDicitonary:currentlySelectedUser]];
 
     FavoriteCategory *favoriteCategory      = [[preferencesDictionary objectForKey:kCategory] objectAtIndex:0];
     FavoriteCategory *favoriteCuisine       = [[preferencesDictionary objectForKey:kCuisine] objectAtIndex:0];
@@ -104,63 +107,38 @@
     [_smoking setStringValue:smokingValue];
     [_locationTextField setStringValue:location];
     
+    //Set preferences Value
     [_priceRange setStringValue:[[preferencesDictionary objectForKey:kPrice] stringValue]];
     [_gardenTextField setStringValue: [[preferencesDictionary objectForKey:kGarden] stringValue]];
     [_liveMusicTextfield setStringValue: [[preferencesDictionary objectForKey:kLiveMusic] stringValue]];
     [_childFriendlyTextfield setStringValue: [[preferencesDictionary objectForKey:kChildfriendly] stringValue]];
     [_vegetarianTextfield setStringValue: [[preferencesDictionary objectForKey:kVegaterian] stringValue]];
     
+    //Set preferenceWeights
+    
+    [_categoryWeight setStringValue:[[preferencesWeightDictionary objectForKey:kCategory] stringValue]];
+    [_cuisineWeight setStringValue:[[preferencesWeightDictionary objectForKey:kCuisine] stringValue]];
+    [_locationWeight setStringValue:[[preferencesWeightDictionary objectForKey:kLocation] stringValue]];
+    [_smokingWeight setStringValue:[[preferencesWeightDictionary objectForKey:kSmoking] stringValue]];
+    [_priceRangeWeight setStringValue:[[preferencesWeightDictionary objectForKey:kPrice] stringValue]];
+    [_gardenWeight setStringValue:[[preferencesWeightDictionary objectForKey:kGarden] stringValue]];
+    [_liveMusicWeight setStringValue:[[preferencesWeightDictionary objectForKey:kLiveMusic] stringValue]];
+    [_childFriendlyWeight setStringValue:[[preferencesWeightDictionary objectForKey:kChildfriendly] stringValue]];
+    [_vegaterianWeight setStringValue:[[preferencesWeightDictionary objectForKey:kVegaterian] stringValue]];
+    
     NSLog(@"Preferences %@",preferencesDictionary);
     
     [self updateRatingTable];
-    
-    
-    //Calculate correlation of attributes
-    
-    /*
-    NSArray *ratedRestaurants = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:currentlySelectedUser];
-    NSMutableArray *gardenValuesArray = [[NSMutableArray alloc] initWithCapacity:0];
-    NSMutableArray *liveMusicValuesArray = [[NSMutableArray alloc] initWithCapacity:0];
-    NSMutableArray *carParkValuesArray = [[NSMutableArray alloc] initWithCapacity:0];
-    NSMutableArray *childfriendlyValuesArray = [[NSMutableArray alloc] initWithCapacity:0];
-    
-    
-    for (RestaurantRating *currentRestRating in ratedRestaurants) {
 
-        
-        if ([currentRestRating.restaurant.garden isEqualToNumber:[NSNumber numberWithInteger:0]]) {
-        [gardenValuesArray addObject:[NSNumber numberWithInteger:5]];
-        }else{
-            [gardenValuesArray addObject:[NSNumber numberWithInteger:10]];
-        }
-        
-        [liveMusicValuesArray addObject:currentRestRating.restaurant.liveMusic];
-        [carParkValuesArray addObject:currentRestRating.restaurant.carPark];
-        [childfriendlyValuesArray addObject:currentRestRating.restaurant.childFriendly];
-}
-    
-    double correlationGarden = [StatisticsLibrary pearsonCorreleationBetweenArray1:weightedAverageArray andArray2:gardenValuesArray];
-    double correlationLiveMusic = [StatisticsLibrary pearsonCorreleationBetweenArray1:weightedAverageArray andArray2:liveMusicValuesArray];
-    double correlationChildFriendly = [StatisticsLibrary pearsonCorreleationBetweenArray1:weightedAverageArray andArray2:childfriendlyValuesArray];
-    double correlationCarPark = [StatisticsLibrary pearsonCorreleationBetweenArray1:weightedAverageArray andArray2:carParkValuesArray];
-    
-    NSLog(@"Correlation Garden %f",correlationGarden);
-    NSLog(@"Correlation Live Music %f",correlationLiveMusic);
-    NSLog(@"Correlation Child friendly %f",correlationChildFriendly);
-    NSLog(@"Correlation Car park %f",correlationCarPark);
-    */
 }
 
 -(IBAction)checkBoxchangedValue:(id)sender
 {
-
     [self updateRatingTable];
 }
 
-
 -(void)updateRatingTable{
     
-
     if (_onlyPositiveRatingscheckBox.state==NSOnState) {
         
         NSArray *anArray = [[RatingsManager sharedInstance] getPositiveRatingsforUser:currentlySelectedUser];
@@ -186,7 +164,6 @@
 
 }
 
-
 -(IBAction)showListPopOver:(id)sender{
 
 
@@ -197,35 +174,27 @@
     switch (clickedButton.tag) {
         case 101:
         {
-
             [listPopUpcontroller setDataSource:[preferencesDictionary objectForKey:kCategory]];
             break;
         }
         case 102:
         {
             [listPopUpcontroller setDataSource:[preferencesDictionary objectForKey:kCuisine]];
-
             break;
         }
         case 103:
         {
-                        [listPopUpcontroller setDataSource:[preferencesDictionary objectForKey:kLocation]];
-//            listPopUpcontroller = [[ListPopUpcontroller alloc] initWithDataSource:[preferencesDictionary objectForKey:kLocation]];
+            [listPopUpcontroller setDataSource:[preferencesDictionary objectForKey:kLocation]];
             break;
         }
         case 104:
         {
             [listPopUpcontroller setDataSource:[preferencesDictionary objectForKey:kSmoking]];
-
-//            listPopUpcontroller = [[ListPopUpcontroller alloc] initWithDataSource:[preferencesDictionary objectForKey:kSmoking]];
             break;
         }
-            
         default:
             break;
     }
-    
-
     [_listPopover showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMaxYEdge];
 
     }
@@ -235,7 +204,6 @@
 #pragma mark - Tableview Delegate
 
 - (NSInteger)clickedRow{
-    
     return [usersTableView selectedRow];
 }
 
@@ -323,7 +291,6 @@
 
 -(IBAction)generateRecommendation:(id)sender{
 
-    [[PreferencesManager sharedInstance] getUserPreferenceWeightDicitonary:currentlySelectedUser];
 }
 
 
