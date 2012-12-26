@@ -119,13 +119,14 @@ static NSArray *favoriteVegaterianCategories;
     double childFactor          = [[DataGenerationRulesRating sharedInstance] childFriendly:aRest ofUser:aUser];
     double gardenFactor         = [[DataGenerationRulesRating sharedInstance] gardenFactor:aRest ofUser:aUser];
     double vegaterianFactor     = [[DataGenerationRulesRating sharedInstance] vegaterianFactor:aRest ofUser:aUser];
+    double liveMusicFactor      = [[DataGenerationRulesRating sharedInstance] liveMusicFactor:aRest ofUser:aUser];
 
 #warning seperate garden factor from personal rating
     accessibilityRating *=(priceFactor*childFactor*gardenFactor*vegaterianFactor);
-    coreServiceRating   *=(priceFactor*childFactor*gardenFactor*vegaterianFactor);
+    coreServiceRating   *=(priceFactor*childFactor*gardenFactor*vegaterianFactor*liveMusicFactor);
     personalRating      *=(priceFactor*childFactor*gardenFactor*vegaterianFactor);
-    serviceRating       *=(priceFactor*childFactor*gardenFactor*vegaterianFactor);
-    tangiblesRating     *=(priceFactor*childFactor*gardenFactor*vegaterianFactor);
+    serviceRating       *=(priceFactor*childFactor*gardenFactor*vegaterianFactor*liveMusicFactor);
+    tangiblesRating     *=(priceFactor*childFactor*gardenFactor*vegaterianFactor*liveMusicFactor);
     
     if (accessibilityRating > 10) {
         accessibilityRating = 10;
@@ -164,19 +165,16 @@ static NSArray *favoriteVegaterianCategories;
 //Assign has car
 //assign has child
 //consider location
-    
-//Consider price
-//Consider smoking
-//Consider vegaterian etc
 //consider location or not
 //Limit maximum deviation between highes and lowest rating
-    
     
     return returnDicitonary;
 
 }
 
 
+
+#pragma mark - Attribute factors
 -(double)priceFactor:(Restaurant*)aRest ofUser:(User*)aUser{
 
     double priceFactor = 1;
@@ -328,6 +326,46 @@ static NSArray *favoriteVegaterianCategories;
     
     return vegaterianRating;
 }
+
+-(double)liveMusicFactor:(Restaurant*)aRest ofUser:(User*)aUser{
+    
+    double liveMusicFactor = 0;
+    
+    //Live Music
+    if ([aUser.stereotype isEqualToString:kStudent]) {
+        
+        if ([aRest.liveMusic isEqualToNumber:[NSNumber numberWithInt:1]])
+        {
+            liveMusicFactor = 1.3;
+        }else{
+
+            liveMusicFactor = 1;
+        }
+        
+    }else if ([aUser.stereotype isEqualToString:kGourmet]){
+        
+        if ([aRest.liveMusic isEqualToNumber:[NSNumber numberWithInt:1]])
+        {
+            liveMusicFactor = 1.1;
+        }else{
+            
+            liveMusicFactor = 1;
+        }
+        
+    }else{
+        if ([aRest.liveMusic isEqualToNumber:[NSNumber numberWithInt:1]])
+        {
+            liveMusicFactor = 1.2;
+        }else{
+            
+            liveMusicFactor = 1;
+        }
+    
+    }
+    
+    return liveMusicFactor;
+}
+
 
 
 
