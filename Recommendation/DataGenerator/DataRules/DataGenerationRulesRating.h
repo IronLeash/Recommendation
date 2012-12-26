@@ -18,6 +18,9 @@
 -(NSDictionary*)ratingsForRestaruant:(Restaurant*)aRest ofUser:(User*)aUser;
 
 -(double)priceFactor:(Restaurant*)aRest ofUser:(User*)aUser;
+-(double)smokingFactor:(Restaurant*)aRest ofUser:(User*)aUser;
+
+
 
 +(DataGenerationRulesRating*)sharedInstance;
 

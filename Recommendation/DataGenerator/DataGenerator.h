@@ -18,7 +18,6 @@ NSString *ratingsGeneratedNotification;
 }
 +(DataGenerator*)sharedInstance;
 
-
 //Data generators
 
 -(void)generateUserStereotypes;
@@ -31,6 +30,5 @@ NSString *ratingsGeneratedNotification;
 -(void)generateRatingForUser:(User*)aUser;
 
 -(void)generateAllUserRatings;
-
 
 @end

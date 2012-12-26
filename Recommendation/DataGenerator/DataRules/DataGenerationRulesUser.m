@@ -103,8 +103,10 @@
 
     int vegateriean = arc4random() % 100;
 
-    
-    if (vegateriean > 90) {
+    if ([userStereotype isEqualToString:kVegaterian])
+    {
+        vegateriean = 1;
+    }else if (vegateriean > 90) {
         vegateriean = 1;
     } else {
         vegateriean = 0;

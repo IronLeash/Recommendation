@@ -8,7 +8,7 @@
 
 #import "DataGenerationRulesRating.h"
 #import "DataFetcher.h"
-
+#import "User.h"
 #import "Constants.h"
 
 @implementation DataGenerationRulesRating
@@ -115,13 +115,39 @@ static NSArray *favoriteVegaterianCategories;
 
     }
 
-    double priceFactor = [[DataGenerationRulesRating sharedInstance] priceFactor:aRest ofUser:aUser];
+    double priceFactor          = [[DataGenerationRulesRating sharedInstance] priceFactor:aRest ofUser:aUser];
+    double childFactor          = [[DataGenerationRulesRating sharedInstance] childFriendly:aRest ofUser:aUser];
+    double gardenFactor         = [[DataGenerationRulesRating sharedInstance] gardenFactor:aRest ofUser:aUser];
+    double vegaterianFactor     = [[DataGenerationRulesRating sharedInstance] vegaterianFactor:aRest ofUser:aUser];
+
+#warning seperate garden factor from personal rating
+    accessibilityRating *=(priceFactor*childFactor*gardenFactor*vegaterianFactor);
+    coreServiceRating   *=(priceFactor*childFactor*gardenFactor*vegaterianFactor);
+    personalRating      *=(priceFactor*childFactor*gardenFactor*vegaterianFactor);
+    serviceRating       *=(priceFactor*childFactor*gardenFactor*vegaterianFactor);
+    tangiblesRating     *=(priceFactor*childFactor*gardenFactor*vegaterianFactor);
     
-    accessibilityRating *=priceFactor;
-    coreServiceRating   *=priceFactor;
-    personalRating      *=priceFactor;
-    serviceRating       *=priceFactor;
-    tangiblesRating     *=priceFactor;
+    if (accessibilityRating > 10) {
+        accessibilityRating = 10;
+    }
+    
+    if (coreServiceRating >10) {
+        coreServiceRating = 10;
+    }
+    
+    if (personalRating >10) {
+        personalRating = 10;
+    }
+    
+    if (serviceRating >10) {
+        serviceRating = 10;
+    }
+    
+    if (tangiblesRating >10) {
+        tangiblesRating= 10;
+    }
+    
+    
 
 
     NSDictionary *returnDicitonary = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSNumber numberWithInt:accessibilityRating],
@@ -221,6 +247,88 @@ static NSArray *favoriteVegaterianCategories;
 
     return priceFactor;
 }
+
+-(double)childFriendly:(Restaurant*)aRest ofUser:(User*)aUser{
+
+    double childFriendlyFactor = 0;
+    
+    if ([aRest.childFriendly isEqualToNumber:[NSNumber numberWithInt:0]]) {
+    
+        if ([aUser.stereotype isEqualToString:kFamily]) {
+            childFriendlyFactor = 0.3;
+        }else if ([aUser.stereotype isEqualToString:kAmbianceLover]){
+            childFriendlyFactor = 1.2;
+        }else
+        {
+            childFriendlyFactor = 1;
+        }
+        
+    }else{
+    
+        if ([aUser.stereotype isEqualToString:kFamily]) {
+            childFriendlyFactor = 1.4;
+        }else if ([aUser.stereotype isEqualToString:kGourmet] || [aUser.stereotype isEqualToString:kAmbianceLover]){
+            childFriendlyFactor = 0.7;
+        }else{
+            childFriendlyFactor = 1;
+        }
+
+    }
+    return childFriendlyFactor;
+}
+
+-(double)gardenFactor:(Restaurant*)aRest ofUser:(User*)aUser{
+
+    double gardenFactor = 0;
+
+    if ([aRest.garden isEqualToNumber:[NSNumber numberWithInt:1]]) {
+        
+        if ([aUser.stereotype isEqualToString:kFamily]) {
+            gardenFactor = 1.2;
+        }else if ([aUser.stereotype isEqualToString:kAmbianceLover]){
+            gardenFactor = 1.1;
+        }else
+        {
+            gardenFactor = 1;
+        }
+        
+    }else{
+        
+        if ([aUser.stereotype isEqualToString:kFamily] || [aUser.stereotype isEqualToString:kAmbianceLover]) {
+            gardenFactor = 0.9;
+        }else{
+            gardenFactor = 1;
+        }
+        
+    }
+    return gardenFactor;
+}
+
+-(double)vegaterianFactor:(Restaurant*)aRest ofUser:(User*)aUser{
+
+    double vegaterianRating = 0;
+
+
+    if ([aUser.vegaterian isEqualToNumber:[NSNumber numberWithInt:1]]) {
+        
+        if ([aRest.vegaterian isEqualToNumber:[NSNumber numberWithInt:1]]) {
+            vegaterianRating = 1.3;
+        }else{
+            vegaterianRating = 1;
+        }
+        
+    }else{
+    
+        if ([aRest.vegaterian isEqualToNumber:[NSNumber numberWithInt:0]]) {
+            vegaterianRating = 1;
+        }else{
+            vegaterianRating = 0.6;
+        }
+    }
+    
+    return vegaterianRating;
+}
+
 
 
 @end
