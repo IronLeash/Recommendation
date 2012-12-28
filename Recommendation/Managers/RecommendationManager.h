@@ -1,0 +1,22 @@
+//
+//  RecommendationManager.h
+//  Recommendation
+//
+//  Created by ilker on 28.12.12.
+//  Copyright (c) 2012 ilker. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+#import "RestaurantRating.h"
+#import "Restaurant.h"
+
+@interface RecommendationManager : NSObject
+{
+
+    User *currentUser;
+    NSDictionary *userPreferencesDictionary;
+    NSArray *recommendationResultsArray;
+
+}
+@end

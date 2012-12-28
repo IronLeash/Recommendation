@@ -86,6 +86,7 @@ static PreferencesManager* preferencesManager = nil;
     double locationEntrophy= [[entrophyDicitonary objectForKey:kLocation] doubleValue];
     double smokingEntrophy= [[entrophyDicitonary objectForKey:kSmoking] doubleValue];
     
+
     double total = priceEntropy +gardenEntropy+liveMusicEntrophy+childEntropy+vegEntrophy+categoryEntrophy+cuisineEntrophy+locationEntrophy+smokingEntrophy;
 
     //Normalize
@@ -98,7 +99,8 @@ static PreferencesManager* preferencesManager = nil;
     cuisineEntrophy     /= total;
     locationEntrophy    /= total;
     smokingEntrophy     /= total;
-    
+
+     
     //Correlations
     NSMutableArray *weightedAverageArray = [ActionGeneric weightedAveraRatingsArrayForRatings:userRatings];
     
@@ -114,6 +116,14 @@ static PreferencesManager* preferencesManager = nil;
                                          [restaurantVauesDicitonary objectForKey:kChildfriendly] andArray2:weightedAverageArray];
     double vegateriancorrelation    =   [StatisticsLibrary pearsonCorreleationBetweenArray1:
                                          [restaurantVauesDicitonary objectForKey:kVegaterian] andArray2:weightedAverageArray];
+    
+    
+    //Take Absolute Values
+    priceRangeCorrelation   = ABS(priceRangeCorrelation);
+    gardenCorrelation       = ABS(gardenCorrelation);
+    liveMusicCorelation     = ABS(liveMusicCorelation);
+    childFiendlyCorrelation = ABS(childFiendlyCorrelation);
+    vegateriancorrelation   = ABS(vegateriancorrelation);
 
     //Cramers V for nominal attributes
     
@@ -122,18 +132,43 @@ static PreferencesManager* preferencesManager = nil;
     double locationCramer = [StatisticsLibrary cramersVforAttribute:[[PreferencesManager sharedInstance] contingencyMatrixForAttribute:@"Location" OfUser:aUser]];
     double smokingCramer = [StatisticsLibrary cramersVforAttribute:[[PreferencesManager sharedInstance] contingencyMatrixForAttribute:@"Smoking" OfUser:aUser]];
 
+    
+    //Unnormalized Weights
+    
+    double priceWeight          = priceRangeCorrelation*priceEntropy;
+    double gardenWeight         = gardenCorrelation * gardenEntropy;
+    double liveMusicWeight      = liveMusicCorelation*liveMusicEntrophy;
+    double childFriendlyWeight  = childFiendlyCorrelation*childEntropy;
+    double vegaterianWeight     = vegateriancorrelation*vegEntrophy;
+    double categoryWeight       = categoryyCramer*categoryEntrophy;
+    double cuisineWeight        = cuisineCramer*cuisineEntrophy;
+    double locationWeight       = locationCramer*locationEntrophy;
+    double smokingWeight        = smokingCramer*smokingEntrophy;
+    
+    double weighttotal = priceWeight+gardenWeight+liveMusicWeight+childFriendlyWeight+vegaterianWeight+categoryWeight+cuisineWeight+locationWeight+smokingWeight;
 
+    
+    priceWeight          /= weighttotal;
+    gardenWeight         /= weighttotal;
+    liveMusicWeight      /= weighttotal;
+    childFriendlyWeight  /= weighttotal;
+    vegaterianWeight     /= weighttotal;
+    categoryWeight       /= weighttotal;
+    cuisineWeight        /= weighttotal;
+    locationWeight       /= weighttotal;
+    smokingWeight        /= weighttotal;
+    
     NSDictionary *weightDictionary = [NSDictionary dictionaryWithObjects:
                                       [NSArray arrayWithObjects:
-                                       [NSNumber numberWithDouble:priceRangeCorrelation],
-                                       [NSNumber numberWithDouble:gardenCorrelation],
-                                       [NSNumber numberWithDouble:liveMusicCorelation],
-                                       [NSNumber numberWithDouble:childFiendlyCorrelation],
-                                       [NSNumber numberWithDouble:vegateriancorrelation],
-                                       [NSNumber numberWithDouble:categoryyCramer],
-                                       [NSNumber numberWithDouble:cuisineCramer],
-                                       [NSNumber numberWithDouble:locationCramer],
-                                       [NSNumber numberWithDouble:smokingCramer],nil]
+                                       [NSNumber numberWithDouble:priceWeight],
+                                       [NSNumber numberWithDouble:gardenWeight],
+                                       [NSNumber numberWithDouble:liveMusicWeight],
+                                       [NSNumber numberWithDouble:childFriendlyWeight],
+                                       [NSNumber numberWithDouble:vegaterianWeight],
+                                       [NSNumber numberWithDouble:categoryWeight],
+                                       [NSNumber numberWithDouble:cuisineWeight],
+                                       [NSNumber numberWithDouble:locationWeight],
+                                       [NSNumber numberWithDouble:smokingWeight],nil]
                                       
                                                                  forKeys:[NSArray arrayWithObjects:
                                                                           kPrice,

@@ -149,7 +149,23 @@ static NSArray *favoriteVegaterianCategories;
     }
     
     
-
+    if (accessibilityRating < 1) {
+        accessibilityRating = 1;
+    }
+    if (coreServiceRating <1) {
+        coreServiceRating = 1;
+    }
+    if (personalRating  < 1) {
+        personalRating = 1;
+    }
+    if (serviceRating < 1) {
+        serviceRating = 1;
+    }
+    if (tangiblesRating < 1) {
+        tangiblesRating= 1;
+    }
+    
+    
 
     NSDictionary *returnDicitonary = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSNumber numberWithInt:accessibilityRating],
                                                                                                     [NSNumber numberWithInt:coreServiceRating],

@@ -41,6 +41,7 @@
 		52D684001662E019006919E2 /* FavoriteCuisine.m in Sources */ = {isa = PBXBuildFile; fileRef = 52D683FF1662E019006919E2 /* FavoriteCuisine.m */; };
 		52D684041662E7AE006919E2 /* FavoriteLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 52D684031662E7AE006919E2 /* FavoriteLocation.m */; };
 		52D684071662E7FF006919E2 /* FavoriteSmoking.m in Sources */ = {isa = PBXBuildFile; fileRef = 52D684061662E7FF006919E2 /* FavoriteSmoking.m */; };
+		52E4D637168E4ED8002241BB /* RecommendationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E4D636168E4ED8002241BB /* RecommendationManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -111,6 +112,8 @@
 		52D684031662E7AE006919E2 /* FavoriteLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteLocation.m; sourceTree = "<group>"; };
 		52D684051662E7FF006919E2 /* FavoriteSmoking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteSmoking.h; sourceTree = "<group>"; };
 		52D684061662E7FF006919E2 /* FavoriteSmoking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteSmoking.m; sourceTree = "<group>"; };
+		52E4D635168E4ED8002241BB /* RecommendationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendationManager.h; sourceTree = "<group>"; };
+		52E4D636168E4ED8002241BB /* RecommendationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendationManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +149,8 @@
 				17707E6A167B72F80000CD27 /* PreferencesManager.m */,
 				522B1BB1167E173300720E8D /* RatingsManager.h */,
 				522B1BB2167E173300720E8D /* RatingsManager.m */,
+				52E4D635168E4ED8002241BB /* RecommendationManager.h */,
+				52E4D636168E4ED8002241BB /* RecommendationManager.m */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -412,6 +417,7 @@
 				177F5BFF1683AA5100330CE0 /* User.m in Sources */,
 				177F5C031683AAA200330CE0 /* UserPreference.m in Sources */,
 				177F5C061683AAA300330CE0 /* UserPreferenceWeight.m in Sources */,
+				52E4D637168E4ED8002241BB /* RecommendationManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

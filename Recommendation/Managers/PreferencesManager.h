@@ -20,8 +20,6 @@
     NSArray      *currentUserRatingsArray;
 }
 
-
-
 +(PreferencesManager*)sharedInstance;
 
 //Setters
