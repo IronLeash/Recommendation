@@ -13,10 +13,12 @@
 
 @interface RecommendationManager : NSObject
 {
-
     User *currentUser;
     NSDictionary *userPreferencesDictionary;
     NSArray *recommendationResultsArray;
-
 }
+
++(RecommendationManager*)sharedInstance;
+-(NSArray*)getRecommendationForUser:(User*)anUser withPreferences:(NSDictionary*)preferences andWeight:(NSDictionary*)weights;
+
 @end

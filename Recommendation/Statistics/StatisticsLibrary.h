@@ -43,4 +43,7 @@
 //Entrophy of Attributes calculated based on Restaurant items
 + (NSDictionary*)entopyOfVariable;
 
++ (double)coisineSimilarityBetweenArray1:(NSArray*)anArray andArray2:(NSArray*)array2;
++ (double)euclidianDistanceBetweenArray1:(NSArray*)anArray andArray2:(NSArray*)array2;
+
 @end

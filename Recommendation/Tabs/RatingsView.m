@@ -9,7 +9,10 @@
 #import "RatingsView.h"
 #import "DataGenerator.h"
 #import "DataGenerationRulesRating.h"
+
 #import "PreferencesManager.h"
+#import "RecommendationManager.h"
+
 #import "DataFetcher.h"
 
 #import "User.h"
@@ -89,7 +92,6 @@
     FavoriteSmoking *favoriteSmoking        = [[preferencesDictionary objectForKey:kSmoking] objectAtIndex:0];
     FavoriteLocation *favoriteLocation      = [[preferencesDictionary objectForKey:kLocation] objectAtIndex:0];
 
-    
     NSString *smokingValue;
     
     if ([favoriteSmoking.value isEqualToNumber:[NSNumber numberWithInt:0]]) {
@@ -115,7 +117,6 @@
     [_vegetarianTextfield setStringValue: [[preferencesDictionary objectForKey:kVegaterian] stringValue]];
     
     //Set preferenceWeights
-    
     [_categoryWeight setStringValue:[[preferencesWeightDictionary objectForKey:kCategory] stringValue]];
     [_cuisineWeight setStringValue:[[preferencesWeightDictionary objectForKey:kCuisine] stringValue]];
     [_locationWeight setStringValue:[[preferencesWeightDictionary objectForKey:kLocation] stringValue]];
@@ -290,7 +291,10 @@
 #pragma mark - Generator Methods
 
 -(IBAction)generateRecommendation:(id)sender{
-
+    
+    [[RecommendationManager sharedInstance] getRecommendationForUser:currentlySelectedUser
+                                                     withPreferences:preferencesDictionary
+                                                           andWeight:preferencesWeightDictionary];
 }
 
 

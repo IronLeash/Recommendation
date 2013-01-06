@@ -17,6 +17,10 @@
 
 #import "Constants.h"
 
+#import "FavoriteCategory.h"
+#import "FavoriteCuisine.h"
+#import "FavoriteSmoking.h"
+
 @implementation ActionGeneric
 
 +(int)cuisinePosiitonInContigencyMatrix:(NSString*)attributeValue{
@@ -124,6 +128,54 @@
         NSLog(@"%@",currentRowString);
     }
 
+}
+
++(int)positionInArray:(NSArray*)anArray :(id)term{
+
+    int position = 0;
+
+    
+    for (id element in anArray) {
+    
+        if ([element isKindOfClass:[FavoriteCategory class]]) {
+    
+            if ([[(FavoriteCategory*)element name] isEqualToString:(NSString*)term]) {
+                break;
+            }else{
+                position++;
+            }
+        }else if ([element isKindOfClass:[FavoriteCuisine class]]){
+            if ([[(FavoriteCuisine*)element name] isEqualToString:(NSString*)term]) {
+                break;
+            }else{
+                position++;
+            }
+        
+        }else{
+        
+            if ([(FavoriteSmoking*)element value] == (NSNumber*)term) {
+                break;
+            }else{
+                position++;
+            }
+        }
+    
+    }
+    
+    return position;
+}
+
+
+
++(NSArray*)sortRecommendationObjects:(NSArray*)anArray{
+
+    NSMutableArray *sortedArray = [[NSMutableArray alloc] initWithCapacity:[anArray count]];
+
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"self.distance" ascending:YES];
+
+    [sortedArray addObjectsFromArray:[anArray sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]]];
+    
+    return sortedArray;
 }
 
 

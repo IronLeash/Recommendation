@@ -23,5 +23,8 @@
 //Logs human readable contigency matrix
 +(void)printContigencyMatrix:(NSArray*)anArray;
 
++(int)positionInArray:(NSArray*)anArray :(id)term;
+
++(NSArray*)sortRecommendationObjects:(NSArray*)anArray;
 
 @end

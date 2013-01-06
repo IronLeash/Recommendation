@@ -25,4 +25,10 @@
 @dynamic vegaterian;
 @dynamic ratings;
 
+
+-(NSString*)description{
+
+    return [NSString stringWithFormat:@"Category %@ Cuisine %@",self.category,self.cuisine];
+}
+
 @end
