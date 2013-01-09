@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		174899CC1682791200D61DC2 /* Restaurant.m in Sources */ = {isa = PBXBuildFile; fileRef = 174899CB1682791200D61DC2 /* Restaurant.m */; };
+		1769133C169DD10900A53FA5 /* RecommendationTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 1769133B169DD10900A53FA5 /* RecommendationTab.m */; };
+		17691340169DD12F00A53FA5 /* Evaluation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1769133F169DD12F00A53FA5 /* Evaluation.m */; };
 		17707E5D167B70130000CD27 /* UserDataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 17707E5C167B70130000CD27 /* UserDataFetcher.m */; };
 		17707E60167B70440000CD27 /* RatingDataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 17707E5F167B70440000CD27 /* RatingDataFetcher.m */; };
 		17707E63167B705B0000CD27 /* RestaurantDataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 17707E62167B705B0000CD27 /* RestaurantDataFetcher.m */; };
@@ -48,6 +50,10 @@
 /* Begin PBXFileReference section */
 		174899CA1682791200D61DC2 /* Restaurant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Restaurant.h; sourceTree = "<group>"; };
 		174899CB1682791200D61DC2 /* Restaurant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Restaurant.m; sourceTree = "<group>"; };
+		1769133A169DD10900A53FA5 /* RecommendationTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendationTab.h; sourceTree = "<group>"; };
+		1769133B169DD10900A53FA5 /* RecommendationTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendationTab.m; sourceTree = "<group>"; };
+		1769133E169DD12F00A53FA5 /* Evaluation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Evaluation.h; sourceTree = "<group>"; };
+		1769133F169DD12F00A53FA5 /* Evaluation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Evaluation.m; sourceTree = "<group>"; };
 		17707E5B167B70130000CD27 /* UserDataFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDataFetcher.h; sourceTree = "<group>"; };
 		17707E5C167B70130000CD27 /* UserDataFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDataFetcher.m; sourceTree = "<group>"; };
 		17707E5E167B70440000CD27 /* RatingDataFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RatingDataFetcher.h; sourceTree = "<group>"; };
@@ -283,6 +289,10 @@
 				523A0C4F16603B0700F9BF3E /* RatingsView.m */,
 				522E78791666A7080017A86A /* ListPopUpcontroller.h */,
 				522E787A1666A7080017A86A /* ListPopUpcontroller.m */,
+				1769133A169DD10900A53FA5 /* RecommendationTab.h */,
+				1769133B169DD10900A53FA5 /* RecommendationTab.m */,
+				1769133E169DD12F00A53FA5 /* Evaluation.h */,
+				1769133F169DD12F00A53FA5 /* Evaluation.m */,
 			);
 			path = Tabs;
 			sourceTree = "<group>";
@@ -424,6 +434,8 @@
 				177F5C061683AAA300330CE0 /* UserPreferenceWeight.m in Sources */,
 				52E4D637168E4ED8002241BB /* RecommendationManager.m in Sources */,
 				524A25C9168F005C00CF2534 /* Recommendation.m in Sources */,
+				1769133C169DD10900A53FA5 /* RecommendationTab.m in Sources */,
+				17691340169DD12F00A53FA5 /* Evaluation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
