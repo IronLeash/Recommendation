@@ -14,6 +14,9 @@
 
 #import "Recommendation.h"
 
+
+NSString *recommendationArrayGeneratedNotification = @"RecommendationGeneratedNotification";
+
 static RecommendationManager *recommendationManager;
 
 @implementation RecommendationManager
@@ -103,12 +106,17 @@ static RecommendationManager *recommendationManager;
         pow((double)(vegaterianFriendly), 2)*vegaterianWeight;
 
                 [recommendationsArray addObject:currentRecommendation];
-//        NSLog(@"Distance %f",sqrt(distance));
-        
     }
     
     
-    NSLog(@"Sorted Array %@",[ActionGeneric sortRecommendationObjects:recommendationsArray]);
+    //Post Notification
+    
+    NSArray *sortedRecommendationsArray =[ActionGeneric sortRecommendationObjects:recommendationsArray];
+    NSNotification *recommendationNotification  = [NSNotification notificationWithName:recommendationArrayGeneratedNotification
+                                                                                object:sortedRecommendationsArray];
+    
+    [[NSNotificationCenter defaultCenter] postNotification:recommendationNotification];
+    
     return recommendationsArray;
 }
 

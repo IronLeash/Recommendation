@@ -291,10 +291,15 @@
 #pragma mark - Generator Methods
 
 -(IBAction)generateRecommendation:(id)sender{
-    
+
+
     [[RecommendationManager sharedInstance] getRecommendationForUser:currentlySelectedUser
                                                      withPreferences:preferencesDictionary
                                                            andWeight:preferencesWeightDictionary];
+    
+    //Change tab to recommendation
+    [tabview selectTabViewItemAtIndex:3];
+
 }
 
 

@@ -11,6 +11,10 @@
 #import "RestaurantRating.h"
 #import "Restaurant.h"
 
+
+
+NSString *recommendationArrayGeneratedNotification;
+
 @interface RecommendationManager : NSObject
 {
     User *currentUser;

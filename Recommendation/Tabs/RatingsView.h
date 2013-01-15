@@ -63,7 +63,8 @@
     
     NSMutableDictionary *preferencesDictionary;
     NSMutableDictionary *preferencesWeightDictionary;
-
+    
+    IBOutlet NSTabView *tabview;
 }
 
 

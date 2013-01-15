@@ -7,10 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "User.h"
 
 @interface RecommendationTab : NSObject <NSTableViewDataSource,NSTableViewDelegate>
 {
     IBOutlet NSTableView *recommendationTableView;
     IBOutlet NSTextView  *selectedUsetTextView;
+    
+    User *currentUser;
+    NSMutableArray *recommendationArray;
+    
 }
 @end
