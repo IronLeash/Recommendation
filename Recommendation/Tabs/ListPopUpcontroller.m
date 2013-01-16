@@ -35,16 +35,6 @@
 }
 
 
-/*
--(void)awakeFromNib{
-
-
-    [[firstColumn headerCell] setStringValue:@"Deneme"] ;
-    [[scoreTableview headerView] setNeedsDisplay:YES];
-
-}
-*/
-
 
 #pragma mark - TableView delegate
 

@@ -17,6 +17,7 @@
 
     NSDictionary *entrophyDictionary;
     NSDictionary *currentUserPreferenceWeight;
+    NSDictionary *currentPreferencesDictionary;
     NSArray      *currentUserRatingsArray;
 }
 
@@ -34,6 +35,8 @@
 -(NSDictionary*)getUserPreferenceWeightDicitonary:(User*)currentUser;
 
 -(NSDictionary*)getPreferencesDictionaryForUser:(User*)currentUser;
+
+-(User*)getCurrentUser;
 
 //Helper
 -(NSArray*)contingencyMatrixForAttribute:(NSString*)anAttribute;

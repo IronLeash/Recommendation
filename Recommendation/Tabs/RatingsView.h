@@ -11,6 +11,9 @@
 #import "Restaurant.h"
 #import "ListPopUpcontroller.h"
 
+
+NSString *userSelectedNotification;
+
 @interface RatingsView : NSObject <NSTabViewDelegate,NSTableViewDataSource>
 {
 

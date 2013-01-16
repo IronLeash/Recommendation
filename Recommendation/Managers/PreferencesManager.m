@@ -186,6 +186,10 @@ static PreferencesManager* preferencesManager = nil;
 
 -(NSDictionary*)getPreferencesDictionaryForUser:(User*)aUser{
     
+    NSDictionary *preferencesDictionary;
+    
+    if (aUser!=currentUser) {
+        
     NSArray *positiveRatingsArray = [[RatingsManager sharedInstance] getPositiveRatingsforUser:aUser];
     
     float vegetarian = 0;
@@ -217,7 +221,7 @@ static PreferencesManager* preferencesManager = nil;
     NSArray *favoriteLocation = [[RatingsManager sharedInstance] getFavoriteLocationForUser:aUser];
     
 
-    NSDictionary *preferencesDictionary = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:
+     preferencesDictionary = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:
                                                                                [NSNumber numberWithFloat:vegetarian],
                                                                                [NSNumber numberWithFloat:childFriendly],
                                                                                [NSNumber numberWithFloat:liveMusic],
@@ -230,7 +234,19 @@ static PreferencesManager* preferencesManager = nil;
                                                                                nil]
                                                                       forKeys:[NSArray arrayWithObjects:kVegaterian,kChildfriendly,kLiveMusic,kGarden,kPrice,kCategory,kCuisine,kSmoking,kLocation,nil]];
     
+    currentPreferencesDictionary = [NSDictionary dictionaryWithDictionary:preferencesDictionary];
+    }else{
+        preferencesDictionary = currentPreferencesDictionary;
+    }
+    
     return preferencesDictionary;
+}
+
+
+
+-(User*)getCurrentUser
+{
+    return currentUser;
 }
 
 //Creates empty  contigency table according to to cardinality of attribute
@@ -292,6 +308,8 @@ static PreferencesManager* preferencesManager = nil;
     return contingancyMatrix;
 
 }
+
+
 
 -(NSMutableArray*)contingencyMatrixForAttribute:(NSString*)anAttribute OfUser:(User*)aUser{
     

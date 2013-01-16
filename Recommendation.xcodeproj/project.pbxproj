@@ -28,6 +28,7 @@
 		52679F1D167CFFD7002860A5 /* RestaurantRating.m in Sources */ = {isa = PBXBuildFile; fileRef = 52679F1C167CFFD7002860A5 /* RestaurantRating.m */; };
 		529B7F13165D92D500C72F10 /* UsersView.m in Sources */ = {isa = PBXBuildFile; fileRef = 529B7F12165D92D500C72F10 /* UsersView.m */; };
 		529FAFE81659311000802D22 /* DataGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 529FAFE71659311000802D22 /* DataGenerator.m */; };
+		52A152E416A72F4B0028475D /* AttributeValueConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A152E316A72F4B0028475D /* AttributeValueConverter.m */; };
 		52A6852D16617B4000B83BAF /* FavoriteCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A6852C16617B4000B83BAF /* FavoriteCategory.m */; };
 		52A97894165449C8004ABC6D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52A97893165449C8004ABC6D /* Cocoa.framework */; };
 		52A9789E165449C8004ABC6D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 52A9789C165449C8004ABC6D /* InfoPlist.strings */; };
@@ -90,6 +91,8 @@
 		529B7F12165D92D500C72F10 /* UsersView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsersView.m; sourceTree = "<group>"; };
 		529FAFE61659311000802D22 /* DataGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataGenerator.h; sourceTree = "<group>"; };
 		529FAFE71659311000802D22 /* DataGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataGenerator.m; sourceTree = "<group>"; };
+		52A152E216A72F4B0028475D /* AttributeValueConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttributeValueConverter.h; sourceTree = "<group>"; };
+		52A152E316A72F4B0028475D /* AttributeValueConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttributeValueConverter.m; sourceTree = "<group>"; };
 		52A68526166156A000B83BAF /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		52A6852B16617B4000B83BAF /* FavoriteCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteCategory.h; sourceTree = "<group>"; };
 		52A6852C16617B4000B83BAF /* FavoriteCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteCategory.m; sourceTree = "<group>"; };
@@ -186,6 +189,15 @@
 			path = DataGenerator;
 			sourceTree = "<group>";
 		};
+		52A152E016A72F330028475D /* Helper Classes */ = {
+			isa = PBXGroup;
+			children = (
+				52A152E216A72F4B0028475D /* AttributeValueConverter.h */,
+				52A152E316A72F4B0028475D /* AttributeValueConverter.m */,
+			);
+			path = "Helper Classes";
+			sourceTree = "<group>";
+		};
 		52A685241661546200B83BAF /* Constants */ = {
 			isa = PBXGroup;
 			children = (
@@ -250,6 +262,7 @@
 		52A97899165449C8004ABC6D /* Recommendation */ = {
 			isa = PBXGroup;
 			children = (
+				52A152E016A72F330028475D /* Helper Classes */,
 				17707E68167B72CB0000CD27 /* Managers */,
 				17707E59167B6FF10000CD27 /* DataFetcher */,
 				52A685241661546200B83BAF /* Constants */,
@@ -436,6 +449,7 @@
 				524A25C9168F005C00CF2534 /* Recommendation.m in Sources */,
 				1769133C169DD10900A53FA5 /* RecommendationTab.m in Sources */,
 				17691340169DD12F00A53FA5 /* Evaluation.m in Sources */,
+				52A152E416A72F4B0028475D /* AttributeValueConverter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

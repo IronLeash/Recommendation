@@ -27,6 +27,8 @@
 
 @implementation RatingsView
 
+NSString *userSelectedNotification = @"aUserSelectedNotificaiton";
+
 -(id)init
 {
     
@@ -60,8 +62,6 @@
                                                object:nil];
     
 }
-
-
 
 #pragma mark = Notifications
 
@@ -126,11 +126,13 @@
     [_liveMusicWeight setStringValue:[[preferencesWeightDictionary objectForKey:kLiveMusic] stringValue]];
     [_childFriendlyWeight setStringValue:[[preferencesWeightDictionary objectForKey:kChildfriendly] stringValue]];
     [_vegaterianWeight setStringValue:[[preferencesWeightDictionary objectForKey:kVegaterian] stringValue]];
-    
-    NSLog(@"Preferences %@",preferencesDictionary);
-    
+        
     [self updateRatingTable];
-
+    
+    //Post Notification for the RecommendationView
+    NSNotification *userChangedNotification  = [NSNotification notificationWithName:userSelectedNotification object:currentlySelectedUser];
+    [[NSNotificationCenter defaultCenter] postNotification:userChangedNotification];
+    
 }
 
 -(IBAction)checkBoxchangedValue:(id)sender

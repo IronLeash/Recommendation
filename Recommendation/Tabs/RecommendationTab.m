@@ -7,8 +7,12 @@
 //
 
 #import "RecommendationTab.h"
+#import "RatingsView.h"
 #import "RecommendationManager.h"
+#import "PreferencesManager.h"
+
 #import "Recommendation.h"
+#import "AttributeValueConverter.h"
 
 @implementation RecommendationTab
 
@@ -30,21 +34,37 @@
                                              selector:@selector(updateRecommendationTable:)
                                                  name:recommendationArrayGeneratedNotification
                                                object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateCurrentUser:)
+                                                 name:userSelectedNotification
+                                               object:nil];
+    
 }
 
+
+
+
+-(void)updateCurrentUser:(NSNotification*)aNotification
+{
+    currentUser = [aNotification object];
+    
+    [selectedUsetTextView setString:[AttributeValueConverter userDescription:currentUser]];
+    [AttributeValueConverter userPreferencesDescription:[[PreferencesManager sharedInstance] getPreferencesDictionaryForUser:currentUser]];
+    NSLog(@"Current User %@",currentUser);
+    
+}
 
 
 -(void)updateRecommendationTable:(NSNotification*)aNotification
 {
+    
     [recommendationArray removeAllObjects];
     [recommendationArray addObjectsFromArray:[aNotification object]];
     [recommendationTableView reloadData];
-
 }
 
-
 #pragma mark - Tableview Delegate
-
 
 -(NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
@@ -64,6 +84,22 @@
         returnString = currentRecommendation.restaurant.cuisine;
     }else if([tableColumn.identifier isEqualToString:@"category"]){
         returnString = currentRecommendation.restaurant.category;
+    }else if([tableColumn.identifier isEqualToString:@"place"]){
+        returnString = [currentRecommendation.restaurant.location stringValue];
+    }else if([tableColumn.identifier isEqualToString:@"price"]){
+        returnString = [AttributeValueConverter priceValueRepresentation:currentRecommendation.restaurant.priceRange];
+    }else if([tableColumn.identifier isEqualToString:@"smoking"]){
+        returnString = [AttributeValueConverter smoingValueRepresentation:currentRecommendation.restaurant.smoking];
+    }else if([tableColumn.identifier isEqualToString:@"garden"]){
+        returnString = BOOLREP([currentRecommendation.restaurant.garden intValue]);
+    }else if([tableColumn.identifier isEqualToString:@"liveMusic"]){
+        returnString = BOOLREP([currentRecommendation.restaurant.liveMusic intValue]);
+    }else if([tableColumn.identifier isEqualToString:@"carPark"]){
+        returnString = BOOLREP([currentRecommendation.restaurant.carPark intValue]);
+    }else if([tableColumn.identifier isEqualToString:@"childFriendly"]){
+        returnString = BOOLREP([currentRecommendation.restaurant.childFriendly intValue]);
+    }else if([tableColumn.identifier isEqualToString:@"vegaterian"]){
+        returnString = BOOLREP([currentRecommendation.restaurant.vegaterian intValue]);
     }else{
         returnString = @"Hi";
     }
