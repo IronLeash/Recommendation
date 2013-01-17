@@ -146,9 +146,9 @@
     double vegaterian               = [[prefrencesDictionary objectForKey:kVegaterian] doubleValue];
     [preferencesDescriptionString appendString:[AttributeValueConverter interpretateVegaterian:vegaterian]];
     
-    NSMutableString *decriptionString = [[NSMutableString alloc] initWithString:@""];
+//    NSMutableString *decriptionString = [[NSMutableString alloc] initWithString:@""];
     
-    return decriptionString;
+    return preferencesDescriptionString;
 }
 
 
@@ -235,7 +235,7 @@
 }
 
 +(NSString*)interpretateVegaterian:(double)vegValue{
-
+#warning refactor this
     NSString *returnString;
     
     if (vegValue < 0.1)

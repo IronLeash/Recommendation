@@ -48,11 +48,12 @@
 -(void)updateCurrentUser:(NSNotification*)aNotification
 {
     currentUser = [aNotification object];
+    NSMutableString *userInformationString = [[NSMutableString alloc] initWithString:[AttributeValueConverter userDescription:currentUser]];
+    [userInformationString appendString:@"\n"];
+    [userInformationString appendString:[AttributeValueConverter userPreferencesDescription:[[PreferencesManager sharedInstance] getPreferencesDictionaryForUser:currentUser]]];
+    [selectedUsetTextView setString:userInformationString];
     
-    [selectedUsetTextView setString:[AttributeValueConverter userDescription:currentUser]];
-    [AttributeValueConverter userPreferencesDescription:[[PreferencesManager sharedInstance] getPreferencesDictionaryForUser:currentUser]];
     NSLog(@"Current User %@",currentUser);
-    
 }
 
 
