@@ -298,5 +298,65 @@ static RatingsManager *ratingsManager = nil;
     return favoriteLocationArray;
 }
 
+#pragma mark - Rating Predictions
+
+
+-(int)getNumberOfPositiveRatingsForUser:(User*)anUser WithAttribute:(NSString*)anAttribute andValue:(NSString*)aValue{
+
+    NSArray *positiveRatingArray = [[RatingsManager sharedInstance] getPositiveRatingsforUser:anUser];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self.restaurant.%@==%@",anAttribute,[NSNumber numberWithInt:[aValue intValue]]];
+    NSArray *filteredArray = [positiveRatingArray filteredArrayUsingPredicate:predicate];
+    
+    return (int)[filteredArray count];
+}
+
+
+-(double)countBasedRatingForAttribute:(NSString*)attribute Value:(NSString*)aValue andUser:(User*)anUser{
+
+    
+    int maxNumber = 0;
+    int minNumber = 0;
+    double prediction;
+    
+    if ([attribute isEqualToString:@"garden"]) {
+
+        NSArray *gardenValuesArray =[[DataFetcher sharedInstance] getGardenValues];
+        
+        maxNumber = [[RatingsManager sharedInstance] getNumberOfPositiveRatingsForUser:anUser
+                                                                         WithAttribute:@"garden"
+                                                                              andValue:[[gardenValuesArray objectAtIndex:0] stringValue]];
+        
+        minNumber = [[RatingsManager sharedInstance] getNumberOfPositiveRatingsForUser:anUser
+                                                                         WithAttribute:@"garden"
+                                                                              andValue:[[gardenValuesArray objectAtIndex:0] stringValue]];
+
+    
+        for (NSNumber *currentValue in gardenValuesArray ) {
+         
+            int currentNumber  =  [[RatingsManager sharedInstance] getNumberOfPositiveRatingsForUser:anUser
+                                                                                       WithAttribute:@"garden"
+                                                                                            andValue:[currentValue stringValue]];
+            if (maxNumber <= currentNumber) {
+                maxNumber = currentNumber;
+            }
+            
+            if (minNumber >= currentNumber) {
+                minNumber = currentNumber;
+            }
+        }
+        
+        int currentNumber  =  [[RatingsManager sharedInstance] getNumberOfPositiveRatingsForUser:anUser
+                                                                                   WithAttribute:@"garden"
+                                                                                        andValue:aValue];
+         prediction = abs((currentNumber-minNumber)) /(maxNumber-minNumber)*10;
+        
+    } else {
+        
+    }
+
+    return prediction;
+}
+
+
 
 @end

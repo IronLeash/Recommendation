@@ -24,6 +24,8 @@ static NSArray *usersArray;
 
 static NSArray *restaurantCategories;
 static NSArray *restaurantCuisines;
+static NSArray *gardenValues;
+static NSArray *liveMusicValues;
 
 #pragma mark - Shared Instance
 #pragma mark -
@@ -37,6 +39,9 @@ static NSArray *restaurantCuisines;
 		if (!dataFetcher)
         {
             
+            gardenValues = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:0],[NSNumber numberWithInt:1], nil];
+            liveMusicValues = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:0],[NSNumber numberWithInt:1], nil];
+
             return [[self alloc] init];
         }else{
             return dataFetcher;
@@ -54,6 +59,10 @@ static NSArray *restaurantCuisines;
     return moc;
 }
 #pragma mark - Restaurant related
+
+-(NSArray*)getGardenValues{
+    return gardenValues;
+}
 -(NSArray*)getRestaurantCategories{
     
 

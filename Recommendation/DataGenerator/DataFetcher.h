@@ -11,7 +11,8 @@
 
 @interface DataFetcher : NSObject
 {
-
+    
+    //CArdinalities and Attribute ValuesArray;
 }
 
 +(DataFetcher*)sharedInstance;
@@ -19,6 +20,8 @@
 //Getters
 
 -(NSManagedObjectContext*)getManagedObjectContext;
+
+-(NSArray*)getGardenValues;
 
 -(NSArray*)getRestaurantCategories;
 

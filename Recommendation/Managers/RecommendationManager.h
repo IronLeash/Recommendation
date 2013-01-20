@@ -20,9 +20,18 @@ NSString *recommendationArrayGeneratedNotification;
     User *currentUser;
     NSDictionary *userPreferencesDictionary;
     NSArray *recommendationResultsArray;
+    
+    
 }
 
 +(RecommendationManager*)sharedInstance;
 -(NSArray*)getRecommendationForUser:(User*)anUser withPreferences:(NSDictionary*)preferences andWeight:(NSDictionary*)weights;
+
+
+
+-(double)overalRatingForRestaurant:(Restaurant*)aRestaurant;
+-(double)countBasedRatingForAttribute:(NSString*)attribute Value:(NSString*)aValue andUser:(User*)anUser;
+-(double)averageRatingBasedRatingForAttribute:(NSString*)attribute;
+
 
 @end

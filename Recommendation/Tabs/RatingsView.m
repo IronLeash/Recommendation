@@ -75,6 +75,9 @@ NSString *userSelectedNotification = @"aUserSelectedNotificaiton";
 #pragma mark - Custom Methods
 
 -(IBAction)aRowIsSelected:(id)sender{
+    
+    
+
 
     NSLog(@"Selected row %ld",[usersTableView selectedRow]);
     
@@ -133,6 +136,9 @@ NSString *userSelectedNotification = @"aUserSelectedNotificaiton";
     NSNotification *userChangedNotification  = [NSNotification notificationWithName:userSelectedNotification object:currentlySelectedUser];
     [[NSNotificationCenter defaultCenter] postNotification:userChangedNotification];
     
+//    [[RatingsManager sharedInstance] getNumberOfPositiveRatingsForUser:currentlySelectedUser WithAttribute:@"smoking" andValue:@"0"];
+    [[RatingsManager sharedInstance] countBasedRatingForAttribute:@"garden" Value:@"0" andUser:currentlySelectedUser];
+    [[RatingsManager sharedInstance] countBasedRatingForAttribute:@"garden" Value:@"1" andUser:currentlySelectedUser];
 }
 
 -(IBAction)checkBoxchangedValue:(id)sender

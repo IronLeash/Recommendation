@@ -29,6 +29,13 @@
 -(NSArray*)getFavoriteSmokingForUser:(User*)currentUser;
 -(NSArray*)getFavoriteLocationForUser:(User*)currentUser;
 
+
+//Rating Predictions
+-(int)getNumberOfPositiveRatingsForUser:(User*)anUser WithAttribute:(NSString*)anAttribute andValue:(NSString*)aValue;
+-(double)countBasedRatingForAttribute:(NSString*)attribute Value:(NSString*)aValue andUser:(User*)anUser;
+//-(double)averageRatingBasedRatingForAttribute:(NSString*)attribute;
+
+
 -(void)cleanUp;
 
 @end

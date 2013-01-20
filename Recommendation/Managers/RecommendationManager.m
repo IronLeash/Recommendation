@@ -7,6 +7,8 @@
 //
 
 #import "RecommendationManager.h"
+#import "RatingsManager.h"
+
 #import "DataFetcher.h"
 
 #import "Constants.h"
@@ -119,6 +121,26 @@ static RecommendationManager *recommendationManager;
     
     return recommendationsArray;
 }
+
+
+-(double)countBasedRatingForAttribute:(NSString*)attribute Value:(NSString*)aValue andUser:(User*)anUser{
+
+
+    NSArray *positiveRatingArray = [[RatingsManager sharedInstance] getPositiveRatingsforUser:anUser];
+    
+    if (kGarden) {
+    
+        if ([aValue isEqualToString:@"0"]) {
+            
+        } else {
+
+        }
+        
+    } else {
+        
+    }
+}
+
 
 
 @end
