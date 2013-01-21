@@ -7,6 +7,8 @@
 //
 
 #import "RecommendationManager.h"
+#import "PreferencesManager.h"
+
 #import "RatingsManager.h"
 
 #import "DataFetcher.h"
@@ -68,6 +70,8 @@ static RecommendationManager *recommendationManager;
     
     for (Restaurant *currentRestaurant in restaurantsArray) {
 
+        [[RecommendationManager sharedInstance] overalRatingPredictionOfRestaurant:currentRestaurant ForUser:anUser];
+        
         Recommendation *currentRecommendation = [[Recommendation alloc] init];
         currentRecommendation.restaurant = currentRestaurant;
 
@@ -123,24 +127,89 @@ static RecommendationManager *recommendationManager;
 }
 
 
--(double)countBasedRatingForAttribute:(NSString*)attribute Value:(NSString*)aValue andUser:(User*)anUser{
+#pragma mark - Rating Predictions
 
+-(double)overalRatingPredictionOfRestaurant:(Restaurant*)aRestaurant ForUser:(User*)anUser{
 
-    NSArray *positiveRatingArray = [[RatingsManager sharedInstance] getPositiveRatingsforUser:anUser];
+    double garden           = [[RecommendationManager sharedInstance] countbasedGardenRatingofRestaurant:aRestaurant ForUser:anUser];
+    NSLog(@"Garden value %f",garden);
+    double carPark          = [[RecommendationManager sharedInstance] countbasedCarParkRatingofRestaurant:aRestaurant ForUser:anUser];
+        NSLog(@"Garden value %f",carPark);
+    double liveMusic        = [[RecommendationManager sharedInstance] countbasedLiveMusicRatingofRestaurant:aRestaurant ForUser:anUser];
+        NSLog(@"Garden value %f",liveMusic);
+    double childFriendly    = [[RecommendationManager sharedInstance] countbasedChildFriendlyRatingofRestaurant:aRestaurant ForUser:anUser];
+        NSLog(@"Garden value %f",childFriendly);
     
-    if (kGarden) {
-    
-        if ([aValue isEqualToString:@"0"]) {
-            
-        } else {
-
-        }
-        
-    } else {
-        
-    }
+    return 1;
 }
 
+-(double)countbasedGardenRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser{
 
+    double currentResturantValue  = [aRestaurant.garden doubleValue];
+    double preferenceValue = [[PreferencesManager sharedInstance] getGardenOf:aUser] ;
+
+    double distanceValue =  fabs(currentResturantValue-preferenceValue);
+    
+    return 1.0 - distanceValue;
+}
+
+-(double)countbasedCarParkRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser{
+
+    double currentResturantValue  = [aRestaurant.carPark doubleValue];
+    double preferenceValue = [[PreferencesManager sharedInstance] getCarPark:aUser] ;
+    
+    double distanceValue =  fabs(currentResturantValue-preferenceValue);
+    
+    return 1.0 - distanceValue;
+}
+
+-(double)countbasedLiveMusicRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser{
+
+    double currentResturantValue  = [aRestaurant.liveMusic doubleValue];
+    double preferenceValue = [[PreferencesManager sharedInstance] getLiveMusic:aUser] ;
+    
+    double distanceValue =  fabs(currentResturantValue-preferenceValue);
+    
+    return 1.0 - distanceValue;
+}
+
+-(double)countbasedChildFriendlyRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser{
+
+    double currentResturantValue  = [aRestaurant.childFriendly doubleValue];
+    double preferenceValue = [[PreferencesManager sharedInstance] getChildFriendly:aUser] ;
+    
+    double distanceValue =  fabs(currentResturantValue-preferenceValue);
+    
+    return 1.0 - distanceValue;
+}
+
+-(double)countbasedVegaterianRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser{
+
+    double currentResturantValue  = [aRestaurant.childFriendly doubleValue];
+    double preferenceValue = [[PreferencesManager sharedInstance] getVegaterian:aUser] ;
+    
+    double distanceValue =  fabs(currentResturantValue-preferenceValue);
+    
+    return 1.0 - distanceValue;
+}
+
+//PAst Ratings based prediction
+-(double)pastRatingBasedGardenRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser{
+
+    
+}
+-(double)pastRatingBasedCarParkRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser{
+
+}
+-(double)pastRatingBasedLiveMusicRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser{
+
+}
+-(double)pastRatingBasedChildFriendlyRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser{
+
+}
+
+-(double)pastRatingBasedVegaterianRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser{
+
+}
 
 @end

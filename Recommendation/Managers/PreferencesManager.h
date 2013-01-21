@@ -19,6 +19,9 @@
     NSDictionary *currentUserPreferenceWeight;
     NSDictionary *currentPreferencesDictionary;
     NSArray      *currentUserRatingsArray;
+    
+    
+    //Individual Values
 }
 
 +(PreferencesManager*)sharedInstance;
@@ -37,6 +40,14 @@
 -(NSDictionary*)getPreferencesDictionaryForUser:(User*)currentUser;
 
 -(User*)getCurrentUser;
+
+//Individual Preference Values;
+-(double)getGardenOf:(User*)aUser;
+-(double)getLiveMusic:(User*)aUser;
+-(double)getChildFriendly:(User*)aUser;
+-(double)getCarPark:(User*)aUser;
+-(double)getVegaterian:(User*)aUser;
+
 
 //Helper
 -(NSArray*)contingencyMatrixForAttribute:(NSString*)anAttribute;

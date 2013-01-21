@@ -13,6 +13,7 @@
 #import "StatisticsLibrary.h"
 #import "Restaurant.h"
 #import "Constants.h"
+#import "PreferencesManager.h"
 
 static RatingsManager *ratingsManager = nil;
 
@@ -311,6 +312,10 @@ static RatingsManager *ratingsManager = nil;
 }
 
 
+
+
+
+/*
 -(double)countBasedRatingForAttribute:(NSString*)attribute Value:(NSString*)aValue andUser:(User*)anUser{
 
     
@@ -356,7 +361,7 @@ static RatingsManager *ratingsManager = nil;
 
     return prediction;
 }
-
+*/
 
 
 @end

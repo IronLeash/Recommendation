@@ -57,6 +57,8 @@ static PreferencesManager* preferencesManager = nil;
 
 //Getters
 
+
+#pragma mark - Getters
 -(NSDictionary*)getEntrophyDictionary{
 
     NSDictionary *returnDictionary = [[NSUserDefaults standardUserDefaults] objectForKey:kRestaurantAttributesEntropyDistionary];
@@ -197,7 +199,7 @@ static PreferencesManager* preferencesManager = nil;
     float liveMusic = 0;
     float garden = 0;
     float priceRange = 0;
-
+    float carPark = 0;
     
     for (RestaurantRating *currentRating in positiveRatingsArray)
     {
@@ -207,6 +209,7 @@ static PreferencesManager* preferencesManager = nil;
         liveMusic      += [currentRating.restaurant.liveMusic floatValue];
         garden         += [currentRating.restaurant.garden floatValue];
         priceRange     += [currentRating.restaurant.priceRange floatValue];
+        carPark        += [currentRating.restaurant.carPark floatValue];
     }
     
     vegetarian     = vegetarian/[positiveRatingsArray count];
@@ -214,7 +217,9 @@ static PreferencesManager* preferencesManager = nil;
     liveMusic      = liveMusic / [positiveRatingsArray count];
     garden         = garden / [positiveRatingsArray count];
     priceRange     = priceRange / [positiveRatingsArray count];
-    
+    carPark        = carPark / [positiveRatingsArray count];
+
+        
     NSArray *favoriteCategories = [[RatingsManager sharedInstance] getFavoriteCategoriesForUser:aUser];
     NSArray *favoriteCuisines = [[RatingsManager sharedInstance] getFavoriteCuisinesForUser:aUser];
     NSArray *favoriteSmoking = [[RatingsManager sharedInstance] getFavoriteSmokingForUser:aUser];
@@ -227,12 +232,13 @@ static PreferencesManager* preferencesManager = nil;
                                                                                [NSNumber numberWithFloat:liveMusic],
                                                                                [NSNumber numberWithFloat:garden],
                                                                                [NSNumber numberWithFloat:priceRange],
+                                                                                [NSNumber numberWithFloat:carPark],
                                                                                favoriteCategories,
                                                                                favoriteCuisines,
                                                                                favoriteSmoking,
                                                                                favoriteLocation,
                                                                                nil]
-                                                                      forKeys:[NSArray arrayWithObjects:kVegaterian,kChildfriendly,kLiveMusic,kGarden,kPrice,kCategory,kCuisine,kSmoking,kLocation,nil]];
+                                                                      forKeys:[NSArray arrayWithObjects:kVegaterian,kChildfriendly,kLiveMusic,kGarden,kPrice,kCarPark,kCategory,kCuisine,kSmoking,kLocation,nil]];
     
     currentPreferencesDictionary = [NSDictionary dictionaryWithDictionary:preferencesDictionary];
     }else{
@@ -380,5 +386,81 @@ static PreferencesManager* preferencesManager = nil;
     return contingancyMatrix;
     
 }
+
+#pragma mark - Individual Values
+
+-(double)getGardenOf:(User*)aUser{
+    
+    double garden;
+    if ([aUser isEqualTo:currentUser] && currentPreferencesDictionary) {
+        garden = [[currentPreferencesDictionary objectForKey:kGarden] doubleValue];
+    }else{
+    
+        NSDictionary *localPreferencesDictionary = [[PreferencesManager sharedInstance] getPreferencesDictionaryForUser:aUser];
+        garden = [[localPreferencesDictionary objectForKey:kGarden] doubleValue];    
+    }
+    
+    return garden;
+}
+
+-(double)getLiveMusic:(User*)aUser{
+
+    double liveMusic;
+    if ([aUser isEqualTo:currentUser] && currentPreferencesDictionary) {
+        liveMusic = [[currentPreferencesDictionary objectForKey:kLiveMusic] doubleValue];
+    }else{
+        
+        NSDictionary *localPreferencesDictionary = [[PreferencesManager sharedInstance] getPreferencesDictionaryForUser:aUser];
+        liveMusic = [[localPreferencesDictionary objectForKey:kLiveMusic] doubleValue];
+    }
+    
+    return liveMusic;
+
+}
+
+-(double)getChildFriendly:(User*)aUser{
+
+    double childFriendly;
+    if ([aUser isEqualTo:currentUser] && currentPreferencesDictionary) {
+        childFriendly = [[currentPreferencesDictionary objectForKey:kChildfriendly] doubleValue];
+    }else{
+        
+        NSDictionary *localPreferencesDictionary = [[PreferencesManager sharedInstance] getPreferencesDictionaryForUser:aUser];
+        childFriendly = [[localPreferencesDictionary objectForKey:kChildfriendly] doubleValue];
+    }
+    
+    return childFriendly;
+}
+
+
+-(double)getCarPark:(User*)aUser{
+    
+    double carPark;
+    if ([aUser isEqualTo:currentUser] && currentPreferencesDictionary) {
+        carPark = [[currentPreferencesDictionary objectForKey:kCarPark] doubleValue];
+    }else{
+        
+        NSDictionary *localPreferencesDictionary = [[PreferencesManager sharedInstance] getPreferencesDictionaryForUser:aUser];
+        carPark = [[localPreferencesDictionary objectForKey:kCarPark] doubleValue];
+    }
+    
+    return carPark;
+}
+
+
+-(double)getVegaterian:(User*)aUser{
+    
+    double carPark;
+    if ([aUser isEqualTo:currentUser] && currentPreferencesDictionary) {
+        carPark = [[currentPreferencesDictionary objectForKey:kVegaterian] doubleValue];
+    }else{
+        
+        NSDictionary *localPreferencesDictionary = [[PreferencesManager sharedInstance] getPreferencesDictionaryForUser:aUser];
+        carPark = [[localPreferencesDictionary objectForKey:kVegaterian] doubleValue];
+    }
+    
+    return carPark;
+}
+
 
 @end

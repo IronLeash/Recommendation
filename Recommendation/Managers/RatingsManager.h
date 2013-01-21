@@ -15,6 +15,10 @@
     User *currentUser;
     NSMutableArray *posiviteUserRatings;
     NSMutableArray *currentUserRatings;
+
+    NSDictionary *userPreferenceDictionary;
+    NSDictionary *userPreferenceWeightDictionary;
+
 }
 
 //Ratings

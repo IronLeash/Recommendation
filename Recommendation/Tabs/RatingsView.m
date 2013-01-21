@@ -76,8 +76,6 @@ NSString *userSelectedNotification = @"aUserSelectedNotificaiton";
 
 -(IBAction)aRowIsSelected:(id)sender{
     
-    
-
 
     NSLog(@"Selected row %ld",[usersTableView selectedRow]);
     
@@ -118,6 +116,7 @@ NSString *userSelectedNotification = @"aUserSelectedNotificaiton";
     [_liveMusicTextfield setStringValue: [[preferencesDictionary objectForKey:kLiveMusic] stringValue]];
     [_childFriendlyTextfield setStringValue: [[preferencesDictionary objectForKey:kChildfriendly] stringValue]];
     [_vegetarianTextfield setStringValue: [[preferencesDictionary objectForKey:kVegaterian] stringValue]];
+    [_carParkTextField setStringValue:[[preferencesDictionary objectForKey:kCarPark] stringValue]];
     
     //Set preferenceWeights
     [_categoryWeight setStringValue:[[preferencesWeightDictionary objectForKey:kCategory] stringValue]];
@@ -137,8 +136,8 @@ NSString *userSelectedNotification = @"aUserSelectedNotificaiton";
     [[NSNotificationCenter defaultCenter] postNotification:userChangedNotification];
     
 //    [[RatingsManager sharedInstance] getNumberOfPositiveRatingsForUser:currentlySelectedUser WithAttribute:@"smoking" andValue:@"0"];
-    [[RatingsManager sharedInstance] countBasedRatingForAttribute:@"garden" Value:@"0" andUser:currentlySelectedUser];
-    [[RatingsManager sharedInstance] countBasedRatingForAttribute:@"garden" Value:@"1" andUser:currentlySelectedUser];
+//    [[RatingsManager sharedInstance] countBasedRatingForAttribute:@"garden" Value:@"0" andUser:currentlySelectedUser];
+//    [[RatingsManager sharedInstance] countBasedRatingForAttribute:@"garden" Value:@"1" andUser:currentlySelectedUser];
 }
 
 -(IBAction)checkBoxchangedValue:(id)sender
@@ -307,6 +306,8 @@ NSString *userSelectedNotification = @"aUserSelectedNotificaiton";
     
     //Change tab to recommendation
     [tabview selectTabViewItemAtIndex:3];
+    
+    
 
 }
 
