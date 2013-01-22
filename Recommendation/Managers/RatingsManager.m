@@ -7,6 +7,7 @@
 //
 
 #import "RatingsManager.h"
+#import "RatingWeight.h"
 #import "RestaurantRating.h"
 #import "AppDelegate.h"
 #import "DataFetcher.h"
@@ -118,6 +119,23 @@ static RatingsManager *ratingsManager = nil;
 }
 
 
+-(double)weightedAverageForRatings:(NSArray*)ratingsArray OfUser:(User*)anUser{
+
+    RatingWeight *ratingWeight = anUser.ratingWeight;
+    double average = 0;
+    
+    for (RestaurantRating *currentRating in ratingsArray) {
+        
+        average  += [currentRating.tangiblesRating doubleValue]*[ratingWeight.tangibles doubleValue]+
+                   [currentRating.coreServiceRating doubleValue]*[ratingWeight.coreService doubleValue]+
+                    [currentRating.accessibilityRating doubleValue]*[ratingWeight.accessibility doubleValue]+
+                    [currentRating.personalRating doubleValue]*[ratingWeight.personal doubleValue]+
+                    [currentRating.serviceRating doubleValue]*[ratingWeight.service doubleValue];
+    }
+    return average/[ratingsArray count];
+}
+
+
 -(NSArray*)getPositiveRatingsforUser:(User*)aUser{
     
     
@@ -147,6 +165,87 @@ static RatingsManager *ratingsManager = nil;
         return positiveRatings;
     }
 }
+
+
+
+
+-(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithGardenValueOfRestaurant:(Restaurant*)aRestaurant onlyPositive:(BOOL)aBool{
+    
+    NSArray *userRatings;
+    if (aBool) {
+        userRatings = [[RatingsManager sharedInstance] getPositiveRatingsforUser:aUser];
+    }else{
+        userRatings = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser];
+    }
+    
+    NSPredicate *gardenPredicate = [NSPredicate predicateWithFormat:@"self.restaurant.garden==%@",aRestaurant.garden];
+    NSArray *filteredArray = [userRatings filteredArrayUsingPredicate:gardenPredicate];
+    
+    return filteredArray;
+}
+
+-(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithLiveMusicValueOfRestaurant:(Restaurant*)aRestaurant onlyPositive:(BOOL)aBool{
+
+    NSArray *userRatings;
+    if (aBool) {
+        userRatings = [[RatingsManager sharedInstance] getPositiveRatingsforUser:aUser];
+    }else{
+        userRatings = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser];
+    }
+    
+    NSPredicate *gardenPredicate = [NSPredicate predicateWithFormat:@"self.restaurant.liveMusic==%@",aRestaurant.garden];
+    NSArray *filteredArray = [userRatings filteredArrayUsingPredicate:gardenPredicate];
+    
+    return filteredArray;
+}
+
+
+-(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithChildFriendlyValueOfRestaurant:(Restaurant*)aRestaurant onlyPositive:(BOOL)aBool{
+
+    NSArray *userRatings;
+    if (aBool) {
+        userRatings = [[RatingsManager sharedInstance] getPositiveRatingsforUser:aUser];
+    }else{
+        userRatings = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser];
+    }
+    
+    NSPredicate *gardenPredicate = [NSPredicate predicateWithFormat:@"self.restaurant.childFriendly==%@",aRestaurant.garden];
+    NSArray *filteredArray = [userRatings filteredArrayUsingPredicate:gardenPredicate];
+    
+    return filteredArray;
+}
+
+-(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithVegaterianValueOfRestaurant:(Restaurant*)aRestaurant onlyPositive:(BOOL)aBool{
+
+    NSArray *userRatings;
+    if (aBool) {
+        userRatings = [[RatingsManager sharedInstance] getPositiveRatingsforUser:aUser];
+    }else{
+        userRatings = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser];
+    }
+    
+    NSPredicate *gardenPredicate = [NSPredicate predicateWithFormat:@"self.restaurant.vegaterian==%@",aRestaurant.garden];
+    NSArray *filteredArray = [userRatings filteredArrayUsingPredicate:gardenPredicate];
+    
+    return filteredArray;
+}
+
+-(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithCarParkValueOfRestaurant:(Restaurant*)aRestaurant onlyPositive:(BOOL)aBool{
+
+    NSArray *userRatings;
+    if (aBool) {
+        userRatings = [[RatingsManager sharedInstance] getPositiveRatingsforUser:aUser];
+    }else{
+        userRatings = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser];
+    }
+    
+    NSPredicate *gardenPredicate = [NSPredicate predicateWithFormat:@"self.restaurant.carPark==%@",aRestaurant.garden];
+    NSArray *filteredArray = [userRatings filteredArrayUsingPredicate:gardenPredicate];
+    
+    return filteredArray;
+}
+
+
 
 
 -(NSArray*)getFavoriteCategoriesForUser:(User*)aUser{
@@ -362,6 +461,7 @@ static RatingsManager *ratingsManager = nil;
     return prediction;
 }
 */
+
 
 
 @end

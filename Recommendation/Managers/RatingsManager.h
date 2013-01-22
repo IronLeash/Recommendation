@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Restaurant.h"
 #import "User.h"
 
 @interface RatingsManager : NSObject
@@ -26,6 +27,17 @@
 
 -(NSArray*)getRestaurantRatings;
 -(NSArray*)getRestaurantRatingsForUser:(User*)aUser;
+
+
+-(double)weightedAverageForRatings:(NSArray*)ratingsArray OfUser:(User*)anUser;
+
+-(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithGardenValueOfRestaurant:(Restaurant*)aRestaurant onlyPositive:(BOOL)aBool;
+-(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithLiveMusicValueOfRestaurant:(Restaurant*)aRestaurant onlyPositive:(BOOL)aBool;
+-(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithChildFriendlyValueOfRestaurant:(Restaurant*)aRestaurant onlyPositive:(BOOL)aBool;
+-(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithVegaterianValueOfRestaurant:(Restaurant*)aRestaurant onlyPositive:(BOOL)aBool;
+-(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithCarParkValueOfRestaurant:(Restaurant*)aRestaurant onlyPositive:(BOOL)aBool;
+
+
 -(NSArray*)getPositiveRatingsforUser:(User*)aUser;
 
 -(NSArray*)getFavoriteCategoriesForUser:(User*)currentUser;
@@ -37,7 +49,10 @@
 //Rating Predictions
 -(int)getNumberOfPositiveRatingsForUser:(User*)anUser WithAttribute:(NSString*)anAttribute andValue:(NSString*)aValue;
 -(double)countBasedRatingForAttribute:(NSString*)attribute Value:(NSString*)aValue andUser:(User*)anUser;
-//-(double)averageRatingBasedRatingForAttribute:(NSString*)attribute;
+
+
+
+//AverageRatingsWithCommonAttaribute
 
 
 -(void)cleanUp;

@@ -139,7 +139,18 @@ static RecommendationManager *recommendationManager;
         NSLog(@"Garden value %f",liveMusic);
     double childFriendly    = [[RecommendationManager sharedInstance] countbasedChildFriendlyRatingofRestaurant:aRestaurant ForUser:anUser];
         NSLog(@"Garden value %f",childFriendly);
-    
+
+#warning is it ok to take all ratings or just positive ones
+    double ratingBasedGarden        = [[RecommendationManager sharedInstance] pastRatingBasedGardenRatingofRestaurant:aRestaurant ForUser:anUser onlyPositive:YES];
+    double ratingBaseCarPark        = [[RecommendationManager sharedInstance] pastRatingBasedCarParkRatingofRestaurant:aRestaurant ForUser:anUser onlyPositive:YES];
+    double ratingBaseLiveMusic      = [[RecommendationManager sharedInstance] pastRatingBasedLiveMusicRatingofRestaurant:aRestaurant ForUser:anUser onlyPositive:YES];
+    double ratingBasedChildFriendly = [[RecommendationManager sharedInstance] pastRatingBasedChildFriendlyRatingofRestaurant:aRestaurant ForUser:anUser onlyPositive:YES];
+
+    double gardenWeight;
+    double carParkWeight;
+    double liveMusickWeight;
+    double childFriendlykWeight;
+
     return 1;
 }
 
@@ -194,22 +205,69 @@ static RecommendationManager *recommendationManager;
 }
 
 //PAst Ratings based prediction
--(double)pastRatingBasedGardenRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser{
+-(double)pastRatingBasedGardenRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser onlyPositive:(BOOL)aBool{
+    NSArray *ratingsArray;
+    if (aBool) {
+    ratingsArray     = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser WithGardenValueOfRestaurant:aRestaurant onlyPositive:YES];
+    }else{
+    ratingsArray     = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser WithGardenValueOfRestaurant:aRestaurant onlyPositive:NO];
+    }
 
+    double average =[[RatingsManager sharedInstance] weightedAverageForRatings:ratingsArray OfUser:aUser];
+    return average;
+}
+
+-(double)pastRatingBasedCarParkRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser onlyPositive:(BOOL)aBool{
+
+    NSArray *ratingsArray;
+    if (aBool) {
+        ratingsArray     = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser WithCarParkValueOfRestaurant:aRestaurant onlyPositive:YES];
+    }else{
+        ratingsArray     = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser WithCarParkValueOfRestaurant:aRestaurant onlyPositive:NO];
+    }
+    
+    double average =[[RatingsManager sharedInstance] weightedAverageForRatings:ratingsArray OfUser:aUser];
+    return average;
+}
+
+-(double)pastRatingBasedLiveMusicRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser onlyPositive:(BOOL)aBool{
+
+    NSArray *ratingsArray;
+    if (aBool) {
+        ratingsArray     = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser WithLiveMusicValueOfRestaurant:aRestaurant onlyPositive:YES];
+    }else{
+        ratingsArray     = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser WithLiveMusicValueOfRestaurant:aRestaurant onlyPositive:NO];
+    }
+    
+    double average =[[RatingsManager sharedInstance] weightedAverageForRatings:ratingsArray OfUser:aUser];
+    return average;
     
 }
--(double)pastRatingBasedCarParkRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser{
+-(double)pastRatingBasedChildFriendlyRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser onlyPositive:(BOOL)aBool{
 
+    NSArray *ratingsArray;
+    if (aBool) {
+        ratingsArray     = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser WithChildFriendlyValueOfRestaurant:aRestaurant onlyPositive:YES];
+    }else{
+        ratingsArray     = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser WithChildFriendlyValueOfRestaurant:aRestaurant onlyPositive:NO];
+    }
+    
+    double average =[[RatingsManager sharedInstance] weightedAverageForRatings:ratingsArray OfUser:aUser];
+    return average;
+    
 }
--(double)pastRatingBasedLiveMusicRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser{
 
-}
--(double)pastRatingBasedChildFriendlyRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser{
+-(double)pastRatingBasedVegaterianRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser onlyPositive:(BOOL)aBool{
 
-}
-
--(double)pastRatingBasedVegaterianRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser{
-
+    NSArray *ratingsArray;
+    if (aBool) {
+        ratingsArray     = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser WithVegaterianValueOfRestaurant:aRestaurant onlyPositive:YES];
+    }else{
+        ratingsArray     = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser WithVegaterianValueOfRestaurant:aRestaurant onlyPositive:NO];
+    }
+    
+    double average =[[RatingsManager sharedInstance] weightedAverageForRatings:ratingsArray OfUser:aUser];
+    return average;
 }
 
 @end
