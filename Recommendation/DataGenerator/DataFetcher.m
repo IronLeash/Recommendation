@@ -68,23 +68,6 @@ static NSArray *liveMusicValues;
 
     if (![restaurantCategories count]) {
         
-        /*
-        //Check if cusines are alreadyThere
-        //Fetsch results
-        NSEntityDescription *entityDescription = [NSEntityDescription
-                                                  entityForName:@"Category" inManagedObjectContext:moc];
-        NSFetchRequest *request = [[NSFetchRequest alloc] init];
-        [request setEntity:entityDescription];
-        
-        // Set example predicate and sort orderings...
-        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
-                                            initWithKey:@"name" ascending:YES];
-        [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
-        
-        NSError *error;
-        restaurantCategories = [[NSArray alloc] initWithArray:[moc executeFetchRequest:request error:&error]];
-        
-        */
         restaurantCategories = [[NSArray alloc] initWithObjects:
                                   @"Bakery",
                                   @"Bistro",
@@ -157,6 +140,28 @@ static NSArray *liveMusicValues;
     return restaurantCuisines;
     
 }
+
+-(NSArray*)getRestaurantLocations{
+
+NSArray *returnArray =[[NSArray alloc] initWithObjects:[NSNumber numberWithInt:1],
+                       [NSNumber numberWithInt:2],
+                       [NSNumber numberWithInt:3],
+                       [NSNumber numberWithInt:4],
+                       [NSNumber numberWithInt:5],
+                       [NSNumber numberWithInt:6],
+                       [NSNumber numberWithInt:7],
+                       [NSNumber numberWithInt:8],
+                       [NSNumber numberWithInt:9],
+                       [NSNumber numberWithInt:10],
+                       [NSNumber numberWithInt:11],
+                       [NSNumber numberWithInt:12],
+                       [NSNumber numberWithInt:13],
+                       [NSNumber numberWithInt:14],
+                       [NSNumber numberWithInt:15],
+                       nil];
+    return returnArray;
+}
+
 /*
 -(Cuisine*)getRestaurantCuisineWithName:(NSString*)name{
 

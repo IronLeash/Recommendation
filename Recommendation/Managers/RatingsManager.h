@@ -19,7 +19,24 @@
 
     NSDictionary *userPreferenceDictionary;
     NSDictionary *userPreferenceWeightDictionary;
-
+    
+    
+    //Min Max values
+    int minCategory;
+    int maxCategory;
+    
+    int minCuisine;
+    int maxCuisine;
+    
+    int minLocation;
+    int maxLocation;
+    
+    int minSmoking;
+    int maxSmoking;
+    
+    int minPriceRange;
+    int maxPriceRange;
+    
 }
 
 //Ratings
@@ -37,6 +54,12 @@
 -(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithVegaterianValueOfRestaurant:(Restaurant*)aRestaurant onlyPositive:(BOOL)aBool;
 -(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithCarParkValueOfRestaurant:(Restaurant*)aRestaurant onlyPositive:(BOOL)aBool;
 
+-(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithCategoryOfrestaurant:(Restaurant*)aRestaurant onlyPositive:(BOOL)aBool;
+-(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithCuisineOfrestaurant:(Restaurant*)aRestaurant onlyPositive:(BOOL)aBool;
+-(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithLocationOfrestaurant:(Restaurant*)aRestaurant onlyPositive:(BOOL)aBool;
+-(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithSmokingOfrestaurant:(Restaurant*)aRestaurant onlyPositive:(BOOL)aBool;
+-(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithPriceRangeOfrestaurant:(Restaurant*)aRestaurant onlyPositive:(BOOL)aBool;
+
 
 -(NSArray*)getPositiveRatingsforUser:(User*)aUser;
 
@@ -50,11 +73,22 @@
 -(int)getNumberOfPositiveRatingsForUser:(User*)anUser WithAttribute:(NSString*)anAttribute andValue:(NSString*)aValue;
 -(double)countBasedRatingForAttribute:(NSString*)attribute Value:(NSString*)aValue andUser:(User*)anUser;
 
-
-
 //AverageRatingsWithCommonAttaribute
 
-
 -(void)cleanUp;
+
+
+//Min Max Methods
+
+-(int)getMinCategoryForUser:(User*)anUser onlyPositiveRatings:(BOOL)aBool;
+-(int)getmaxCategoryForUser:(User*)anUser onlyPositiveRatings:(BOOL)aBool;
+
+-(int)getminCuisineForUser:(User*)anUser onlyPositiveRatings:(BOOL)aBool;
+-(int)getmaxCuisineForUser:(User*)anUser onlyPositiveRatings:(BOOL)aBool;
+
+
+-(int)getminLocationForUser:(User*)anUser onlyPositiveRatings:(BOOL)aBool;
+-(int)getmaxLocationForUser:(User*)anUser onlyPositiveRatings:(BOOL)aBool;
+
 
 @end

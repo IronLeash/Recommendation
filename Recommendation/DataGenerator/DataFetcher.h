@@ -27,6 +27,8 @@
 
 -(NSArray*)getRestaurantCuisines;
 
+-(NSArray*)getRestaurantLocations;
+
 -(NSArray*)getRestaurants;
 
 -(NSArray*)getRestaurantsofCategory:(NSString*)aCategory;

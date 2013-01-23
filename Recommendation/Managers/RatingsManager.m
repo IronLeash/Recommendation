@@ -28,6 +28,7 @@ static RatingsManager *ratingsManager = nil;
 		if (ratingsManager==nil)
         {
             ratingsManager = [[self alloc] init];
+            
         }
             return ratingsManager;
     }
@@ -48,6 +49,22 @@ static RatingsManager *ratingsManager = nil;
         
         posiviteUserRatings = [[NSMutableArray alloc] init];
         currentUserRatings =  [[NSMutableArray alloc] init];
+        
+        
+        minCategory     = -1;
+        maxCategory     = -1;
+        
+        minCuisine      = -1;
+        maxCuisine      = -1;
+        
+        minLocation     = -1;
+        maxLocation     = -1;
+        
+        minSmoking      = -1;
+        maxSmoking      = -1;
+        
+        minPriceRange   = -1;
+        maxPriceRange   = -1;
 	}
     
 	return self;
@@ -166,6 +183,81 @@ static RatingsManager *ratingsManager = nil;
     }
 }
 
+
+-(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithCategoryOfrestaurant:(Restaurant*)aRestaurant onlyPositive:(BOOL)aBool{
+    
+    NSArray *userRatings;
+    if (aBool) {
+        userRatings = [[RatingsManager sharedInstance] getPositiveRatingsforUser:aUser];
+    }else{
+        userRatings = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser];
+    }
+
+    NSPredicate *categoryPredicate = [NSPredicate predicateWithFormat:@"self.restaurant.category==%@",aRestaurant.category];
+    NSArray *filteredArray = [userRatings filteredArrayUsingPredicate:categoryPredicate];
+    
+    return filteredArray;
+}
+
+-(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithCuisineOfrestaurant:(Restaurant*)aRestaurant onlyPositive:(BOOL)aBool{
+    
+    NSArray *userRatings;
+    if (aBool) {
+        userRatings = [[RatingsManager sharedInstance] getPositiveRatingsforUser:aUser];
+    }else{
+        userRatings = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser];
+    }
+    
+    NSPredicate *categoryPredicate = [NSPredicate predicateWithFormat:@"self.restaurant.cuisine==%@",aRestaurant.cuisine];
+    NSArray *filteredArray = [userRatings filteredArrayUsingPredicate:categoryPredicate];
+    
+    return filteredArray;
+}
+
+-(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithLocationOfrestaurant:(Restaurant*)aRestaurant onlyPositive:(BOOL)aBool{
+    
+    NSArray *userRatings;
+    if (aBool) {
+        userRatings = [[RatingsManager sharedInstance] getPositiveRatingsforUser:aUser];
+    }else{
+        userRatings = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser];
+    }
+    
+    NSPredicate *categoryPredicate = [NSPredicate predicateWithFormat:@"self.restaurant.location==%@",aRestaurant.location];
+    NSArray *filteredArray = [userRatings filteredArrayUsingPredicate:categoryPredicate];
+    
+    return filteredArray;
+}
+
+-(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithSmokingOfrestaurant:(Restaurant*)aRestaurant onlyPositive:(BOOL)aBool{
+    
+    NSArray *userRatings;
+    if (aBool) {
+        userRatings = [[RatingsManager sharedInstance] getPositiveRatingsforUser:aUser];
+    }else{
+        userRatings = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser];
+    }
+    
+    NSPredicate *categoryPredicate = [NSPredicate predicateWithFormat:@"self.restaurant.smoking==%@",aRestaurant.smoking];
+    NSArray *filteredArray = [userRatings filteredArrayUsingPredicate:categoryPredicate];
+    
+    return filteredArray;
+}
+
+-(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithPriceRangeOfrestaurant:(Restaurant*)aRestaurant onlyPositive:(BOOL)aBool{
+    
+    NSArray *userRatings;
+    if (aBool) {
+        userRatings = [[RatingsManager sharedInstance] getPositiveRatingsforUser:aUser];
+    }else{
+        userRatings = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser];
+    }
+    
+    NSPredicate *categoryPredicate = [NSPredicate predicateWithFormat:@"self.restaurant.priceRange==%@",aRestaurant.priceRange];
+    NSArray *filteredArray = [userRatings filteredArrayUsingPredicate:categoryPredicate];
+    
+    return filteredArray;
+}
 
 
 
@@ -411,57 +503,202 @@ static RatingsManager *ratingsManager = nil;
 }
 
 
+#pragma mark - Get min/max
 
 
-
-/*
--(double)countBasedRatingForAttribute:(NSString*)attribute Value:(NSString*)aValue andUser:(User*)anUser{
-
+//Min Max values
+-(int)getMinCategoryForUser:(User*)anUser onlyPositiveRatings:(BOOL)aBool{
     
-    int maxNumber = 0;
-    int minNumber = 0;
-    double prediction;
+    if (minCategory!=-1 && [anUser isEqual:currentUser]) {
+        return minCategory;
+    }else{
     
-    if ([attribute isEqualToString:@"garden"]) {
-
-        NSArray *gardenValuesArray =[[DataFetcher sharedInstance] getGardenValues];
+        NSArray *allCategoriesArray = [[DataFetcher sharedInstance] getRestaurantCategories];
         
-        maxNumber = [[RatingsManager sharedInstance] getNumberOfPositiveRatingsForUser:anUser
-                                                                         WithAttribute:@"garden"
-                                                                              andValue:[[gardenValuesArray objectAtIndex:0] stringValue]];
+        minCategory = -1;
+        for (NSString *currentCategory in allCategoriesArray)
+        {
         
-        minNumber = [[RatingsManager sharedInstance] getNumberOfPositiveRatingsForUser:anUser
-                                                                         WithAttribute:@"garden"
-                                                                              andValue:[[gardenValuesArray objectAtIndex:0] stringValue]];
-
-    
-        for (NSNumber *currentValue in gardenValuesArray ) {
-         
-            int currentNumber  =  [[RatingsManager sharedInstance] getNumberOfPositiveRatingsForUser:anUser
-                                                                                       WithAttribute:@"garden"
-                                                                                            andValue:[currentValue stringValue]];
-            if (maxNumber <= currentNumber) {
-                maxNumber = currentNumber;
+            NSArray *userRatings;
+            if (aBool) {
+                userRatings = [[RatingsManager sharedInstance] getPositiveRatingsforUser:anUser];
+            }else{
+                userRatings = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:anUser];
             }
             
-            if (minNumber >= currentNumber) {
-                minNumber = currentNumber;
+            NSPredicate *ratingsPredicate = [NSPredicate predicateWithFormat:@"self.restaurant.category==%@",currentCategory];
+            NSArray *filteredArray = [userRatings filteredArrayUsingPredicate:ratingsPredicate];
+            
+            if (minCategory == -1 || minCategory > [filteredArray count]) {
+                minCategory = (int)[filteredArray count] ;
+            }
+        
+        }
+    }
+return minCategory;
+}
+-(int)getmaxCategoryForUser:(User*)anUser onlyPositiveRatings:(BOOL)aBool{
+
+    if (maxCategory!=-1 && [anUser isEqual:currentUser]) {
+        return maxCategory;
+    }else{
+        
+        NSArray *allCategoriesArray = [[DataFetcher sharedInstance] getRestaurantCategories];
+        
+        maxCategory = -1;
+        for (NSString *currentCategory in allCategoriesArray)
+        {
+            
+            NSArray *userRatings;
+            if (aBool) {
+                userRatings = [[RatingsManager sharedInstance] getPositiveRatingsforUser:anUser];
+            }else{
+                userRatings = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:anUser];
+            }
+            
+            NSPredicate *ratingsPredicate = [NSPredicate predicateWithFormat:@"self.restaurant.category==%@",currentCategory];
+            NSArray *filteredArray = [userRatings filteredArrayUsingPredicate:ratingsPredicate];
+            
+            if (maxCategory == -1 || maxCategory < [filteredArray count]) {
+                maxCategory = (int)[filteredArray count] ;
+            }
+            
+        }
+    }
+    return maxCategory;
+}
+-(int)getminCuisineForUser:(User*)anUser onlyPositiveRatings:(BOOL)aBool{
+    
+    if (minCuisine!=-1 && [anUser isEqual:currentUser]) {
+        return minCuisine;
+    }else{
+        
+        NSArray *allCuisines = [[DataFetcher sharedInstance] getRestaurantCuisines];
+        
+        minCuisine = -1;
+        for (NSString *currentCategory in allCuisines)
+        {
+            NSArray *userRatings;
+            if (aBool) {
+                userRatings = [[RatingsManager sharedInstance] getPositiveRatingsforUser:anUser];
+            }else{
+                userRatings = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:anUser];
+            }
+            
+            NSPredicate *ratingsPredicate = [NSPredicate predicateWithFormat:@"self.restaurant.cuisine==%@",currentCategory];
+            NSArray *filteredArray = [userRatings filteredArrayUsingPredicate:ratingsPredicate];
+            
+            if (minCuisine == -1 || minCuisine > [filteredArray count]) {
+                minCuisine = (int)[filteredArray count] ;
+            }
+
+        }
+    }
+    return minCuisine;
+
+}
+-(int)getmaxCuisineForUser:(User*)anUser onlyPositiveRatings:(BOOL)aBool{
+
+    if (maxCuisine!=-1 && [anUser isEqual:currentUser]) {
+        return maxCuisine;
+    }else{
+        
+        NSArray *allCuisines = [[DataFetcher sharedInstance] getRestaurantCuisines];
+        
+        maxCuisine = -1;
+        for (NSString *currentCuisine in allCuisines)
+        {
+            NSArray *userRatings;
+            if (aBool) {
+                userRatings = [[RatingsManager sharedInstance] getPositiveRatingsforUser:anUser];
+            }else{
+                userRatings = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:anUser];
+            }
+            
+            NSPredicate *ratingsPredicate = [NSPredicate predicateWithFormat:@"self.restaurant.cuisine==%@",currentCuisine];
+            NSArray *filteredArray = [userRatings filteredArrayUsingPredicate:ratingsPredicate];
+            
+            if (maxCuisine == -1 || maxCuisine < [filteredArray count]) {
+                maxCuisine = (int)[filteredArray count] ;
+            }
+            
+        }
+    }
+    return maxCuisine;
+}
+-(int)getminLocationForUser:(User*)anUser onlyPositiveRatings:(BOOL)aBool{
+
+    
+    if (minLocation!=-1 && [anUser isEqual:currentUser]) {
+        return minLocation;
+    }else{
+        
+        NSArray *allLocations = [[DataFetcher sharedInstance] getRestaurantLocations];
+        
+        minLocation = -1;
+        for (NSNumber *currentLocation in allLocations)
+        {
+            
+            NSArray *userRatings;
+            if (aBool) {
+                userRatings = [[RatingsManager sharedInstance] getPositiveRatingsforUser:anUser];
+            }else{
+                userRatings = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:anUser];
+            }
+            
+            NSPredicate *ratingsPredicate = [NSPredicate predicateWithFormat:@"self.restaurant.location==%@",currentLocation];
+            NSArray *filteredArray = [userRatings filteredArrayUsingPredicate:ratingsPredicate];
+            
+            if (minLocation == -1 || minLocation > [filteredArray count]) {
+                minLocation = (int)[filteredArray count] ;
+            }
+            
+        }
+    }
+    return minLocation;
+}
+-(int)getmaxLocationForUser:(User*)anUser onlyPositiveRatings:(BOOL)aBool{
+
+    if (maxLocation!=-1 && [anUser isEqual:currentUser]) {
+        return maxLocation;
+    }else{
+        
+        NSArray *allLocations = [[DataFetcher sharedInstance] getRestaurantLocations];
+        
+        maxLocation = -1;
+        for (NSNumber *currentLocation in allLocations)
+        {
+            NSArray *userRatings;
+            if (aBool) {
+                userRatings = [[RatingsManager sharedInstance] getPositiveRatingsforUser:anUser];
+            }else{
+                userRatings = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:anUser];
+            }
+            
+            NSPredicate *ratingsPredicate = [NSPredicate predicateWithFormat:@"self.restaurant.location==%@",currentLocation];
+            NSArray *filteredArray = [userRatings filteredArrayUsingPredicate:ratingsPredicate];
+            
+            if (maxLocation == -1 || maxLocation < [filteredArray count])
+            {
+                maxLocation = (int)[filteredArray count] ;
             }
         }
-        
-        int currentNumber  =  [[RatingsManager sharedInstance] getNumberOfPositiveRatingsForUser:anUser
-                                                                                   WithAttribute:@"garden"
-                                                                                        andValue:aValue];
-         prediction = abs((currentNumber-minNumber)) /(maxNumber-minNumber)*10;
-        
-    } else {
-        
     }
-
-    return prediction;
+    return maxLocation;
 }
-*/
+-(int)getminSmokingForUser:(User*)anUser onlyPositiveRatings:(BOOL)aBool{
 
 
+}
+-(int)getmaxSmokingForUser:(User*)anUser onlyPositiveRatings:(BOOL)aBool{
+
+}
+-(int)getminPriceRangeForUser:(User*)anUser{
+
+}
+
+-(int)getmaxPriceRangeForUser:(User*)anUser{
+
+}
 
 @end
