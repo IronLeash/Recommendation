@@ -627,7 +627,6 @@ return minCategory;
     return maxCuisine;
 }
 -(int)getminLocationForUser:(User*)anUser onlyPositiveRatings:(BOOL)aBool{
-
     
     if (minLocation!=-1 && [anUser isEqual:currentUser]) {
         return minLocation;
@@ -688,17 +687,123 @@ return minCategory;
 }
 -(int)getminSmokingForUser:(User*)anUser onlyPositiveRatings:(BOOL)aBool{
 
+    if (minSmoking!=-1 && [anUser isEqual:currentUser]) {
+        return minSmoking;
+    }else{
+        
+        NSArray *smokingTypes = [NSArray arrayWithObjects:[NSNumber numberWithInt:0],[NSNumber numberWithInt:1],[NSNumber numberWithInt:2], nil];
+        
+        minSmoking = -1;
+        for (NSNumber *currentSmokingType in smokingTypes)
+        {
+            
+            NSArray *userRatings;
+            if (aBool) {
+                userRatings = [[RatingsManager sharedInstance] getPositiveRatingsforUser:anUser];
+            }else{
+                userRatings = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:anUser];
+            }
+            
+            NSPredicate *ratingsPredicate = [NSPredicate predicateWithFormat:@"self.restaurant.smoking==%@",currentSmokingType];
+            NSArray *filteredArray = [userRatings filteredArrayUsingPredicate:ratingsPredicate];
+            
+            if (minSmoking == -1 || minSmoking > [filteredArray count]) {
+                minSmoking = (int)[filteredArray count] ;
+            }
+        }
+    }
+    return minSmoking;
 
 }
+
 -(int)getmaxSmokingForUser:(User*)anUser onlyPositiveRatings:(BOOL)aBool{
 
+    if (maxSmoking!=-1 && [anUser isEqual:currentUser]) {
+        return maxSmoking;
+    }else{
+        
+        NSArray *smokingTypes = [NSArray arrayWithObjects:[NSNumber numberWithInt:0],[NSNumber numberWithInt:1],[NSNumber numberWithInt:2], nil];
+        
+        maxSmoking = -1;
+        for (NSNumber *curentSmoking in smokingTypes)
+        {
+            NSArray *userRatings;
+            if (aBool) {
+                userRatings = [[RatingsManager sharedInstance] getPositiveRatingsforUser:anUser];
+            }else{
+                userRatings = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:anUser];
+            }
+            
+            NSPredicate *ratingsPredicate = [NSPredicate predicateWithFormat:@"self.restaurant.smoking==%@",curentSmoking];
+            NSArray *filteredArray = [userRatings filteredArrayUsingPredicate:ratingsPredicate];
+            
+            if (maxSmoking == -1 || maxSmoking < [filteredArray count])
+            {
+                maxSmoking = (int)[filteredArray count] ;
+            }
+        }
+    }
+    return maxSmoking;
 }
--(int)getminPriceRangeForUser:(User*)anUser{
 
+-(int)getminPriceRangeForUser:(User*)anUser  onlyPositiveRatings:(BOOL)aBool{
+
+    if (minPriceRange!=-1 && [anUser isEqual:currentUser]) {
+        return minPriceRange;
+    }else{
+        
+        NSArray *smokingTypes = [NSArray arrayWithObjects:[NSNumber numberWithInt:0],[NSNumber numberWithInt:1],[NSNumber numberWithInt:2],[NSNumber numberWithInt:3], nil];
+        
+        minPriceRange = -1;
+        for (NSNumber *curentSmoking in smokingTypes)
+        {
+            NSArray *userRatings;
+            if (aBool) {
+                userRatings = [[RatingsManager sharedInstance] getPositiveRatingsforUser:anUser];
+            }else{
+                userRatings = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:anUser];
+            }
+            
+            NSPredicate *ratingsPredicate = [NSPredicate predicateWithFormat:@"self.restaurant.priceRange==%@",curentSmoking];
+            NSArray *filteredArray = [userRatings filteredArrayUsingPredicate:ratingsPredicate];
+            
+            if (minPriceRange == -1 || minPriceRange > [filteredArray count])
+            {
+                minPriceRange = (int)[filteredArray count] ;
+            }
+        }
+    }
+    return minPriceRange;
 }
 
--(int)getmaxPriceRangeForUser:(User*)anUser{
+-(int)getmaxPriceRangeForUser:(User*)anUser  onlyPositiveRatings:(BOOL)aBool{
 
+    if (maxPriceRange!=-1 && [anUser isEqual:currentUser]) {
+        return maxPriceRange;
+    }else{
+        
+        NSArray *smokingTypes = [NSArray arrayWithObjects:[NSNumber numberWithInt:0],[NSNumber numberWithInt:1],[NSNumber numberWithInt:2],[NSNumber numberWithInt:3], nil];
+        
+        maxPriceRange = -1;
+        for (NSNumber *curentSmoking in smokingTypes)
+        {
+            NSArray *userRatings;
+            if (aBool) {
+                userRatings = [[RatingsManager sharedInstance] getPositiveRatingsforUser:anUser];
+            }else{
+                userRatings = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:anUser];
+            }
+            
+            NSPredicate *ratingsPredicate = [NSPredicate predicateWithFormat:@"self.restaurant.priceRange==%@",curentSmoking];
+            NSArray *filteredArray = [userRatings filteredArrayUsingPredicate:ratingsPredicate];
+            
+            if (maxPriceRange == -1 || maxPriceRange < [filteredArray count])
+            {
+                maxPriceRange = (int)[filteredArray count] ;
+            }
+        }
+    }
+    return maxPriceRange;
 }
 
 @end

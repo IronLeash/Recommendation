@@ -86,9 +86,13 @@
 -(int)getminCuisineForUser:(User*)anUser onlyPositiveRatings:(BOOL)aBool;
 -(int)getmaxCuisineForUser:(User*)anUser onlyPositiveRatings:(BOOL)aBool;
 
-
 -(int)getminLocationForUser:(User*)anUser onlyPositiveRatings:(BOOL)aBool;
 -(int)getmaxLocationForUser:(User*)anUser onlyPositiveRatings:(BOOL)aBool;
 
+-(int)getminSmokingForUser:(User*)anUser onlyPositiveRatings:(BOOL)aBool;
+-(int)getmaxSmokingForUser:(User*)anUser onlyPositiveRatings:(BOOL)aBool;
+
+-(int)getminPriceRangeForUser:(User*)anUser  onlyPositiveRatings:(BOOL)aBool;
+-(int)getmaxPriceRangeForUser:(User*)anUser  onlyPositiveRatings:(BOOL)aBool;
 
 @end

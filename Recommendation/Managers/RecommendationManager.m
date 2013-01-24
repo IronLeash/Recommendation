@@ -131,6 +131,9 @@ static RecommendationManager *recommendationManager;
 
 -(double)overalRatingPredictionOfRestaurant:(Restaurant*)aRestaurant ForUser:(User*)anUser{
 
+    
+    //Count based Rating Prediction
+    
     double garden           = [[RecommendationManager sharedInstance] countbasedGardenRatingofRestaurant:aRestaurant ForUser:anUser];
     NSLog(@"Garden value %f",garden);
     double carPark          = [[RecommendationManager sharedInstance] countbasedCarParkRatingofRestaurant:aRestaurant ForUser:anUser];
@@ -144,25 +147,50 @@ static RecommendationManager *recommendationManager;
     double category     = [[RecommendationManager sharedInstance] countBasedRatingForCategoryOfRestaurant:aRestaurant andUser:anUser];
     double cuisine      = [[RecommendationManager sharedInstance] countBasedRatingForCuisineOfRestaurant:aRestaurant andUser:anUser];
     double location     = [[RecommendationManager sharedInstance] countBasedRatingForLocationOfRestaurant:aRestaurant andUser:anUser];
-//    double smoking      = [[RecommendationManager sharedInstance] countBasedRatingForSmokingOfRestaurant:aRestaurant andUser:anUser];
-//    double pricerange   = [[RecommendationManager sharedInstance] countBasedRatingForPriceOfRestaurant:aRestaurant andUser:anUser];
+    double smoking      = [[RecommendationManager sharedInstance] countBasedRatingForSmokingOfRestaurant:aRestaurant andUser:anUser];
+    double pricerange   = [[RecommendationManager sharedInstance] countBasedRatingForPriceOfRestaurant:aRestaurant andUser:anUser];
 
+    
+    
+    //Rating Based Predictions
     double ratingBasedGarden        = [[RecommendationManager sharedInstance] pastRatingBasedGardenRatingofRestaurant:aRestaurant ForUser:anUser onlyPositive:YES];
     double ratingBaseCarPark        = [[RecommendationManager sharedInstance] pastRatingBasedCarParkRatingofRestaurant:aRestaurant ForUser:anUser onlyPositive:YES];
     double ratingBaseLiveMusic      = [[RecommendationManager sharedInstance] pastRatingBasedLiveMusicRatingofRestaurant:aRestaurant ForUser:anUser onlyPositive:YES];
     double ratingBasedChildFriendly = [[RecommendationManager sharedInstance] pastRatingBasedChildFriendlyRatingofRestaurant:aRestaurant ForUser:anUser onlyPositive:YES];
 
+    
+    double ratingBasedCateogry      = [[RecommendationManager sharedInstance] pastRatingBasedCategoryRatingofRestaurant:aRestaurant ForUser:anUser onlyPositive:YES];
+    NSLog(@"ratingBasedCateogry %f",ratingBasedCateogry);
+    double ratingBasedCuisine       = [[RecommendationManager sharedInstance] pastRatingBasedCuisineRatingofRestaurant:aRestaurant ForUser:anUser onlyPositive:YES];
+    NSLog(@"ratingBasedCuisine %f",ratingBasedCuisine);
+    double ratingBasedLocation      = [[RecommendationManager sharedInstance] pastRatingBasedLocationRatingofRestaurant:aRestaurant ForUser:anUser onlyPositive:YES];
+    NSLog(@"ratingBasedLocation %f",ratingBasedLocation);
+    double ratingBasedSmoking       = [[RecommendationManager sharedInstance] pastRatingBasedSmokingRatingofRestaurant:aRestaurant ForUser:anUser onlyPositive:YES];
+    NSLog(@"ratingBasedSmoking %f",ratingBasedSmoking);
+    double ratingBasedPriceRange    = [[RecommendationManager sharedInstance] pastRatingBasedPriceRangeRatingofRestaurant:aRestaurant ForUser:anUser onlyPositive:YES];
+    NSLog(@"ratingBasedPriceRange %f",ratingBasedPriceRange);
+    
     garden = (garden +ratingBasedGarden)/2;
     carPark = (carPark + ratingBaseCarPark)/2;
     liveMusic = (liveMusic + ratingBaseLiveMusic)/2;
     childFriendly = (childFriendly + ratingBasedChildFriendly)/2;
+    
+    category    = (category +ratingBasedCateogry)/2;
+    cuisine     = (cuisine+ratingBasedCuisine)/2;
+    location    = (location+ratingBasedLocation)/2;
+    smoking     = (smoking+ratingBasedSmoking)/2;
+    pricerange  = (pricerange+ratingBasedPriceRange)/2;
+    
+#warning handle nan values
+    
     
     double gardenWeight;
     double carParkWeight;
     double liveMusickWeight;
     double childFriendlykWeight;
 
-
+    double total = garden+carPark+liveMusic+childFriendly+category+cuisine+location+smoking+pricerange;
+    
     return 1;
 }
 
@@ -215,12 +243,12 @@ static RecommendationManager *recommendationManager;
 
 -(double)countBasedRatingForSmokingOfRestaurant:(Restaurant*)aRestaurant andUser:(User*)anUser{
     
-    int minNumber = [[RatingsManager sharedInstance] getminCuisineForUser:anUser onlyPositiveRatings:NO];
-    int maxNumber = [[RatingsManager sharedInstance] getmaxCuisineForUser:anUser onlyPositiveRatings:NO];
+    int minNumber = [[RatingsManager sharedInstance] getminSmokingForUser:anUser onlyPositiveRatings:NO];
+    int maxNumber = [[RatingsManager sharedInstance] getmaxSmokingForUser:anUser onlyPositiveRatings:NO];
     
     double prediction;;
     
-    int currentNumber  =  (int)[[[RatingsManager sharedInstance] getRestaurantRatingsForUser:anUser WithCuisineOfrestaurant:aRestaurant onlyPositive:NO] count];
+    int currentNumber  =  (int)[[[RatingsManager sharedInstance] getRestaurantRatingsForUser:anUser WithSmokingOfrestaurant:aRestaurant onlyPositive:NO] count];
     
     prediction = ((double)abs((currentNumber-minNumber)) /(maxNumber-minNumber))*10;
     
@@ -229,12 +257,12 @@ static RecommendationManager *recommendationManager;
 
 -(double)countBasedRatingForPriceOfRestaurant:(Restaurant*)aRestaurant andUser:(User*)anUser{
     
-    int minNumber = [[RatingsManager sharedInstance] getminCuisineForUser:anUser onlyPositiveRatings:NO];
-    int maxNumber = [[RatingsManager sharedInstance] getmaxCuisineForUser:anUser onlyPositiveRatings:NO];
+    int minNumber = [[RatingsManager sharedInstance] getminPriceRangeForUser:anUser onlyPositiveRatings:NO];
+    int maxNumber = [[RatingsManager sharedInstance] getmaxPriceRangeForUser:anUser onlyPositiveRatings:NO];
     
     double prediction;;
     
-    int currentNumber  =  (int)[[[RatingsManager sharedInstance] getRestaurantRatingsForUser:anUser WithCuisineOfrestaurant:aRestaurant onlyPositive:NO] count];
+    int currentNumber  =  (int)[[[RatingsManager sharedInstance] getRestaurantRatingsForUser:anUser WithPriceRangeOfrestaurant:aRestaurant onlyPositive:NO] count];
     
     prediction = ((double)abs((currentNumber-minNumber)) /(maxNumber-minNumber))*10;
     
@@ -354,6 +382,73 @@ static RecommendationManager *recommendationManager;
         ratingsArray     = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser WithVegaterianValueOfRestaurant:aRestaurant onlyPositive:YES];
     }else{
         ratingsArray     = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser WithVegaterianValueOfRestaurant:aRestaurant onlyPositive:NO];
+    }
+    
+    double average =[[RatingsManager sharedInstance] weightedAverageForRatings:ratingsArray OfUser:aUser];
+    return average;
+}
+
+
+-(double)pastRatingBasedCategoryRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser onlyPositive:(BOOL)aBool{
+    
+    NSArray *ratingsArray;
+    if (aBool) {
+        ratingsArray     = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser WithCategoryOfrestaurant:aRestaurant onlyPositive:YES];
+    }else{
+        ratingsArray     = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser WithCategoryOfrestaurant:aRestaurant onlyPositive:NO];
+    }
+    
+    double average =[[RatingsManager sharedInstance] weightedAverageForRatings:ratingsArray OfUser:aUser];
+    return average;
+}
+
+-(double)pastRatingBasedCuisineRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser onlyPositive:(BOOL)aBool{
+    
+    NSArray *ratingsArray;
+    if (aBool) {
+        ratingsArray     = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser WithCuisineOfrestaurant:aRestaurant onlyPositive:YES];
+    }else{
+        ratingsArray     = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser WithCuisineOfrestaurant:aRestaurant onlyPositive:NO];
+    }
+    
+    double average =[[RatingsManager sharedInstance] weightedAverageForRatings:ratingsArray OfUser:aUser];
+    return average;
+}
+
+-(double)pastRatingBasedLocationRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser onlyPositive:(BOOL)aBool{
+    
+    NSArray *ratingsArray;
+    if (aBool) {
+        ratingsArray     = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser WithLocationOfrestaurant:aRestaurant onlyPositive:YES];
+    }else{
+        ratingsArray     = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser WithLocationOfrestaurant:aRestaurant onlyPositive:NO];
+    }
+    
+    double average =[[RatingsManager sharedInstance] weightedAverageForRatings:ratingsArray OfUser:aUser];
+    return average;
+}
+
+
+-(double)pastRatingBasedSmokingRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser onlyPositive:(BOOL)aBool{
+    
+    NSArray *ratingsArray;
+    if (aBool) {
+        ratingsArray     = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser WithSmokingOfrestaurant:aRestaurant onlyPositive:YES];
+    }else{
+        ratingsArray     = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser WithSmokingOfrestaurant:aRestaurant onlyPositive:NO];
+    }
+    
+    double average =[[RatingsManager sharedInstance] weightedAverageForRatings:ratingsArray OfUser:aUser];
+    return average;
+}
+
+-(double)pastRatingBasedPriceRangeRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser onlyPositive:(BOOL)aBool{
+    
+    NSArray *ratingsArray;
+    if (aBool) {
+        ratingsArray     = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser WithPriceRangeOfrestaurant:aRestaurant onlyPositive:YES];
+    }else{
+        ratingsArray     = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser WithPriceRangeOfrestaurant:aRestaurant onlyPositive:NO];
     }
     
     double average =[[RatingsManager sharedInstance] weightedAverageForRatings:ratingsArray OfUser:aUser];
