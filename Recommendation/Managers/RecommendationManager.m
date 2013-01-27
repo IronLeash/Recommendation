@@ -19,6 +19,9 @@
 #import "Recommendation.h"
 
 
+#import "StatisticsLibrary.h"
+#import "RestaurantRating.h"
+
 NSString *recommendationArrayGeneratedNotification = @"RecommendationGeneratedNotification";
 
 static RecommendationManager *recommendationManager;
@@ -66,15 +69,21 @@ static RecommendationManager *recommendationManager;
     NSArray *orderedCuisineArray    = [preferences objectForKey:kCuisine];
     NSArray *orderedSmokingArray    = [preferences objectForKey:kSmoking];
 
-    NSArray *restaurantsArray = [[DataFetcher sharedInstance] getRestaurants];
+    NSArray *restaurantsArray       = [[DataFetcher sharedInstance] getRestaurants];
+
+    NSArray *restaurantRatingsArray = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:anUser];
     
     for (Restaurant *currentRestaurant in restaurantsArray) {
+
+        NSPredicate *currentRatingPredicate         = [NSPredicate predicateWithFormat:@"restaurant.uniqueName == %@",currentRestaurant.uniqueName];
+        RestaurantRating *currentRestaurantRating   = [[restaurantRatingsArray filteredArrayUsingPredicate:currentRatingPredicate] objectAtIndex:0];
 
         [[RecommendationManager sharedInstance] overalRatingPredictionOfRestaurant:currentRestaurant ForUser:anUser];
         
         Recommendation *currentRecommendation = [[Recommendation alloc] init];
         currentRecommendation.restaurant = currentRestaurant;
-
+        currentRecommendation.rating = [[RecommendationManager sharedInstance] overalRatingPredictionOfRestaurant:currentRestaurant ForUser:anUser];
+        
         NSUInteger cuisinePosition     = [ActionGeneric positionInArray:orderedCuisineArray :currentRestaurant.cuisine];
         double categoryPosition    = ([ActionGeneric positionInArray:orderedCategoryArray :currentRestaurant.category])*19/16;
         NSLog(@"Current Category %@ with Position %f",currentRestaurant.category,categoryPosition);
@@ -88,19 +97,6 @@ static RecommendationManager *recommendationManager;
          double childFriendly       = ([currentRestaurant.childFriendly doubleValue] - [[preferences objectForKey:kChildfriendly] doubleValue])*19;
          double vegaterianFriendly  = ([currentRestaurant.vegaterian doubleValue] - [[preferences objectForKey:kVegaterian] doubleValue])*19;
         
-        /*
-        currentRecommendation.distance =    pow((double)(cuisinePosition*cuisineWeight), 2) +
-                                            pow((double)(categoryPosition*categoryWeight), 2) +
-                                            pow((double)(smokingPosition*smokingWeight), 2) +
-                                            pow((double)(pricePosition*priceWeight), 2) +
-                                            pow((double)(gardenPosition*gardenWeight), 2) +
-                                            pow((double)(liveMusicPosition*liveMusicWeight), 2) +
-                                            pow((double)(childFriendly*childFriendlyWeight), 2) +
-                                            pow((double)(vegaterianFriendly*vegaterianWeight), 2);
-        
-
-        NSLog(@"Distance %f",currentRecommendation.distance);
-        */
         
         currentRecommendation.distance =    pow((double)(cuisinePosition), 2)*cuisineWeight +
         pow((double)(categoryPosition), 2)*categoryWeight +
@@ -111,9 +107,9 @@ static RecommendationManager *recommendationManager;
         pow((double)(childFriendly), 2)*childFriendlyWeight +
         pow((double)(vegaterianFriendly), 2)*vegaterianWeight;
 
-                [recommendationsArray addObject:currentRecommendation];
+        currentRecommendation.realRating = [StatisticsLibrary weightedSumForRating:currentRestaurantRating];
+        [recommendationsArray addObject:currentRecommendation];
     }
-    
     
     //Post Notification
     
@@ -130,17 +126,16 @@ static RecommendationManager *recommendationManager;
 #pragma mark - Rating Predictions
 
 -(double)overalRatingPredictionOfRestaurant:(Restaurant*)aRestaurant ForUser:(User*)anUser{
-
     
     //Count based Rating Prediction
     
-    double garden           = [[RecommendationManager sharedInstance] countbasedGardenRatingofRestaurant:aRestaurant ForUser:anUser];
+    double garden           = [[RecommendationManager sharedInstance] countbasedGardenRatingofRestaurant:aRestaurant ForUser:anUser]*10;
     NSLog(@"Garden value %f",garden);
-    double carPark          = [[RecommendationManager sharedInstance] countbasedCarParkRatingofRestaurant:aRestaurant ForUser:anUser];
+    double carPark          = [[RecommendationManager sharedInstance] countbasedCarParkRatingofRestaurant:aRestaurant ForUser:anUser]*10;
         NSLog(@"Garden value %f",carPark);
-    double liveMusic        = [[RecommendationManager sharedInstance] countbasedLiveMusicRatingofRestaurant:aRestaurant ForUser:anUser];
+    double liveMusic        = [[RecommendationManager sharedInstance] countbasedLiveMusicRatingofRestaurant:aRestaurant ForUser:anUser]*10;
         NSLog(@"Garden value %f",liveMusic);
-    double childFriendly    = [[RecommendationManager sharedInstance] countbasedChildFriendlyRatingofRestaurant:aRestaurant ForUser:anUser];
+    double childFriendly    = [[RecommendationManager sharedInstance] countbasedChildFriendlyRatingofRestaurant:aRestaurant ForUser:anUser]*10;
         NSLog(@"Garden value %f",childFriendly);
     
     
@@ -149,7 +144,7 @@ static RecommendationManager *recommendationManager;
     double location     = [[RecommendationManager sharedInstance] countBasedRatingForLocationOfRestaurant:aRestaurant andUser:anUser];
     double smoking      = [[RecommendationManager sharedInstance] countBasedRatingForSmokingOfRestaurant:aRestaurant andUser:anUser];
     double pricerange   = [[RecommendationManager sharedInstance] countBasedRatingForPriceOfRestaurant:aRestaurant andUser:anUser];
-
+    double vegaterian   = [[RecommendationManager sharedInstance] countbasedVegaterianRatingofRestaurant:aRestaurant ForUser:anUser];
     
     
     //Rating Based Predictions
@@ -169,59 +164,94 @@ static RecommendationManager *recommendationManager;
     NSLog(@"ratingBasedSmoking %f",ratingBasedSmoking);
     double ratingBasedPriceRange    = [[RecommendationManager sharedInstance] pastRatingBasedPriceRangeRatingofRestaurant:aRestaurant ForUser:anUser onlyPositive:YES];
     NSLog(@"ratingBasedPriceRange %f",ratingBasedPriceRange);
+    double ratingBasedVegaterian    = [[RecommendationManager sharedInstance] pastRatingBasedVegaterianRatingofRestaurant:aRestaurant ForUser:anUser onlyPositive:YES];
+    NSLog(@"ratingBasedVegaterian %f",ratingBasedVegaterian);
     
-    garden = (garden +ratingBasedGarden)/2;
-    carPark = (carPark + ratingBaseCarPark)/2;
-    liveMusic = (liveMusic + ratingBaseLiveMusic)/2;
-    childFriendly = (childFriendly + ratingBasedChildFriendly)/2;
-    
-    category    = (category +ratingBasedCateogry)/2;
-    cuisine     = (cuisine+ratingBasedCuisine)/2;
-    location    = (location+ratingBasedLocation)/2;
-    smoking     = (smoking+ratingBasedSmoking)/2;
-    pricerange  = (pricerange+ratingBasedPriceRange)/2;
+    double bothGarden           = (garden +ratingBasedGarden)/2;
+    double bothCarPark          = (carPark + ratingBaseCarPark)/2;
+    double bothLiveMusic        = (liveMusic + ratingBaseLiveMusic)/2;
+    double bothChildFriendly    = (childFriendly + ratingBasedChildFriendly)/2;
+    double bothCategory         = (category +ratingBasedCateogry)/2;
+    double bothCuisine          = (cuisine+ratingBasedCuisine)/2;
+    double bothLocation         = (location+ratingBasedLocation)/2;
+    double bothSmoking          = (smoking+ratingBasedSmoking)/2;
+    double bothPricerange       = (pricerange+ratingBasedPriceRange)/2;
+    double bothVegaterian       = (vegaterian+ratingBasedPriceRange)/2;
+
     
 #warning handle nan values
+    NSDictionary *preferencesWeightDictionary = [[PreferencesManager sharedInstance] getUserPreferenceWeightDicitonary:anUser];
     
+    double categoryWeight       = [[preferencesWeightDictionary objectForKey:kCategory] doubleValue];
+    double cuisineWeight        = [[preferencesWeightDictionary objectForKey:kCuisine] doubleValue];
+    double locationWeight       = [[preferencesWeightDictionary objectForKey:kLocation] doubleValue];
+    double smokingWeight        = [[preferencesWeightDictionary objectForKey:kSmoking] doubleValue];
+    double priceRangeWeigt      = [[preferencesWeightDictionary objectForKey:kPrice] doubleValue];
     
-    double gardenWeight;
-    double carParkWeight;
-    double liveMusickWeight;
-    double childFriendlykWeight;
+    double gardenWeight         = [[preferencesWeightDictionary objectForKey:kGarden] doubleValue];
+    double carParkWeight        = [[preferencesWeightDictionary objectForKey:kCarPark] doubleValue];
+    double liveMusickWeight     = [[preferencesWeightDictionary objectForKey:kLiveMusic] doubleValue];
+    double childFriendlykWeight = [[preferencesWeightDictionary objectForKey:kChildfriendly] doubleValue];
+    double vegaterianWeight     = [[preferencesWeightDictionary objectForKey:kVegaterian] doubleValue];
 
-    double total = garden+carPark+liveMusic+childFriendly+category+cuisine+location+smoking+pricerange;
     
-    return 1;
+    
+    double total = ((bothGarden*gardenWeight)+
+                    (bothCarPark*carParkWeight)+
+                    (bothLiveMusic*liveMusickWeight)+
+                    (bothChildFriendly*childFriendlykWeight)+
+                    (bothCategory*categoryWeight)+
+                    (bothCuisine*cuisineWeight)+
+                    (bothLocation*locationWeight)+
+                    (bothSmoking*smokingWeight)+
+                    (bothPricerange*priceRangeWeigt)+(bothVegaterian*vegaterianWeight));
+
+    return total;
 }
 
 #pragma mark - Count based rating prediction
 
-
  -(double)countBasedRatingForCategoryOfRestaurant:(Restaurant*)aRestaurant andUser:(User*)anUser{
   
-     int maxNumber = [[RatingsManager sharedInstance] getmaxCategoryForUser:anUser onlyPositiveRatings:NO];
-     int minNumber = [[RatingsManager sharedInstance] getMinCategoryForUser:anUser onlyPositiveRatings:NO];
+     int maxNumber = [[RatingsManager sharedInstance] getmaxCategoryForUser:anUser onlyPositiveRatings:YES];
+     int minNumber = [[RatingsManager sharedInstance] getMinCategoryForUser:anUser onlyPositiveRatings:YES];
 
      double prediction;;
  
-     int currentNumber  =  (int)[[[RatingsManager sharedInstance] getRestaurantRatingsForUser:anUser WithCategoryOfrestaurant:aRestaurant onlyPositive:NO] count];
+     int currentNumber  =  (int)[[[RatingsManager sharedInstance] getRestaurantRatingsForUser:anUser WithCategoryOfrestaurant:aRestaurant onlyPositive:YES] count];
      
-     prediction = ((double)abs((currentNumber-minNumber)) /(maxNumber-minNumber))*10;
+     if ((maxNumber-minNumber)==0) {
+         prediction =0;
+     }else{
+         prediction = ((double)abs((currentNumber-minNumber)) /(maxNumber-minNumber))*10;
+     }
+     
+     if (prediction>10) {
+         NSLog(@"prediction %f",prediction);
+     }
  
      return prediction;
  }
 
 -(double)countBasedRatingForCuisineOfRestaurant:(Restaurant*)aRestaurant andUser:(User*)anUser{
     
-    int minNumber = [[RatingsManager sharedInstance] getminCuisineForUser:anUser onlyPositiveRatings:NO];
-    int maxNumber = [[RatingsManager sharedInstance] getmaxCuisineForUser:anUser onlyPositiveRatings:NO];
+    int minNumber = [[RatingsManager sharedInstance] getminCuisineForUser:anUser onlyPositiveRatings:YES];
+    int maxNumber = [[RatingsManager sharedInstance] getmaxCuisineForUser:anUser onlyPositiveRatings:YES];
     
     double prediction;;
     
-    int currentNumber  =  (int)[[[RatingsManager sharedInstance] getRestaurantRatingsForUser:anUser WithCuisineOfrestaurant:aRestaurant onlyPositive:NO] count];
+    int currentNumber  =  (int)[[[RatingsManager sharedInstance] getRestaurantRatingsForUser:anUser WithCuisineOfrestaurant:aRestaurant onlyPositive:YES] count];
     
+    if ((maxNumber-minNumber)==0) {
+        prediction =0;
+    }else{
     prediction = ((double)abs((currentNumber-minNumber)) /(maxNumber-minNumber))*10;
+    }
     
+    
+    if (prediction>10) {
+        NSLog(@"prediction %f",prediction);
+    }
     return prediction;
 }
 
@@ -229,43 +259,81 @@ static RecommendationManager *recommendationManager;
 #pragma mark -Here
 -(double)countBasedRatingForLocationOfRestaurant:(Restaurant*)aRestaurant andUser:(User*)anUser{
     
-    int minNumber = [[RatingsManager sharedInstance] getminLocationForUser:anUser onlyPositiveRatings:NO];
-    int maxNumber = [[RatingsManager sharedInstance] getmaxLocationForUser:anUser onlyPositiveRatings:NO];
+    int minNumber = [[RatingsManager sharedInstance] getminLocationForUser:anUser onlyPositiveRatings:YES];
+    int maxNumber = [[RatingsManager sharedInstance] getmaxLocationForUser:anUser onlyPositiveRatings:YES];
     
     double prediction;;
     
-    int currentNumber  =  (int)[[[RatingsManager sharedInstance] getRestaurantRatingsForUser:anUser WithLocationOfrestaurant:aRestaurant onlyPositive:NO] count];
+    int currentNumber  =  (int)[[[RatingsManager sharedInstance] getRestaurantRatingsForUser:anUser WithLocationOfrestaurant:aRestaurant onlyPositive:YES] count];
     
-    prediction = ((double)abs((currentNumber-minNumber)) /(maxNumber-minNumber))*10;
+    if ((maxNumber-minNumber)==0) {
+        prediction =0;
+    }else{
+        prediction = ((double)abs((currentNumber-minNumber)) /(maxNumber-minNumber))*10;
+    }
+    
+    if (prediction>10) {
+        NSLog(@"prediction %f",prediction);
+    }
     
     return prediction;
 }
 
 -(double)countBasedRatingForSmokingOfRestaurant:(Restaurant*)aRestaurant andUser:(User*)anUser{
     
-    int minNumber = [[RatingsManager sharedInstance] getminSmokingForUser:anUser onlyPositiveRatings:NO];
-    int maxNumber = [[RatingsManager sharedInstance] getmaxSmokingForUser:anUser onlyPositiveRatings:NO];
+    int minNumber = [[RatingsManager sharedInstance] getminSmokingForUser:anUser onlyPositiveRatings:YES];
+    int maxNumber = [[RatingsManager sharedInstance] getmaxSmokingForUser:anUser onlyPositiveRatings:YES];
     
-    double prediction;;
+    double prediction;
     
-    int currentNumber  =  (int)[[[RatingsManager sharedInstance] getRestaurantRatingsForUser:anUser WithSmokingOfrestaurant:aRestaurant onlyPositive:NO] count];
+    int currentNumber  =  (int)[[[RatingsManager sharedInstance] getRestaurantRatingsForUser:anUser WithSmokingOfrestaurant:aRestaurant onlyPositive:YES] count];
     
-    prediction = ((double)abs((currentNumber-minNumber)) /(maxNumber-minNumber))*10;
-    
+    if ((maxNumber-minNumber)==0) {
+        prediction =0;
+    }else{
+        prediction = ((double)abs((currentNumber-minNumber)) /(maxNumber-minNumber))*10;
+    }
+    if (prediction>10) {
+        NSLog(@"prediction %f",prediction);
+        
+        
+        int minNumber = [[RatingsManager sharedInstance] getminSmokingForUser:anUser onlyPositiveRatings:YES];
+        int maxNumber = [[RatingsManager sharedInstance] getmaxSmokingForUser:anUser onlyPositiveRatings:YES];
+        
+        double prediction;
+        
+        int currentNumber  =  (int)[[[RatingsManager sharedInstance] getRestaurantRatingsForUser:anUser WithSmokingOfrestaurant:aRestaurant onlyPositive:YES] count];
+        
+    }
     return prediction;
 }
 
 -(double)countBasedRatingForPriceOfRestaurant:(Restaurant*)aRestaurant andUser:(User*)anUser{
     
-    int minNumber = [[RatingsManager sharedInstance] getminPriceRangeForUser:anUser onlyPositiveRatings:NO];
-    int maxNumber = [[RatingsManager sharedInstance] getmaxPriceRangeForUser:anUser onlyPositiveRatings:NO];
+    int minNumber = [[RatingsManager sharedInstance] getminPriceRangeForUser:anUser onlyPositiveRatings:YES];
+    int maxNumber = [[RatingsManager sharedInstance] getmaxPriceRangeForUser:anUser onlyPositiveRatings:YES];
     
     double prediction;;
     
-    int currentNumber  =  (int)[[[RatingsManager sharedInstance] getRestaurantRatingsForUser:anUser WithPriceRangeOfrestaurant:aRestaurant onlyPositive:NO] count];
+    int currentNumber  =  (int)[[[RatingsManager sharedInstance] getRestaurantRatingsForUser:anUser WithPriceRangeOfrestaurant:aRestaurant onlyPositive:YES] count];
     
-    prediction = ((double)abs((currentNumber-minNumber)) /(maxNumber-minNumber))*10;
+    if ((maxNumber-minNumber)==0) {
+        prediction =0;
+    }else{
+        prediction = ((double)abs((currentNumber-minNumber)) /(maxNumber-minNumber))*10;
+    }
     
+    
+    if (prediction>10) {
+        NSLog(@"prediction %f",prediction);
+        
+        int minNumber = [[RatingsManager sharedInstance] getminPriceRangeForUser:anUser onlyPositiveRatings:YES];
+        int maxNumber = [[RatingsManager sharedInstance] getmaxPriceRangeForUser:anUser onlyPositiveRatings:YES];
+        
+        double prediction;;
+        
+        int currentNumber  =  (int)[[[RatingsManager sharedInstance] getRestaurantRatingsForUser:anUser WithPriceRangeOfrestaurant:aRestaurant onlyPositive:YES] count];
+    }
     return prediction;
 }
 

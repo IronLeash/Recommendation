@@ -14,6 +14,7 @@
 @synthesize distance;
 @synthesize restaurant;
 @synthesize rating;
+@synthesize realRating;
 
 -(NSString*)description
 {

@@ -14,7 +14,7 @@
 {
 
     User *currentUser;
-
+    NSString *userId;
     NSDictionary *entrophyDictionary;
     NSDictionary *currentUserPreferenceWeight;
     NSDictionary *currentPreferencesDictionary;

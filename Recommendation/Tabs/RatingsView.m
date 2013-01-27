@@ -82,12 +82,14 @@ NSString *userSelectedNotification = @"aUserSelectedNotificaiton";
     currentlySelectedUser = [usersArray objectAtIndex:[usersTableView selectedRow]];
     
     //Change preferences
+    
     preferencesDictionary = [NSMutableDictionary dictionaryWithDictionary: [[PreferencesManager sharedInstance] getPreferencesDictionaryForUser:currentlySelectedUser]];
     
     //Change weights
     preferencesWeightDictionary = [NSMutableDictionary dictionaryWithDictionary:
                                    [[PreferencesManager sharedInstance] getUserPreferenceWeightDicitonary:currentlySelectedUser]];
 
+    
     FavoriteCategory *favoriteCategory      = [[preferencesDictionary objectForKey:kCategory] objectAtIndex:0];
     FavoriteCategory *favoriteCuisine       = [[preferencesDictionary objectForKey:kCuisine] objectAtIndex:0];
     FavoriteSmoking *favoriteSmoking        = [[preferencesDictionary objectForKey:kSmoking] objectAtIndex:0];

@@ -98,6 +98,7 @@ static RatingsManager *ratingsManager = nil;
     return array;
 }
 
+
 -(NSArray*)getRestaurantRatingsForUser:(User*)aUser{
     
     if ([aUser isEqualTo:currentUser] && currentUserRatings) {
@@ -135,6 +136,11 @@ static RatingsManager *ratingsManager = nil;
     }
 }
 
+-(RestaurantRating*)getRatingsOfRestaurant:(Restaurant*) ForUser:(User*)aUser{
+
+
+}
+
 
 -(double)weightedAverageForRatings:(NSArray*)ratingsArray OfUser:(User*)anUser{
 
@@ -149,7 +155,12 @@ static RatingsManager *ratingsManager = nil;
                     [currentRating.personalRating doubleValue]*[ratingWeight.personal doubleValue]+
                     [currentRating.serviceRating doubleValue]*[ratingWeight.service doubleValue];
     }
+
+    if ([ratingsArray count]==0) {
+        return 0;
+    }else{
     return average/[ratingsArray count];
+    }
 }
 
 
@@ -238,8 +249,8 @@ static RatingsManager *ratingsManager = nil;
         userRatings = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser];
     }
     
-    NSPredicate *categoryPredicate = [NSPredicate predicateWithFormat:@"self.restaurant.smoking==%@",aRestaurant.smoking];
-    NSArray *filteredArray = [userRatings filteredArrayUsingPredicate:categoryPredicate];
+    NSPredicate *smokingPredicate = [NSPredicate predicateWithFormat:@"self.restaurant.smoking==%@",aRestaurant.smoking];
+    NSArray *filteredArray = [userRatings filteredArrayUsingPredicate:smokingPredicate];
     
     return filteredArray;
 }

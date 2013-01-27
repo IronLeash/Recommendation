@@ -17,5 +17,6 @@
 @property (strong,nonatomic)     Restaurant *restaurant;
 @property (assign)               double distance;
 @property (assign)               double rating;
+@property (assign)               double realRating;
 
 @end

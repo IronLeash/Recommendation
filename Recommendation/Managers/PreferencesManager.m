@@ -29,11 +29,10 @@ static PreferencesManager* preferencesManager = nil;
 
 		if (!preferencesManager)
         {
-            
-            return [[self alloc] init];
-        }else{
-            return preferencesManager;
+            preferencesManager = [[self alloc] init];
         }
+            return preferencesManager;
+        
     }
     
 	return nil;
@@ -41,6 +40,10 @@ static PreferencesManager* preferencesManager = nil;
 
 
 #pragma mark - Setters
+-(void)setCurrentUser:(User*)aUser{
+
+//
+}
 
 -(void)setEntrophyDictionary{
     
@@ -50,10 +53,7 @@ static PreferencesManager* preferencesManager = nil;
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
--(void)setUserPreferenceWeightDicitonary:(User*)aUser{
 
-
-}
 
 //Getters
 
@@ -73,6 +73,14 @@ static PreferencesManager* preferencesManager = nil;
 
 -(NSDictionary*)getUserPreferenceWeightDicitonary:(User*)aUser{
 
+    
+    NSDictionary *userWeightDictionary;
+    
+    
+    if ([aUser.userid isEqualToString:userId]) {
+
+        return currentUserPreferenceWeight;
+    }else{
     NSArray *userRatings = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser];
     
     //Entropies
@@ -160,7 +168,7 @@ static PreferencesManager* preferencesManager = nil;
     locationWeight       /= weighttotal;
     smokingWeight        /= weighttotal;
     
-    NSDictionary *weightDictionary = [NSDictionary dictionaryWithObjects:
+        userWeightDictionary = [NSDictionary dictionaryWithObjects:
                                       [NSArray arrayWithObjects:
                                        [NSNumber numberWithDouble:priceWeight],
                                        [NSNumber numberWithDouble:gardenWeight],
@@ -182,7 +190,10 @@ static PreferencesManager* preferencesManager = nil;
                                                                           kCuisine,
                                                                           kLocation,
                                                                           kSmoking,nil]];
-    return weightDictionary;
+        
+        currentUserPreferenceWeight = [NSDictionary dictionaryWithDictionary:userWeightDictionary];
+    }
+    return currentUserPreferenceWeight;
 }
 
 
@@ -190,7 +201,7 @@ static PreferencesManager* preferencesManager = nil;
     
     NSDictionary *preferencesDictionary;
     
-    if (aUser!=currentUser) {
+    if (![aUser.userid isEqualToString:userId]){
         
     NSArray *positiveRatingsArray = [[RatingsManager sharedInstance] getPositiveRatingsforUser:aUser];
     
@@ -241,14 +252,14 @@ static PreferencesManager* preferencesManager = nil;
                                                                       forKeys:[NSArray arrayWithObjects:kVegaterian,kChildfriendly,kLiveMusic,kGarden,kPrice,kCarPark,kCategory,kCuisine,kSmoking,kLocation,nil]];
     
     currentPreferencesDictionary = [NSDictionary dictionaryWithDictionary:preferencesDictionary];
+    currentUserPreferenceWeight = [[PreferencesManager sharedInstance] getUserPreferenceWeightDicitonary:aUser];
+    userId = [[NSString alloc] initWithString:aUser.userid];
     }else{
         preferencesDictionary = currentPreferencesDictionary;
     }
     
     return preferencesDictionary;
 }
-
-
 
 -(User*)getCurrentUser
 {

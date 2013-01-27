@@ -101,8 +101,11 @@
         returnString = BOOLREP([currentRecommendation.restaurant.childFriendly intValue]);
     }else if([tableColumn.identifier isEqualToString:@"vegaterian"]){
         returnString = BOOLREP([currentRecommendation.restaurant.vegaterian intValue]);
-    }else{
-        returnString = @"Hi";
+    }else if ([tableColumn.identifier isEqualToString:@"realRating"]){
+        returnString = [NSString stringWithFormat:@"%f",currentRecommendation.realRating];
+    }
+    else{
+        returnString = [NSString stringWithFormat:@"%f",currentRecommendation.rating];
     }
 
     return returnString;
