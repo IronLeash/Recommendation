@@ -20,6 +20,9 @@
 
 @implementation PreferencesManager
 
+@synthesize entrophyWeight;
+@synthesize recalculateWeights;
+
 static PreferencesManager* preferencesManager = nil;
 
 +(PreferencesManager*)sharedInstance;
@@ -32,12 +35,10 @@ static PreferencesManager* preferencesManager = nil;
             preferencesManager = [[self alloc] init];
         }
             return preferencesManager;
-        
     }
     
 	return nil;
 }
-
 
 #pragma mark - Setters
 -(void)setCurrentUser:(User*)aUser{
@@ -53,11 +54,7 @@ static PreferencesManager* preferencesManager = nil;
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-
-
 //Getters
-
-
 #pragma mark - Getters
 -(NSDictionary*)getEntrophyDictionary{
 
@@ -73,11 +70,9 @@ static PreferencesManager* preferencesManager = nil;
 
 -(NSDictionary*)getUserPreferenceWeightDicitonary:(User*)aUser{
 
-    
     NSDictionary *userWeightDictionary;
     
-    
-    if ([aUser.userid isEqualToString:userId]) {
+    if ([aUser.userid isEqualToString:userId] && recalculateWeights) {
 
         return currentUserPreferenceWeight;
     }else{
@@ -145,19 +140,19 @@ static PreferencesManager* preferencesManager = nil;
     
     //Unnormalized Weights
     
-    double priceWeight          = priceRangeCorrelation*priceEntropy;
-    double gardenWeight         = gardenCorrelation * gardenEntropy;
-    double liveMusicWeight      = liveMusicCorelation*liveMusicEntrophy;
-    double childFriendlyWeight  = childFiendlyCorrelation*childEntropy;
-    double vegaterianWeight     = vegateriancorrelation*vegEntrophy;
-    double categoryWeight       = categoryyCramer*categoryEntrophy;
-    double cuisineWeight        = cuisineCramer*cuisineEntrophy;
-    double locationWeight       = locationCramer*locationEntrophy;
-    double smokingWeight        = smokingCramer*smokingEntrophy;
+    double priceWeight          = (priceRangeCorrelation*(1-entrophyWeight))+(priceEntropy*entrophyWeight);
+    double gardenWeight         = (gardenCorrelation*(1-entrophyWeight)) + (gardenEntropy*entrophyWeight);
+    double liveMusicWeight      = (liveMusicCorelation*(1-entrophyWeight))+(liveMusicEntrophy*entrophyWeight);
+    double childFriendlyWeight  = (childFiendlyCorrelation*(1-entrophyWeight))+(childEntropy*entrophyWeight);
+    double vegaterianWeight     = (vegateriancorrelation*(1-entrophyWeight))+(vegEntrophy*entrophyWeight);
+    double categoryWeight       = (categoryyCramer*(1-entrophyWeight))+(categoryEntrophy*entrophyWeight);
+    double cuisineWeight        = (cuisineCramer*(1-entrophyWeight))+cuisineEntrophy*(entrophyWeight);
+    double locationWeight       = (locationCramer*(1-entrophyWeight))+(locationEntrophy*entrophyWeight);
+    double smokingWeight        = (smokingCramer*(1-entrophyWeight))+(smokingEntrophy*entrophyWeight);
     
+        
     double weighttotal = priceWeight+gardenWeight+liveMusicWeight+childFriendlyWeight+vegaterianWeight+categoryWeight+cuisineWeight+locationWeight+smokingWeight;
-
-    
+        
     priceWeight          /= weighttotal;
     gardenWeight         /= weighttotal;
     liveMusicWeight      /= weighttotal;

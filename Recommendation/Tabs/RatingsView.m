@@ -76,8 +76,10 @@ NSString *userSelectedNotification = @"aUserSelectedNotificaiton";
 
 -(IBAction)aRowIsSelected:(id)sender{
     
-
     NSLog(@"Selected row %ld",[usersTableView selectedRow]);
+
+    [[PreferencesManager sharedInstance] setEntrophyWeight:[[_entrophyWeight stringValue] doubleValue]];
+    [[PreferencesManager sharedInstance] setRecalculateWeights:YES];
     
     currentlySelectedUser = [usersArray objectAtIndex:[usersTableView selectedRow]];
     
@@ -89,7 +91,6 @@ NSString *userSelectedNotification = @"aUserSelectedNotificaiton";
     preferencesWeightDictionary = [NSMutableDictionary dictionaryWithDictionary:
                                    [[PreferencesManager sharedInstance] getUserPreferenceWeightDicitonary:currentlySelectedUser]];
 
-    
     FavoriteCategory *favoriteCategory      = [[preferencesDictionary objectForKey:kCategory] objectAtIndex:0];
     FavoriteCategory *favoriteCuisine       = [[preferencesDictionary objectForKey:kCuisine] objectAtIndex:0];
     FavoriteSmoking *favoriteSmoking        = [[preferencesDictionary objectForKey:kSmoking] objectAtIndex:0];
@@ -302,13 +303,24 @@ NSString *userSelectedNotification = @"aUserSelectedNotificaiton";
 -(IBAction)generateRecommendation:(id)sender{
 
 
-    [[RecommendationManager sharedInstance] getRecommendationForUser:currentlySelectedUser
-                                                     withPreferences:preferencesDictionary
-                                                           andWeight:preferencesWeightDictionary];
+    [[RecommendationManager sharedInstance] setAlphaWeight:[[_alphaWeight stringValue] doubleValue]];
+    [[PreferencesManager sharedInstance] setEntrophyWeight:[[_entrophyWeight stringValue] doubleValue]];
+    
+    if (_pastRatingsCheckBox.state==NSOnState) {
+        
+        [[RecommendationManager sharedInstance] getRecommendationForUser:currentlySelectedUser
+                                                         withPreferences:preferencesDictionary
+                                                               andWeight:preferencesWeightDictionary onlyPosiiveRatings:NO];
+    }else if (_pastRatingsCheckBox.state==NSOffState){
+        
+
+        [[RecommendationManager sharedInstance] getRecommendationForUser:currentlySelectedUser
+                                                         withPreferences:preferencesDictionary
+                                                               andWeight:preferencesWeightDictionary onlyPosiiveRatings:YES];
+    }
     
     //Change tab to recommendation
     [tabview selectTabViewItemAtIndex:3];
-    
     
 
 }
@@ -317,38 +329,18 @@ NSString *userSelectedNotification = @"aUserSelectedNotificaiton";
 -(IBAction)generateRatings:(id)sender
 {
 #warning show loading indication
-    /*
-    NSArray *array1 = [NSArray arrayWithObjects:[NSNumber numberWithFloat:32.523532532],[NSNumber numberWithFloat:-32.532532],[NSNumber numberWithFloat:99.0],[NSNumber numberWithFloat:12.532532],[NSNumber numberWithFloat:22], nil];
-    NSArray *array2 = [NSArray arrayWithObjects:[NSNumber numberWithFloat:-2.532532],[NSNumber numberWithFloat:-3.1],[NSNumber numberWithFloat:-9.1],[NSNumber numberWithFloat:22.53253],[NSNumber numberWithFloat:-12.0], nil];
-    
-     */
-//    NSLog(@"Correlation %f",[StatisticsLibrary pearsonCorreleationBetweenArray1:array1 andArray2:array2]);
-//    NSLog(@"Cramer %f",[StatisticsLibrary cramersVforAttribute]);
-    
 
-
-//    [self generateRatingBackgroundThread];
     [self performSelectorInBackground:@selector(generateRatingBackgroundThread) withObject:nil];
-    
-//    [self generateRatingBackgroundThread];
-    
-//    NSLog(@"Entropy %f",[StatisticsLibrary entopyOfVariable]);
 }
 
 -(void)generateRatingBackgroundThread{
 
-/*
-        NSArray *allUsersArray = [[DataFetcher sharedInstance] getUsers];
-        int i =0;
-    
-    NSTimeInterval start= [[NSDate date] timeIntervalSince1970];
- */
     @autoreleasepool
     {
+        [[PreferencesManager sharedInstance] setEntrophyWeight:[[_entrophyWeight stringValue] doubleValue]];
         [[DataGenerator sharedInstance] generateAllUserRatings];
     }
     
-
     [self performSelectorOnMainThread:@selector(notifyViewsAfterRAtingGeneration) withObject:nil waitUntilDone:NO];
     
 }

@@ -48,7 +48,7 @@
 
 -(NSInteger)numberOfRowsInTableView:(NSTableView *)tableView{
 
-    NSLog(@"%ld",[restaurantsArray count]);
+//    NSLog(@"%ld",[restaurantsArray count]);
     
     return [restaurantsArray count];
 }

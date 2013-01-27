@@ -116,7 +116,7 @@
     NSUInteger rowNumber = [(NSArray*)[anArray objectAtIndex:0] count];
     NSUInteger colomnNumbr = [anArray count];
 
-    NSLog(@"---------------Contigency Matrix---------------");
+//    NSLog(@"---------------Contigency Matrix---------------");
 
     for (int i =0;i < rowNumber; i++)
     {
@@ -125,7 +125,7 @@
         for (int j = 0; j < colomnNumbr; j++) {
             [currentRowString appendString:[NSString stringWithFormat:@" %@",[(NSArray*)[anArray objectAtIndex:j] objectAtIndex:i]]];
         }
-        NSLog(@"%@",currentRowString);
+//        NSLog(@"%@",currentRowString);
     }
 
 }

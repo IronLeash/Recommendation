@@ -21,8 +21,6 @@
 
 + (float)weightedSumForRating:(RestaurantRating*)aRating{
 
-    
-    
     RatingWeight *currentRatingWeight = aRating.user.ratingWeight;
     
     float accessibility = ([aRating.accessibilityRating floatValue] * [currentRatingWeight.accessibility floatValue]);
@@ -34,9 +32,6 @@
     return accessibility + coreService + tangibles + service + personal;
     
 }
-
-
-
 
 + (float)scoreofCategory:(FavoriteCategory*)aCategory amongRatingNumber:(int)numberfPositeRatings withAverage:(float)positveRatingAverage{
 
@@ -87,14 +82,14 @@
     int i = 0;
     for (NSNumber *currentNumber in array1) {
         CArray1[i] = (double)[currentNumber doubleValue];
-        NSLog(@"Array1 %f",CArray1[i]);
+//        NSLog(@"Array1 %f",CArray1[i]);
         i++;
     }
     
     i = 0;
     for (NSNumber *currentNumber in array2) {
         CArray2[i] = (double)[currentNumber doubleValue];
-        NSLog(@"Array2 %f",CArray2[i]);
+//        NSLog(@"Array2 %f",CArray2[i]);
         i++;
     }
     
@@ -166,7 +161,7 @@
         for (int row = 0; row < numberOfRows; row++)
         {
             double expected = (double)(([[marginalFrequencyColomn objectAtIndex:colomn] doubleValue] * [[marginalFrequencyRow objectAtIndex:row] doubleValue])/totalOccurences);
-            NSLog(@"Expected %f",expected);
+//            NSLog(@"Expected %f",expected);
             /*
             chiSquare += (([[[anArray objectAtIndex:colomn] objectAtIndex:row] doubleValue]-expected)*([[[anArray objectAtIndex:colomn] objectAtIndex:row] doubleValue]-expected))/expected;
             */
@@ -174,12 +169,10 @@
             if (expected>0) {
                 chiSquare += pow([[[anArray objectAtIndex:colomn] objectAtIndex:row] floatValue]-expected, 2.0)/expected;
                 
+//                NSLog(@"O %@",[[anArray objectAtIndex:colomn] objectAtIndex:row]);
+//                NSLog(@"O %f",[[[anArray objectAtIndex:colomn] objectAtIndex:row] doubleValue]-expected);
                 
-                
-                NSLog(@"O %@",[[anArray objectAtIndex:colomn] objectAtIndex:row]);
-                NSLog(@"O %f",[[[anArray objectAtIndex:colomn] objectAtIndex:row] doubleValue]-expected);
-                
-                NSLog(@"Chi %f",chiSquare);
+//                NSLog(@"Chi %f",chiSquare);
             }
             
         }

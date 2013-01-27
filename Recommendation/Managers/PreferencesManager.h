@@ -20,9 +20,12 @@
     NSDictionary *currentPreferencesDictionary;
     NSArray      *currentUserRatingsArray;
     
-    
-    //Individual Values
+    double entrophyWeight;
+    BOOL recalculateWeights;
 }
+
+@property(nonatomic)     double entrophyWeight;
+@property(nonatomic)     BOOL recalculateWeights;
 
 +(PreferencesManager*)sharedInstance;
 

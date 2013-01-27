@@ -20,18 +20,24 @@ NSString *recommendationArrayGeneratedNotification;
     User *currentUser;
     NSDictionary *userPreferencesDictionary;
     NSArray *recommendationResultsArray;
-    
+    double alphaWeight;
     
 }
 
+@property (nonatomic) double alphaWeight;
+
 +(RecommendationManager*)sharedInstance;
--(NSArray*)getRecommendationForUser:(User*)anUser withPreferences:(NSDictionary*)preferences andWeight:(NSDictionary*)weights;
+-(NSArray*)getRecommendationForUser:(User*)anUser withPreferences:(NSDictionary*)preferences andWeight:(NSDictionary*)weights onlyPosiiveRatings:(BOOL)aBool;
 
 
-
--(double)overalRatingPredictionOfRestaurant:(Restaurant*)aRestaurant ForUser:(User*)anUser;
+-(double)overalRatingPredictionOfRestaurant:(Restaurant*)aRestaurant ForUser:(User*)anUser onlyPosivite:(BOOL)aBool;
 
 //Count based ratings
+-(double)countBasedRatingForCategoryOfRestaurant:(Restaurant*)aRestaurant andUser:(User*)anUser onlyPositive:(BOOL)aBool;
+-(double)countBasedRatingForCuisineOfRestaurant:(Restaurant*)aRestaurant andUser:(User*)anUser onlyPositive:(BOOL)aBool;
+-(double)countBasedRatingForLocationOfRestaurant:(Restaurant*)aRestaurant andUser:(User*)anUser onlyPositive:(BOOL)aBool;
+-(double)countBasedRatingForSmokingOfRestaurant:(Restaurant*)aRestaurant andUser:(User*)anUser onlyPositive:(BOOL)aBool;
+-(double)countBasedRatingForPriceOfRestaurant:(Restaurant*)aRestaurant andUser:(User*)anUser onlyPositive:(BOOL)aBool;
 -(double)countbasedGardenRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser;
 -(double)countbasedCarParkRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser;
 -(double)countbasedLiveMusicRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser;
