@@ -173,6 +173,8 @@
 
     }else if([tableColumn.identifier isEqualToString:@"vegaterian"]){
         
+        return @"Remove";
+        /*
         switch ([(NSNumber*)currentRestaurant.vegaterian intValue]) {
             case 0:
             {
@@ -187,6 +189,7 @@
             default:
                 break;
         }
+        */
 
     }else if([tableColumn.identifier isEqualToString:@"carPark"]){
         switch ([(NSNumber*)currentRestaurant.carPark intValue]) {

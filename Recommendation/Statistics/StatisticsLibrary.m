@@ -312,6 +312,7 @@
         }
         NSLog(@"Entropty LiveMusic %f",hLiveMusic);
 
+        /*
         for (int i = 0; i < 2 ; i++ ) {
             [temporaryArray addObjectsFromArray:[[DataFetcher sharedInstance] getRestaurantsWithVegaterieanValue:[NSNumber numberWithInt:i]]];
             
@@ -324,6 +325,7 @@
             
             [temporaryArray removeAllObjects];
         }
+         */
         NSLog(@"Entropty Vegaterian %f",hVegaterian);
 
         for (int i = 0; i < 2 ; i++ ) {

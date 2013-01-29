@@ -393,6 +393,7 @@ NSArray *returnArray =[[NSArray alloc] initWithObjects:[NSNumber numberWithInt:1
     return array;
 }
 
+/*
 -(NSArray*)getRestaurantsWithVegaterieanValue:(NSNumber*)aVegaterianValue{
     
     NSEntityDescription *entityDescription = [NSEntityDescription
@@ -406,6 +407,7 @@ NSArray *returnArray =[[NSArray alloc] initWithObjects:[NSNumber numberWithInt:1
     
     return array;
 }
+ */
 
 -(NSArray*)getRestaurantForCarParkValue:(NSNumber*)aCarParkValue{
     
@@ -423,41 +425,48 @@ NSArray *returnArray =[[NSArray alloc] initWithObjects:[NSNumber numberWithInt:1
 
 
 -(NSArray*)getFavoriteCagetoriesForStereotype:(NSString*)aString{
-    
-    NSEntityDescription *entityDescription = [NSEntityDescription
-                                              entityForName:@"Category" inManagedObjectContext:moc];
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:entityDescription];
 
     
     NSArray *favoriteArray;
     if ([aString isEqualToString:kGourmet])
     {
-//    [request setPredicate:[NSPredicate predicateWithFormat:@"name == %@ OR name == %@ OR name == %@",kFineDining,kSteakHouse,kSeaFoodRestaurant]];
         favoriteArray = [[NSArray alloc] initWithObjects:kFineDining,kSteakHouse,kSeaFoodRestaurant, nil];
     } else if (([aString isEqualToString:kStudent])) {
-//    [request setPredicate:[NSPredicate predicateWithFormat:@"name == %@ OR name == %@ OR name == %@",kBakery,kBistro,kFastFoodRest,kTakeOut,kSnackBar,kPub,kBrewPub]];
                 favoriteArray = [[NSArray alloc] initWithObjects:kBakery,kBistro,kFastFoodRest,kTakeOut,kSnackBar,kPub,kBrewPub, nil];
     }else if (([aString isEqualToString:kTourist])) {
-//    [request setPredicate:[NSPredicate predicateWithFormat:@"name == %@ OR name == %@ OR name == %@",kCoffeehouse,kFastFoodRest,kHeuriger,kSnackBar,kTakeOut]];
                 favoriteArray = [[NSArray alloc] initWithObjects:kCoffeehouse,kFastFoodRest,kHeuriger,kSnackBar,kTakeOut, nil];
     }else if (([aString isEqualToString:kFamily])) {
-//    [request setPredicate:[NSPredicate predicateWithFormat:@"name == %@ OR name == %@ OR name == %@",kCounterService,kFoodCourt,kPizzeria]];
                 favoriteArray = [[NSArray alloc] initWithObjects:kCounterService,kFoodCourt,kPizzeria, nil];
     }else if (([aString isEqualToString:kAmbianceLover])) {
-//    [request setPredicate:[NSPredicate predicateWithFormat:@"name == %@ OR name == %@ OR name == %@",kRunningSushi,kOuzeriaTavern,kBrewPub,kFineDining,kOsteria]];
                 favoriteArray = [[NSArray alloc] initWithObjects:kRunningSushi,kOuzeriaTavern,kBrewPub,kFineDining,kOsteria, nil];
     }else{
-//    [request setPredicate:[NSPredicate predicateWithFormat:@"name == %@ OR name == %@ OR name == %@",kBakery,kFoodCourt,kCounterService]];
                 favoriteArray = [[NSArray alloc] initWithObjects:kBakery,kFoodCourt,kCounterService, nil];
     }
-    
-
-//    NSError *error;
-//    NSArray *array = [moc executeFetchRequest:request error:&error];
-    
+     
     return favoriteArray;
 
+}
+
+-(NSArray*)getFavoriteCuisinesForStereotype:(NSString*)aString{
+    
+
+    NSArray *favoriteArray;
+    if ([aString isEqualToString:kGourmet])
+    {
+        favoriteArray = [[NSArray alloc] initWithObjects:kItalian,kWorld,kFrench,kSpanish,kWorld,kTurkish, nil];
+    } else if (([aString isEqualToString:kStudent])) {
+        favoriteArray = [[NSArray alloc] initWithObjects:kTurkish,kAustrian,kItalian,kMexica,kThailand,kChinese,kEnglish,kIrish, nil];
+    }else if (([aString isEqualToString:kTourist])) {
+        favoriteArray = [[NSArray alloc] initWithObjects:kAustrian,kWorld,kAmerican,kItalian,kJapan, nil];
+    }else if (([aString isEqualToString:kFamily])) {
+        favoriteArray = [[NSArray alloc] initWithObjects:kAmerican,kArgentina,kWorld,kAustrian, nil];
+    }else if (([aString isEqualToString:kAmbianceLover])) {
+        favoriteArray = [[NSArray alloc] initWithObjects:kGreek,kThailand,kIrish,kMexica, nil];
+    }else{
+        favoriteArray = [[NSArray alloc] initWithObjects:kChinese,kJapan,kKorea,kThailand,kWorld, nil];
+    }
+    
+    return favoriteArray;
 }
 
 

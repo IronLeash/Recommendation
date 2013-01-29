@@ -48,6 +48,9 @@
 
 //Favorite Categories
 -(NSArray*)getFavoriteCagetoriesForStereotype:(NSString*)aString;
+//Favorite Cuisines
+-(NSArray*)getFavoriteCuisinesForStereotype:(NSString*)aString;
+
 
 
 //Users

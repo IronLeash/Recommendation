@@ -88,11 +88,12 @@ static PreferencesManager* preferencesManager = nil;
     double vegEntrophy= [[entrophyDicitonary objectForKey:kVegaterian] doubleValue];
     double categoryEntrophy= [[entrophyDicitonary objectForKey:kCategory] doubleValue];
     double cuisineEntrophy= [[entrophyDicitonary objectForKey:kCuisine] doubleValue];
-    double locationEntrophy= [[entrophyDicitonary objectForKey:kLocation] doubleValue];
+//    double locationEntrophy= [[entrophyDicitonary objectForKey:kLocation] doubleValue];
     double smokingEntrophy= [[entrophyDicitonary objectForKey:kSmoking] doubleValue];
+    double carPArkEntrophy= [[entrophyDicitonary objectForKey:kCarPark] doubleValue];
     
 
-    double total = priceEntropy +gardenEntropy+liveMusicEntrophy+childEntropy+vegEntrophy+categoryEntrophy+cuisineEntrophy+locationEntrophy+smokingEntrophy;
+    double total = priceEntropy +gardenEntropy+liveMusicEntrophy+childEntropy+vegEntrophy+categoryEntrophy+cuisineEntrophy+carPArkEntrophy+smokingEntrophy;
 
     //Normalize
     priceEntropy        /= total;
@@ -102,8 +103,9 @@ static PreferencesManager* preferencesManager = nil;
     vegEntrophy         /= total;
     categoryEntrophy    /= total;
     cuisineEntrophy     /= total;
-    locationEntrophy    /= total;
+//    locationEntrophy    /= total;
     smokingEntrophy     /= total;
+    carPArkEntrophy     /= total;
 
      
     //Correlations
@@ -122,19 +124,24 @@ static PreferencesManager* preferencesManager = nil;
     double vegateriancorrelation    =   [StatisticsLibrary pearsonCorreleationBetweenArray1:
                                          [restaurantVauesDicitonary objectForKey:kVegaterian] andArray2:weightedAverageArray];
     
-    
+    double carParkCorrelation       =   [StatisticsLibrary pearsonCorreleationBetweenArray1:
+                                             [restaurantVauesDicitonary objectForKey:kCarPark] andArray2:weightedAverageArray];
+        
+        
     //Take Absolute Values
     priceRangeCorrelation   = ABS(priceRangeCorrelation);
     gardenCorrelation       = ABS(gardenCorrelation);
     liveMusicCorelation     = ABS(liveMusicCorelation);
     childFiendlyCorrelation = ABS(childFiendlyCorrelation);
     vegateriancorrelation   = ABS(vegateriancorrelation);
+    carParkCorrelation      = ABS(carParkCorrelation);
 
+        
     //Cramers V for nominal attributes
     
     double categoryyCramer = [StatisticsLibrary cramersVforAttribute:[[PreferencesManager sharedInstance] contingencyMatrixForAttribute:@"Category" OfUser:aUser]];
     double cuisineCramer = [StatisticsLibrary cramersVforAttribute:[[PreferencesManager sharedInstance] contingencyMatrixForAttribute:@"Cuisine" OfUser:aUser]];
-    double locationCramer = [StatisticsLibrary cramersVforAttribute:[[PreferencesManager sharedInstance] contingencyMatrixForAttribute:@"Location" OfUser:aUser]];
+//    double locationCramer = [StatisticsLibrary cramersVforAttribute:[[PreferencesManager sharedInstance] contingencyMatrixForAttribute:@"Location" OfUser:aUser]];
     double smokingCramer = [StatisticsLibrary cramersVforAttribute:[[PreferencesManager sharedInstance] contingencyMatrixForAttribute:@"Smoking" OfUser:aUser]];
 
     
@@ -144,35 +151,37 @@ static PreferencesManager* preferencesManager = nil;
     double gardenWeight         = (gardenCorrelation*(1-entrophyWeight)) + (gardenEntropy*entrophyWeight);
     double liveMusicWeight      = (liveMusicCorelation*(1-entrophyWeight))+(liveMusicEntrophy*entrophyWeight);
     double childFriendlyWeight  = (childFiendlyCorrelation*(1-entrophyWeight))+(childEntropy*entrophyWeight);
-    double vegaterianWeight     = (vegateriancorrelation*(1-entrophyWeight))+(vegEntrophy*entrophyWeight);
+//    double vegaterianWeight     = (vegateriancorrelation*(1-entrophyWeight))+(vegEntrophy*entrophyWeight);
     double categoryWeight       = (categoryyCramer*(1-entrophyWeight))+(categoryEntrophy*entrophyWeight);
     double cuisineWeight        = (cuisineCramer*(1-entrophyWeight))+cuisineEntrophy*(entrophyWeight);
-    double locationWeight       = (locationCramer*(1-entrophyWeight))+(locationEntrophy*entrophyWeight);
+//    double locationWeight       = (locationCramer*(1-entrophyWeight))+(locationEntrophy*entrophyWeight);
     double smokingWeight        = (smokingCramer*(1-entrophyWeight))+(smokingEntrophy*entrophyWeight);
-    
+    double carPArkWeigt        = (carParkCorrelation*(1-entrophyWeight))+(carPArkEntrophy*entrophyWeight);
+
         
-    double weighttotal = priceWeight+gardenWeight+liveMusicWeight+childFriendlyWeight+vegaterianWeight+categoryWeight+cuisineWeight+locationWeight+smokingWeight;
+        
+    double weighttotal = priceWeight+gardenWeight+liveMusicWeight+childFriendlyWeight+categoryWeight+cuisineWeight+smokingWeight;
         
     priceWeight          /= weighttotal;
     gardenWeight         /= weighttotal;
     liveMusicWeight      /= weighttotal;
     childFriendlyWeight  /= weighttotal;
-    vegaterianWeight     /= weighttotal;
+//    vegaterianWeight     /= weighttotal;
     categoryWeight       /= weighttotal;
     cuisineWeight        /= weighttotal;
-    locationWeight       /= weighttotal;
+//    locationWeight       /= weighttotal;
     smokingWeight        /= weighttotal;
-    
+    carPArkWeigt        /= weighttotal;
+        
         userWeightDictionary = [NSDictionary dictionaryWithObjects:
                                       [NSArray arrayWithObjects:
                                        [NSNumber numberWithDouble:priceWeight],
                                        [NSNumber numberWithDouble:gardenWeight],
                                        [NSNumber numberWithDouble:liveMusicWeight],
                                        [NSNumber numberWithDouble:childFriendlyWeight],
-                                       [NSNumber numberWithDouble:vegaterianWeight],
                                        [NSNumber numberWithDouble:categoryWeight],
                                        [NSNumber numberWithDouble:cuisineWeight],
-                                       [NSNumber numberWithDouble:locationWeight],
+                                       [NSNumber numberWithDouble:carPArkWeigt],
                                        [NSNumber numberWithDouble:smokingWeight],nil]
                                       
                                                                  forKeys:[NSArray arrayWithObjects:
@@ -180,10 +189,9 @@ static PreferencesManager* preferencesManager = nil;
                                                                           kGarden,
                                                                           kLiveMusic,
                                                                           kChildfriendly,
-                                                                          kVegaterian,
                                                                           kCategory,
                                                                           kCuisine,
-                                                                          kLocation,
+                                                                          kCarPark,
                                                                           kSmoking,nil]];
         
         currentUserPreferenceWeight = [NSDictionary dictionaryWithDictionary:userWeightDictionary];
@@ -210,7 +218,7 @@ static PreferencesManager* preferencesManager = nil;
     for (RestaurantRating *currentRating in positiveRatingsArray)
     {
 #warning you can add a weighting factor according to rating value
-        vegetarian     += [currentRating.restaurant.vegaterian floatValue];
+//        vegetarian     += [currentRating.restaurant.vegaterian floatValue];
         childFriendly  += [currentRating.restaurant.childFriendly floatValue];
         liveMusic      += [currentRating.restaurant.liveMusic floatValue];
         garden         += [currentRating.restaurant.garden floatValue];

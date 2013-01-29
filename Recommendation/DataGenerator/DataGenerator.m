@@ -251,14 +251,13 @@ static  NSManagedObjectContext *moc;
                     int location = arc4random() %(15);
                     
                     currentUser.userid      = [NSString stringWithFormat:@"User %@",[NSNumber numberWithInt:currentUserIndex]];
-                    currentUser.age         = [NSNumber numberWithInt:[DataGenerationRulesUser userAgePredictionFor:currentStereotype]];
-                    currentUser.gender      = [NSNumber numberWithInt:gender];
+//                    currentUser.age         = [NSNumber numberWithInt:[DataGenerationRulesUser userAgePredictionFor:currentStereotype]];
+//                    currentUser.gender      = [NSNumber numberWithInt:gender];
                     currentUser.location    = [NSNumber numberWithInt:location];
                     currentUser.smoker      = [NSNumber numberWithInt:[DataGenerationRulesUser userSmokingPredictionFor:currentStereotype]];
-                    currentUser.vegaterian  = [NSNumber numberWithInt:[DataGenerationRulesUser userVegetarianPredictionFor:currentStereotype]];
+//                    currentUser.vegaterian  = [NSNumber numberWithInt:[DataGenerationRulesUser userVegetarianPredictionFor:currentStereotype]];
                     currentUser.stereotype  = currentStereotype;
                 
-                    
                     RatingWeight *ratingWeight = [NSEntityDescription insertNewObjectForEntityForName:@"RatingWeight" inManagedObjectContext:moc];
                     float accessibility = (arc4random() %(9))+1;
                     float coreService = (arc4random() %(9))+1;
@@ -284,7 +283,6 @@ static  NSManagedObjectContext *moc;
                     currentUser.ratingWeight = ratingWeight;
                     currentUserIndex++;
                     
-
                 }
             }
         }
@@ -329,7 +327,7 @@ static  NSManagedObjectContext *moc;
             currentRestaurant.smoking = [NSNumber numberWithInt:[DataGenerationRulesRestaurant smokingForCategory:currentCateory]];
             currentRestaurant.childFriendly = [NSNumber numberWithInt:[DataGenerationRulesRestaurant childFriendlyForCategory:currentCateory]];
             currentRestaurant.priceRange = [NSNumber numberWithInt:[DataGenerationRulesRestaurant priceForCategory:currentCateory]];
-            currentRestaurant.vegaterian = [NSNumber numberWithInt:[DataGenerationRulesRestaurant vegetarianForCategory:currentCateory]];
+//            currentRestaurant.vegaterian = [NSNumber numberWithInt:[DataGenerationRulesRestaurant vegetarianForCategory:currentCateory]];
         
     }
     }

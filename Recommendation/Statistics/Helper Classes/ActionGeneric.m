@@ -84,7 +84,7 @@
         [liveMusicArray addObject:currentRestaurant.liveMusic];
         [smokingArray addObject:currentRestaurant.smoking];
         [childFriendlyArray addObject:currentRestaurant.childFriendly];
-        [vegaterianArray addObject:currentRestaurant.vegaterian];
+//        [vegaterianArray addObject:currentRestaurant.vegaterian];
     }
     
     NSDictionary *restaurantsAttributesDicitonary = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:priceArray,carParkArray,gardenArray,liveMusicArray,childFriendlyArray,vegaterianArray,smokingArray, nil]
@@ -171,7 +171,7 @@
 
     NSMutableArray *sortedArray = [[NSMutableArray alloc] initWithCapacity:[anArray count]];
 
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"self.distance" ascending:YES];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"self.rating" ascending:NO];
 
     [sortedArray addObjectsFromArray:[anArray sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]]];
     

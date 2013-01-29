@@ -23,6 +23,14 @@ static NSArray *favoriteAmbianceLoverCategories;
 static NSArray *favoriteVegaterianCategories;
 
 
+static NSArray *favoriteStudentCuisines;
+static NSArray *favoriteTouriestCuisines;
+static NSArray *favoriteGourmetCuisines;
+static NSArray *favoriteFamilyCuisines;
+static NSArray *favoriteAmbianceLoverCuisines;
+static NSArray *favoriteVegaterianCuisines;
+
+
 #pragma mark - Shared Instance
 #pragma mark -
 +(DataGenerationRulesRating*)sharedInstance;
@@ -39,6 +47,13 @@ static NSArray *favoriteVegaterianCategories;
             favoriteFamilyCategories =[[NSArray alloc] initWithArray:[[DataFetcher sharedInstance] getFavoriteCagetoriesForStereotype:kFamily]];
             favoriteAmbianceLoverCategories =[[NSArray alloc] initWithArray:[[DataFetcher sharedInstance] getFavoriteCagetoriesForStereotype:kAmbianceLover]];
             favoriteVegaterianCategories = [[NSArray alloc] initWithArray:[[DataFetcher sharedInstance] getFavoriteCagetoriesForStereotype:kVegaterian]];
+            
+            favoriteStudentCuisines     = [[NSArray alloc] initWithArray:[[DataFetcher sharedInstance] getFavoriteCuisinesForStereotype:kStudent]];
+            favoriteTouriestCuisines    = [[NSArray alloc] initWithArray:[[DataFetcher sharedInstance] getFavoriteCuisinesForStereotype:kTourist]];
+            favoriteGourmetCuisines     = [[NSArray alloc] initWithArray:[[DataFetcher sharedInstance] getFavoriteCuisinesForStereotype:kGourmet]];
+            favoriteFamilyCuisines      = [[NSArray alloc] initWithArray:[[DataFetcher sharedInstance] getFavoriteCuisinesForStereotype:kFamily]];
+            favoriteAmbianceLoverCuisines = [[NSArray alloc] initWithArray:[[DataFetcher sharedInstance] getFavoriteCuisinesForStereotype:kAmbianceLover]];
+            favoriteVegaterianCuisines  = [[NSArray alloc] initWithArray:[[DataFetcher sharedInstance] getFavoriteCuisinesForStereotype:kVegaterian]];
             
             dataGenerationRulesRating = [[self alloc] init];
 
@@ -79,54 +94,57 @@ static NSArray *favoriteVegaterianCategories;
     int serviceRating = (arc4random() %(10))+1;
     int tangiblesRating = (arc4random() %(10))+1;
     
-    BOOL favoriteRest = NO;
-    NSSet *favoriteSet;
-    NSSet *categorySet = [NSSet setWithObject:aRest.category];
+    double categoryFactor   =[[DataGenerationRulesRating sharedInstance] categoryFactor:aRest ofUser:aUser];
+    double cuisineFactor    =[[DataGenerationRulesRating sharedInstance] cuisineFactor:aRest ofUser:aUser];
     
-
-    if ([aUser.stereotype isEqualToString:kStudent]) {
-        favoriteSet = [NSSet setWithArray:favoriteStudentCategories];
-        favoriteSet = [[NSSet alloc] initWithArray:favoriteStudentCategories];
-    }else if ([aUser.stereotype isEqualToString:kGourmet]){
-        favoriteSet = [[NSSet alloc] initWithArray:favoriteGourmetCategories];
-    }else if ([aUser.stereotype isEqualToString:kAmbianceLover]){
-        favoriteSet = [[NSSet alloc] initWithArray:favoriteAmbianceLoverCategories];
-    }else if ([aUser.stereotype isEqualToString:kFamily]){
-        favoriteSet = [[NSSet alloc] initWithArray:favoriteFamilyCategories];
-    }else if ([aUser.stereotype isEqualToString:kTourist]){
-        favoriteSet = [[NSSet alloc] initWithArray:favoriteTouriestCategories];
-    }else {
-        favoriteSet = [[NSSet alloc] initWithArray:favoriteVegaterianCategories];
-    }
     
-
-
-    if ([categorySet isSubsetOfSet:favoriteSet]) {
-        favoriteRest = YES;
-    }
-
     
-    if (favoriteRest) {
-        accessibilityRating = (arc4random() %(6))+5;
+    if (categoryFactor>0 && cuisineFactor >0) {
+        accessibilityRating = (arc4random() %(5))+6;
+        coreServiceRating = (arc4random() %(5))+6;
+        personalRating = (arc4random() %(5))+6;
+        serviceRating = (arc4random() %(5))+6;
+        tangiblesRating = (arc4random() %(5))+6;
+    }else if (categoryFactor < 0 || cuisineFactor < 0){
+
+        accessibilityRating = (arc4random() %(7))+5;
         coreServiceRating = (arc4random() %(6))+5;
-        personalRating = (arc4random() %(7))+4;
-        serviceRating = (arc4random() %(7))+4;
-        tangiblesRating = (arc4random() %(7))+4;
-
+        personalRating = (arc4random() %(6))+5;
+        serviceRating = (arc4random() %(6))+5;
+        tangiblesRating = (arc4random() %(6))+5;
+    }else{
+        accessibilityRating = (arc4random() %(7))+1;
+        coreServiceRating = (arc4random() %(7))+1;
+        personalRating = (arc4random() %(7))+1;
+        serviceRating = (arc4random() %(7))+1;
+        tangiblesRating = (arc4random() %(7))+1;
     }
+    
 
+    
     double priceFactor          = [[DataGenerationRulesRating sharedInstance] priceFactor:aRest ofUser:aUser];
     double childFactor          = [[DataGenerationRulesRating sharedInstance] childFriendly:aRest ofUser:aUser];
     double gardenFactor         = [[DataGenerationRulesRating sharedInstance] gardenFactor:aRest ofUser:aUser];
-    double vegaterianFactor     = [[DataGenerationRulesRating sharedInstance] vegaterianFactor:aRest ofUser:aUser];
+    double smokingfactor        = [[DataGenerationRulesRating sharedInstance] smokingFactor:aRest ofUser:aUser];
+    double carParkfactor        = [[DataGenerationRulesRating sharedInstance] carParkFactor:aRest ofUser:aUser];
     double liveMusicFactor      = [[DataGenerationRulesRating sharedInstance] liveMusicFactor:aRest ofUser:aUser];
 
 #warning seperate garden factor from personal rating
-    accessibilityRating *=(priceFactor*childFactor*gardenFactor*vegaterianFactor);
-    coreServiceRating   *=(priceFactor*childFactor*gardenFactor*vegaterianFactor*liveMusicFactor);
-    personalRating      *=(priceFactor*childFactor*gardenFactor*vegaterianFactor);
-    serviceRating       *=(priceFactor*childFactor*gardenFactor*vegaterianFactor*liveMusicFactor);
-    tangiblesRating     *=(priceFactor*childFactor*gardenFactor*vegaterianFactor*liveMusicFactor);
+    
+    
+    double totalShot = priceFactor+childFactor+gardenFactor+smokingfactor+carParkfactor+liveMusicFactor;
+    
+//    accessibilityRating +=(priceFactor+childFactor*gardenFactor+smokingfactor);
+//    coreServiceRating   +=(priceFactor+childFactor*gardenFactor+liveMusicFactor);
+//    personalRating      +=(priceFactor+childFactor*gardenFactor+smokingfactor);
+//    serviceRating       +=(priceFactor+childFactor+gardenFactor+liveMusicFactor);
+//    tangiblesRating     +=(priceFactor+childFactor+gardenFactor+liveMusicFactor);
+    
+    accessibilityRating +=totalShot;
+    coreServiceRating   +=totalShot;
+    personalRating      +=totalShot;
+    serviceRating       +=totalShot;
+    tangiblesRating     +=totalShot;
     
     if (accessibilityRating > 10) {
         accessibilityRating = 10;
@@ -188,75 +206,143 @@ static NSArray *favoriteVegaterianCategories;
 
 }
 
+-(double)cuisineFactor:(Restaurant*)aRest ofUser:(User*)aUser
+{
+    BOOL favoriteRest = NO;
+    NSSet *favoriteSet;
+    NSSet *cuisineSet = [NSSet setWithObject:aRest.cuisine];
+    
+    
+    if ([aUser.stereotype isEqualToString:kStudent]) {
+        favoriteSet = [NSSet setWithArray:favoriteStudentCuisines];
+    }else if ([aUser.stereotype isEqualToString:kGourmet]){
+        favoriteSet = [[NSSet alloc] initWithArray:favoriteGourmetCuisines];
+    }else if ([aUser.stereotype isEqualToString:kAmbianceLover]){
+        favoriteSet = [[NSSet alloc] initWithArray:favoriteAmbianceLoverCuisines];
+    }else if ([aUser.stereotype isEqualToString:kFamily]){
+        favoriteSet = [[NSSet alloc] initWithArray:favoriteFamilyCuisines];
+    }else if ([aUser.stereotype isEqualToString:kTourist]){
+        favoriteSet = [[NSSet alloc] initWithArray:favoriteTouriestCuisines];
+    }else {
+        favoriteSet = [[NSSet alloc] initWithArray:favoriteVegaterianCuisines];
+    }
+    
 
+    if ([cuisineSet isSubsetOfSet:favoriteSet]) {
+        favoriteRest = YES;
+    }
+    
+    if (favoriteRest) {
+        return 1;
+    }else{
+        return -2;
+    }
+    
+}
+
+-(double)categoryFactor:(Restaurant*)aRest ofUser:(User*)aUser{
+    
+    BOOL favoriteRest = NO;
+    NSSet *favoriteSet;
+    NSSet *categorySet = [NSSet setWithObject:aRest.category];
+    
+    
+    if ([aUser.stereotype isEqualToString:kStudent]) {
+        favoriteSet = [NSSet setWithArray:favoriteStudentCategories];
+        favoriteSet = [[NSSet alloc] initWithArray:favoriteStudentCategories];
+    }else if ([aUser.stereotype isEqualToString:kGourmet]){
+        favoriteSet = [[NSSet alloc] initWithArray:favoriteGourmetCategories];
+    }else if ([aUser.stereotype isEqualToString:kAmbianceLover]){
+        favoriteSet = [[NSSet alloc] initWithArray:favoriteAmbianceLoverCategories];
+    }else if ([aUser.stereotype isEqualToString:kFamily]){
+        favoriteSet = [[NSSet alloc] initWithArray:favoriteFamilyCategories];
+    }else if ([aUser.stereotype isEqualToString:kTourist]){
+        favoriteSet = [[NSSet alloc] initWithArray:favoriteTouriestCategories];
+    }else {
+        favoriteSet = [[NSSet alloc] initWithArray:favoriteVegaterianCategories];
+    }
+    
+    
+    
+    if ([categorySet isSubsetOfSet:favoriteSet]) {
+        favoriteRest = YES;
+    }
+
+    if (favoriteRest) {
+        return 1;
+    }else{
+        return -2;
+    }
+    
+}
 
 #pragma mark - Attribute factors
 -(double)priceFactor:(Restaurant*)aRest ofUser:(User*)aUser{
 
-    double priceFactor = 1;
+    double priceFactor = 0;
 
     //Price
     if ([aUser.stereotype isEqualToString:kStudent]) {
         
         if ([aRest.priceRange isEqualToNumber:[NSNumber numberWithInt:0]]) {
-            priceFactor = 1.3;
+            priceFactor = 1;
         } else if ([aRest.priceRange isEqualToNumber:[NSNumber numberWithInt:1]]) {
-            priceFactor = 1.1;
+            priceFactor = 0;
         }else if ([aRest.priceRange isEqualToNumber:[NSNumber numberWithInt:2]]) {
-            priceFactor = 0.8;
-        }else {
-            priceFactor = 0.7;
+            priceFactor = -1;
+        }else{
+            priceFactor = -1.5;
         }
         
     }else if ([aUser.stereotype isEqualToString:kGourmet]){
         
         if ([aRest.priceRange isEqualToNumber:[NSNumber numberWithInt:0]]) {
-            priceFactor = 0.6;
+            priceFactor = -0.5;
         } else if ([aRest.priceRange isEqualToNumber:[NSNumber numberWithInt:1]]) {
-            priceFactor = 0.8;
+            priceFactor = -0.2;
         }else if ([aRest.priceRange isEqualToNumber:[NSNumber numberWithInt:2]]) {
             priceFactor = 1;
         }else {
-            priceFactor = 1.2;
+            priceFactor = 1.5;
         }
         
     }else if ([aUser.stereotype isEqualToString:kAmbianceLover]){
         
         if ([aRest.priceRange isEqualToNumber:[NSNumber numberWithInt:0]]) {
-            priceFactor = 0.7;
+            priceFactor = -0.5;
         } else if ([aRest.priceRange isEqualToNumber:[NSNumber numberWithInt:1]]) {
-            priceFactor = 0.9;
+            priceFactor = 0;
         }else if ([aRest.priceRange isEqualToNumber:[NSNumber numberWithInt:2]]) {
-            priceFactor = 1;
+            priceFactor = 0.5;
         }else {
-            priceFactor = 1.2;
+            priceFactor = 1;
         }
         
     }else if ([aUser.stereotype isEqualToString:kFamily]){
         
         if ([aRest.priceRange isEqualToNumber:[NSNumber numberWithInt:0]]) {
-            priceFactor = 1.2;
+            priceFactor = 0.5;
         } else if ([aRest.priceRange isEqualToNumber:[NSNumber numberWithInt:1]]) {
-            priceFactor = 1;
+            priceFactor = 0.25;
         }else if ([aRest.priceRange isEqualToNumber:[NSNumber numberWithInt:2]]) {
-            priceFactor = 0.9;
+            priceFactor = -0.75;
         }else {
-            priceFactor = 0.8;
+            priceFactor = -1;
         }
     }else if ([aUser.stereotype isEqualToString:kTourist]){
         
         if ([aRest.priceRange isEqualToNumber:[NSNumber numberWithInt:0]]) {
             priceFactor = 1;
         } else if ([aRest.priceRange isEqualToNumber:[NSNumber numberWithInt:1]]) {
-            priceFactor = 1;
+            priceFactor = 0;
         }else if ([aRest.priceRange isEqualToNumber:[NSNumber numberWithInt:2]]) {
-            priceFactor = 0.9;
+            priceFactor = -0.5;
         }else {
-            priceFactor = 0.8;
+            priceFactor = -1;
         }
         
     }else {
-        priceFactor = 1;
+        priceFactor = 0;
     }
 
     return priceFactor;
@@ -269,22 +355,22 @@ static NSArray *favoriteVegaterianCategories;
     if ([aRest.childFriendly isEqualToNumber:[NSNumber numberWithInt:0]]) {
     
         if ([aUser.stereotype isEqualToString:kFamily]) {
-            childFriendlyFactor = 0.3;
+            childFriendlyFactor = -1;
         }else if ([aUser.stereotype isEqualToString:kAmbianceLover]){
-            childFriendlyFactor = 1.2;
+            childFriendlyFactor = 0.25;
         }else
         {
-            childFriendlyFactor = 1;
+            childFriendlyFactor = 0;
         }
         
     }else{
     
         if ([aUser.stereotype isEqualToString:kFamily]) {
-            childFriendlyFactor = 1.4;
+            childFriendlyFactor = +2;
         }else if ([aUser.stereotype isEqualToString:kGourmet] || [aUser.stereotype isEqualToString:kAmbianceLover]){
-            childFriendlyFactor = 0.7;
+            childFriendlyFactor = -1;
         }else{
-            childFriendlyFactor = 1;
+            childFriendlyFactor = 0;
         }
 
     }
@@ -297,50 +383,51 @@ static NSArray *favoriteVegaterianCategories;
 
     if ([aRest.garden isEqualToNumber:[NSNumber numberWithInt:1]]) {
         
-        if ([aUser.stereotype isEqualToString:kFamily]) {
-            gardenFactor = 1.2;
-        }else if ([aUser.stereotype isEqualToString:kAmbianceLover]){
-            gardenFactor = 1.1;
-        }else
-        {
-            gardenFactor = 1;
-        }
+        gardenFactor = 1;
         
     }else{
         
-        if ([aUser.stereotype isEqualToString:kFamily] || [aUser.stereotype isEqualToString:kAmbianceLover]) {
-            gardenFactor = 0.9;
-        }else{
-            gardenFactor = 1;
-        }
+        gardenFactor = -0.25;
         
     }
     return gardenFactor;
 }
 
--(double)vegaterianFactor:(Restaurant*)aRest ofUser:(User*)aUser{
-
-    double vegaterianRating = 0;
 
 
-    if ([aUser.vegaterian isEqualToNumber:[NSNumber numberWithInt:1]]) {
-        
-        if ([aRest.vegaterian isEqualToNumber:[NSNumber numberWithInt:1]]) {
-            vegaterianRating = 1.3;
-        }else{
-            vegaterianRating = 1;
-        }
-        
-    }else{
+-(double)smokingFactor:(Restaurant*)aRest ofUser:(User*)aUser{
     
-        if ([aRest.vegaterian isEqualToNumber:[NSNumber numberWithInt:0]]) {
-            vegaterianRating = 1;
+    double smokingFactor = 0;
+    
+    if ([aRest.smoking isEqualToNumber:[NSNumber numberWithInt:0]]) {
+        
+        if ([aUser.smoker isEqualToNumber:[NSNumber numberWithInt:0]]) {
+            smokingFactor = 1;
         }else{
-            vegaterianRating = 0.6;
+            smokingFactor = -2;
         }
+        
+    }else if ([aRest.smoking isEqualToNumber:[NSNumber numberWithInt:1]]){
+        
+        if ([aUser.smoker isEqualToNumber:[NSNumber numberWithInt:0]]) {
+
+            smokingFactor = 0;
+        }else{
+            smokingFactor = 2;
+        }
+        
+    
+    }else{
+        
+        if ([aUser.smoker isEqualToNumber:[NSNumber numberWithInt:0]]) {
+            smokingFactor = 0.25;
+        }else{
+            smokingFactor = 0.5;
+        }
+    
     }
     
-    return vegaterianRating;
+    return smokingFactor;
 }
 
 -(double)liveMusicFactor:(Restaurant*)aRest ofUser:(User*)aUser{
@@ -352,29 +439,29 @@ static NSArray *favoriteVegaterianCategories;
         
         if ([aRest.liveMusic isEqualToNumber:[NSNumber numberWithInt:1]])
         {
-            liveMusicFactor = 1.3;
+            liveMusicFactor = 1;
         }else{
 
-            liveMusicFactor = 1;
+            liveMusicFactor = 0;
         }
         
     }else if ([aUser.stereotype isEqualToString:kGourmet]){
         
         if ([aRest.liveMusic isEqualToNumber:[NSNumber numberWithInt:1]])
         {
-            liveMusicFactor = 1.1;
+            liveMusicFactor = 0.25;
         }else{
             
-            liveMusicFactor = 1;
+            liveMusicFactor = 0;
         }
         
     }else{
         if ([aRest.liveMusic isEqualToNumber:[NSNumber numberWithInt:1]])
         {
-            liveMusicFactor = 1.2;
+            liveMusicFactor = 0.5;
         }else{
             
-            liveMusicFactor = 1;
+            liveMusicFactor = -0.35;
         }
     
     }
@@ -382,6 +469,31 @@ static NSArray *favoriteVegaterianCategories;
     return liveMusicFactor;
 }
 
+-(double)carParkFactor:(Restaurant*)aRest ofUser:(User*)aUser{
+    
+    double carParkFactor = 0;
+    
+    if ([aRest.carPark isEqualToNumber:[NSNumber numberWithInt:0]]) {
+        
+        if ([aUser.stereotype isEqualToString:kFamily] ||[aUser.stereotype isEqualToString:kGourmet]) {
+            carParkFactor = -1;
+        }else
+        {
+            carParkFactor = 0;
+        }
+        
+    }else{
+        
+        if ([aUser.stereotype isEqualToString:kFamily] ||[aUser.stereotype isEqualToString:kGourmet]) {
+            carParkFactor = 1;
+        }else
+        {
+            carParkFactor = 0.25;
+        }
+        
+    }
+    return carParkFactor;
+}
 
 
 

@@ -18,11 +18,10 @@
 -(NSDictionary*)ratingsForRestaruant:(Restaurant*)aRest ofUser:(User*)aUser;
 
 -(double)priceFactor:(Restaurant*)aRest ofUser:(User*)aUser;
--(double)smokingFactor:(Restaurant*)aRest ofUser:(User*)aUser;
+//-(double)smokingFactor:(Restaurant*)aRest ofUser:(User*)aUser;
 -(double)childFriendly:(Restaurant*)aRest ofUser:(User*)aUser;
 -(double)gardenFactor:(Restaurant*)aRest ofUser:(User*)aUser;
--(double)vegaterianFactor:(Restaurant*)aRest ofUser:(User*)aUser;
-
+-(double)liveMusicFactor:(Restaurant*)aRest ofUser:(User*)aUser;
 
 
 +(DataGenerationRulesRating*)sharedInstance;

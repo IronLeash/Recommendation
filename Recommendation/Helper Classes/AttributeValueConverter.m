@@ -76,12 +76,9 @@
 
 +(NSString*)userDescription:(User*)anUser{
         
-    NSString *description = [NSString stringWithFormat:@"Current user is %@ (%@). User is %@ years old and lives in %@. district.User is a %@ and %@.",anUser.userid,
-                             [AttributeValueConverter genderName:anUser.gender]
-                             ,anUser.age,
+    NSString *description = [NSString stringWithFormat:@"Current user is %@. User lives in %@. district.User is a %@.",anUser.userid,
                              anUser.location,
-                             [AttributeValueConverter smokerValue:anUser.smoker],
-                             [AttributeValueConverter vegaterianVaue:anUser.vegaterian]];
+                             [AttributeValueConverter smokerValue:anUser.smoker]];
 
     return description;
 }

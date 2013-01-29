@@ -2,8 +2,8 @@
 //  Restaurant.h
 //  Recommendation
 //
-//  Created by Ilker Baltaci on 12/19/12.
-//  Copyright (c) 2012 ilker. All rights reserved.
+//  Created by ilker on 28.01.13.
+//  Copyright (c) 2013 ilker. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -23,7 +23,6 @@
 @property (nonatomic, retain) NSNumber * priceRange;
 @property (nonatomic, retain) NSNumber * smoking;
 @property (nonatomic, retain) NSString * uniqueName;
-@property (nonatomic, retain) NSNumber * vegaterian;
 @property (nonatomic, retain) NSSet *ratings;
 @end
 

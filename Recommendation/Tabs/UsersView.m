@@ -55,25 +55,12 @@
         
         return [NSString stringWithFormat:@"User %ld",row];
         
-    }else if([tableColumn.identifier isEqualToString:@"age"]) {
+    }else if([tableColumn.identifier isEqualToString:@"hasChild"]) {
         
-        return currentUser.age;
-    }else if([tableColumn.identifier isEqualToString:@"gender"]){
+        return @"hasChild";
+    }else if([tableColumn.identifier isEqualToString:@"hasCar"]){
         
-        switch ([(NSNumber*)currentUser.gender intValue]) {
-            case 0:
-            {
-                return @"Female";
-                break;
-            }
-            case 1:
-            {
-                return @"Male";
-                break;
-            }
-            default:
-                break;
-        }
+        return @"Car";
     }else if([tableColumn.identifier isEqualToString:@"location"]){
         
         return currentUser.location;
@@ -81,31 +68,11 @@
         
         return currentUser.smoker;
         
-    }else if([tableColumn.identifier isEqualToString:@"vegaterian"]){
-        
-        switch ([(NSNumber*)currentUser.vegaterian intValue]) {
-            case 0:
-            {
-                return @"No";
-                break;
-            }
-            case 1:
-            {
-                return @"Yes";
-                break;
-            }
-            default:
-                break;
-        }
-        
     }else if([tableColumn.identifier isEqualToString:@"stereotype"]){
         
         return currentUser.stereotype;
     }
         
-        
-    
-
     return @"N.A";
 
 }

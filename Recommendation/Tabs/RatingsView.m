@@ -84,7 +84,6 @@ NSString *userSelectedNotification = @"aUserSelectedNotificaiton";
     currentlySelectedUser = [usersArray objectAtIndex:[usersTableView selectedRow]];
     
     //Change preferences
-    
     preferencesDictionary = [NSMutableDictionary dictionaryWithDictionary: [[PreferencesManager sharedInstance] getPreferencesDictionaryForUser:currentlySelectedUser]];
     
     //Change weights
@@ -118,20 +117,20 @@ NSString *userSelectedNotification = @"aUserSelectedNotificaiton";
     [_gardenTextField setStringValue: [[preferencesDictionary objectForKey:kGarden] stringValue]];
     [_liveMusicTextfield setStringValue: [[preferencesDictionary objectForKey:kLiveMusic] stringValue]];
     [_childFriendlyTextfield setStringValue: [[preferencesDictionary objectForKey:kChildfriendly] stringValue]];
-    [_vegetarianTextfield setStringValue: [[preferencesDictionary objectForKey:kVegaterian] stringValue]];
+//    [_vegetarianTextfield setStringValue: [[preferencesDictionary objectForKey:kVegaterian] stringValue]];
     [_carParkTextField setStringValue:[[preferencesDictionary objectForKey:kCarPark] stringValue]];
     
     //Set preferenceWeights
     [_categoryWeight setStringValue:[[preferencesWeightDictionary objectForKey:kCategory] stringValue]];
     [_cuisineWeight setStringValue:[[preferencesWeightDictionary objectForKey:kCuisine] stringValue]];
-    [_locationWeight setStringValue:[[preferencesWeightDictionary objectForKey:kLocation] stringValue]];
+//    [_locationWeight setStringValue:[[preferencesWeightDictionary objectForKey:kLocation] stringValue]];
     [_smokingWeight setStringValue:[[preferencesWeightDictionary objectForKey:kSmoking] stringValue]];
     [_priceRangeWeight setStringValue:[[preferencesWeightDictionary objectForKey:kPrice] stringValue]];
     [_gardenWeight setStringValue:[[preferencesWeightDictionary objectForKey:kGarden] stringValue]];
     [_liveMusicWeight setStringValue:[[preferencesWeightDictionary objectForKey:kLiveMusic] stringValue]];
     [_childFriendlyWeight setStringValue:[[preferencesWeightDictionary objectForKey:kChildfriendly] stringValue]];
-    [_vegaterianWeight setStringValue:[[preferencesWeightDictionary objectForKey:kVegaterian] stringValue]];
-        
+//    [_vegaterianWeight setStringValue:[[preferencesWeightDictionary objectForKey:kVegaterian] stringValue]];
+    
     [self updateRatingTable];
     
     //Post Notification for the RecommendationView
