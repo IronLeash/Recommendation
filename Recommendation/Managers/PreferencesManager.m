@@ -71,7 +71,7 @@ static PreferencesManager* preferencesManager = nil;
 -(NSDictionary*)getUserPreferenceWeightDicitonary:(User*)aUser{
 
     NSDictionary *userWeightDictionary;
-    
+
     if ([aUser.userid isEqualToString:userId] && recalculateWeights) {
 
         return currentUserPreferenceWeight;

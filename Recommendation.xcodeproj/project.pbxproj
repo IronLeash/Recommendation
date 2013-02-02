@@ -26,6 +26,7 @@
 		5253762816B715CE004D6D0E /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 5253762716B715CE004D6D0E /* User.m */; };
 		5253762B16B715CE004D6D0E /* RatingWeight.m in Sources */ = {isa = PBXBuildFile; fileRef = 5253762A16B715CE004D6D0E /* RatingWeight.m */; };
 		5255D9C3166FE8E9003D1734 /* DataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 5255D9C2166FE8E9003D1734 /* DataFetcher.m */; };
+		5266A83316BD74E600C01062 /* EvaluationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5266A83216BD74E600C01062 /* EvaluationManager.m */; };
 		529B7F13165D92D500C72F10 /* UsersView.m in Sources */ = {isa = PBXBuildFile; fileRef = 529B7F12165D92D500C72F10 /* UsersView.m */; };
 		529FAFE81659311000802D22 /* DataGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 529FAFE71659311000802D22 /* DataGenerator.m */; };
 		52A152E416A72F4B0028475D /* AttributeValueConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A152E316A72F4B0028475D /* AttributeValueConverter.m */; };
@@ -87,6 +88,8 @@
 		5253762A16B715CE004D6D0E /* RatingWeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RatingWeight.m; sourceTree = "<group>"; };
 		5255D9C1166FE8E9003D1734 /* DataFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataFetcher.h; sourceTree = "<group>"; };
 		5255D9C2166FE8E9003D1734 /* DataFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataFetcher.m; sourceTree = "<group>"; };
+		5266A83116BD74E600C01062 /* EvaluationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluationManager.h; sourceTree = "<group>"; };
+		5266A83216BD74E600C01062 /* EvaluationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvaluationManager.m; sourceTree = "<group>"; };
 		529B7F11165D92D500C72F10 /* UsersView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsersView.h; sourceTree = "<group>"; };
 		529B7F12165D92D500C72F10 /* UsersView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsersView.m; sourceTree = "<group>"; };
 		529FAFE61659311000802D22 /* DataGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataGenerator.h; sourceTree = "<group>"; };
@@ -163,6 +166,8 @@
 				522B1BB2167E173300720E8D /* RatingsManager.m */,
 				52E4D635168E4ED8002241BB /* RecommendationManager.h */,
 				52E4D636168E4ED8002241BB /* RecommendationManager.m */,
+				5266A83116BD74E600C01062 /* EvaluationManager.h */,
+				5266A83216BD74E600C01062 /* EvaluationManager.m */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -450,6 +455,7 @@
 				5253762516B715CE004D6D0E /* RestaurantRating.m in Sources */,
 				5253762816B715CE004D6D0E /* User.m in Sources */,
 				5253762B16B715CE004D6D0E /* RatingWeight.m in Sources */,
+				5266A83316BD74E600C01062 /* EvaluationManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

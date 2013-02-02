@@ -9,6 +9,16 @@
 #import <Foundation/Foundation.h>
 #import "Restaurant.h"
 
+
+
+typedef enum{
+    truePositive,
+    falsePositive,
+    falseNegative,
+    trueNagative
+}RecommendationClass;
+
+
 @interface Recommendation : NSObject
 {
 
@@ -18,5 +28,7 @@
 @property (assign)               double distance;
 @property (assign)               double rating;
 @property (assign)               double realRating;
+@property (assign)               double difference;
+@property (assign)               RecommendationClass recommendationClass;
 
 @end

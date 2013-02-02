@@ -449,7 +449,6 @@ NSArray *returnArray =[[NSArray alloc] initWithObjects:[NSNumber numberWithInt:1
 
 -(NSArray*)getFavoriteCuisinesForStereotype:(NSString*)aString{
     
-
     NSArray *favoriteArray;
     if ([aString isEqualToString:kGourmet])
     {
@@ -469,13 +468,11 @@ NSArray *returnArray =[[NSArray alloc] initWithObjects:[NSNumber numberWithInt:1
     return favoriteArray;
 }
 
-
 #pragma mark - Users
 -(NSArray*)getUsers{
     
     AppDelegate *appDelegate = (AppDelegate *)[NSApp delegate];
     moc= [appDelegate managedObjectContext];
-    
     
     /*
     NSArray *returnArray;

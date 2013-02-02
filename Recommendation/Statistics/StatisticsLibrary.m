@@ -179,7 +179,7 @@
     }
     
     double cramersV = sqrt(chiSquare / (totalOccurences*degree));
-    NSLog(@"Cramer %f",cramersV);
+//    NSLog(@"Cramer %f",cramersV);
     return cramersV;
 }
 
@@ -224,7 +224,7 @@
             [temporaryArray removeAllObjects];
         }
         
-        NSLog(@"Entropty category %f",hCategory);
+//        NSLog(@"Entropty category %f",hCategory);
         
         for (NSString *currentCuisine in allCuisines) {
             [temporaryArray addObjectsFromArray:[[DataFetcher sharedInstance] getRestaurantsofCuisine:currentCuisine]];
@@ -238,7 +238,7 @@
             
             [temporaryArray removeAllObjects];
         }
-        NSLog(@"Entropty cuisine %f",hCuisine);
+//        NSLog(@"Entropty cuisine %f",hCuisine);
         
         for (NSNumber *currentLocation in allLocations) {
             [temporaryArray addObjectsFromArray:[[DataFetcher sharedInstance] getRestaurantsInLocation:currentLocation]];
@@ -252,7 +252,7 @@
             
             [temporaryArray removeAllObjects];
         }
-        NSLog(@"Entropty Location %f",hLocation);
+//        NSLog(@"Entropty Location %f",hLocation);
         
         for (int i = 0; i < 4 ; i++ ) {
             [temporaryArray addObjectsFromArray:[[DataFetcher sharedInstance] getRestaurantsForPriceRange:[NSNumber numberWithInt:i]]];
@@ -266,7 +266,7 @@
             
             [temporaryArray removeAllObjects];
         }
-        NSLog(@"Entropty PriceRange %f",hPriceRange);
+//        NSLog(@"Entropty PriceRange %f",hPriceRange);
 
         for (int i = 0; i < 3 ; i++ ) {
             [temporaryArray addObjectsFromArray:[[DataFetcher sharedInstance] getRestaurantForSmokingValue:[NSNumber numberWithInt:i]]];
@@ -280,7 +280,7 @@
             
             [temporaryArray removeAllObjects];
         }
-        NSLog(@"Entropty Smoking %f",hSmoking);
+//        NSLog(@"Entropty Smoking %f",hSmoking);
 
         
         for (int i = 0; i < 2 ; i++ ) {
@@ -295,7 +295,7 @@
             
             [temporaryArray removeAllObjects];
         }
-        NSLog(@"Entropty Garden %f",hGarden);
+//        NSLog(@"Entropty Garden %f",hGarden);
 
         
         for (int i = 0; i < 2 ; i++ ) {
@@ -310,7 +310,7 @@
             
             [temporaryArray removeAllObjects];
         }
-        NSLog(@"Entropty LiveMusic %f",hLiveMusic);
+//        NSLog(@"Entropty LiveMusic %f",hLiveMusic);
 
         /*
         for (int i = 0; i < 2 ; i++ ) {
@@ -326,7 +326,7 @@
             [temporaryArray removeAllObjects];
         }
          */
-        NSLog(@"Entropty Vegaterian %f",hVegaterian);
+//        NSLog(@"Entropty Vegaterian %f",hVegaterian);
 
         for (int i = 0; i < 2 ; i++ ) {
             [temporaryArray addObjectsFromArray:[[DataFetcher sharedInstance] getRestaurantForChildFriendly:[NSNumber numberWithInt:i]]];
@@ -340,7 +340,7 @@
             
             [temporaryArray removeAllObjects];
         }
-        NSLog(@"Entropty ChildFriendly %f",hChildFriendly);
+//        NSLog(@"Entropty ChildFriendly %f",hChildFriendly);
 
         for (int i = 0; i < 2 ; i++ ) {
             [temporaryArray addObjectsFromArray:[[DataFetcher sharedInstance] getRestaurantForCarParkValue:[NSNumber numberWithInt:i]]];
@@ -354,7 +354,7 @@
             
             [temporaryArray removeAllObjects];
         }
-        NSLog(@"Entropty Car Park %f",hCardPark);
+//        NSLog(@"Entropty Car Park %f",hCardPark);
         
     }
     

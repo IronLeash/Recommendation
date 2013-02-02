@@ -15,6 +15,7 @@
 #import "Restaurant.h"
 #import "Constants.h"
 #import "PreferencesManager.h"
+#import "RecommendationManager.h"
 
 static RatingsManager *ratingsManager = nil;
 
@@ -195,7 +196,7 @@ static RatingsManager *ratingsManager = nil;
 }
 
 
--(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithCategoryOfrestaurant:(Restaurant*)aRestaurant onlyPositive:(BOOL)aBool{
+-(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithCategoryOfrestaurant:(NSString*)aRestaurantCategory onlyPositive:(BOOL)aBool{
     
     NSArray *userRatings;
     if (aBool) {
@@ -204,7 +205,7 @@ static RatingsManager *ratingsManager = nil;
         userRatings = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser];
     }
 
-    NSPredicate *categoryPredicate = [NSPredicate predicateWithFormat:@"self.restaurant.category==%@",aRestaurant.category];
+    NSPredicate *categoryPredicate = [NSPredicate predicateWithFormat:@"self.restaurant.category==%@",aRestaurantCategory];
     NSArray *filteredArray = [userRatings filteredArrayUsingPredicate:categoryPredicate];
     
     return filteredArray;
@@ -356,23 +357,45 @@ static RatingsManager *ratingsManager = nil;
     NSArray *allCategories = [[DataFetcher sharedInstance] getRestaurantCategories];
     NSMutableArray *favoriteCategories = [NSMutableArray arrayWithCapacity:[allCategories count]];
     
+    
     for (NSString *currentCategory in allCategories)
     {
         FavoriteCategory *curentFavoriteCategory = [[FavoriteCategory alloc] init];
         curentFavoriteCategory.name =currentCategory;
         [favoriteCategories addObject:curentFavoriteCategory];
     }
+
     
-    NSArray *positiveRAtingsArray =  [[RatingsManager sharedInstance] getPositiveRatingsforUser:aUser];
-    float   averagePositveRating =[StatisticsLibrary weightedpositveRatingsMean:positiveRAtingsArray];
+    
+    for (FavoriteCategory *currentFavCategory in favoriteCategories){
+        
+        NSString *currentCategory = currentFavCategory.name;
+        NSArray *restaurantRatingsWithCategory      =  [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser WithCategoryOfrestaurant:currentCategory onlyPositive:NO];
+        float   countBasedRatingForCurrentCategory  =  [[RecommendationManager sharedInstance] countBasedRatingForCategoryOfRestaurant:currentCategory andUser:aUser onlyPositive:NO];
+        float   ratingBasedRatingForCurrentCategory  =  [[RecommendationManager sharedInstance] pastRatingBasedCategoryRatingofRestaurant:currentCategory ForUser:aUser onlyPositive:NO];
+
+        currentFavCategory.totalOccurances = [restaurantRatingsWithCategory count];
+        currentFavCategory.weightedValue    = (countBasedRatingForCurrentCategory*0 + ratingBasedRatingForCurrentCategory*1);
+        
+    }
+    
+    
+    /*
+//    NSArray *positiveRAtingsArray =  [[RatingsManager sharedInstance] getPositiveRatingsforUser:aUser];
+
     
     //Iterate all positive ratings
     for (RestaurantRating *currentRating in positiveRAtingsArray){
         
+
         NSString *likedCategory = currentRating.restaurant.category;
         
         for (FavoriteCategory *favCategory in favoriteCategories) {
+
+            float   *averageRatingForCurrentCategory =  [StatisticsLibrary weightedpositveRatingsMean:positiveRatingsArray];
+            
             if ([favCategory.name isEqualToString:likedCategory]) {
+            
                 favCategory.totalOccurances++;
                 favCategory.ratingtotal += [StatisticsLibrary weightedSumForRating:currentRating];
                 favCategory.weightedValue = [StatisticsLibrary scoreofCategory:favCategory amongRatingNumber:[positiveRAtingsArray count] withAverage:averagePositveRating];
@@ -380,7 +403,7 @@ static RatingsManager *ratingsManager = nil;
         }
     }
     
-    
+    */
     
     //add weighted rating
     

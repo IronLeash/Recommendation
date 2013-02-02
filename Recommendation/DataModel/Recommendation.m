@@ -8,13 +8,14 @@
 
 #import "Recommendation.h"
 
-
 @implementation Recommendation
 
 @synthesize distance;
 @synthesize restaurant;
 @synthesize rating;
 @synthesize realRating;
+@synthesize difference;
+@synthesize recommendationClass;
 
 -(NSString*)description
 {

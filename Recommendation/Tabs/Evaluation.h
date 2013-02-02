@@ -10,4 +10,9 @@
 
 @interface Evaluation : NSObject
 
+
+-(IBAction)calculateEvaluation:(id)sender;
+
+@property (weak) IBOutlet NSTabView *evaluationButton;
+
 @end
