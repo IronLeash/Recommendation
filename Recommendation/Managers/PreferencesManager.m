@@ -103,11 +103,9 @@ static PreferencesManager* preferencesManager = nil;
     vegEntrophy         /= total;
     categoryEntrophy    /= total;
     cuisineEntrophy     /= total;
-//    locationEntrophy    /= total;
     smokingEntrophy     /= total;
     carPArkEntrophy     /= total;
 
-     
     //Correlations
     NSMutableArray *weightedAverageArray = [ActionGeneric weightedAveraRatingsArrayForRatings:userRatings];
     

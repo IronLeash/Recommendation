@@ -158,7 +158,7 @@ static RecommendationManager *recommendationManager;
 //    NSLog(@"ratingBasedCateogry %f",ratingBasedCateogry);
     double ratingBasedCuisine       = [[RecommendationManager sharedInstance] pastRatingBasedCuisineRatingofRestaurant:aRestaurant ForUser:anUser onlyPositive:aBool];
 //    NSLog(@"ratingBasedCuisine %f",ratingBasedCuisine);
-    double ratingBasedLocation      = [[RecommendationManager sharedInstance] pastRatingBasedLocationRatingofRestaurant:aRestaurant ForUser:anUser onlyPositive:aBool];
+//    double ratingBasedLocation      = [[RecommendationManager sharedInstance] pastRatingBasedLocationRatingofRestaurant:aRestaurant ForUser:anUser onlyPositive:aBool];
 //    NSLog(@"ratingBasedLocation %f",ratingBasedLocation);
     double ratingBasedSmoking       = [[RecommendationManager sharedInstance] pastRatingBasedSmokingRatingofRestaurant:aRestaurant ForUser:anUser onlyPositive:aBool];
 //    NSLog(@"ratingBasedSmoking %f",ratingBasedSmoking);

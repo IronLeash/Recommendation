@@ -321,7 +321,6 @@ NSString *userSelectedNotification = @"aUserSelectedNotificaiton";
     //Change tab to recommendation
     [tabview selectTabViewItemAtIndex:3];
     
-
 }
 
 
