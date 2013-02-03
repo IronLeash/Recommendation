@@ -49,7 +49,8 @@ NSString *userSelectedNotification;
     __weak NSTextField *_liveMusicWeight;
     __weak NSTextField *_childFriendlyWeight;
     __weak NSTextField *_vegaterianWeight;
-
+    __weak NSTextField *_carParkWeight;
+    
     __weak NSTextField *_entrophyWeight;
     
     __weak NSPopover *_listPopover;
@@ -113,4 +114,6 @@ NSString *userSelectedNotification;
 @property (weak) IBOutlet NSButton *pastRatingsCheckBox;
 @property (weak) IBOutlet NSTextField *alphaWeight;
 @property (weak) IBOutlet NSTextField *entrophyWeight;
+@property (weak) IBOutlet NSTextField *ratingThresholdTextField;
+@property (weak) IBOutlet NSTextField *carParkWeight;
 @end

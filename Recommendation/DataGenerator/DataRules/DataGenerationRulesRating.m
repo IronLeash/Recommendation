@@ -94,9 +94,14 @@ static NSArray *favoriteVegaterianCuisines;
     int serviceRating = (arc4random() %(10))+1;
     int tangiblesRating = (arc4random() %(10))+1;
     
-    double categoryFactor   =[[DataGenerationRulesRating sharedInstance] categoryFactor:aRest ofUser:aUser];
-    double cuisineFactor    =[[DataGenerationRulesRating sharedInstance] cuisineFactor:aRest ofUser:aUser];
-    
+    double categoryFactor       = [[DataGenerationRulesRating sharedInstance] categoryFactor:aRest ofUser:aUser];
+    double cuisineFactor        = [[DataGenerationRulesRating sharedInstance] cuisineFactor:aRest ofUser:aUser];
+    double priceFactor          = [[DataGenerationRulesRating sharedInstance] priceFactor:aRest ofUser:aUser];
+    double childFactor          = [[DataGenerationRulesRating sharedInstance] childFriendly:aRest ofUser:aUser];
+    double gardenFactor         = [[DataGenerationRulesRating sharedInstance] gardenFactor:aRest ofUser:aUser];
+    double smokingfactor        = [[DataGenerationRulesRating sharedInstance] smokingFactor:aRest ofUser:aUser];
+    double carParkfactor        = [[DataGenerationRulesRating sharedInstance] carParkFactor:aRest ofUser:aUser];
+    double liveMusicFactor      = [[DataGenerationRulesRating sharedInstance] liveMusicFactor:aRest ofUser:aUser];
     
     
     if (categoryFactor>0 && cuisineFactor >0) {
@@ -122,12 +127,7 @@ static NSArray *favoriteVegaterianCuisines;
     
 
     
-    double priceFactor          = [[DataGenerationRulesRating sharedInstance] priceFactor:aRest ofUser:aUser];
-    double childFactor          = [[DataGenerationRulesRating sharedInstance] childFriendly:aRest ofUser:aUser];
-    double gardenFactor         = [[DataGenerationRulesRating sharedInstance] gardenFactor:aRest ofUser:aUser];
-    double smokingfactor        = [[DataGenerationRulesRating sharedInstance] smokingFactor:aRest ofUser:aUser];
-    double carParkfactor        = [[DataGenerationRulesRating sharedInstance] carParkFactor:aRest ofUser:aUser];
-    double liveMusicFactor      = [[DataGenerationRulesRating sharedInstance] liveMusicFactor:aRest ofUser:aUser];
+
 
 #warning seperate garden factor from personal rating
     

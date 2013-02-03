@@ -9,6 +9,12 @@
 #import "Evaluation.h"
 #import "EvaluationManager.h"
 @implementation Evaluation
+@synthesize evaluationButton;
+
+
+-(void)awakeFromNib{
+    positiveRatingThreshold.delegate = self;
+}
 
 
 -(IBAction)calculateEvaluation:(id)sender{
@@ -26,6 +32,15 @@
 -(void)calculateEvaluationBackThreadHandler:(NSNumber*)aNumber{
     
     NSLog(@"MSE : %@",aNumber);
+}
+
+
+
+- (void) controlTextDidChange: (NSNotification *) notification
+{
+    double currentNumner = [[positiveRatingThreshold stringValue] doubleValue];
+    
+    [[EvaluationManager sharedInstance] setPositiveRatingThreshold:currentNumner];
 }
 
 @end

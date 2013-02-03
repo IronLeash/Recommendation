@@ -130,6 +130,7 @@ NSString *userSelectedNotification = @"aUserSelectedNotificaiton";
     [_liveMusicWeight setStringValue:[[preferencesWeightDictionary objectForKey:kLiveMusic] stringValue]];
     [_childFriendlyWeight setStringValue:[[preferencesWeightDictionary objectForKey:kChildfriendly] stringValue]];
 //    [_vegaterianWeight setStringValue:[[preferencesWeightDictionary objectForKey:kVegaterian] stringValue]];
+    [_carParkWeight setStringValue:[[preferencesWeightDictionary objectForKey:kCarPark] stringValue]];
     
     [self updateRatingTable];
     

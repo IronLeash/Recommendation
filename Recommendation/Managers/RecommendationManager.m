@@ -209,6 +209,11 @@ static RecommendationManager *recommendationManager;
 //                    (bothLocation*locationWeight)+
                     (bothSmoking*smokingWeight)+
                     (bothPricerange*priceRangeWeigt));
+    
+    
+    
+    
+
 
     return total;
 }

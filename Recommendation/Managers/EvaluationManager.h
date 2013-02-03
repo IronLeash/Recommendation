@@ -19,8 +19,15 @@
     //false positive rate
     double falsePosiitveRate;
     
-    double numberOfRatings;
-    double numberOfUsers;
+    int numberOfRatings;
+    int numberOfUsers;
+    
+    int numberOfTruePositiveRatings;
+    int numberOfTrueNegativeRatings;
+
+    int numberOfFalseNegativeRatings;
+    int numberOfFalsePositiveRatings;
+    
     double positiveRatingThreshold;
     
 }
@@ -33,4 +40,5 @@
 @property (assign)     double rootMeanSquareError;
 @property (assign)     double meanAbsoluteError;
 
+@property (assign)     double positiveRatingThreshold;
 @end

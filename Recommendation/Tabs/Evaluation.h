@@ -8,7 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Evaluation : NSObject
+@interface Evaluation : NSObject <NSTextFieldDelegate>
+{
+    NSString *positiveRatingThresholdString;
+    IBOutlet NSTextField *positiveRatingThreshold;
+
+}
+
 
 
 -(IBAction)calculateEvaluation:(id)sender;
