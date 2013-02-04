@@ -347,9 +347,9 @@ static RecommendationManager *recommendationManager;
     return prediction;
 }
 
--(double)countBasedRatingForPriceOfRestaurant:(Restaurant*)aRestaurant andUser:(User*)anUser onlyPositive:(BOOL)aBool{
+-(double)countBasedRatingForPriceOfRestaurant:(NSNumber*)aRestaurant andUser:(User*)anUser onlyPositive:(BOOL)aBool{
     
-
+/*
     int minNumber = 0;
     int maxNumber =0;
     
@@ -383,6 +383,9 @@ static RecommendationManager *recommendationManager;
         int currentNumber  =  (int)[[[RatingsManager sharedInstance] getRestaurantRatingsForUser:anUser WithPriceRangeOfrestaurant:aRestaurant onlyPositive:YES] count];
     }
     return prediction;
+
+ */
+    return 0;
 }
 
 
@@ -396,18 +399,20 @@ static RecommendationManager *recommendationManager;
     
     return 1.0 - distanceValue;
      */
-#warning refactor
     return 0;
 }
 
--(double)countbasedCarParkRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser{
+-(double)countbasedCarParkRatingofRestaurant:(NSNumber*)aRestaurant ForUser:(User*)aUser{
 
-    double currentResturantValue  = [aRestaurant.carPark doubleValue];
+    /*
+    double currentResturantValue  = [aRestaurant doubleValue];
     double preferenceValue = [[PreferencesManager sharedInstance] getCarPark:aUser] ;
     
     double distanceValue =  fabs(currentResturantValue-preferenceValue);
     
     return 1.0 - distanceValue;
+     */
+    return 0;
 }
 
 -(double)countbasedLiveMusicRatingofRestaurant:(NSNumber*)aRestaurantLiveMusic ForUser:(User*)aUser{
@@ -463,7 +468,7 @@ static RecommendationManager *recommendationManager;
     return average;
 }
 
--(double)pastRatingBasedCarParkRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser onlyPositive:(BOOL)aBool{
+-(double)pastRatingBasedCarParkRatingofRestaurant:(NSNumber*)aRestaurant ForUser:(User*)aUser onlyPositive:(BOOL)aBool{
 
     NSArray *ratingsArray;
     if (aBool) {
@@ -489,7 +494,7 @@ static RecommendationManager *recommendationManager;
     return average;
     
 }
--(double)pastRatingBasedChildFriendlyRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser onlyPositive:(BOOL)aBool{
+-(double)pastRatingBasedChildFriendlyRatingofRestaurant:(NSNumber*)aRestaurant ForUser:(User*)aUser onlyPositive:(BOOL)aBool{
 
     NSArray *ratingsArray;
     if (aBool) {
@@ -570,7 +575,7 @@ static RecommendationManager *recommendationManager;
     return average;
 }
 
--(double)pastRatingBasedPriceRangeRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser onlyPositive:(BOOL)aBool{
+-(double)pastRatingBasedPriceRangeRatingofRestaurant:(NSNumber*)aRestaurant ForUser:(User*)aUser onlyPositive:(BOOL)aBool{
     
     NSArray *ratingsArray;
     if (aBool) {

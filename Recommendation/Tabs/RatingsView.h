@@ -63,7 +63,7 @@ NSString *userSelectedNotification;
     __weak NSTextField *_liveMusicTextfield;
     __weak NSTextField *_childFriendlyTextfield;
     __weak NSTextField *_vegetarianTextfield;
-    __weak NSTextField *_carParkTextField;
+//    __weak NSTextField *_carParkTextField;
 
     __weak NSTextField *_alphaWeight;
     __weak NSButton *_pastRatingsCheckBox;
@@ -99,6 +99,8 @@ NSString *userSelectedNotification;
 @property (weak) IBOutlet NSTextField *gardenTextField1;
 @property (weak) IBOutlet NSTextField *gardenTextField0;
 
+@property (weak) IBOutlet NSTextField *carPArkTExtField1;
+@property (weak) IBOutlet NSTextField *carParkTextfield0;
 
 @property (weak) IBOutlet NSTextField *cuisineTextField;
 @property (weak) IBOutlet NSTextField *categoryTextfield;

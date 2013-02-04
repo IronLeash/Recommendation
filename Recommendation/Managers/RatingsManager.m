@@ -16,7 +16,8 @@
 #import "Constants.h"
 #import "PreferencesManager.h"
 #import "RecommendationManager.h"
-
+#import "FavoritePriceRange.h"
+#import "AttributeValueConverter.h"
 static RatingsManager *ratingsManager = nil;
 
 @implementation RatingsManager
@@ -256,7 +257,7 @@ static RatingsManager *ratingsManager = nil;
     return filteredArray;
 }
 
--(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithPriceRangeOfrestaurant:(Restaurant*)aRestaurant onlyPositive:(BOOL)aBool{
+-(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithPriceRangeOfrestaurant:(NSNumber*)aRestaurant onlyPositive:(BOOL)aBool{
     
     NSArray *userRatings;
     if (aBool) {
@@ -265,7 +266,7 @@ static RatingsManager *ratingsManager = nil;
         userRatings = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser];
     }
     
-    NSPredicate *categoryPredicate = [NSPredicate predicateWithFormat:@"self.restaurant.priceRange==%@",aRestaurant.priceRange];
+    NSPredicate *categoryPredicate = [NSPredicate predicateWithFormat:@"self.restaurant.priceRange==%@",aRestaurant];
     NSArray *filteredArray = [userRatings filteredArrayUsingPredicate:categoryPredicate];
     
     return filteredArray;
@@ -319,7 +320,7 @@ static RatingsManager *ratingsManager = nil;
     return filteredArray;
 }
 
--(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithVegaterianValueOfRestaurant:(Restaurant*)aRestaurant onlyPositive:(BOOL)aBool{
+-(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithVegaterianValueOfRestaurant:(NSNumber*)aRestaurant onlyPositive:(BOOL)aBool{
 
     NSArray *userRatings;
     if (aBool) {
@@ -328,13 +329,13 @@ static RatingsManager *ratingsManager = nil;
         userRatings = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser];
     }
     
-    NSPredicate *gardenPredicate = [NSPredicate predicateWithFormat:@"self.restaurant.vegaterian==%@",aRestaurant.garden];
+    NSPredicate *gardenPredicate = [NSPredicate predicateWithFormat:@"self.restaurant.vegaterian==%@",aRestaurant];
     NSArray *filteredArray = [userRatings filteredArrayUsingPredicate:gardenPredicate];
     
     return filteredArray;
 }
 
--(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithCarParkValueOfRestaurant:(Restaurant*)aRestaurant onlyPositive:(BOOL)aBool{
+-(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithCarParkValueOfRestaurant:(NSNumber*)aRestaurant onlyPositive:(BOOL)aBool{
 
     NSArray *userRatings;
     if (aBool) {
@@ -343,7 +344,7 @@ static RatingsManager *ratingsManager = nil;
         userRatings = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser];
     }
     
-    NSPredicate *gardenPredicate = [NSPredicate predicateWithFormat:@"self.restaurant.carPark==%@",aRestaurant.garden];
+    NSPredicate *gardenPredicate = [NSPredicate predicateWithFormat:@"self.restaurant.carPark==%@",aRestaurant];
     NSArray *filteredArray = [userRatings filteredArrayUsingPredicate:gardenPredicate];
     
     return filteredArray;
@@ -397,8 +398,8 @@ static RatingsManager *ratingsManager = nil;
         double weightedValue    = (countBasedRatingForCurrentCategory*0 + ratingBasedRatingForCurrentCategory*1);
         [favoriteLiveMusic addObject:[NSNumber numberWithDouble:weightedValue]];
     }
-    NSSortDescriptor *highestToLowest = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:NO];
-    [favoriteLiveMusic sortUsingDescriptors:[NSArray arrayWithObject:highestToLowest]];
+//    NSSortDescriptor *highestToLowest = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:NO];
+//    [favoriteLiveMusic sortUsingDescriptors:[NSArray arrayWithObject:highestToLowest]];
 
     return favoriteLiveMusic;    
 }
@@ -419,11 +420,33 @@ static RatingsManager *ratingsManager = nil;
         double weightedValue    = (countBasedRatingForCurrentCategory*0 + ratingBasedRatingForCurrentCategory*1);
         [favoriteChildFriendlyArray addObject:[NSNumber numberWithDouble:weightedValue]];
     }
-    NSSortDescriptor *highestToLowest = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:NO];
-    [favoriteChildFriendlyArray sortUsingDescriptors:[NSArray arrayWithObject:highestToLowest]];
+//    NSSortDescriptor *highestToLowest = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:NO];
+//    [favoriteChildFriendlyArray sortUsingDescriptors:[NSArray arrayWithObject:highestToLowest]];
     
     return favoriteChildFriendlyArray;
 }
+
+-(NSArray*)getFavoriteCarPark:(User*)aUser{
+
+    NSMutableArray *favoritecarParkArray = [[NSMutableArray alloc] init];
+    
+    for (int carPark=0 ; carPark<2;carPark++){
+        
+#warning refactor countbased
+        float   countBasedRatingForCurrentCategory  =  [[RecommendationManager sharedInstance] countbasedCarParkRatingofRestaurant:[NSNumber numberWithInt:carPark] ForUser:aUser];
+        
+        float   ratingBasedRatingForCurrentCategory  =  [[RecommendationManager sharedInstance] pastRatingBasedCarParkRatingofRestaurant:[NSNumber numberWithInt:carPark]
+                                                                                                                                       ForUser:aUser onlyPositive:NO];
+        
+        double weightedValue    = (countBasedRatingForCurrentCategory*0 + ratingBasedRatingForCurrentCategory*1);
+        [favoritecarParkArray addObject:[NSNumber numberWithDouble:weightedValue]];
+    }
+//    NSSortDescriptor *highestToLowest = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:NO];
+//    [favoritecarParkArray sortUsingDescriptors:[NSArray arrayWithObject:highestToLowest]];
+    
+    return favoritecarParkArray;
+}
+
 
 -(NSArray*)getFavoriteCategoriesForUser:(User*)aUser{
     
@@ -520,39 +543,40 @@ static RatingsManager *ratingsManager = nil;
     [favoriteSmokingArray sortUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
     
     return favoriteSmokingArray;
-    /*
-    //    NSArray *smokeingValues = [NSArray arrayWithObjects:[NSNumber numberWithInt:0],[NSNumber numberWithInt:1],[NSNumber numberWithInt:2], nil];
-    NSMutableArray *favoriteSmokingArray = [NSMutableArray arrayWithCapacity:0];
-    
-    for (int i = 0; i < 3 ; i++)
-    {
-        FavoriteSmoking *currentFavoriteSmoking = [[FavoriteSmoking alloc] init];
-        currentFavoriteSmoking.value = [NSNumber numberWithInt:i];
-        [favoriteSmokingArray addObject:currentFavoriteSmoking];
-    }
-    
-    NSArray *positiveRAtingsArray =  [[RatingsManager sharedInstance] getPositiveRatingsforUser:aUser];
-    float   averagePositveRating =[StatisticsLibrary weightedpositveRatingsMean:positiveRAtingsArray];
-    
-    //Iterate all positive ratings
-    for (RestaurantRating *currentRating in positiveRAtingsArray){
-        
-        for (FavoriteSmoking *favoriteSmoking in favoriteSmokingArray) {
-            if ([favoriteSmoking.value isEqualToNumber:currentRating.restaurant.smoking]) {
-                favoriteSmoking.totalOccurances++;
-                favoriteSmoking.ratingtotal += [StatisticsLibrary weightedSumForRating:currentRating];
-                favoriteSmoking.weightedValue = [StatisticsLibrary scoreoSmoking:favoriteSmoking amongRatingNumber:[positiveRAtingsArray count] withAverage:averagePositveRating];
-            }
-        }
-        
-    }
-    
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"self.weightedValue" ascending:NO];
-    [favoriteSmokingArray sortUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
-    
-    return favoriteSmokingArray;
-    */
+
 }
+
+-(NSArray*)getFavoritePriceRange:(User*)aUser{
+    
+    NSMutableArray *favoritePriceRangeArray = [NSMutableArray arrayWithCapacity:0];
+    
+    for (int i = 0; i < 4 ; i++)
+    {
+        FavoritePriceRange *currentFavoritePriceRange = [[FavoritePriceRange alloc] init];
+        currentFavoritePriceRange.value = [NSNumber numberWithInt:i];
+        [favoritePriceRangeArray addObject:currentFavoritePriceRange];
+    }
+    
+    
+    for (FavoritePriceRange *currentPriceRange in favoritePriceRangeArray){
+        
+//        NSArray *restaurantRatingsWithSmoking      =  [[RatingsManager sharedInstance] getRestaurantRatingsForUser:aUser WithSmokingOfrestaurant:currentSmoking.value onlyPositive:NO];
+        float   countBasedRatingForCurrentSmoking  =  [[RecommendationManager sharedInstance] countBasedRatingForPriceOfRestaurant:currentPriceRange.value andUser:aUser onlyPositive:NO];
+        float   ratingBasedRatingForCurrentSmoking  =  [[RecommendationManager sharedInstance] pastRatingBasedPriceRangeRatingofRestaurant:currentPriceRange.value ForUser:aUser onlyPositive:NO];
+        
+//        currentPriceRange.totalOccurances = [restaurantRatingsWithSmoking count];
+        currentPriceRange.weightedValue    = (countBasedRatingForCurrentSmoking*0 + ratingBasedRatingForCurrentSmoking*1);
+
+        
+    }
+    //Sort the favoriteCategoriesArray
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"self.weightedValue" ascending:NO];
+    [favoritePriceRangeArray sortUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+    
+    return favoritePriceRangeArray;
+    
+}
+
 
 
 -(NSArray*)getFavoriteLocationForUser:(User*)aUser{

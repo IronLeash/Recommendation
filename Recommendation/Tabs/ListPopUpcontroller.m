@@ -8,6 +8,8 @@
 
 #import "ListPopUpcontroller.h"
 #import "FavoriteLocation.h"
+#import "AttributeValueConverter.h"
+#import "FavoriteSmoking.h"
 
 @implementation ListPopUpcontroller 
 
@@ -54,32 +56,43 @@
             
         }else if([[scoreListArray objectAtIndex:rowIndex] respondsToSelector:@selector(value)]){
             
-            NSString *returnValue;
-            switch ([[[scoreListArray objectAtIndex:rowIndex] value] intValue]) {
-                case 0:
-                {
-                    returnValue = @"NO";
-                    break;
+                        NSString *returnValue;
+            if ([[scoreListArray objectAtIndex:rowIndex] isKindOfClass:[FavoriteSmoking class]]) {
+                switch ([[[scoreListArray objectAtIndex:rowIndex] value] intValue]) {
+                    case 0:
+                    {
+                        returnValue = @"NO";
+                        break;
+                    }
+                    case 1:
+                    {
+                        returnValue = @"YES";
+                        break;
+                    }
+                    case 2:
+                    {
+                        returnValue = @"YES/NO";
+                        break;
+                    }
+                    default:
+                        break;
                 }
-                case 1:
-                {
-                    returnValue = @"YES";
-                    break;
-                }
-                case 2:
-                {
-                    returnValue = @"YES/NO";
-                    break;
-                }
-                default:
-                    break;
+                
+            }else{
+                
+                int value = [[[scoreListArray objectAtIndex:rowIndex] value] intValue];
+                returnValue = [AttributeValueConverter priceValueRepresentation:[NSNumber numberWithInt:value]];
             }
             
             return returnValue;
             
         }else{
+            
+            if ([[scoreListArray objectAtIndex:rowIndex] respondsToSelector:@selector(nameNumber)]) {
             return [NSString stringWithFormat:@"Dist. %@",[(FavoriteLocation*)[scoreListArray objectAtIndex:rowIndex] nameNumber]];
-        
+            }else{
+                return [AttributeValueConverter priceValueRepresentation:[NSNumber numberWithInteger:rowIndex]];
+            }
         }
         
     }else if ([aTableColumn.identifier isEqualToString:@"rank"]){
@@ -92,7 +105,7 @@
         }
         else
         {
-            return @"N/A";
+            return [scoreListArray objectAtIndex:rowIndex];
         }
 
     }

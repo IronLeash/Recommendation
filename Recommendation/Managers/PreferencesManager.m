@@ -149,15 +149,12 @@ static PreferencesManager* preferencesManager = nil;
     double gardenWeight         = (gardenCorrelation*(1-entrophyWeight)) + (gardenEntropy*entrophyWeight);
     double liveMusicWeight      = (liveMusicCorelation*(1-entrophyWeight))+(liveMusicEntrophy*entrophyWeight);
     double childFriendlyWeight  = (childFiendlyCorrelation*(1-entrophyWeight))+(childEntropy*entrophyWeight);
-//    double vegaterianWeight     = (vegateriancorrelation*(1-entrophyWeight))+(vegEntrophy*entrophyWeight);
     double categoryWeight       = (categoryyCramer*(1-entrophyWeight))+(categoryEntrophy*entrophyWeight);
     double cuisineWeight        = (cuisineCramer*(1-entrophyWeight))+cuisineEntrophy*(entrophyWeight);
-//    double locationWeight       = (locationCramer*(1-entrophyWeight))+(locationEntrophy*entrophyWeight);
     double smokingWeight        = (smokingCramer*(1-entrophyWeight))+(smokingEntrophy*entrophyWeight);
     double carPArkWeigt        = (carParkCorrelation*(1-entrophyWeight))+(carPArkEntrophy*entrophyWeight);
 
-        
-        
+    
     double weighttotal = priceWeight+gardenWeight+liveMusicWeight+childFriendlyWeight+categoryWeight+cuisineWeight+smokingWeight;
         
     priceWeight          /= weighttotal;
@@ -207,35 +204,34 @@ static PreferencesManager* preferencesManager = nil;
     NSArray *positiveRatingsArray = [[RatingsManager sharedInstance] getPositiveRatingsforUser:aUser];
         
     float priceRange = 0;
-    float carPark = 0;
     
     for (RestaurantRating *currentRating in positiveRatingsArray)
     {
 #warning you can add a weighting factor according to rating value
         priceRange     += [currentRating.restaurant.priceRange floatValue];
-        carPark        += [currentRating.restaurant.carPark floatValue];
     }
 
     priceRange     = priceRange / [positiveRatingsArray count];
-    carPark        = carPark / [positiveRatingsArray count];
-
 
         NSArray *favoriteCategories = [[RatingsManager sharedInstance] getFavoriteCategoriesForUser:aUser];
         NSArray *favoriteCuisines = [[RatingsManager sharedInstance] getFavoriteCuisinesForUser:aUser];
         NSArray *favoriteSmoking = [[RatingsManager sharedInstance] getFavoriteSmokingForUser:aUser];
+        NSArray *favoritePriceRange = [[RatingsManager sharedInstance] getFavoritePriceRange:aUser];
+
         NSArray *favoriteLocation = [[RatingsManager sharedInstance] getFavoriteLocationForUser:aUser];
         
-        NSArray *favoriteGardenArray = [[RatingsManager sharedInstance] getFavoriteGarden:aUser];
-        NSArray *favoriteLiveMusicArray = [[RatingsManager sharedInstance] getFavoriteLiveMusic:aUser];
+        NSArray *favoriteGardenArray        = [[RatingsManager sharedInstance] getFavoriteGarden:aUser];
+        NSArray *favoriteLiveMusicArray     = [[RatingsManager sharedInstance] getFavoriteLiveMusic:aUser];
         NSArray *favoriteChildFriendlyArray = [[RatingsManager sharedInstance] getFavoriteChildFriendly:aUser];
+        NSArray *favoriteCarParkArray       = [[RatingsManager sharedInstance] getFavoriteCarPark:aUser];
 
         
      preferencesDictionary = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:
                                                                             favoriteChildFriendlyArray,
                                                                                favoriteLiveMusicArray,
                                                                             favoriteGardenArray,
-                                                                               [NSNumber numberWithFloat:priceRange],
-                                                                                [NSNumber numberWithFloat:carPark],
+                                                                            favoritePriceRange,
+                                                                                favoriteCarParkArray,
                                                                                favoriteCategories,
                                                                                favoriteCuisines,
                                                                                favoriteSmoking,

@@ -52,13 +52,13 @@
 -(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithLiveMusicValueOfRestaurant:(NSNumber*)aRestaurant onlyPositive:(BOOL)aBool;
 -(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithChildFriendlyValueOfRestaurant:(NSNumber*)aRestaurant onlyPositive:(BOOL)aBool;
 -(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithVegaterianValueOfRestaurant:(Restaurant*)aRestaurant onlyPositive:(BOOL)aBool;
--(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithCarParkValueOfRestaurant:(Restaurant*)aRestaurant onlyPositive:(BOOL)aBool;
+-(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithCarParkValueOfRestaurant:(NSNumber*)aRestaurant onlyPositive:(BOOL)aBool;
 
 -(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithCategoryOfrestaurant:(NSString*)aRestaurant onlyPositive:(BOOL)aBool;
 -(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithCuisineOfrestaurant:(NSString*)aRestaurant onlyPositive:(BOOL)aBool;
 -(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithLocationOfrestaurant:(Restaurant*)aRestaurant onlyPositive:(BOOL)aBool;
 -(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithSmokingOfrestaurant:(NSNumber*)aRestaurant onlyPositive:(BOOL)aBool;
--(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithPriceRangeOfrestaurant:(Restaurant*)aRestaurant onlyPositive:(BOOL)aBool;
+-(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithPriceRangeOfrestaurant:(NSNumber*)aRestaurant onlyPositive:(BOOL)aBool;
 
 
 -(NSArray*)getPositiveRatingsforUser:(User*)aUser;
@@ -66,10 +66,13 @@
 -(NSArray*)getFavoriteGarden:(User*)currentUser;
 -(NSArray*)getFavoriteLiveMusic:(User*)aUser;
 -(NSArray*)getFavoriteChildFriendly:(User*)aUser;
+-(NSArray*)getFavoriteCarPark:(User*)aUser;
+
 
 -(NSArray*)getFavoriteCategoriesForUser:(User*)currentUser;
 -(NSArray*)getFavoriteCuisinesForUser:(User*)currentUser;
 -(NSArray*)getFavoriteSmokingForUser:(User*)currentUser;
+-(NSArray*)getFavoritePriceRange:(User*)aUser;
 -(NSArray*)getFavoriteLocationForUser:(User*)currentUser;
 
 

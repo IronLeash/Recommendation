@@ -125,8 +125,8 @@
 //    [preferencesDescriptionString appendString:[AttributeValueConverter interpratateSmoking:[prefrencesDictionary objectForKey:kSmoking]]];
 
     
-    double carPark                  = [[prefrencesDictionary objectForKey:kCarPark] doubleValue];
-    [preferencesDescriptionString appendString:[AttributeValueConverter carParkInterPretation:carPark]];
+//    double carPark                  = [[prefrencesDictionary objectForKey:kCarPark] doubleValue];
+//    [preferencesDescriptionString appendString:[AttributeValueConverter carParkInterPretation:carPark]];
 
 //    double childFriendly            = [[prefrencesDictionary objectForKey:kChildfriendly] doubleValue];
 //    [preferencesDescriptionString appendString:[AttributeValueConverter interpretateChildFriendly:childFriendly]];
@@ -137,8 +137,8 @@
 //    double liveMusic                = [[prefrencesDictionary objectForKey:kLiveMusic] doubleValue];
 //    [preferencesDescriptionString appendString:[AttributeValueConverter interpretateLiveMusic:liveMus®ic]];
     
-    double price                    = [[prefrencesDictionary objectForKey:kPrice] doubleValue];
-    [preferencesDescriptionString appendString:[AttributeValueConverter interpretatePrice:price]];
+//    double price                    = [[prefrencesDictionary objectForKey:kPrice] doubleValue];
+//    [preferencesDescriptionString appendString:[AttributeValueConverter interpretatePrice:price]];
     
     double vegaterian               = [[prefrencesDictionary objectForKey:kVegaterian] doubleValue];
     [preferencesDescriptionString appendString:[AttributeValueConverter interpretateVegaterian:vegaterian]];

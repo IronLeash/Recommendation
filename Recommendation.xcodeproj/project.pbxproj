@@ -42,6 +42,7 @@
 		52ABE99F1675475200E91274 /* DataGenerationRulesRestaurant.m in Sources */ = {isa = PBXBuildFile; fileRef = 52ABE99E1675475200E91274 /* DataGenerationRulesRestaurant.m */; };
 		52ABE9A41675502F00E91274 /* DataGenerationRulesUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 52ABE9A31675502F00E91274 /* DataGenerationRulesUser.m */; };
 		52ABE9A71675504500E91274 /* DataGenerationRulesRating.m in Sources */ = {isa = PBXBuildFile; fileRef = 52ABE9A61675504500E91274 /* DataGenerationRulesRating.m */; };
+		52B9573D16C0746100B47AC7 /* FavoritePriceRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B9573C16C0746100B47AC7 /* FavoritePriceRange.m */; };
 		52BBD9871656F71D006F9BA2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52A97897165449C8004ABC6D /* CoreData.framework */; };
 		52D684001662E019006919E2 /* FavoriteCuisine.m in Sources */ = {isa = PBXBuildFile; fileRef = 52D683FF1662E019006919E2 /* FavoriteCuisine.m */; };
 		52D684041662E7AE006919E2 /* FavoriteLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 52D684031662E7AE006919E2 /* FavoriteLocation.m */; };
@@ -121,6 +122,8 @@
 		52ABE9A31675502F00E91274 /* DataGenerationRulesUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataGenerationRulesUser.m; sourceTree = "<group>"; };
 		52ABE9A51675504500E91274 /* DataGenerationRulesRating.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataGenerationRulesRating.h; sourceTree = "<group>"; };
 		52ABE9A61675504500E91274 /* DataGenerationRulesRating.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataGenerationRulesRating.m; sourceTree = "<group>"; };
+		52B9573B16C0746100B47AC7 /* FavoritePriceRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritePriceRange.h; sourceTree = "<group>"; };
+		52B9573C16C0746100B47AC7 /* FavoritePriceRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritePriceRange.m; sourceTree = "<group>"; };
 		52D683FE1662E019006919E2 /* FavoriteCuisine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteCuisine.h; sourceTree = "<group>"; };
 		52D683FF1662E019006919E2 /* FavoriteCuisine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteCuisine.m; sourceTree = "<group>"; };
 		52D684021662E7AE006919E2 /* FavoriteLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteLocation.h; sourceTree = "<group>"; };
@@ -224,6 +227,8 @@
 				52D684061662E7FF006919E2 /* FavoriteSmoking.m */,
 				52530D39167E717100C68AD7 /* ActionGeneric.h */,
 				52530D3A167E717100C68AD7 /* ActionGeneric.m */,
+				52B9573B16C0746100B47AC7 /* FavoritePriceRange.h */,
+				52B9573C16C0746100B47AC7 /* FavoritePriceRange.m */,
 			);
 			path = "Helper Classes";
 			sourceTree = "<group>";
@@ -456,6 +461,7 @@
 				5253762816B715CE004D6D0E /* User.m in Sources */,
 				5253762B16B715CE004D6D0E /* RatingWeight.m in Sources */,
 				5266A83316BD74E600C01062 /* EvaluationManager.m in Sources */,
+				52B9573D16C0746100B47AC7 /* FavoritePriceRange.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

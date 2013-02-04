@@ -24,6 +24,9 @@
 #import "AppDelegate.h"
 
 #import "RatingsManager.h"
+#import "AttributeValueConverter.h"
+
+#import "FavoritePriceRange.h"
 
 @implementation RatingsView
 
@@ -90,10 +93,11 @@ NSString *userSelectedNotification = @"aUserSelectedNotificaiton";
     preferencesWeightDictionary = [NSMutableDictionary dictionaryWithDictionary:
                                    [[PreferencesManager sharedInstance] getUserPreferenceWeightDicitonary:currentlySelectedUser]];
 
-    FavoriteCategory *favoriteCategory      = [[preferencesDictionary objectForKey:kCategory] objectAtIndex:0];
-    FavoriteCategory *favoriteCuisine       = [[preferencesDictionary objectForKey:kCuisine] objectAtIndex:0];
-    FavoriteSmoking *favoriteSmoking        = [[preferencesDictionary objectForKey:kSmoking] objectAtIndex:0];
-    FavoriteLocation *favoriteLocation      = [[preferencesDictionary objectForKey:kLocation] objectAtIndex:0];
+    FavoriteCategory *favoriteCategory          = [[preferencesDictionary objectForKey:kCategory] objectAtIndex:0];
+    FavoriteCategory *favoriteCuisine           = [[preferencesDictionary objectForKey:kCuisine] objectAtIndex:0];
+    FavoriteSmoking *favoriteSmoking            = [[preferencesDictionary objectForKey:kSmoking] objectAtIndex:0];
+    FavoriteLocation *favoriteLocation          = [[preferencesDictionary objectForKey:kLocation] objectAtIndex:0];
+    FavoritePriceRange *favoritePriceRange      = [[preferencesDictionary objectForKey:kPrice] objectAtIndex:0];
 
     NSString *smokingValue;
     
@@ -113,7 +117,9 @@ NSString *userSelectedNotification = @"aUserSelectedNotificaiton";
     [_locationTextField setStringValue:location];
     
     //Set preferences Value
-    [_priceRange setStringValue:[[preferencesDictionary objectForKey:kPrice] stringValue]];
+    
+    
+    [_priceRange setStringValue:[AttributeValueConverter priceValueRepresentation:favoritePriceRange.value]];
     
     //Set garden prefrence Text
     [_gardenTextField1 setStringValue: [[[preferencesDictionary objectForKey:kGarden] objectAtIndex:1] stringValue]];
@@ -125,7 +131,8 @@ NSString *userSelectedNotification = @"aUserSelectedNotificaiton";
     [_childFriendlyTextfield1 setStringValue: [[[preferencesDictionary objectForKey:kChildfriendly] objectAtIndex:1] stringValue]];
     [_childFriendlyTextField0 setStringValue: [[[preferencesDictionary objectForKey:kChildfriendly] objectAtIndex:0] stringValue]];
     
-    [_carParkTextField setStringValue:[[preferencesDictionary objectForKey:kCarPark] stringValue]];
+    [_carPArkTExtField1 setStringValue:[[[preferencesDictionary objectForKey:kCarPark] objectAtIndex:1] stringValue]];
+    [_carParkTextfield0 setStringValue:[[[preferencesDictionary objectForKey:kCarPark] objectAtIndex:0] stringValue]];
     
     //Set preferenceWeights
     [_categoryWeight setStringValue:[[preferencesWeightDictionary objectForKey:kCategory] stringValue]];
@@ -206,6 +213,11 @@ NSString *userSelectedNotification = @"aUserSelectedNotificaiton";
         case 104:
         {
             [listPopUpcontroller setDataSource:[preferencesDictionary objectForKey:kSmoking]];
+            break;
+        }
+        case 105:
+        {
+            [listPopUpcontroller setDataSource:[preferencesDictionary objectForKey:kPrice]];
             break;
         }
         default:
