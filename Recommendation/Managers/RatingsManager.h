@@ -48,20 +48,24 @@
 
 -(double)weightedAverageForRatings:(NSArray*)ratingsArray OfUser:(User*)anUser;
 
--(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithGardenValueOfRestaurant:(Restaurant*)aRestaurant onlyPositive:(BOOL)aBool;
--(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithLiveMusicValueOfRestaurant:(Restaurant*)aRestaurant onlyPositive:(BOOL)aBool;
--(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithChildFriendlyValueOfRestaurant:(Restaurant*)aRestaurant onlyPositive:(BOOL)aBool;
+-(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithGardenValueOfRestaurant:(NSNumber*)gardenValue onlyPositive:(BOOL)aBool;
+-(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithLiveMusicValueOfRestaurant:(NSNumber*)aRestaurant onlyPositive:(BOOL)aBool;
+-(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithChildFriendlyValueOfRestaurant:(NSNumber*)aRestaurant onlyPositive:(BOOL)aBool;
 -(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithVegaterianValueOfRestaurant:(Restaurant*)aRestaurant onlyPositive:(BOOL)aBool;
 -(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithCarParkValueOfRestaurant:(Restaurant*)aRestaurant onlyPositive:(BOOL)aBool;
 
 -(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithCategoryOfrestaurant:(NSString*)aRestaurant onlyPositive:(BOOL)aBool;
--(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithCuisineOfrestaurant:(Restaurant*)aRestaurant onlyPositive:(BOOL)aBool;
+-(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithCuisineOfrestaurant:(NSString*)aRestaurant onlyPositive:(BOOL)aBool;
 -(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithLocationOfrestaurant:(Restaurant*)aRestaurant onlyPositive:(BOOL)aBool;
--(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithSmokingOfrestaurant:(Restaurant*)aRestaurant onlyPositive:(BOOL)aBool;
+-(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithSmokingOfrestaurant:(NSNumber*)aRestaurant onlyPositive:(BOOL)aBool;
 -(NSArray*)getRestaurantRatingsForUser:(User*)aUser WithPriceRangeOfrestaurant:(Restaurant*)aRestaurant onlyPositive:(BOOL)aBool;
 
 
 -(NSArray*)getPositiveRatingsforUser:(User*)aUser;
+
+-(NSArray*)getFavoriteGarden:(User*)currentUser;
+-(NSArray*)getFavoriteLiveMusic:(User*)aUser;
+-(NSArray*)getFavoriteChildFriendly:(User*)aUser;
 
 -(NSArray*)getFavoriteCategoriesForUser:(User*)currentUser;
 -(NSArray*)getFavoriteCuisinesForUser:(User*)currentUser;

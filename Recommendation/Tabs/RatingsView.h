@@ -87,10 +87,17 @@ NSString *userSelectedNotification;
 
 
 @property (weak) IBOutlet NSButton *onlyPositiveRatingscheckBox;
-@property (weak) IBOutlet NSTextField *vegetarianTextfield;
-@property (weak) IBOutlet NSTextField *childFriendlyTextfield;
-@property (weak) IBOutlet NSTextField *liveMusicTextfield;
-@property (weak) IBOutlet NSTextField *gardenTextField;
+//@property (weak) IBOutlet NSTextField *vegetarianTextfield;
+
+
+@property (weak) IBOutlet NSTextField *childFriendlyTextfield1;
+@property (weak) IBOutlet NSTextField *childFriendlyTextField0;
+
+@property (weak) IBOutlet NSTextField *liveMusicTextfield1;
+@property (weak) IBOutlet NSTextField *liveMusicTextField0;
+
+@property (weak) IBOutlet NSTextField *gardenTextField1;
+@property (weak) IBOutlet NSTextField *gardenTextField0;
 
 
 @property (weak) IBOutlet NSTextField *cuisineTextField;

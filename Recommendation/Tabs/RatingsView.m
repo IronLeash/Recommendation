@@ -114,10 +114,17 @@ NSString *userSelectedNotification = @"aUserSelectedNotificaiton";
     
     //Set preferences Value
     [_priceRange setStringValue:[[preferencesDictionary objectForKey:kPrice] stringValue]];
-    [_gardenTextField setStringValue: [[preferencesDictionary objectForKey:kGarden] stringValue]];
-    [_liveMusicTextfield setStringValue: [[preferencesDictionary objectForKey:kLiveMusic] stringValue]];
-    [_childFriendlyTextfield setStringValue: [[preferencesDictionary objectForKey:kChildfriendly] stringValue]];
-//    [_vegetarianTextfield setStringValue: [[preferencesDictionary objectForKey:kVegaterian] stringValue]];
+    
+    //Set garden prefrence Text
+    [_gardenTextField1 setStringValue: [[[preferencesDictionary objectForKey:kGarden] objectAtIndex:1] stringValue]];
+    [_gardenTextField0 setStringValue: [[[preferencesDictionary objectForKey:kGarden] objectAtIndex:0] stringValue]];
+
+    [_liveMusicTextfield1 setStringValue: [[[preferencesDictionary objectForKey:kLiveMusic] objectAtIndex:1] stringValue]];
+    [_liveMusicTextField0 setStringValue: [[[preferencesDictionary objectForKey:kLiveMusic] objectAtIndex:0] stringValue]];
+    
+    [_childFriendlyTextfield1 setStringValue: [[[preferencesDictionary objectForKey:kChildfriendly] objectAtIndex:1] stringValue]];
+    [_childFriendlyTextField0 setStringValue: [[[preferencesDictionary objectForKey:kChildfriendly] objectAtIndex:0] stringValue]];
+    
     [_carParkTextField setStringValue:[[preferencesDictionary objectForKey:kCarPark] stringValue]];
     
     //Set preferenceWeights
@@ -138,9 +145,7 @@ NSString *userSelectedNotification = @"aUserSelectedNotificaiton";
     NSNotification *userChangedNotification  = [NSNotification notificationWithName:userSelectedNotification object:currentlySelectedUser];
     [[NSNotificationCenter defaultCenter] postNotification:userChangedNotification];
     
-//    [[RatingsManager sharedInstance] getNumberOfPositiveRatingsForUser:currentlySelectedUser WithAttribute:@"smoking" andValue:@"0"];
-//    [[RatingsManager sharedInstance] countBasedRatingForAttribute:@"garden" Value:@"0" andUser:currentlySelectedUser];
-//    [[RatingsManager sharedInstance] countBasedRatingForAttribute:@"garden" Value:@"1" andUser:currentlySelectedUser];
+
 }
 
 -(IBAction)checkBoxchangedValue:(id)sender

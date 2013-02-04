@@ -205,44 +205,35 @@ static PreferencesManager* preferencesManager = nil;
     if (![aUser.userid isEqualToString:userId]){
         
     NSArray *positiveRatingsArray = [[RatingsManager sharedInstance] getPositiveRatingsforUser:aUser];
-    
-    float vegetarian = 0;
-    float childFriendly = 0;
-    float liveMusic = 0;
-    float garden = 0;
+        
     float priceRange = 0;
     float carPark = 0;
     
     for (RestaurantRating *currentRating in positiveRatingsArray)
     {
 #warning you can add a weighting factor according to rating value
-//        vegetarian     += [currentRating.restaurant.vegaterian floatValue];
-        childFriendly  += [currentRating.restaurant.childFriendly floatValue];
-        liveMusic      += [currentRating.restaurant.liveMusic floatValue];
-        garden         += [currentRating.restaurant.garden floatValue];
         priceRange     += [currentRating.restaurant.priceRange floatValue];
         carPark        += [currentRating.restaurant.carPark floatValue];
     }
-    
-    vegetarian     = vegetarian/[positiveRatingsArray count];
-    childFriendly  = childFriendly/ [positiveRatingsArray count];
-    liveMusic      = liveMusic / [positiveRatingsArray count];
-    garden         = garden / [positiveRatingsArray count];
+
     priceRange     = priceRange / [positiveRatingsArray count];
     carPark        = carPark / [positiveRatingsArray count];
 
-        
-    NSArray *favoriteCategories = [[RatingsManager sharedInstance] getFavoriteCategoriesForUser:aUser];
-    NSArray *favoriteCuisines = [[RatingsManager sharedInstance] getFavoriteCuisinesForUser:aUser];
-    NSArray *favoriteSmoking = [[RatingsManager sharedInstance] getFavoriteSmokingForUser:aUser];
-    NSArray *favoriteLocation = [[RatingsManager sharedInstance] getFavoriteLocationForUser:aUser];
-    
 
+        NSArray *favoriteCategories = [[RatingsManager sharedInstance] getFavoriteCategoriesForUser:aUser];
+        NSArray *favoriteCuisines = [[RatingsManager sharedInstance] getFavoriteCuisinesForUser:aUser];
+        NSArray *favoriteSmoking = [[RatingsManager sharedInstance] getFavoriteSmokingForUser:aUser];
+        NSArray *favoriteLocation = [[RatingsManager sharedInstance] getFavoriteLocationForUser:aUser];
+        
+        NSArray *favoriteGardenArray = [[RatingsManager sharedInstance] getFavoriteGarden:aUser];
+        NSArray *favoriteLiveMusicArray = [[RatingsManager sharedInstance] getFavoriteLiveMusic:aUser];
+        NSArray *favoriteChildFriendlyArray = [[RatingsManager sharedInstance] getFavoriteChildFriendly:aUser];
+
+        
      preferencesDictionary = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:
-                                                                               [NSNumber numberWithFloat:vegetarian],
-                                                                               [NSNumber numberWithFloat:childFriendly],
-                                                                               [NSNumber numberWithFloat:liveMusic],
-                                                                               [NSNumber numberWithFloat:garden],
+                                                                            favoriteChildFriendlyArray,
+                                                                               favoriteLiveMusicArray,
+                                                                            favoriteGardenArray,
                                                                                [NSNumber numberWithFloat:priceRange],
                                                                                 [NSNumber numberWithFloat:carPark],
                                                                                favoriteCategories,
@@ -250,7 +241,7 @@ static PreferencesManager* preferencesManager = nil;
                                                                                favoriteSmoking,
                                                                                favoriteLocation,
                                                                                nil]
-                                                                      forKeys:[NSArray arrayWithObjects:kVegaterian,kChildfriendly,kLiveMusic,kGarden,kPrice,kCarPark,kCategory,kCuisine,kSmoking,kLocation,nil]];
+                                                                      forKeys:[NSArray arrayWithObjects:kChildfriendly,kLiveMusic,kGarden,kPrice,kCarPark,kCategory,kCuisine,kSmoking,kLocation,nil]];
     
     currentPreferencesDictionary = [NSDictionary dictionaryWithDictionary:preferencesDictionary];
     currentUserPreferenceWeight = [[PreferencesManager sharedInstance] getUserPreferenceWeightDicitonary:aUser];

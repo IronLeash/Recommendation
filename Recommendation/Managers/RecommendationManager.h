@@ -34,25 +34,25 @@ NSString *recommendationArrayGeneratedNotification;
 
 //Count based ratings
 -(double)countBasedRatingForCategoryOfRestaurant:(NSString*)aRestaurant andUser:(User*)anUser onlyPositive:(BOOL)aBool;
--(double)countBasedRatingForCuisineOfRestaurant:(Restaurant*)aRestaurant andUser:(User*)anUser onlyPositive:(BOOL)aBool;
+-(double)countBasedRatingForCuisineOfRestaurant:(NSString*)aRestaurant andUser:(User*)anUser onlyPositive:(BOOL)aBool;
 -(double)countBasedRatingForLocationOfRestaurant:(Restaurant*)aRestaurant andUser:(User*)anUser onlyPositive:(BOOL)aBool;
--(double)countBasedRatingForSmokingOfRestaurant:(Restaurant*)aRestaurant andUser:(User*)anUser onlyPositive:(BOOL)aBool;
+-(double)countBasedRatingForSmokingOfRestaurant:(NSNumber*)aRestaurant andUser:(User*)anUser onlyPositive:(BOOL)aBool;
 -(double)countBasedRatingForPriceOfRestaurant:(Restaurant*)aRestaurant andUser:(User*)anUser onlyPositive:(BOOL)aBool;
--(double)countbasedGardenRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser;
+-(double)countbasedGardenRatingofRestaurant:(NSNumber*)aRestaurant ForUser:(User*)aUser;
 -(double)countbasedCarParkRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser;
--(double)countbasedLiveMusicRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser;
--(double)countbasedChildFriendlyRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser;
+-(double)countbasedLiveMusicRatingofRestaurant:(NSNumber*)aRestaurant ForUser:(User*)aUser;
+-(double)countbasedChildFriendlyRatingofRestaurant:(NSNumber*)aRestaurant ForUser:(User*)aUser;
 -(double)countbasedVegaterianRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser;
 
 //PAst Ratings based prediction
--(double)pastRatingBasedGardenRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser onlyPositive:(BOOL)aBool;
+-(double)pastRatingBasedGardenRatingofRestaurant:(NSNumber*)aRestaurant ForUser:(User*)aUser onlyPositive:(BOOL)aBool;
 -(double)pastRatingBasedCarParkRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser onlyPositive:(BOOL)aBool;
--(double)pastRatingBasedLiveMusicRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser onlyPositive:(BOOL)aBool;
--(double)pastRatingBasedChildFriendlyRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser onlyPositive:(BOOL)aBool;
+-(double)pastRatingBasedLiveMusicRatingofRestaurant:(NSNumber*)aRestaurant ForUser:(User*)aUser onlyPositive:(BOOL)aBool;
+-(double)pastRatingBasedChildFriendlyRatingofRestaurant:(NSNumber*)aRestaurant ForUser:(User*)aUser onlyPositive:(BOOL)aBool;
 -(double)pastRatingBasedCategoryRatingofRestaurant:(NSString*)aRestaurant ForUser:(User*)aUser onlyPositive:(BOOL)aBool;
--(double)pastRatingBasedCuisineRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser onlyPositive:(BOOL)aBool;
+-(double)pastRatingBasedCuisineRatingofRestaurant:(NSString*)aRestaurant ForUser:(User*)aUser onlyPositive:(BOOL)aBool;
 -(double)pastRatingBasedLocationRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser onlyPositive:(BOOL)aBool;
--(double)pastRatingBasedSmokingRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser onlyPositive:(BOOL)aBool;
+-(double)pastRatingBasedSmokingRatingofRestaurant:(NSNumber*)aRestaurant ForUser:(User*)aUser onlyPositive:(BOOL)aBool;
 -(double)pastRatingBasedPriceRangeRatingofRestaurant:(Restaurant*)aRestaurant ForUser:(User*)aUser onlyPositive:(BOOL)aBool;
 
 @end

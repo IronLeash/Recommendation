@@ -128,14 +128,14 @@
     double carPark                  = [[prefrencesDictionary objectForKey:kCarPark] doubleValue];
     [preferencesDescriptionString appendString:[AttributeValueConverter carParkInterPretation:carPark]];
 
-    double childFriendly            = [[prefrencesDictionary objectForKey:kChildfriendly] doubleValue];
-    [preferencesDescriptionString appendString:[AttributeValueConverter interpretateChildFriendly:childFriendly]];
+//    double childFriendly            = [[prefrencesDictionary objectForKey:kChildfriendly] doubleValue];
+//    [preferencesDescriptionString appendString:[AttributeValueConverter interpretateChildFriendly:childFriendly]];
     
-    double garden                   = [[prefrencesDictionary objectForKey:kGarden] doubleValue];
-    [preferencesDescriptionString appendString:[AttributeValueConverter interpretateGarden:garden]];
+//    double garden                   = [[prefrencesDictionary objectForKey:kGarden] doubleValue];
+//    [preferencesDescriptionString appendString:[AttributeValueConverter interpretateGarden:garden]];
     
-    double liveMusic                = [[prefrencesDictionary objectForKey:kLiveMusic] doubleValue];
-    [preferencesDescriptionString appendString:[AttributeValueConverter interpretateLiveMusic:liveMusic]];
+//    double liveMusic                = [[prefrencesDictionary objectForKey:kLiveMusic] doubleValue];
+//    [preferencesDescriptionString appendString:[AttributeValueConverter interpretateLiveMusic:liveMus®ic]];
     
     double price                    = [[prefrencesDictionary objectForKey:kPrice] doubleValue];
     [preferencesDescriptionString appendString:[AttributeValueConverter interpretatePrice:price]];
