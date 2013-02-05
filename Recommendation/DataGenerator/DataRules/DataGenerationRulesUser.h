@@ -10,17 +10,10 @@
 
 @interface DataGenerationRulesUser : NSObject
 
-+(int)userAgePredictionFor:(NSString*)userStereotype;
-
-#warning IRRELEVANT
-+(int)userGenderPredictionFor:(NSString*)userStereotype;
-
-#warning IRRELEVANT
-//+(int)userLocationPredictionFor:(NSString*)userStereotype;
-
 +(int)userSmokingPredictionFor:(NSString*)userStereotype;
 
-+(int)userVegetarianPredictionFor:(NSString*)userStereotype;
++(int)userHasCar:(NSString*)userStereotype;
 
++(int)userHasChild:(NSString*)userStereotype;
 
 @end

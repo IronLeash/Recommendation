@@ -13,6 +13,7 @@
 
 @implementation DataGenerationRulesUser
 
+/*
 +(int)userAgePredictionFor:(NSString*)userStereotype{
 
     int age = arc4random() %(2);
@@ -36,6 +37,7 @@
     }
     return age;
 }
+*/
 
 /*
 +(int)userLocationPredictionFor:(NSString*)userStereotype{
@@ -47,7 +49,7 @@
 +(int)userSmokingPredictionFor:(NSString*)userStereotype{
 
     int smoking = arc4random() %(100);
-    
+
     if ([userStereotype isEqualToString:kStudent])
     {
         if (smoking > 51) {
@@ -113,5 +115,93 @@
     }
     return vegateriean;
 }
+
+
++(int)userHasCar:(NSString*)userStereotype{
+
+    int hasCar = arc4random() %(100);
+    int returnValue = 0;
+    if ([userStereotype isEqualToString:kStudent])
+    {
+        
+        if (hasCar > 90) {
+            returnValue =1;
+        }
+        
+    }else if([userStereotype isEqualToString:kAmbianceLover]){
+        
+        if (hasCar > 70) {
+            returnValue = 1;
+        }
+    }else if([userStereotype isEqualToString:kGourmet]){
+        
+        if (hasCar > 55) {
+            returnValue = 1;
+        }
+        
+    }else if([userStereotype isEqualToString:kFamily]){
+        
+        if (hasCar > 25) {
+            returnValue = 1;
+        }
+        
+    }else if([userStereotype isEqualToString:kVegaterian]){
+        
+        if (hasCar > 80) {
+            returnValue = 1;
+        }
+        
+    }else{
+        //Tourist
+        if (hasCar > 10) {
+            returnValue = 1;
+        }
+    }
+    
+    return returnValue;
+}
+
++(int)userHasChild:(NSString*)userStereotype{
+
+    int hasChild = arc4random() %(100);
+    int returnValue = 0;
+    if ([userStereotype isEqualToString:kStudent])
+    {
+        returnValue = 0;
+        
+    }else if([userStereotype isEqualToString:kAmbianceLover]){
+        
+        if (hasChild > 80) {
+            returnValue = 1;
+        }
+    }else if([userStereotype isEqualToString:kGourmet]){
+        
+        if (hasChild > 85) {
+            returnValue = 1;
+        }
+        
+    }else if([userStereotype isEqualToString:kFamily]){
+        
+        if (hasChild > 35) {
+            returnValue = 1;
+        }
+        
+    }else if([userStereotype isEqualToString:kVegaterian]){
+        
+        if (hasChild > 70) {
+            returnValue = 1;
+        }
+        
+    }else{
+        //Tourist
+        if (hasChild > 65) {
+            returnValue = 1;
+        }
+    }
+    
+    return returnValue;
+
+}
+
 
 @end

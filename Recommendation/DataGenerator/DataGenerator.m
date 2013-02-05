@@ -247,12 +247,15 @@ static  NSManagedObjectContext *moc;
 
                     User* currentUser = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:moc];
                     
-                    int gender = arc4random() %(2);
+//                    int gender = arc4random() %(2);
                     int location = arc4random() %(15);
                     
                     currentUser.userid      = [NSString stringWithFormat:@"User %@",[NSNumber numberWithInt:currentUserIndex]];
 //                    currentUser.age         = [NSNumber numberWithInt:[DataGenerationRulesUser userAgePredictionFor:currentStereotype]];
 //                    currentUser.gender      = [NSNumber numberWithInt:gender];
+                
+                    currentUser.hasChild    = [NSNumber numberWithInt:[DataGenerationRulesUser userHasChild:currentStereotype]];
+                    currentUser.hasCar      = [NSNumber numberWithInt:[DataGenerationRulesUser userHasCar:currentStereotype]];
                     currentUser.location    = [NSNumber numberWithInt:location];
                     currentUser.smoker      = [NSNumber numberWithInt:[DataGenerationRulesUser userSmokingPredictionFor:currentStereotype]];
 //                    currentUser.vegaterian  = [NSNumber numberWithInt:[DataGenerationRulesUser userVegetarianPredictionFor:currentStereotype]];

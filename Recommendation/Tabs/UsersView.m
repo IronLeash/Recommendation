@@ -57,10 +57,11 @@
         
     }else if([tableColumn.identifier isEqualToString:@"hasChild"]) {
         
-        return @"hasChild";
+        return currentUser.hasChild;
     }else if([tableColumn.identifier isEqualToString:@"hasCar"]){
         
-        return @"Car";
+        return currentUser.hasCar;
+        
     }else if([tableColumn.identifier isEqualToString:@"location"]){
         
         return currentUser.location;
