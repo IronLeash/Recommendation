@@ -84,14 +84,14 @@ static NSArray *favoriteVegaterianCuisines;
 
 -(NSDictionary*)getRatingForRestaurant:(Restaurant*)aRest ofUser:(User*)aUser{
 
-    int childFriendly;
-    int carPark;
-    int smoking;
-    int garden;
-    int liveMusic;
-    int category;
-    int cuisine;
-    int price;
+    double childFriendly;
+    double carPark;
+    double smoking;
+    double garden;
+    double liveMusic;
+    double category;
+    double cuisine;
+    double price;
     
 //    if ([aUser.stereotype isEqualToString:kFamily]) {
         childFriendly   = [[DataGenerationRulesRating sharedInstance] childFriendly:aRest ofUser:aUser];
@@ -324,7 +324,8 @@ static NSArray *favoriteVegaterianCuisines;
     BOOL favoriteRest = NO;
     NSSet *favoriteSet;
     NSSet *cuisineSet = [NSSet setWithObject:aRest.cuisine];
-    
+    double favoriteRestvalue = 0;
+
     
     if ([aUser.stereotype isEqualToString:kStudent]) {
         favoriteSet = [NSSet setWithArray:favoriteStudentCuisines];
@@ -334,6 +335,28 @@ static NSArray *favoriteVegaterianCuisines;
         favoriteSet = [[NSSet alloc] initWithArray:favoriteAmbianceLoverCuisines];
     }else if ([aUser.stereotype isEqualToString:kFamily]){
         favoriteSet = [[NSSet alloc] initWithArray:favoriteFamilyCuisines];
+        
+        NSUInteger position = [favoriteFamilyCuisines indexOfObject:aRest.cuisine];
+        
+        if (position!=NSNotFound) {
+            if (position<3) {
+                favoriteRestvalue = 10;
+            } else if (position  < 5){
+                favoriteRestvalue = 9;
+            }else if (position  < 7){
+                favoriteRestvalue = 8;
+            }else if (position  < 7){
+                favoriteRestvalue = 7;
+            }else if (position  < 10){
+                favoriteRestvalue = 6;
+            }else if (position  < 14){
+                favoriteRestvalue = 4;
+            }else{
+                favoriteRestvalue = 3;
+            }
+            
+        }
+        
     }else if ([aUser.stereotype isEqualToString:kTourist]){
         favoriteSet = [[NSSet alloc] initWithArray:favoriteTouriestCuisines];
     }else {
@@ -369,16 +392,33 @@ static NSArray *favoriteVegaterianCuisines;
         favoriteSet = [[NSSet alloc] initWithArray:favoriteAmbianceLoverCategories];
     }else if ([aUser.stereotype isEqualToString:kFamily]){
         favoriteSet = [[NSSet alloc] initWithArray:favoriteFamilyCategories];
-        NSUInteger position = [favoriteStudentCategories indexOfObject:aRest.category];
+        NSUInteger position = [favoriteFamilyCategories indexOfObject:aRest.category];
         
         if (position!=NSNotFound) {
             if (position<2) {
             favoriteRestvalue = 10;
             } else if (position  < 4){
             favoriteRestvalue = 9;
-            }else{
+            }else if (position  < 6){
             favoriteRestvalue = 8;
+            }else if (position  < 8){
+                favoriteRestvalue = 7;
+            }else if (position  < 10){
+                favoriteRestvalue = 6;
+            }else if (position  < 12){
+                favoriteRestvalue = 5;
+            }else if (position  < 14){
+                favoriteRestvalue = 4;
+            }else if (position  < 15){
+                favoriteRestvalue = 3;
+            }else if (position  < 16){
+                favoriteRestvalue = 2;
+            }else if (position  < 17){
+                favoriteRestvalue = 1;
+            }else{
+                favoriteRestvalue = 0;
             }
+        
         }
         
     }else if ([aUser.stereotype isEqualToString:kTourist]){
@@ -484,7 +524,7 @@ static NSArray *favoriteVegaterianCuisines;
             if ([aUser.hasChild isEqualToNumber:[NSNumber numberWithInt:0]]) {
                 childFriendlyFactor = 7;
             } else {
-                childFriendlyFactor = 5;
+                childFriendlyFactor = 3;
             }
             
         }else if ([aUser.stereotype isEqualToString:kAmbianceLover]){
@@ -502,7 +542,7 @@ static NSArray *favoriteVegaterianCuisines;
             if ([aUser.hasChild isEqualToNumber:[NSNumber numberWithInt:1]]) {
                 childFriendlyFactor = 10;
             } else {
-                childFriendlyFactor = 4;
+                childFriendlyFactor = 8;
             }
             
         }else if ([aUser.stereotype isEqualToString:kGourmet] || [aUser.stereotype isEqualToString:kAmbianceLover]){
@@ -553,15 +593,15 @@ static NSArray *favoriteVegaterianCuisines;
             if ([aUser.smoker isEqualToNumber:[NSNumber numberWithInt:1]]) {
                 smokingFactor= 10;
             } else {
-                smokingFactor = 6;
+                smokingFactor = 4;
             }
         
         }else{
             
             if ([aUser.smoker isEqualToNumber:[NSNumber numberWithInt:1]]) {
-                smokingFactor= 8.5;
+                smokingFactor= 10;
             } else {
-                smokingFactor = 8.5;
+                smokingFactor = 9;
             }
         }
         
@@ -584,11 +624,11 @@ static NSArray *favoriteVegaterianCuisines;
         
         if ([aRest.liveMusic isEqualToNumber:[NSNumber numberWithInt:0]]) {
             
-            liveMusicFactor = 9;
+            liveMusicFactor = 10;
             
         }else{
             
-            liveMusicFactor = 7;
+            liveMusicFactor = 8;
         }
         
     }else

@@ -203,8 +203,9 @@ static RecommendationManager *recommendationManager;
     double childFriendlykWeight = [[preferencesWeightDictionary objectForKey:kChildfriendly] doubleValue];
 //    double vegaterianWeight     = [[preferencesWeightDictionary objectForKey:kVegaterian] doubleValue];
 
+    double weightTotal = childFriendlykWeight+liveMusickWeight+carParkWeight+gardenWeight+priceRangeWeigt+smokingWeight+cuisineWeight+categoryWeight;
     
-    
+#warning total of weight is more than 1
     double total = ((bothGarden*gardenWeight)+
                     (bothCarPark*carParkWeight)+
                     (bothLiveMusic*liveMusickWeight)+

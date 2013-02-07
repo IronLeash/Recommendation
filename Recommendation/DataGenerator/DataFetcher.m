@@ -427,16 +427,67 @@ NSArray *returnArray =[[NSArray alloc] initWithObjects:[NSNumber numberWithInt:1
 -(NSArray*)getFavoriteCagetoriesForStereotype:(NSString*)aString{
 
     
+    /*
+#define kBakery             @"Bakery"
+#define kBistro             @"Bistro"
+#define kBrewPub            @"Brew Pub"
+#define kCantina            @"Cantina"
+#define kCoffeehouse        @"Coffeehouse"
+#define kCounterService     @"Counter Service"
+#define kFastFoodRest       @"Fast Food Rest"
+#define kFineDining         @"Fine Dining"
+#define kFoodCourt          @"Food Court"
+#define kHeuriger           @"Heuriger"
+#define kOsteria            @"Osteria"
+#define kOuzeriaTavern      @"Ouzeria/Tavern"
+#define kPizzeria           @"Pizzeria"
+#define kPub                @"Pub"
+#define kRunningSushi       @"Running Sushi"
+#define kSeaFoodRestaurant  @"Sea Food Restaurant"
+#define kSnackBar           @"Snack Bar"
+#define kSteakHouse         @"Steak house"
+#define kTakeOut            @"Take-Out"
+    
+    */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     NSArray *favoriteArray;
     if ([aString isEqualToString:kGourmet])
     {
         favoriteArray = [[NSArray alloc] initWithObjects:kFineDining,kSteakHouse,kSeaFoodRestaurant, nil];
     } else if (([aString isEqualToString:kStudent])) {
-                favoriteArray = [[NSArray alloc] initWithObjects:kBakery,kBistro,kFastFoodRest,kTakeOut,kSnackBar,kPub,kBrewPub, nil];
+                favoriteArray = [[NSArray alloc] initWithObjects:kBakery,kBistro,kFastFoodRest,kTakeOut,kSnackBar,kPub,kBrewPub,kSeaFoodRestaurant, nil];
     }else if (([aString isEqualToString:kTourist])) {
-                favoriteArray = [[NSArray alloc] initWithObjects:kCoffeehouse,kFastFoodRest,kHeuriger,kSnackBar,kTakeOut, nil];
+                favoriteArray = [[NSArray alloc] initWithObjects:kCoffeehouse,kFastFoodRest,kHeuriger,kSnackBar,kSteakHouse,kTakeOut,kPizzeria,kBakery,kFineDining,kOsteria,kCoffeehouse,kCantina,kRunningSushi,kBistro,kSnackBar,kOuzeriaTavern,kBrewPub,kPub, nil];
     }else if (([aString isEqualToString:kFamily])) {
-                favoriteArray = [[NSArray alloc] initWithObjects:kHeuriger,kCounterService,kFoodCourt,kPizzeria,kFineDining,kFastFoodRest, nil];
+        favoriteArray = [[NSArray alloc] initWithObjects:kFoodCourt,kHeuriger,kCounterService,kPizzeria,kFineDining,kFastFoodRest,kSteakHouse,kSeaFoodRestaurant,kCoffeehouse,kTakeOut,kBakery,kRunningSushi,kSnackBar,kCantina,kBistro,kOsteria,kOuzeriaTavern,kPub,kBrewPub,nil];
     }else if (([aString isEqualToString:kAmbianceLover])) {
                 favoriteArray = [[NSArray alloc] initWithObjects:kRunningSushi,kOuzeriaTavern,kBrewPub,kFineDining,kOsteria, nil];
     }else{
@@ -446,6 +497,30 @@ NSArray *returnArray =[[NSArray alloc] initWithObjects:[NSNumber numberWithInt:1
     return favoriteArray;
 
 }
+
+/*
+ 
+ 
+ #define kAmerican   @"American"
+ #define kArgentina  @"Argentina"
+ #define kAustrian   @"Austrian"
+ #define kTurkish    @"Turkish"
+ #define kFrench     @"French"
+ #define kEnglish    @"English"
+ #define kItalian    @"Italian"
+ #define kIrish      @"Irish"
+ #define kSpanish    @"Spanish"
+ #define kGreek      @"Greek"
+ #define kWorld      @"World"
+ #define kKorea      @"Korea"
+ #define kJapan      @"Japan"
+ #define kThailand   @"Thailand"
+ #define kChinese    @"Chinese"
+ #define kMexica     @"Mexica"
+
+ */
+
+
 
 -(NSArray*)getFavoriteCuisinesForStereotype:(NSString*)aString{
     
@@ -458,7 +533,8 @@ NSArray *returnArray =[[NSArray alloc] initWithObjects:[NSNumber numberWithInt:1
     }else if (([aString isEqualToString:kTourist])) {
         favoriteArray = [[NSArray alloc] initWithObjects:kAustrian,kWorld,kAmerican,kItalian,kJapan, nil];
     }else if (([aString isEqualToString:kFamily])) {
-        favoriteArray = [[NSArray alloc] initWithObjects:kAmerican,kArgentina,kWorld,kAustrian, nil];
+        favoriteArray = [[NSArray alloc] initWithObjects:kAustrian,kItalian,kAmerican,kTurkish,kArgentina,kFrench,kWorld,kSpanish,kMexica,kChinese,kGreek,kKorea,
+                         kJapan,kThailand,kEnglish,kIrish, nil];
     }else if (([aString isEqualToString:kAmbianceLover])) {
         favoriteArray = [[NSArray alloc] initWithObjects:kGreek,kThailand,kIrish,kMexica, nil];
     }else{
