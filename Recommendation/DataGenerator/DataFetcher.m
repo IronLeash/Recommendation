@@ -436,7 +436,7 @@ NSArray *returnArray =[[NSArray alloc] initWithObjects:[NSNumber numberWithInt:1
     }else if (([aString isEqualToString:kTourist])) {
                 favoriteArray = [[NSArray alloc] initWithObjects:kCoffeehouse,kFastFoodRest,kHeuriger,kSnackBar,kTakeOut, nil];
     }else if (([aString isEqualToString:kFamily])) {
-                favoriteArray = [[NSArray alloc] initWithObjects:kCounterService,kFoodCourt,kPizzeria, nil];
+                favoriteArray = [[NSArray alloc] initWithObjects:kHeuriger,kCounterService,kFoodCourt,kPizzeria,kFineDining,kFastFoodRest, nil];
     }else if (([aString isEqualToString:kAmbianceLover])) {
                 favoriteArray = [[NSArray alloc] initWithObjects:kRunningSushi,kOuzeriaTavern,kBrewPub,kFineDining,kOsteria, nil];
     }else{

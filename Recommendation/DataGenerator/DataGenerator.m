@@ -427,7 +427,7 @@ static  NSManagedObjectContext *moc;
                 restaurantRating.restaurant = currentRestaunt;
                 restaurantRating.user   = aUser;
                 
-                NSDictionary *ratingDicitonary = [[DataGenerationRulesRating sharedInstance] ratingsForRestaruant:currentRestaunt ofUser:aUser];
+                NSDictionary *ratingDicitonary = [[DataGenerationRulesRating sharedInstance] getRatingForRestaurant:currentRestaunt ofUser:aUser];
                 
                 restaurantRating.accessibilityRating = [ratingDicitonary objectForKey:kAccessibility];
                 restaurantRating.coreServiceRating = [ratingDicitonary objectForKey:kCoreService];
