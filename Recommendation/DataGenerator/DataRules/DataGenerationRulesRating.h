@@ -26,7 +26,12 @@
 -(double)categoryFacator:(Restaurant*)aRestCat ofUser:(User*)aUser;
 -(double)cuisineFactor:(Restaurant*)aRestCuisine ofUser:(User*)aUser;
 
--(NSDictionary*)getRatingForRestaurant:(Restaurant*)aRest ofUser:(User*)aUser;
+-(NSDictionary*)getRatingForRestaurant:(Restaurant*)aRest ofFamilyUser:(User*)aUser;
+-(NSDictionary*)getRatingForRestaurant:(Restaurant*)aRest ofStudentUser:(User*)aUser;
+-(NSDictionary*)getRatingForRestaurant:(Restaurant*)aRest ofGourmetUser:(User*)aUser;
+-(NSDictionary*)getRatingForRestaurant:(Restaurant*)aRest ofAmbianceLoverUser:(User*)aUser;
+-(NSDictionary*)getRatingForRestaurant:(Restaurant*)aRest ofTouristUser:(User*)aUser;
+
 
 +(DataGenerationRulesRating*)sharedInstance;
 

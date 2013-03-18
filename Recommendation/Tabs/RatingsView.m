@@ -122,9 +122,12 @@ NSString *userSelectedNotification = @"aUserSelectedNotificaiton";
     [_priceRange setStringValue:[AttributeValueConverter priceValueRepresentation:favoritePriceRange.value]];
     
     //Set garden prefrence Text
+    //YES
     [_gardenTextField1 setStringValue: [[[preferencesDictionary objectForKey:kGarden] objectAtIndex:1] stringValue]];
+    //NO
     [_gardenTextField0 setStringValue: [[[preferencesDictionary objectForKey:kGarden] objectAtIndex:0] stringValue]];
 
+    
     [_liveMusicTextfield1 setStringValue: [[[preferencesDictionary objectForKey:kLiveMusic] objectAtIndex:1] stringValue]];
     [_liveMusicTextField0 setStringValue: [[[preferencesDictionary objectForKey:kLiveMusic] objectAtIndex:0] stringValue]];
     

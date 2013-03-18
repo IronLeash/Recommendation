@@ -2,7 +2,7 @@
 //  Restaurant.h
 //  Recommendation
 //
-//  Created by ilker on 28.01.13.
+//  Created by ilker on 17.03.13.
 //  Copyright (c) 2013 ilker. All rights reserved.
 //
 
@@ -22,7 +22,7 @@
 @property (nonatomic, retain) NSNumber * location;
 @property (nonatomic, retain) NSNumber * priceRange;
 @property (nonatomic, retain) NSNumber * smoking;
-@property (nonatomic, retain) NSString * uniqueName;
+@property (nonatomic, retain) NSNumber * uniqueName;
 @property (nonatomic, retain) NSSet *ratings;
 @end
 

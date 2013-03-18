@@ -118,8 +118,6 @@ NSString *userSelectedNotification;
 @property (weak) IBOutlet NSTextField *childFriendlyWeight;
 @property (weak) IBOutlet NSTextField *vegaterianWeight;
 
-
-@property (weak) IBOutlet NSTextField *carParkTextField;
 @property (weak) IBOutlet NSButton *pastRatingsCheckBox;
 @property (weak) IBOutlet NSTextField *alphaWeight;
 @property (weak) IBOutlet NSTextField *entrophyWeight;

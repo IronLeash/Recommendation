@@ -250,7 +250,7 @@ static  NSManagedObjectContext *moc;
 //                    int gender = arc4random() %(2);
                     int location = arc4random() %(15);
                     
-                    currentUser.userid      = [NSString stringWithFormat:@"User %@",[NSNumber numberWithInt:currentUserIndex]];
+                    currentUser.userid      = [NSString stringWithFormat:@"%@",[NSNumber numberWithInt:currentUserIndex]];
 //                    currentUser.age         = [NSNumber numberWithInt:[DataGenerationRulesUser userAgePredictionFor:currentStereotype]];
 //                    currentUser.gender      = [NSNumber numberWithInt:gender];
                 
@@ -322,7 +322,7 @@ static  NSManagedObjectContext *moc;
             currentRestaurant.category = currentCateory;
 
             currentRestaurant.cuisine = currentCuisine;
-            currentRestaurant.uniqueName = [NSString stringWithFormat:@"RestId %d",i];
+            currentRestaurant.uniqueName = [NSString stringWithFormat:@"%d",i];
             currentRestaurant.liveMusic = [NSNumber numberWithInt:[DataGenerationRulesRestaurant liveMusicForCategory:currentCateory]];
             currentRestaurant.garden = [NSNumber numberWithInt:[DataGenerationRulesRestaurant gardenForCategory:currentCateory]];
             currentRestaurant.carPark = [NSNumber numberWithInt:[DataGenerationRulesRestaurant carParkForCategory:currentCateory]];
@@ -427,7 +427,9 @@ static  NSManagedObjectContext *moc;
                 restaurantRating.restaurant = currentRestaunt;
                 restaurantRating.user   = aUser;
                 
-                NSDictionary *ratingDicitonary = [[DataGenerationRulesRating sharedInstance] getRatingForRestaurant:currentRestaunt ofUser:aUser];
+                
+
+                NSDictionary *ratingDicitonary = [[DataGenerationRulesRating sharedInstance] ratingsForRestaruant:currentRestaunt ofUser:aUser];
                 
                 restaurantRating.accessibilityRating = [ratingDicitonary objectForKey:kAccessibility];
                 restaurantRating.coreServiceRating = [ratingDicitonary objectForKey:kCoreService];

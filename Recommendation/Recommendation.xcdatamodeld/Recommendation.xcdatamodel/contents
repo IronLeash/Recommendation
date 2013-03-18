@@ -42,7 +42,7 @@
     </entity>
     <elements>
         <element name="RatingWeight" positionX="-893" positionY="387" width="128" height="133"/>
-        <element name="Restaurant" positionX="-353" positionY="144" width="128" height="208"/>
+        <element name="Restaurant" positionX="-353" positionY="144" width="128" height="210"/>
         <element name="RestaurantRating" positionX="-576" positionY="315" width="128" height="148"/>
         <element name="User" positionX="-875" positionY="126" width="128" height="163"/>
     </elements>

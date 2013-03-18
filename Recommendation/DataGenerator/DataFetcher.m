@@ -205,19 +205,27 @@ NSArray *returnArray =[[NSArray alloc] initWithObjects:[NSNumber numberWithInt:1
         NSFetchRequest *request = [[NSFetchRequest alloc] init];
         [request setEntity:entityDescription];
         
-        /*
-         // Set example predicate and sort orderings...
-         NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
-         initWithKey:@"name" ascending:YES];
-         [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
-         */
-        
-        NSError *error;
-        restaurantsArray = [[NSArray alloc] initWithArray:[moc executeFetchRequest:request error:&error]];
-    }
-        returnArray = restaurantsArray;
+
     
-    return returnArray;
+        NSSortDescriptor *aSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"uniqueName" ascending:YES comparator:^(id obj1, id obj2) {
+            
+            if ([obj1 integerValue] > [obj2 integerValue]) {
+                return (NSComparisonResult)NSOrderedDescending;
+            }
+            if ([obj1 integerValue] < [obj2 integerValue]) {
+                return (NSComparisonResult)NSOrderedAscending;
+            }
+            return (NSComparisonResult)NSOrderedSame;
+        }];
+
+        NSError *error;
+        restaurantsArray = [[moc executeFetchRequest:request error:&error] sortedArrayUsingDescriptors:@[aSortDescriptor]];
+    }
+    
+    
+    returnArray = restaurantsArray;
+    
+    return  returnArray;
 }
 
 
@@ -451,33 +459,6 @@ NSArray *returnArray =[[NSArray alloc] initWithObjects:[NSNumber numberWithInt:1
     */
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     NSArray *favoriteArray;
     if ([aString isEqualToString:kGourmet])
     {
@@ -549,25 +530,7 @@ NSArray *returnArray =[[NSArray alloc] initWithObjects:[NSNumber numberWithInt:1
     
     AppDelegate *appDelegate = (AppDelegate *)[NSApp delegate];
     moc= [appDelegate managedObjectContext];
-    
-    /*
-    NSArray *returnArray;
-    if (![usersArray count] || [usersArray count]==0) {
         
-        //Check if cusines are alreadyThere
-        //Fetsch results
-        NSEntityDescription *entityDescription = [NSEntityDescription
-                                                  entityForName:@"User" inManagedObjectContext:moc];
-        NSFetchRequest *request = [[NSFetchRequest alloc] init];
-        [request setReturnsObjectsAsFaults:NO];
-        [request setEntity:entityDescription];
-        
-        NSError *error;
-        usersArray = [[NSArray alloc] initWithArray:[moc executeFetchRequest:request error:&error]];
-    }
-    */
-   
-    
     //Check if cusines are alreadyThere
     //Fetsch results
     NSEntityDescription *entityDescription = [NSEntityDescription
@@ -577,8 +540,21 @@ NSArray *returnArray =[[NSArray alloc] initWithObjects:[NSNumber numberWithInt:1
     [request setEntity:entityDescription];
     
     NSError *error;
-    usersArray = [[NSArray alloc] initWithArray:[moc executeFetchRequest:request error:&error]];
-//        returnArray = usersArray;
+
+    
+    NSSortDescriptor *aSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"userid" ascending:YES comparator:^(id obj1, id obj2) {
+        
+        if ([obj1 integerValue] > [obj2 integerValue]) {
+            return (NSComparisonResult)NSOrderedDescending;
+        }
+        if ([obj1 integerValue] < [obj2 integerValue]) {
+            return (NSComparisonResult)NSOrderedAscending;
+        }
+        return (NSComparisonResult)NSOrderedSame;
+    }];
+    
+    usersArray = [[[NSArray alloc] initWithArray:[moc executeFetchRequest:request error:&error]] sortedArrayUsingDescriptors:@[aSortDescriptor]];
+    
     return usersArray;
 
 }

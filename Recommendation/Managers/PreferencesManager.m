@@ -198,7 +198,8 @@ static PreferencesManager* preferencesManager = nil;
     if (![aUser.userid isEqualToString:userId]){
         
     NSArray *positiveRatingsArray = [[RatingsManager sharedInstance] getPositiveRatingsforUser:aUser];
-        
+    
+        /*
     float priceRange = 0;
     
     for (RestaurantRating *currentRating in positiveRatingsArray)
@@ -208,7 +209,8 @@ static PreferencesManager* preferencesManager = nil;
     }
 
     priceRange     = priceRange / [positiveRatingsArray count];
-
+         */
+        
         NSArray *favoriteCategories = [[RatingsManager sharedInstance] getFavoriteCategoriesForUser:aUser];
         NSArray *favoriteCuisines = [[RatingsManager sharedInstance] getFavoriteCuisinesForUser:aUser];
         NSArray *favoriteSmoking = [[RatingsManager sharedInstance] getFavoriteSmokingForUser:aUser];

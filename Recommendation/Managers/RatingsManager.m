@@ -370,8 +370,8 @@ static RatingsManager *ratingsManager = nil;
         double weightedValue    = (countBasedRatingForCurrentCategory*0 + ratingBasedRatingForCurrentCategory*1);
         [favoriteGarden addObject:[NSNumber numberWithDouble:weightedValue]];
     }
-    NSSortDescriptor *highestToLowest = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:NO];
-    [favoriteGarden sortUsingDescriptors:[NSArray arrayWithObject:highestToLowest]];
+//    NSSortDescriptor *highestToLowest = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:NO];
+//    [favoriteGarden sortUsingDescriptors:[NSArray arrayWithObject:highestToLowest]];
     
     //add weighted rating
     

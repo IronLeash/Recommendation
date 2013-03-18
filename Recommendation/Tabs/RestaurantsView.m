@@ -59,7 +59,7 @@
     
     if ([tableColumn.identifier isEqualToString:@"id"]) {
     
-        return [NSString stringWithFormat:@"Rest %ld",row];
+        return [NSString stringWithFormat:@"%@",currentRestaurant.uniqueName];
     
     }else if([tableColumn.identifier isEqualToString:@"category"]) {
 
