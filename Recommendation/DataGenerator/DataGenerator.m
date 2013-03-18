@@ -236,7 +236,7 @@ static  NSManagedObjectContext *moc;
 }
 -(void)generateUsers:(int)numberOfUsers{
     
-    NSArray *stereoTypes  = [NSArray arrayWithObjects:kStudent,kAmbianceLover,kGourmet,kFamily,kVegaterian,kTourist,nil];
+    NSArray *stereoTypes  = [NSArray arrayWithObjects:kStudent,kAmbianceLover,kGourmet,kFamily,kTourist,nil];
     
         @autoreleasepool
         {
@@ -246,19 +246,14 @@ static  NSManagedObjectContext *moc;
                 for (int i = 0; i < numberOfUsers/[stereoTypes count]; i++) {
 
                     User* currentUser = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:moc];
-                    
-//                    int gender = arc4random() %(2);
+                
                     int location = arc4random() %(15);
                     
                     currentUser.userid      = [NSString stringWithFormat:@"%@",[NSNumber numberWithInt:currentUserIndex]];
-//                    currentUser.age         = [NSNumber numberWithInt:[DataGenerationRulesUser userAgePredictionFor:currentStereotype]];
-//                    currentUser.gender      = [NSNumber numberWithInt:gender];
-                
                     currentUser.hasChild    = [NSNumber numberWithInt:[DataGenerationRulesUser userHasChild:currentStereotype]];
                     currentUser.hasCar      = [NSNumber numberWithInt:[DataGenerationRulesUser userHasCar:currentStereotype]];
                     currentUser.location    = [NSNumber numberWithInt:location];
                     currentUser.smoker      = [NSNumber numberWithInt:[DataGenerationRulesUser userSmokingPredictionFor:currentStereotype]];
-//                    currentUser.vegaterian  = [NSNumber numberWithInt:[DataGenerationRulesUser userVegetarianPredictionFor:currentStereotype]];
                     currentUser.stereotype  = currentStereotype;
                 
                     RatingWeight *ratingWeight = [NSEntityDescription insertNewObjectForEntityForName:@"RatingWeight" inManagedObjectContext:moc];

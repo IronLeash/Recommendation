@@ -87,8 +87,8 @@
 //        [vegaterianArray addObject:currentRestaurant.vegaterian];
     }
     
-    NSDictionary *restaurantsAttributesDicitonary = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:priceArray,carParkArray,gardenArray,liveMusicArray,childFriendlyArray,vegaterianArray,smokingArray, nil]
-                                                                                forKeys:[NSArray arrayWithObjects:kPrice,kCarPark,kGarden,kLiveMusic,kChildfriendly,kVegaterian,kSmoking, nil]];
+    NSDictionary *restaurantsAttributesDicitonary = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:priceArray,carParkArray,gardenArray,liveMusicArray,childFriendlyArray,smokingArray, nil]
+                                                                                forKeys:[NSArray arrayWithObjects:kPrice,kCarPark,kGarden,kLiveMusic,kChildfriendly,kSmoking, nil]];
 
     return restaurantsAttributesDicitonary;
 }

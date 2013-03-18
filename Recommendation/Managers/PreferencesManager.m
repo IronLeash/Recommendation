@@ -445,6 +445,7 @@ static PreferencesManager* preferencesManager = nil;
 }
 
 
+/*
 -(double)getVegaterian:(User*)aUser{
     
     double carPark;
@@ -458,6 +459,7 @@ static PreferencesManager* preferencesManager = nil;
     
     return carPark;
 }
+ */
 
 
 @end

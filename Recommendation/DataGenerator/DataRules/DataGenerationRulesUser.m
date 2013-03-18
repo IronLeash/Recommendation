@@ -81,14 +81,6 @@
             smoking = 0;
         }
         
-    }else if([userStereotype isEqualToString:kVegaterian]){
-
-        if (smoking > 65) {
-            smoking = 1;
-        } else {
-            smoking = 0;
-        }
-        
     }else{
         
         if (smoking > 65) {
@@ -100,7 +92,7 @@
     
     return smoking;
 }
-
+/*
 +(int)userVegetarianPredictionFor:(NSString*)userStereotype{
 
     int vegateriean = arc4random() % 100;
@@ -115,7 +107,7 @@
     }
     return vegateriean;
 }
-
+*/
 
 +(int)userHasCar:(NSString*)userStereotype{
 
@@ -142,12 +134,6 @@
     }else if([userStereotype isEqualToString:kFamily]){
         
         if (hasCar > 25) {
-            returnValue = 1;
-        }
-        
-    }else if([userStereotype isEqualToString:kVegaterian]){
-        
-        if (hasCar > 80) {
             returnValue = 1;
         }
         
@@ -183,12 +169,6 @@
     }else if([userStereotype isEqualToString:kFamily]){
         
         if (hasChild > 35) {
-            returnValue = 1;
-        }
-        
-    }else if([userStereotype isEqualToString:kVegaterian]){
-        
-        if (hasChild > 70) {
             returnValue = 1;
         }
         

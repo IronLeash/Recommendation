@@ -65,7 +65,6 @@
 #define kAmbianceLover    @"Ambiance lover"
 #define kGourmet          @"Gourmet"
 #define kFamily           @"Family"
-#define kVegaterian       @"Vegaterian"
 #define kTourist          @"Tourist"
 
 //Dictionary Keys

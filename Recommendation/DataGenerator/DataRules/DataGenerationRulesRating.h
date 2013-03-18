@@ -32,7 +32,6 @@
 -(NSDictionary*)getRatingForRestaurant:(Restaurant*)aRest ofAmbianceLoverUser:(User*)aUser;
 -(NSDictionary*)getRatingForRestaurant:(Restaurant*)aRest ofTouristUser:(User*)aUser;
 
-
 +(DataGenerationRulesRating*)sharedInstance;
 
 

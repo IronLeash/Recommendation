@@ -46,14 +46,14 @@ static NSArray *favoriteVegaterianCuisines;
             favoriteGourmetCategories =[[NSArray alloc] initWithArray:[[DataFetcher sharedInstance] getFavoriteCagetoriesForStereotype:kGourmet]];
             favoriteFamilyCategories =[[NSArray alloc] initWithArray:[[DataFetcher sharedInstance] getFavoriteCagetoriesForStereotype:kFamily]];
             favoriteAmbianceLoverCategories =[[NSArray alloc] initWithArray:[[DataFetcher sharedInstance] getFavoriteCagetoriesForStereotype:kAmbianceLover]];
-            favoriteVegaterianCategories = [[NSArray alloc] initWithArray:[[DataFetcher sharedInstance] getFavoriteCagetoriesForStereotype:kVegaterian]];
+//            favoriteVegaterianCategories = [[NSArray alloc] initWithArray:[[DataFetcher sharedInstance] getFavoriteCagetoriesForStereotype:kVegaterian]];
             
             favoriteStudentCuisines     = [[NSArray alloc] initWithArray:[[DataFetcher sharedInstance] getFavoriteCuisinesForStereotype:kStudent]];
             favoriteTouriestCuisines    = [[NSArray alloc] initWithArray:[[DataFetcher sharedInstance] getFavoriteCuisinesForStereotype:kTourist]];
             favoriteGourmetCuisines     = [[NSArray alloc] initWithArray:[[DataFetcher sharedInstance] getFavoriteCuisinesForStereotype:kGourmet]];
             favoriteFamilyCuisines      = [[NSArray alloc] initWithArray:[[DataFetcher sharedInstance] getFavoriteCuisinesForStereotype:kFamily]];
             favoriteAmbianceLoverCuisines = [[NSArray alloc] initWithArray:[[DataFetcher sharedInstance] getFavoriteCuisinesForStereotype:kAmbianceLover]];
-            favoriteVegaterianCuisines  = [[NSArray alloc] initWithArray:[[DataFetcher sharedInstance] getFavoriteCuisinesForStereotype:kVegaterian]];
+//            favoriteVegaterianCuisines  = [[NSArray alloc] initWithArray:[[DataFetcher sharedInstance] getFavoriteCuisinesForStereotype:kVegaterian]];
             
             dataGenerationRulesRating = [[self alloc] init];
 
@@ -75,8 +75,7 @@ static NSArray *favoriteVegaterianCuisines;
         favoriteGourmetCategories =[[NSArray alloc] initWithArray:[[DataFetcher sharedInstance] getFavoriteCagetoriesForStereotype:kGourmet]];
         favoriteFamilyCategories =[[NSArray alloc] initWithArray:[[DataFetcher sharedInstance] getFavoriteCagetoriesForStereotype:kFamily]];
         favoriteAmbianceLoverCategories =[[NSArray alloc] initWithArray:[[DataFetcher sharedInstance] getFavoriteCagetoriesForStereotype:kAmbianceLover]];
-        favoriteVegaterianCategories = [[NSArray alloc] initWithArray:[[DataFetcher sharedInstance] getFavoriteCagetoriesForStereotype:kVegaterian]];
-        
+//        favoriteVegaterianCategories = [[NSArray alloc] initWithArray:[[DataFetcher sharedInstance] getFavoriteCagetoriesForStereotype:kVegaterian]];
     }
     return self;
 }

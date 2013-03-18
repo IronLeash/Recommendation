@@ -140,8 +140,8 @@
 //    double price                    = [[prefrencesDictionary objectForKey:kPrice] doubleValue];
 //    [preferencesDescriptionString appendString:[AttributeValueConverter interpretatePrice:price]];
     
-    double vegaterian               = [[prefrencesDictionary objectForKey:kVegaterian] doubleValue];
-    [preferencesDescriptionString appendString:[AttributeValueConverter interpretateVegaterian:vegaterian]];
+//    double vegaterian               = [[prefrencesDictionary objectForKey:kVegaterian] doubleValue];
+//    [preferencesDescriptionString appendString:[AttributeValueConverter interpretateVegaterian:vegaterian]];
     
 //    NSMutableString *decriptionString = [[NSMutableString alloc] initWithString:@""];
     
