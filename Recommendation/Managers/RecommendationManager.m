@@ -56,23 +56,7 @@ static RecommendationManager *recommendationManager;
 
     NSMutableArray *recommendationsArray = [[NSMutableArray alloc] initWithCapacity:0];
     
-    /*
-    double categoryWeight   = [[weights objectForKey:kCategory] doubleValue];
-    double cuisineWeight    = [[weights objectForKey:kCuisine] doubleValue];
-    double priceWeight      = [[weights objectForKey:kPrice] doubleValue];
-    double smokingWeight    = [[weights objectForKey:kSmoking] doubleValue];
-    
-    double gardenWeight             = [[weights objectForKey:kGarden] doubleValue];
-    double liveMusicWeight          = [[weights objectForKey:kLiveMusic] doubleValue];
-    double childFriendlyWeight      = [[weights objectForKey:kChildfriendly] doubleValue];
-//    double vegaterianWeight         = [[weights objectForKey:kVegaterian] doubleValue];
 
-    
-    NSArray *orderedCategoryArray   = [preferences objectForKey:kCategory];
-    NSArray *orderedCuisineArray    = [preferences objectForKey:kCuisine];
-    NSArray *orderedSmokingArray    = [preferences objectForKey:kSmoking];
-
-    */
     NSArray *restaurantsArray       = [[DataFetcher sharedInstance] getRestaurants];
 
     NSArray *restaurantRatingsArray = [[RatingsManager sharedInstance] getRestaurantRatingsForUser:anUser];
@@ -81,44 +65,25 @@ static RecommendationManager *recommendationManager;
 
         NSPredicate *currentRatingPredicate         = [NSPredicate predicateWithFormat:@"restaurant.uniqueName == %@",currentRestaurant.uniqueName];
         RestaurantRating *currentRestaurantRating   = [[restaurantRatingsArray filteredArrayUsingPredicate:currentRatingPredicate] objectAtIndex:0];
-
-//        [[RecommendationManager sharedInstance] overalRatingPredictionOfRestaurant:currentRestaurant ForUser:anUser onlyPosivite:aBool];
         
         Recommendation *currentRecommendation = [[Recommendation alloc] init];
         currentRecommendation.restaurant = currentRestaurant;
         currentRecommendation.rating = [[RecommendationManager sharedInstance] overalRatingPredictionOfRestaurant:currentRestaurant ForUser:anUser onlyPosivite:aBool];
-        
-        /*
-        NSUInteger cuisinePosition     = [ActionGeneric positionInArray:orderedCuisineArray :currentRestaurant.cuisine];
-        double categoryPosition    = ([ActionGeneric positionInArray:orderedCategoryArray :currentRestaurant.category])*19/16;
-//        NSLog(@"Current Category %@ with Position %f",currentRestaurant.category,categoryPosition);
-        
-        double smokingPosition     = ([ActionGeneric positionInArray:orderedSmokingArray :currentRestaurant.smoking])*19/3;
-        
-        double pricePosition       = ([currentRestaurant.priceRange intValue] - [[preferences objectForKey:kPrice] intValue])*19/4;
-        
-         double gardenPosition      = ([currentRestaurant.garden doubleValue] - [[preferences objectForKey:kGarden] doubleValue])*19;
-         double liveMusicPosition   = ([currentRestaurant.liveMusic doubleValue] - [[preferences objectForKey:kLiveMusic] doubleValue])*19;
-         double childFriendly       = ([currentRestaurant.childFriendly doubleValue] - [[preferences objectForKey:kChildfriendly] doubleValue])*19;
-//         double vegaterianFriendly  = ([currentRestaurant.vegaterian doubleValue] - [[preferences objectForKey:kVegaterian] doubleValue])*19;
-        
-        
-        currentRecommendation.distance =    pow((double)(cuisinePosition), 2)*cuisineWeight +
-        pow((double)(categoryPosition), 2)*categoryWeight +
-        pow((double)(smokingPosition), 2)*smokingWeight +
-        pow((double)(pricePosition), 2)*priceWeight +
-        pow((double)(gardenPosition), 2)*gardenWeight +
-        pow((double)(liveMusicPosition), 2)*liveMusicWeight +
-        pow((double)(childFriendly), 2)*childFriendlyWeight;
-//        pow((double)(vegaterianFriendly), 2)*vegaterianWeight;
-
-         */
-        
-        
         currentRecommendation.realRating = [StatisticsLibrary weightedSumForRating:currentRestaurantRating];
         currentRecommendation.difference = currentRecommendation.realRating - currentRecommendation.rating;
         [recommendationsArray addObject:currentRecommendation];
     }
+    
+    
+    NSSortDescriptor *sortDescriptor  = [[NSSortDescriptor alloc] initWithKey:@"self.rating" ascending:YES];
+    NSArray *sortedRecommendationArray = [[NSArray alloc] initWithArray:[recommendationsArray sortedArrayUsingDescriptors:@[sortDescriptor]]];
+    
+    
+    for (Recommendation *currentRecommendation in recommendationsArray)
+    {        
+    }
+    
+    
     
     //Post Notification
     
@@ -145,9 +110,6 @@ static RecommendationManager *recommendationManager;
     double liveMusic        = [[RecommendationManager sharedInstance] countbasedLiveMusicRatingofRestaurant:aRestaurant.liveMusic ForUser:anUser]*10;
 //        NSLog(@"Garden value %f",liveMusic);
     double childFriendly    = [[RecommendationManager sharedInstance] countbasedChildFriendlyRatingofRestaurant:aRestaurant.childFriendly ForUser:anUser]*10;
-//        NSLog(@"Garden value %f",childFriendly);
-//    double vegaterian   = [[RecommendationManager sharedInstance] countbasedVegaterianRatingofRestaurant:aRestaurant ForUser:anUser]*10;
-//        NSLog(@"vegaterian value %f",vegaterian);
     
     double category     = [[RecommendationManager sharedInstance] countBasedRatingForCategoryOfRestaurant:aRestaurant.category andUser:anUser onlyPositive:aBool];
     double cuisine      = [[RecommendationManager sharedInstance] countBasedRatingForCuisineOfRestaurant:aRestaurant.cuisine andUser:anUser onlyPositive:aBool];

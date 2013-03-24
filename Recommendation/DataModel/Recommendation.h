@@ -29,6 +29,7 @@ typedef enum{
 @property (assign)               double rating;
 @property (assign)               double realRating;
 @property (assign)               double difference;
+@property (assign)               NSInteger realRanking;
 @property (assign)               RecommendationClass recommendationClass;
 
 @end

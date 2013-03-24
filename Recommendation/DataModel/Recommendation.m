@@ -15,6 +15,8 @@
 @synthesize rating;
 @synthesize realRating;
 @synthesize difference;
+@synthesize realRanking;
+
 @synthesize recommendationClass;
 
 -(NSString*)description

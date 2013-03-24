@@ -16,6 +16,7 @@
     
     User *currentUser;
     NSMutableArray *recommendationArray;
-    
+    NSNumberFormatter *textformatter;
+
 }
 @end

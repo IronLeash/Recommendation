@@ -40,6 +40,10 @@
                                                  name:userSelectedNotification
                                                object:nil];
     
+    
+    textformatter = [[NSNumberFormatter alloc] init];
+    textformatter.roundingIncrement = [NSNumber numberWithDouble:0.1];
+    textformatter.numberStyle = NSNumberFormatterDecimalStyle;
 }
 
 
@@ -78,7 +82,7 @@
     Recommendation *currentRecommendation = [recommendationArray objectAtIndex:row];
     
     if ([tableColumn.identifier isEqualToString:@"restaurant"]) {
-        returnString = currentRecommendation.restaurant.uniqueName;
+        returnString = [NSString stringWithFormat:@"%@",currentRecommendation.restaurant.uniqueName];
     }
     else if ([tableColumn.identifier isEqualToString:@"cuisine"])
     {
@@ -99,14 +103,18 @@
         returnString = BOOLREP([currentRecommendation.restaurant.carPark intValue]);
     }else if([tableColumn.identifier isEqualToString:@"childFriendly"]){
         returnString = BOOLREP([currentRecommendation.restaurant.childFriendly intValue]);
-    }else if([tableColumn.identifier isEqualToString:@"vegaterian"]){
-//        returnString = BOOLREP([currentRecommendation.restaurant.vegaterian intValue]);
-        returnString = @"remove me";
     }else if ([tableColumn.identifier isEqualToString:@"realRating"]){
-        returnString = [NSString stringWithFormat:@"%f",currentRecommendation.realRating];
+        NSString *roundedRating = [textformatter stringFromNumber:[NSNumber numberWithDouble:currentRecommendation.realRating]];
+        returnString = roundedRating;
+    }else if ([tableColumn.identifier isEqualToString:@"realRanking"]){
+        returnString = @"0";
+    }else if ([tableColumn.identifier isEqualToString:@"ranking"]){
+        returnString = [NSString stringWithFormat:@"%ld",(row+1)];
     }
     else{
-        returnString = [NSString stringWithFormat:@"%f",currentRecommendation.rating];
+
+        NSString *roundedRating = [textformatter stringFromNumber:[NSNumber numberWithDouble:currentRecommendation.rating]];
+        returnString = roundedRating;
     }
 
     return returnString;
