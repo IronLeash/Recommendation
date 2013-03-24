@@ -24,14 +24,18 @@
 
 -(void)calculateEvaluationBackThread:(id)sender{
 
-    double mse = [[EvaluationManager sharedInstance] calculateMSE];
+    double rmse = [[EvaluationManager sharedInstance] calculateRMSE];
     
-    [self performSelectorOnMainThread:@selector(calculateEvaluationBackThreadHandler:) withObject:[NSNumber numberWithDouble:mse] waitUntilDone:NO];
+    [self performSelectorOnMainThread:@selector(calculateEvaluationBackThreadHandler:) withObject:[NSNumber numberWithDouble:rmse] waitUntilDone:NO];
 }
 
 -(void)calculateEvaluationBackThreadHandler:(NSNumber*)aNumber{
     
-    NSLog(@"MSE : %@",aNumber);
+#warning write to a file
+
+    NSLog(@"RMSE : %@",aNumber);
+    NSLog(@"MSE : %f",[[EvaluationManager sharedInstance] calculateMSE]);
+    
 }
 
 

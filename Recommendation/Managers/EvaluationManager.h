@@ -35,6 +35,7 @@
 +(EvaluationManager*)sharedInstance;
 
 -(double)calculateMSE;
+-(double)calculateRMSE;
 
 
 @property (assign)     double rootMeanSquareError;

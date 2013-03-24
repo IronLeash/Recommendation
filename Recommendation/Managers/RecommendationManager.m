@@ -75,16 +75,32 @@ static RecommendationManager *recommendationManager;
     }
     
     
-    NSSortDescriptor *sortDescriptor  = [[NSSortDescriptor alloc] initWithKey:@"self.rating" ascending:YES];
+    
+    //Set Real ratings
+    NSSortDescriptor *sortDescriptor  = [[NSSortDescriptor alloc] initWithKey:@"self.realRating" ascending:NO];
     NSArray *sortedRecommendationArray = [[NSArray alloc] initWithArray:[recommendationsArray sortedArrayUsingDescriptors:@[sortDescriptor]]];
     
     
-    for (Recommendation *currentRecommendation in recommendationsArray)
-    {        
+    int realRanking = 0;
+    for (Recommendation *currentRecommendation in sortedRecommendationArray)
+    {
+        currentRecommendation.realRanking = realRanking;
+        realRanking ++;
     }
+
+    //Set predicted ratings
+    
+    NSSortDescriptor *sortDescriptor2  = [[NSSortDescriptor alloc] initWithKey:@"self.rating" ascending:YES];
+    sortedRecommendationArray = [sortedRecommendationArray sortedArrayUsingDescriptors:@[sortDescriptor2]];
     
     
-    
+    int predictedRanking = 0;
+    for (Recommendation *currentRecommendation in sortedRecommendationArray)
+    {
+        currentRecommendation.ranking = predictedRanking;
+        predictedRanking ++;
+    }
+
     //Post Notification
     
     NSArray *sortedRecommendationsArray =[ActionGeneric sortRecommendationObjects:recommendationsArray];

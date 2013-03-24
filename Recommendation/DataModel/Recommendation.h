@@ -27,7 +27,10 @@ typedef enum{
 @property (strong,nonatomic)     Restaurant *restaurant;
 @property (assign)               double distance;
 @property (assign)               double rating;
+
 @property (assign)               double realRating;
+@property (assign)               double ranking;
+
 @property (assign)               double difference;
 @property (assign)               NSInteger realRanking;
 @property (assign)               RecommendationClass recommendationClass;

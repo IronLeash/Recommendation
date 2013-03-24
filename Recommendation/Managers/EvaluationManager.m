@@ -44,16 +44,16 @@ static EvaluationManager *evaluationManager;
 
     self = [super init];
     if (self) {
-        self.positiveRatingThreshold = 7.0;
+        self.positiveRatingThreshold = 0.0;
     }
 return self;
 }
 
 
--(double)calculateMSE{
+-(double)calculateRMSE{
 
     NSArray *usersArray = [[DataFetcher sharedInstance] getUsers];
-    double mse = 0;
+    double rmse = 0;
     double localAbsoluteMeanError = 0;
 
     
@@ -92,7 +92,7 @@ return self;
                 numberOfFalseNegativeRatings++;
             }
             
-            mse                     +=squaredDifference;
+            rmse                     +=squaredDifference;
             localAbsoluteMeanError  +=absoluteDifference;
         }
     
@@ -108,16 +108,22 @@ return self;
               );
 
     }
-    mse = mse/numberOfRatings;
-    mse = sqrt(mse);
+    rmse = rmse/numberOfRatings;
+    rmse = sqrt(rmse);
     
     localAbsoluteMeanError = localAbsoluteMeanError/numberOfRatings;
     localAbsoluteMeanError = sqrt(localAbsoluteMeanError);
     
-    self.rootMeanSquareError = mse;
+    self.rootMeanSquareError = rmse;
     self.meanAbsoluteError = localAbsoluteMeanError;
     
-    return mse;
+    return rmse;
 }
 
+
+-(double)calculateMSE{
+
+    return self.meanAbsoluteError;
+    
+}
 @end

@@ -107,7 +107,7 @@
         NSString *roundedRating = [textformatter stringFromNumber:[NSNumber numberWithDouble:currentRecommendation.realRating]];
         returnString = roundedRating;
     }else if ([tableColumn.identifier isEqualToString:@"realRanking"]){
-        returnString = @"0";
+        returnString = [NSString stringWithFormat:@"%ld",currentRecommendation.realRanking+1];
     }else if ([tableColumn.identifier isEqualToString:@"ranking"]){
         returnString = [NSString stringWithFormat:@"%ld",(row+1)];
     }
