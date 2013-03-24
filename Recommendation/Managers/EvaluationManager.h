@@ -29,6 +29,7 @@
     int numberOfFalsePositiveRatings;
     
     double positiveRatingThreshold;
+    double recommendationRelevanceRatio;
     
 }
 
@@ -37,9 +38,17 @@
 -(double)calculateMSE;
 -(double)calculateRMSE;
 
+-(double)calculatePresicion;
+-(double)calculateRecall;
+
+-(double)calculateNDPM;
+
+
 
 @property (assign)     double rootMeanSquareError;
 @property (assign)     double meanAbsoluteError;
 
 @property (assign)     double positiveRatingThreshold;
+@property (assign)     double recommendationRelevanceRatio;
+
 @end

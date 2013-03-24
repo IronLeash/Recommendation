@@ -19,6 +19,7 @@
 
 -(IBAction)calculateEvaluation:(id)sender{
 
+    NSLog(@"Stated Evaluation Calculation......");
     [NSThread detachNewThreadSelector:@selector(calculateEvaluationBackThread:) toTarget:self withObject:nil];
 }
 
@@ -35,7 +36,10 @@
 
     NSLog(@"RMSE : %@",aNumber);
     NSLog(@"MSE : %f",[[EvaluationManager sharedInstance] calculateMSE]);
-    
+
+    NSLog(@"Presicion : %f",[[EvaluationManager sharedInstance] calculatePresicion]);
+    NSLog(@"Recall : %f",[[EvaluationManager sharedInstance] calculateRecall]);
+
 }
 
 

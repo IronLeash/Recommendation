@@ -24,6 +24,7 @@
 @synthesize rootMeanSquareError;
 
 @synthesize positiveRatingThreshold;
+@synthesize recommendationRelevanceRatio;
 
 static EvaluationManager *evaluationManager;
 
@@ -44,7 +45,8 @@ static EvaluationManager *evaluationManager;
 
     self = [super init];
     if (self) {
-        self.positiveRatingThreshold = 0.0;
+        self.positiveRatingThreshold = 0;
+        self.recommendationRelevanceRatio = 0.1;
     }
 return self;
 }
@@ -67,6 +69,8 @@ return self;
     for (User *currentUser in usersArray)
     {
     
+        NSLog(@"Calculation for User -------------------------------------------- %@",currentUser);
+
         NSDictionary *preferencesDictionary = [[PreferencesManager sharedInstance] getPreferencesDictionaryForUser:currentUser];
         NSDictionary *weightsDictionary = [[PreferencesManager sharedInstance] getUserPreferenceWeightDicitonary:currentUser];
         
@@ -81,19 +85,21 @@ return self;
             double squaredDifference = pow(currentRestaurntReccomendation.difference, 2);
             double absoluteDifference = ABS(currentRestaurntReccomendation.difference);
             
-            
-            if (currentRestaurntReccomendation.realRating >= self.positiveRatingThreshold && currentRestaurntReccomendation.rating >= self.positiveRatingThreshold) {
-                numberOfTruePositiveRatings++;
-            }else if (currentRestaurntReccomendation.realRating < self.positiveRatingThreshold && currentRestaurntReccomendation.rating < self.positiveRatingThreshold){
-                numberOfTrueNegativeRatings++;
-            }else if (currentRestaurntReccomendation.realRating < self.positiveRatingThreshold && currentRestaurntReccomendation.rating >= self.positiveRatingThreshold){
-                numberOfFalsePositiveRatings++;
-            }else{
-                numberOfFalseNegativeRatings++;
-            }
+        
+                if (currentRestaurntReccomendation.realRating >= self.positiveRatingThreshold && currentRestaurntReccomendation.rating >= self.positiveRatingThreshold) {
+                    numberOfTruePositiveRatings++;
+                }else if (currentRestaurntReccomendation.realRating < self.positiveRatingThreshold && currentRestaurntReccomendation.rating < self.positiveRatingThreshold){
+                    numberOfTrueNegativeRatings++;
+                }else if (currentRestaurntReccomendation.realRating < self.positiveRatingThreshold && currentRestaurntReccomendation.rating >= self.positiveRatingThreshold){
+                    numberOfFalsePositiveRatings++;
+                }else{
+                    numberOfFalseNegativeRatings++;
+                }
+   
             
             rmse                     +=squaredDifference;
             localAbsoluteMeanError  +=absoluteDifference;
+
         }
     
         NSLog(@"Number Of Ratings-------------------------------------------- %d",numberOfRatings);
@@ -126,4 +132,44 @@ return self;
     return self.meanAbsoluteError;
     
 }
+
+
+
+-(double)calculatePresicion{
+
+    return numberOfTruePositiveRatings/(numberOfTruePositiveRatings + numberOfFalsePositiveRatings);
+}
+
+
+
+-(double)calculateRecall{
+
+    return numberOfTruePositiveRatings/(numberOfTruePositiveRatings + numberOfFalseNegativeRatings);
+
+}
+
+-(double)calculateNDPMForRatingsArray:(NSArray*)anArray{
+
+    //Total number of pairs (n-1)*(n-2)/2
+    int numberOFPairs = ([anArray count]-2)*([anArray count]-1)/2;
+
+    int numberOfWrongPairs = 0;
+    
+    double ndpm= 0.0;
+    
+    for (int i = 0; i < [anArray count]; i++) {
+    
+        Recommendation *a =[anArray objectAtIndex:i];
+        
+        Recommendation *b =[anArray objectAtIndex:i+1];
+        
+        if (a.realRanking < b.realRanking) {
+            
+        }
+    }
+
+    
+}
+
+
 @end
