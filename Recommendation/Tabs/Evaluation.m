@@ -25,9 +25,11 @@
 
 -(void)calculateEvaluationBackThread:(id)sender{
 
-    double rmse = [[EvaluationManager sharedInstance] calculateRMSE];
+//    double rmse = [[EvaluationManager sharedInstance] calculateRMSE];
     
-    [self performSelectorOnMainThread:@selector(calculateEvaluationBackThreadHandler:) withObject:[NSNumber numberWithDouble:rmse] waitUntilDone:NO];
+//    [self performSelectorOnMainThread:@selector(calculateEvaluationBackThreadHandler:) withObject:[NSNumber numberWithDouble:rmse] waitUntilDone:NO];
+    NSLog(@"NDPM : %f",[[EvaluationManager sharedInstance] calculateNDPM]);
+
 }
 
 -(void)calculateEvaluationBackThreadHandler:(NSNumber*)aNumber{
@@ -35,11 +37,10 @@
 #warning write to a file
 
     NSLog(@"RMSE : %@",aNumber);
-    NSLog(@"MSE : %f",[[EvaluationManager sharedInstance] calculateMSE]);
+//    NSLog(@"MSE : %f",[[EvaluationManager sharedInstance] calculateMSE]);
 
-    NSLog(@"Presicion : %f",[[EvaluationManager sharedInstance] calculatePresicion]);
-    NSLog(@"Recall : %f",[[EvaluationManager sharedInstance] calculateRecall]);
-
+//    NSLog(@"Presicion : %f",[[EvaluationManager sharedInstance] calculatePresicion]);
+//    NSLog(@"Recall : %f",[[EvaluationManager sharedInstance] calculateRecall]);
 }
 
 

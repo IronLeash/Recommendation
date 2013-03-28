@@ -169,7 +169,7 @@ static RatingsManager *ratingsManager = nil;
 -(NSArray*)getPositiveRatingsforUser:(User*)aUser{
     
     
-    if ([aUser isEqualTo:currentUser] && posiviteUserRatings) {
+    if ([aUser isEqualTo:currentUser] && [posiviteUserRatings count]) {
 
         return posiviteUserRatings;
     }else{

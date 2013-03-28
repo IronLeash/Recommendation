@@ -197,7 +197,7 @@ static PreferencesManager* preferencesManager = nil;
     
     if (![aUser.userid isEqualToString:userId]){
         
-    NSArray *positiveRatingsArray = [[RatingsManager sharedInstance] getPositiveRatingsforUser:aUser];
+//    NSArray *positiveRatingsArray = [[RatingsManager sharedInstance] getPositiveRatingsforUser:aUser];
     
         /*
     float priceRange = 0;

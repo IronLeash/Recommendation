@@ -148,27 +148,51 @@ return self;
 
 }
 
--(double)calculateNDPMForRatingsArray:(NSArray*)anArray{
+-(double)calculateNDPM{
 
-    //Total number of pairs (n-1)*(n-2)/2
-    int numberOFPairs = ([anArray count]-2)*([anArray count]-1)/2;
+    NSArray *usersArray = [[DataFetcher sharedInstance] getUsers];
 
+
+    int numberOFPairs =0;
+    
     int numberOfWrongPairs = 0;
     
     double ndpm= 0.0;
     
+    for (User *currentUser in usersArray) {
+        
+
+        NSDictionary *preferencesDictionary = [[PreferencesManager sharedInstance] getPreferencesDictionaryForUser:currentUser];
+        NSDictionary *weightsDictionary = [[PreferencesManager sharedInstance] getUserPreferenceWeightDicitonary:currentUser];
+        
+        NSArray *anArray = [[RecommendationManager sharedInstance] getRecommendationForUser:currentUser
+                                                                                                    withPreferences:preferencesDictionary
+                                                                                                          andWeight:weightsDictionary onlyPosiiveRatings:NO];
+        
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"self.ranking" ascending:YES];
+        anArray = [anArray sortedArrayUsingDescriptors:@[sortDescriptor]];
+    //Total number of pairs (n-1)*(n-2)/2
+         numberOFPairs += ([anArray count]-2)*([anArray count]-1)/2;
+        
+
     for (int i = 0; i < [anArray count]; i++) {
     
+        
         Recommendation *a =[anArray objectAtIndex:i];
         
-        Recommendation *b =[anArray objectAtIndex:i+1];
+        for (int j = i+1; j < [anArray count]; j++) {
         
-        if (a.realRanking < b.realRanking) {
+            Recommendation *b =[anArray objectAtIndex:j];
             
+            if (a.realRanking > b.realRanking) {
+                numberOfWrongPairs++;
+            }
         }
     }
-
-    
+}
+//307479/621255
+    ndpm = ((double)numberOfWrongPairs/(double)numberOFPairs);
+    return ndpm;
 }
 
 
